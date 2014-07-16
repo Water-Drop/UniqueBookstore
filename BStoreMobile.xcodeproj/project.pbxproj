@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */; };
+		E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3EEA197629F300BA3797 /* XYMyBookController.m */; };
+		E33A3EF019762A0E00BA3797 /* cart.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EED19762A0E00BA3797 /* cart.plist */; };
+		E33A3EF119762A0E00BA3797 /* paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EEE19762A0E00BA3797 /* paid.plist */; };
+		E33A3EF219762A0E00BA3797 /* tobuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EEF19762A0E00BA3797 /* tobuy.plist */; };
 		E35BA3611973630E0055EDF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3601973630E0055EDF4 /* Foundation.framework */; };
 		E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3621973630E0055EDF4 /* CoreGraphics.framework */; };
 		E35BA3651973630E0055EDF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3641973630E0055EDF4 /* UIKit.framework */; };
@@ -19,11 +24,6 @@
 		E35BA37C1973630E0055EDF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3641973630E0055EDF4 /* UIKit.framework */; };
 		E35BA3841973630E0055EDF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E35BA3821973630E0055EDF4 /* InfoPlist.strings */; };
 		E35BA3861973630E0055EDF4 /* BStoreMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E35BA3851973630E0055EDF4 /* BStoreMobileTests.m */; };
-		E35BA3921973666D0055EDF4 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E35BA3911973666D0055EDF4 /* Main_iPhone.storyboard */; };
-		E35BA39519736C230055EDF4 /* cart.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35BA39419736C230055EDF4 /* cart.plist */; };
-		E35BA39A197373F90055EDF4 /* tobuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35BA399197373F90055EDF4 /* tobuy.plist */; };
-		E35BA39C197374DA0055EDF4 /* paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35BA39B197374DA0055EDF4 /* paid.plist */; };
-		E39D056F1973B87C006A8F53 /* XYMyBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39D056E1973B87C006A8F53 /* XYMyBookController.m */; };
 		E39D059119741E6F006A8F53 /* Algeria.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D057119741E6F006A8F53 /* Algeria.png */; };
 		E39D059219741E6F006A8F53 /* Argentina.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D057219741E6F006A8F53 /* Argentina.png */; };
 		E39D059319741E6F006A8F53 /* Australia.png in Resources */ = {isa = PBXBuildFile; fileRef = E39D057319741E6F006A8F53 /* Australia.png */; };
@@ -73,6 +73,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		E33A3EE9197629F300BA3797 /* XYMyBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyBookController.h; sourceTree = "<group>"; };
+		E33A3EEA197629F300BA3797 /* XYMyBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyBookController.m; sourceTree = "<group>"; };
+		E33A3EED19762A0E00BA3797 /* cart.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = cart.plist; path = BStoreMobile/DataSource/cart.plist; sourceTree = "<group>"; };
+		E33A3EEE19762A0E00BA3797 /* paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = paid.plist; path = BStoreMobile/DataSource/paid.plist; sourceTree = "<group>"; };
+		E33A3EEF19762A0E00BA3797 /* tobuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = tobuy.plist; path = BStoreMobile/DataSource/tobuy.plist; sourceTree = "<group>"; };
 		E35BA35D1973630E0055EDF4 /* BStoreMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BStoreMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35BA3601973630E0055EDF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E35BA3621973630E0055EDF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,12 +95,6 @@
 		E35BA3811973630E0055EDF4 /* BStoreMobileTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BStoreMobileTests-Info.plist"; sourceTree = "<group>"; };
 		E35BA3831973630E0055EDF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E35BA3851973630E0055EDF4 /* BStoreMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BStoreMobileTests.m; sourceTree = "<group>"; };
-		E35BA3911973666D0055EDF4 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPhone.storyboard; path = ../Main_iPhone.storyboard; sourceTree = "<group>"; };
-		E35BA39419736C230055EDF4 /* cart.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cart.plist; sourceTree = "<group>"; };
-		E35BA399197373F90055EDF4 /* tobuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tobuy.plist; sourceTree = "<group>"; };
-		E35BA39B197374DA0055EDF4 /* paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = paid.plist; sourceTree = "<group>"; };
-		E39D056D1973B87C006A8F53 /* XYMyBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYMyBookController.h; path = ../XYMyBookController.h; sourceTree = "<group>"; };
-		E39D056E1973B87C006A8F53 /* XYMyBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYMyBookController.m; path = ../XYMyBookController.m; sourceTree = "<group>"; };
 		E39D057119741E6F006A8F53 /* Algeria.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Algeria.png; sourceTree = "<group>"; };
 		E39D057219741E6F006A8F53 /* Argentina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Argentina.png; sourceTree = "<group>"; };
 		E39D057319741E6F006A8F53 /* Australia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Australia.png; sourceTree = "<group>"; };
@@ -194,17 +194,17 @@
 			children = (
 				E39D057019741E6F006A8F53 /* 球队图片 */,
 				E35BA39319736BF20055EDF4 /* DataSource */,
-				E35BA3911973666D0055EDF4 /* Main_iPhone.storyboard */,
 				E35BA36F1973630E0055EDF4 /* XYAppDelegate.h */,
 				E35BA3701973630E0055EDF4 /* XYAppDelegate.m */,
-				E39D056D1973B87C006A8F53 /* XYMyBookController.h */,
-				E39D056E1973B87C006A8F53 /* XYMyBookController.m */,
 				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
 				E39D05B1197575AA006A8F53 /* XYSaleItemCell.h */,
 				E39D05B2197575AA006A8F53 /* XYSaleItemCell.m */,
 				E3AB0DCE197596C90041A318 /* XYCollectionCell.h */,
 				E3AB0DCF197596C90041A318 /* XYCollectionCell.m */,
 				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
+				E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */,
+				E33A3EE9197629F300BA3797 /* XYMyBookController.h */,
+				E33A3EEA197629F300BA3797 /* XYMyBookController.m */,
 				E35BA3721973630E0055EDF4 /* Images.xcassets */,
 				E35BA3671973630E0055EDF4 /* Supporting Files */,
 			);
@@ -243,9 +243,9 @@
 		E35BA39319736BF20055EDF4 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				E35BA39419736C230055EDF4 /* cart.plist */,
-				E35BA399197373F90055EDF4 /* tobuy.plist */,
-				E35BA39B197374DA0055EDF4 /* paid.plist */,
+				E33A3EED19762A0E00BA3797 /* cart.plist */,
+				E33A3EEE19762A0E00BA3797 /* paid.plist */,
+				E33A3EEF19762A0E00BA3797 /* tobuy.plist */,
 			);
 			name = DataSource;
 			path = ..;
@@ -371,9 +371,10 @@
 				E3AB0DD2197596DF0041A318 /* XYCollectionCell.xib in Resources */,
 				E39D05A619741E6F006A8F53 /* Paraguay.png in Resources */,
 				E39D059E19741E6F006A8F53 /* Holland.png in Resources */,
-				E35BA39C197374DA0055EDF4 /* paid.plist in Resources */,
 				E39D05B019741E6F006A8F53 /* USA.png in Resources */,
+				E33A3EF019762A0E00BA3797 /* cart.plist in Resources */,
 				E39D059619741E6F006A8F53 /* Chile.png in Resources */,
+				E33A3EF219762A0E00BA3797 /* tobuy.plist in Resources */,
 				E39D059219741E6F006A8F53 /* Argentina.png in Resources */,
 				E39D059F19741E6F006A8F53 /* Honduras.png in Resources */,
 				E39D05A819741E6F006A8F53 /* Serbia.png in Resources */,
@@ -381,8 +382,10 @@
 				E39D059719741E6F006A8F53 /* CoteDIvoire.png in Resources */,
 				E39D05A019741E6F006A8F53 /* Italy.png in Resources */,
 				E39D05A119741E6F006A8F53 /* Japan.png in Resources */,
+				E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */,
 				E39D05AE19741E6F006A8F53 /* Switzerland.png in Resources */,
 				E39D059B19741E6F006A8F53 /* Germany.png in Resources */,
+				E33A3EF119762A0E00BA3797 /* paid.plist in Resources */,
 				E35BA36B1973630E0055EDF4 /* InfoPlist.strings in Resources */,
 				E39D05A419741E6F006A8F53 /* Nigeria.png in Resources */,
 				E39D05AD19741E6F006A8F53 /* Spain.png in Resources */,
@@ -391,11 +394,8 @@
 				E39D05AC19741E6F006A8F53 /* SouthKorea.png in Resources */,
 				E39D05AB19741E6F006A8F53 /* SouthAfrica.png in Resources */,
 				E39D059419741E6F006A8F53 /* Brazil.png in Resources */,
-				E35BA39519736C230055EDF4 /* cart.plist in Resources */,
-				E35BA39A197373F90055EDF4 /* tobuy.plist in Resources */,
 				E39D05A919741E6F006A8F53 /* Slovakia.png in Resources */,
 				E39D05A319741E6F006A8F53 /* NewZealand.png in Resources */,
-				E35BA3921973666D0055EDF4 /* Main_iPhone.storyboard in Resources */,
 				E39D059A19741E6F006A8F53 /* France.png in Resources */,
 				E39D05A219741E6F006A8F53 /* Mexico.png in Resources */,
 				E39D059919741E6F006A8F53 /* England.png in Resources */,
@@ -426,9 +426,9 @@
 			files = (
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
-				E39D056F1973B87C006A8F53 /* XYMyBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
+				E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
