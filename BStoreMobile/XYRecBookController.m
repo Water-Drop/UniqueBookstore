@@ -10,6 +10,8 @@
 #import "XYRecBookCell.h"
 #import "XYCollectionCell.h"
 
+#define IMAGECNT 31
+
 @interface XYRecBookController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *imageArray;
@@ -37,9 +39,8 @@
 
 - (void)prepareImageArray
 {
-    NSInteger imageCnt = 20;
-    self.imageArray = [[NSMutableArray alloc]initWithCapacity:imageCnt];
-    for (NSInteger i = 0; i < imageCnt; i++) {
+    self.imageArray = [[NSMutableArray alloc]initWithCapacity:IMAGECNT];
+    for (NSInteger i = 0; i < IMAGECNT; i++) {
         NSString *filename = [NSString stringWithFormat:@"%ld", (long)i];
         filename = [filename stringByAppendingString:@"_full.JPG"];
         [self.imageArray addObject:[UIImage imageNamed:filename]];
@@ -52,7 +53,7 @@
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
     [self prepareImageArray];
-    self.imageIndex = arc4random() % 20;
+    self.imageIndex = arc4random() % IMAGECNT;
 }
 
 - (void)didReceiveMemoryWarning
