@@ -12,6 +12,10 @@
 		E33A3EF019762A0E00BA3797 /* cart.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EED19762A0E00BA3797 /* cart.plist */; };
 		E33A3EF119762A0E00BA3797 /* paid.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EEE19762A0E00BA3797 /* paid.plist */; };
 		E33A3EF219762A0E00BA3797 /* tobuy.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EEF19762A0E00BA3797 /* tobuy.plist */; };
+		E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3F04197762AF00BA3797 /* XYRecBookCell.m */; };
+		E33A3F081977706200BA3797 /* XYRecBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3F071977706200BA3797 /* XYRecBookController.m */; };
+		E33A3F0D1977973500BA3797 /* AFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3F0A1977973500BA3797 /* AFViewController.m */; };
+		E33A3F0E1977973500BA3797 /* AFTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3F0C1977973500BA3797 /* AFTableViewCell.m */; };
 		E35BA3611973630E0055EDF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3601973630E0055EDF4 /* Foundation.framework */; };
 		E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3621973630E0055EDF4 /* CoreGraphics.framework */; };
 		E35BA3651973630E0055EDF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3641973630E0055EDF4 /* UIKit.framework */; };
@@ -79,6 +83,14 @@
 		E33A3EED19762A0E00BA3797 /* cart.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = cart.plist; path = BStoreMobile/DataSource/cart.plist; sourceTree = "<group>"; };
 		E33A3EEE19762A0E00BA3797 /* paid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = paid.plist; path = BStoreMobile/DataSource/paid.plist; sourceTree = "<group>"; };
 		E33A3EEF19762A0E00BA3797 /* tobuy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = tobuy.plist; path = BStoreMobile/DataSource/tobuy.plist; sourceTree = "<group>"; };
+		E33A3F03197762AF00BA3797 /* XYRecBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRecBookCell.h; sourceTree = "<group>"; };
+		E33A3F04197762AF00BA3797 /* XYRecBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRecBookCell.m; sourceTree = "<group>"; };
+		E33A3F061977706200BA3797 /* XYRecBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRecBookController.h; sourceTree = "<group>"; };
+		E33A3F071977706200BA3797 /* XYRecBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRecBookController.m; sourceTree = "<group>"; };
+		E33A3F091977973500BA3797 /* AFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewController.h; sourceTree = "<group>"; };
+		E33A3F0A1977973500BA3797 /* AFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewController.m; sourceTree = "<group>"; };
+		E33A3F0B1977973500BA3797 /* AFTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableViewCell.h; sourceTree = "<group>"; };
+		E33A3F0C1977973500BA3797 /* AFTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableViewCell.m; sourceTree = "<group>"; };
 		E35BA35D1973630E0055EDF4 /* BStoreMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BStoreMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35BA3601973630E0055EDF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E35BA3621973630E0055EDF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -202,9 +214,17 @@
 				E3AB0DCE197596C90041A318 /* XYCollectionCell.h */,
 				E3AB0DCF197596C90041A318 /* XYCollectionCell.m */,
 				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
-				E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */,
 				E33A3EE9197629F300BA3797 /* XYMyBookController.h */,
 				E33A3EEA197629F300BA3797 /* XYMyBookController.m */,
+				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
+				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
+				E33A3F061977706200BA3797 /* XYRecBookController.h */,
+				E33A3F071977706200BA3797 /* XYRecBookController.m */,
+				E33A3F091977973500BA3797 /* AFViewController.h */,
+				E33A3F0A1977973500BA3797 /* AFViewController.m */,
+				E33A3F0B1977973500BA3797 /* AFTableViewCell.h */,
+				E33A3F0C1977973500BA3797 /* AFTableViewCell.m */,
+				E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */,
 				E35BA3721973630E0055EDF4 /* Images.xcassets */,
 				E35BA3671973630E0055EDF4 /* Supporting Files */,
 			);
@@ -424,10 +444,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
+				E33A3F0D1977973500BA3797 /* AFViewController.m in Sources */,
+				E33A3F081977706200BA3797 /* XYRecBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
+				E33A3F0E1977973500BA3797 /* AFTableViewCell.m in Sources */,
 				E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,10 +571,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -560,10 +586,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

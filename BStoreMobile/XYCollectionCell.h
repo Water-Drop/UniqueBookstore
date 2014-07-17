@@ -10,4 +10,8 @@
 
 @interface XYCollectionCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *coverImage;
+@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *detail;
+
 @end

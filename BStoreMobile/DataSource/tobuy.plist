@@ -42,5 +42,15 @@
 		<key>price</key>
 		<string>1234.34</string>
 	</dict>
+	<dict>
+		<key>name</key>
+		<string>B5-英格兰</string>
+		<key>image</key>
+		<string>England</string>
+		<key>detail</key>
+		<string>伊丽莎白，伊丽莎白</string>
+		<key>price</key>
+		<string>3.45</string>
+	</dict>
 </array>
 </plist>

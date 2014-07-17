@@ -24,6 +24,10 @@
 - (void)awakeFromNib
 {
     // Initialization code
+}
+
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
     if (iOS7) {
         NSLog(@"AwakeFromNib");
         [self showButtonBorder:self.buyButton];

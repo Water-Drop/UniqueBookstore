@@ -7,7 +7,7 @@
         <!--My Book Controller - 我的书籍-->
         <scene sceneID="9ii-yu-pVG">
             <objects>
-                <viewController id="pVK-69-RzV" customClass="XYMyBookController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="pVK-69-RzV" customClass="XYMyBookController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hBX-rm-PWV"/>
                         <viewControllerLayoutGuide type="bottom" id="FuG-uM-7lM"/>
@@ -36,7 +36,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="146" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CFU-4u-RD3">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CFU-4u-RD3">
                                 <rect key="frame" x="0.0" y="108" width="320" height="412"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,18 +87,19 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="d7O-7p-f1q" kind="relationship" relationship="viewControllers" id="xcF-3g-o2l"/>
                         <segue destination="5N5-Gn-IO4" kind="relationship" relationship="viewControllers" id="IZw-0H-Xpp"/>
+                        <segue destination="d7O-7p-f1q" kind="relationship" relationship="viewControllers" id="xcF-3g-o2l"/>
+                        <segue destination="2kZ-2A-dGN" kind="relationship" relationship="viewControllers" id="5UR-7A-Z8L"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzR-gu-oVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="842" y="425"/>
         </scene>
-        <!--View Controller - 精品推荐-->
+        <!--Rec Book Controller - 精品推荐-->
         <scene sceneID="CS2-Ox-CMm">
             <objects>
-                <viewController id="Mfk-Hp-yfV" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Mfk-Hp-yfV" customClass="XYRecBookController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tCb-ul-G04"/>
                         <viewControllerLayoutGuide type="bottom" id="cQV-A1-ekO"/>
@@ -106,9 +107,23 @@
                     <view key="view" contentMode="scaleToFill" id="RvY-Af-BPN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="152" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OyO-3q-kNV">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Mfk-Hp-yfV" id="X6e-gD-aJe"/>
+                                    <outlet property="delegate" destination="Mfk-Hp-yfV" id="5qB-v9-ch3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="精品推荐" id="amF-2W-KS2"/>
+                    <connections>
+                        <outlet property="tableView" destination="OyO-3q-kNV" id="oa9-3f-WwC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXz-nl-d8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -132,6 +147,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ItG-LP-YVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1380" y="736"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bk4-dY-7FP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2kZ-2A-dGN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="A5G-Mt-pTp"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RO-vu-Njo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JTe-bv-F3t" kind="relationship" relationship="rootViewController" id="2bw-DS-sui"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VSs-Ri-P3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="1408"/>
+        </scene>
+        <!--View Controller - 好友圈-->
+        <scene sceneID="KQL-OH-bAd">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="JTe-bv-F3t" customClass="AFViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l4p-Cp-oHL"/>
+                        <viewControllerLayoutGuide type="bottom" id="q60-ge-d9c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kZL-ab-OCp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="u32-lR-jBI">
+                                <rect key="frame" x="0.0" y="65" width="320" height="453"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="JTe-bv-F3t" id="Taf-9O-exx"/>
+                                    <outlet property="delegate" destination="JTe-bv-F3t" id="ngY-gl-cCj"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="好友圈" id="wPa-fw-Vvd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fcK-IX-roa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1906" y="1408"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
