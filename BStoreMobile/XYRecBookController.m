@@ -12,6 +12,8 @@
 
 @interface XYRecBookController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *imageArray;
+@property NSInteger imageIndex;
 
 @end
 
@@ -33,11 +35,24 @@
     return self;
 }
 
+- (void)prepareImageArray
+{
+    NSInteger imageCnt = 20;
+    self.imageArray = [[NSMutableArray alloc]initWithCapacity:imageCnt];
+    for (NSInteger i = 0; i < imageCnt; i++) {
+        NSString *filename = [NSString stringWithFormat:@"%ld", (long)i];
+        filename = [filename stringByAppendingString:@"_full.JPG"];
+        [self.imageArray addObject:[UIImage imageNamed:filename]];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
+    [self prepareImageArray];
+    self.imageIndex = arc4random() % 20;
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,6 +95,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (indexPath.section == 0) {
+        NSString *recImageCell = @"recImageCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recImageCell];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recImageCell];
+        }
+        UIImageView *recImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 152)];
+        recImageView.animationDuration = 3.0;
+        recImageView.animationImages = self.imageArray;
+//        [recImageView startAnimating];
+//        recImageView.animationRepeatCount = 0;
+        recImageView.image = self.imageArray[self.imageIndex];
+        [cell.contentView addSubview:recImageView];
+        return cell;
+    }
+    
     static NSString *cellIdentifier = @"RecItemCellIdentifier";
     XYRecBookCell *cell = (XYRecBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
@@ -93,7 +125,9 @@
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(XYRecBookCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [cell setCollectionViewDataSourceDelegate:self index:(indexPath.section-1)];
+    if (indexPath.section != 0) {
+        [cell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+    }
 }
 
 #pragma mark - UITableViewDelegate Methods
@@ -108,13 +142,13 @@
     NSInteger fileIndex = collectionView.tag;
     NSArray *listItem;
     switch (fileIndex) {
-        case 0:
+        case 1:
             listItem = [self loadTopRated];
             break;
-        case 1:
+        case 2:
             listItem = [self loadFriends];
             break;
-        case 2:
+        case 3:
             listItem = [self loadCategory];
             break;
         default:
@@ -139,13 +173,13 @@
     NSInteger fileIndex = collectionView.tag;
     NSArray *listItem;
     switch (fileIndex) {
-        case 0:
+        case 1:
             listItem = [self loadTopRated];
             break;
-        case 1:
+        case 2:
             listItem = [self loadFriends];
             break;
-        case 2:
+        case 3:
             listItem = [self loadCategory];
             break;
         default:
