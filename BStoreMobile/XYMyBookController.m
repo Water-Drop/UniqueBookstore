@@ -102,7 +102,7 @@
     price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
     [cell.buyButton setTitle:price forState: UIControlStateNormal];
     
-//  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -110,10 +110,10 @@
 // 系统是先调用 heightForRowAtIndexPath 方法的，再调用cellForRowAtIndexPath。
 // 动态分配cell大小，可以通过dictionary或者array
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 103.0f;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 103.0f;
+}
 
 /*
 #pragma mark - Navigation

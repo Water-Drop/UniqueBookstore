@@ -110,15 +110,17 @@
 //        recImageView.animationRepeatCount = 0;
         recImageView.image = self.imageArray[self.imageIndex];
         [cell.contentView addSubview:recImageView];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     
     static NSString *cellIdentifier = @"RecItemCellIdentifier";
     XYRecBookCell *cell = (XYRecBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if (!cell) {
+    if (cell == nil) {
         cell = [[XYRecBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

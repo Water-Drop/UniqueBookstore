@@ -1,29 +1,27 @@
 //
-//  XYSaleItemCell.m
+//  XYBookInfoMainCell.m
 //  BStoreMobile
 //
-//  Created by Julie on 14-7-15.
+//  Created by Julie on 14-7-17.
 //  Copyright (c) 2014年 SJTU. All rights reserved.
 //
 
-#import "XYSaleItemCell.h"
+#import "XYBookInfoMainCell.h"
 
 #define iOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 
-@implementation XYSaleItemCell
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
+@implementation XYBookInfoMainCell
 
 - (void)awakeFromNib
 {
     // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -32,13 +30,6 @@
         [self showButtonBorder:self.buyButton];
         [self showButtonBorder:self.navButton];
     }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)showButtonBorder: (UIButton *)button

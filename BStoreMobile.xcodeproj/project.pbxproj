@@ -128,6 +128,9 @@
 		E39D05B519758D1B006A8F53 /* XYSaleItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */; };
 		E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AB0DCF197596C90041A318 /* XYCollectionCell.m */; };
 		E3AB0DD2197596DF0041A318 /* XYCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */; };
+		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
+		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
+		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -273,6 +276,11 @@
 		E3AB0DCE197596C90041A318 /* XYCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCollectionCell.h; sourceTree = "<group>"; };
 		E3AB0DCF197596C90041A318 /* XYCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCollectionCell.m; sourceTree = "<group>"; };
 		E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYCollectionCell.xib; sourceTree = "<group>"; };
+		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
+		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
+		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
+		E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoMainCell.m; sourceTree = "<group>"; };
+		E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYBookInfoMainCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,6 +483,11 @@
 				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
 				E33A3F061977706200BA3797 /* XYRecBookController.h */,
 				E33A3F071977706200BA3797 /* XYRecBookController.m */,
+				E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */,
+				E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */,
+				E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */,
+				E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */,
+				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
 				E33A3F091977973500BA3797 /* AFViewController.h */,
 				E33A3F0A1977973500BA3797 /* AFViewController.m */,
 				E33A3F0B1977973500BA3797 /* AFTableViewCell.h */,
@@ -705,6 +718,7 @@
 				E33A3F701977BB5000BA3797 /* 8.JPG in Resources */,
 				E33A3F551977BB5000BA3797 /* 11.JPG in Resources */,
 				E33A3FCD1977BFD800BA3797 /* 4_full.JPG in Resources */,
+				E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */,
 				E33A3F641977BB5000BA3797 /* 25.JPG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,12 +740,14 @@
 			files = (
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
+				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
 				E33A3F0D1977973500BA3797 /* AFViewController.m in Sources */,
 				E33A3F081977706200BA3797 /* XYRecBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
 				E33A3F0E1977973500BA3797 /* AFTableViewCell.m in Sources */,
+				E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */,
 				E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
