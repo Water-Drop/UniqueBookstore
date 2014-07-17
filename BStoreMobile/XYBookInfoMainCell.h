@@ -14,6 +14,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *detail;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIButton *navButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *segControl;
 
 @end
