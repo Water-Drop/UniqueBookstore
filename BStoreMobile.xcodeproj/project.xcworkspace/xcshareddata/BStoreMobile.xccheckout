@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5CB511E4-3D97-4007-8373-7EA2CC7CC019</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BStoreMobile</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6033D45A-607A-4B04-A892-B3F9195DA54F</key>
+		<string>https://github.com/Water-Drop/UniqueBookstore.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BStoreMobile.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6033D45A-607A-4B04-A892-B3F9195DA54F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Water-Drop/UniqueBookstore.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6033D45A-607A-4B04-A892-B3F9195DA54F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6033D45A-607A-4B04-A892-B3F9195DA54F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UniqueBookstore</string>
+		</dict>
+	</array>
+</dict>
+</plist>
