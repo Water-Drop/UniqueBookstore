@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYSearchController : UIViewController <UISearchBarDelegate>
+@interface XYSearchController : UIViewController <UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate>
 
-- (IBAction)valueChanged:(id)sender;
-@property (nonatomic, strong) NSArray *listCart;
+@property (nonatomic, strong) NSArray *listItem;
+
+@property (nonatomic, strong) NSDictionary *valueDict;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
