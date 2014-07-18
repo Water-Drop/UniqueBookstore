@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *imageArray;
 @property NSInteger imageIndex;
 
+@property (nonatomic, strong) NSDictionary *valueDict;
+
 @end
 
 @implementation XYRecBookController
@@ -203,6 +205,19 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (collectionView.tag <= 3) {
+        XYCollectionCell * cell = (XYCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        // 准备segue的参数传递
+        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"titleStr",cell.title.text,
+                          @"detailStr",cell.detail.text,
+                          nil];
+        [self performSegueWithIdentifier:@"BookDetail" sender:self];
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -234,6 +249,21 @@
     NSArray *listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
     NSLog(@"XYRecBookController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[listItem count]);
     return listItem;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"BookDetail"]) {
+        UIViewController *dest = segue.destinationViewController;
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+//                if ([dest respondsToSelector:@selector(setData:)]) {
+                    NSLog(@"%@, %@", key, self.valueDict[key]);
+                    [dest setValue:key forKey:self.valueDict[key]];
+//                }
+            }
+        }
+    }
 }
 
 @end

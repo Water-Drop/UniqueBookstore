@@ -100,7 +100,7 @@
     
     NSString *price = @"￥";
     price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
-    [cell.buyButton setTitle:price forState: UIControlStateNormal];
+    [cell.buyButton setTitle:price forState:UIControlStateNormal];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

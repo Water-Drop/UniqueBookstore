@@ -10,4 +10,7 @@
 
 @interface XYBookInfoController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
+@property NSString *titleStr;
+@property NSString *detailStr;
+
 @end

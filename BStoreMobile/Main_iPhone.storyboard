@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTF-aX-s2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="-672"/>
+            <point key="canvasLocation" x="3060" y="736"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCO-pR-gEx">
@@ -123,7 +123,6 @@
                         <segue destination="5N5-Gn-IO4" kind="relationship" relationship="viewControllers" id="IZw-0H-Xpp"/>
                         <segue destination="d7O-7p-f1q" kind="relationship" relationship="viewControllers" id="xcF-3g-o2l"/>
                         <segue destination="2kZ-2A-dGN" kind="relationship" relationship="viewControllers" id="5UR-7A-Z8L"/>
-                        <segue destination="5wT-5E-Oa7" kind="relationship" relationship="viewControllers" id="KJu-oI-VCs"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzR-gu-oVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,6 +156,7 @@
                     <navigationItem key="navigationItem" title="精品推荐" id="amF-2W-KS2"/>
                     <connections>
                         <outlet property="tableView" destination="OyO-3q-kNV" id="oa9-3f-WwC"/>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="tFE-eq-5b4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXz-nl-d8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -237,6 +237,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5wT-5E-Oa7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="Doh-Ry-5Rj"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="BQB-qY-SbS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iyp-A1-JEI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -248,7 +249,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZjR-Gh-dmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="-672"/>
+            <point key="canvasLocation" x="2512" y="244"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -256,4 +257,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="jZa-P2-Khz"/>
+    </inferredMetricsTieBreakers>
 </document>

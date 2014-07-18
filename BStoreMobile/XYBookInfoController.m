@@ -18,6 +18,8 @@ enum BookInfoStatus {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property enum BookInfoStatus status;
 @property (nonatomic, strong) UIToolbar *toolBar;
+@property NSString *imageStr;
+@property NSString *priceStr;
 
 @end
 
@@ -45,6 +47,25 @@ enum BookInfoStatus {
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
     [self prepareForToolBar];
+    [self getInfoFromSegue];
+}
+
+- (void)getInfoFromSegue
+{
+    NSArray *array = [NSArray arrayWithObjects:@"cart",@"tobuy",@"paid", nil];
+    for (NSInteger i=0; i<[array count]; i++) {
+        NSArray *listItem = [self loadPlistFile:array[i] ofType:@"plist"];
+        for (NSInteger j=0; j<[listItem count]; j++) {
+            NSDictionary *rowDict = listItem[j];
+            if ([[rowDict objectForKey:@"name"] isEqualToString:self.titleStr]) {
+                self.imageStr = [rowDict objectForKey:@"image"];
+                self.priceStr = @"￥";
+                self.priceStr = [self.priceStr stringByAppendingString:[rowDict objectForKey:@"price"]];
+                break;
+            }
+        }
+    }
+    NSLog(@"getInfoFromSegue at XYBookInfoController");
 }
 
 - (void)prepareForToolBar
@@ -105,10 +126,17 @@ enum BookInfoStatus {
             //第一个对象就是BookInfoCellIdentifier了（xib所列子控件中的最高父控件，BookInfoCellIdentifier）
             cell = [nib objectAtIndex:0];
         }
-        cell.title.text = @"BI1-USA";
-        cell.detail.text = @"克林顿，布什，奥巴马";
-        cell.coverImage.image = [UIImage imageNamed:@"USA.png"];
-        [cell.buyButton setTitle:@"￥234.56" forState: UIControlStateNormal];
+        
+        
+//        cell.title.text = @"BI1-USA";
+//        cell.detail.text = @"克林顿，布什，奥巴马";
+//        cell.coverImage.image = [UIImage imageNamed:@"USA.png"];
+//        [cell.buyButton setTitle:@"￥234.56" forState: UIControlStateNormal];
+        
+        cell.title.text = self.titleStr;
+        cell.detail.text = self.detailStr;
+        cell.coverImage.image = [UIImage imageNamed:self.imageStr];
+        [cell.buyButton setTitle:self.priceStr forState:UIControlStateNormal];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -162,6 +190,17 @@ enum BookInfoStatus {
             break;
     }
     [self.tableView reloadData];
+}
+
+- (NSArray *) loadPlistFile:(NSString *)path ofType:(NSString *)type {
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSString *plistPath = [bundle pathForResource:path ofType:type];
+    
+    // 获取属性列表文件中的全部数据
+    NSArray *listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    
+    NSLog(@"XYBookInfoController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[listItem count]);
+    return listItem;
 }
 
 @end
