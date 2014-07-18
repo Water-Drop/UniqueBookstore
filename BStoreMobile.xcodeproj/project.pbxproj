@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214197A71978BB6A009F22AD /* XYSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 214197A61978BB6A009F22AD /* XYSearchController.m */; };
 		E35BA3611973630E0055EDF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3601973630E0055EDF4 /* Foundation.framework */; };
 		E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3621973630E0055EDF4 /* CoreGraphics.framework */; };
 		E35BA3651973630E0055EDF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3641973630E0055EDF4 /* UIKit.framework */; };
@@ -73,6 +74,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		214197A51978BB6A009F22AD /* XYSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSearchController.h; sourceTree = "<group>"; };
+		214197A61978BB6A009F22AD /* XYSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSearchController.m; sourceTree = "<group>"; };
 		E35BA35D1973630E0055EDF4 /* BStoreMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BStoreMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35BA3601973630E0055EDF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E35BA3621973630E0055EDF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,6 +162,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		214197A81978C230009F22AD /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				214197A51978BB6A009F22AD /* XYSearchController.h */,
+				214197A61978BB6A009F22AD /* XYSearchController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		E35BA3541973630E0055EDF4 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +217,7 @@
 				E3AB0DCE197596C90041A318 /* XYCollectionCell.h */,
 				E3AB0DCF197596C90041A318 /* XYCollectionCell.m */,
 				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
+				214197A81978C230009F22AD /* Search */,
 				E35BA3721973630E0055EDF4 /* Images.xcassets */,
 				E35BA3671973630E0055EDF4 /* Supporting Files */,
 			);
@@ -426,6 +439,7 @@
 			files = (
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
+				214197A71978BB6A009F22AD /* XYSearchController.m in Sources */,
 				E39D056F1973B87C006A8F53 /* XYMyBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
