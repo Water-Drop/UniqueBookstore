@@ -11,7 +11,7 @@
 
 @interface XYMyBookController ()
 
-@property (nonatomic, strong) NSArray *listCart;
+@property (nonatomic, strong) NSArray *listItem;
 
 - (IBAction)valueChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -61,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.listCart count];
+    return [self.listItem count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,21 +77,18 @@
     */
     
     // 从xib中创建，不在sb中的tableview里添加prototype(否则关联的outlet是nil，没有初始化，main interface是sb)
-    static NSString *CellIdentifier = @"CellIdentifier";
-    XYSaleItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellIdentifier = @"SaleItemCellIdentifier";
+    XYSaleItemCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         // XYSaleItemCell.xib as NibName
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYSaleItemCell" owner:nil options:nil];
         //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
         cell = [nib objectAtIndex:0];
     }
-    if (cell == nil) {
-        NSLog(@"NILLLLL");
-    }
     
     // Configure the cell...
     NSUInteger row = [indexPath row];
-    NSDictionary *rowDict = [self.listCart objectAtIndex:row];
+    NSDictionary *rowDict = [self.listItem objectAtIndex:row];
     cell.title.text = [rowDict objectForKey:@"name"];
     
     NSString *imagePath = [rowDict objectForKey:@"image"];
@@ -103,12 +100,21 @@
     
     NSString *price = @"￥";
     price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
-    [cell.buyButton setTitle:price forState: UIControlStateNormal];
+    [cell.buyButton setTitle:price forState:UIControlStateNormal];
     
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
+
+// 系统是先调用 heightForRowAtIndexPath 方法的，再调用cellForRowAtIndexPath。
+// 动态分配cell大小，可以通过dictionary或者array
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 103.0f;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -158,8 +164,8 @@
     NSString *plistPath = [bundle pathForResource:path ofType:type];
     
     // 获取属性列表文件中的全部数据
-    self.listCart = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    self.listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
-    NSLog(@"loadPlistFile from %@.%@ %d",path, type,[self.listCart count]);
+    NSLog(@"XYMyBookController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[self.listItem count]);
 }
 @end
