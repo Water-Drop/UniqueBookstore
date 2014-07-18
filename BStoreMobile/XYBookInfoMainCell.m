@@ -29,6 +29,7 @@
     if (iOS7) {
         [self showButtonBorder:self.buyButton];
         [self showButtonBorder:self.navButton];
+        [self showButtonBorder:self.toBuyButton];
     }
 }
 
