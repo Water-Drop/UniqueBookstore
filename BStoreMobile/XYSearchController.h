@@ -10,10 +10,6 @@
 
 @interface XYSearchController : UIViewController <UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) NSArray *listItem;
-
-@property (nonatomic, strong) NSDictionary *valueDict;
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
