@@ -51,6 +51,7 @@
                     <navigationItem key="navigationItem" title="我的书籍" id="65e-Ub-aIc"/>
                     <connections>
                         <outlet property="tableView" destination="CFU-4u-RD3" id="QlX-kL-4ij"/>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="iie-G2-nLg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t23-hj-wpl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -316,6 +317,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Cd5-aU-63D"/>
+        <segue reference="iie-G2-nLg"/>
     </inferredMetricsTieBreakers>
 </document>

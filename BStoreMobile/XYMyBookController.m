@@ -16,6 +16,8 @@
 - (IBAction)valueChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) NSDictionary *valueDict;
+
 @end
 
 @implementation XYMyBookController
@@ -64,9 +66,21 @@
     return [self.listItem count];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell) {
+        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"titleStr",cell.title.text,
+                          @"detailStr",cell.detail.text,
+                          nil];
+        [self performSegueWithIdentifier:@"BookDetail" sender:self];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath");
+    NSLog(@"XYMyBookController cellForRowAtIndexPath");
     
     /* // 不在/在sb中的tableview里添加prototype，从storyboard创建
     static NSString *CellIdentifier = @"CellIdentifier";
@@ -167,5 +181,18 @@
     self.listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
     NSLog(@"XYMyBookController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[self.listItem count]);
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"BookDetail"]) {
+        UIViewController *dest = segue.destinationViewController;
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:key forKey:self.valueDict[key]];
+            }
+        }
+    }
 }
 @end

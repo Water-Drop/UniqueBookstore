@@ -209,12 +209,14 @@
 {
     if (collectionView.tag <= 3) {
         XYCollectionCell * cell = (XYCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        // 准备segue的参数传递
-        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"titleStr",cell.title.text,
-                          @"detailStr",cell.detail.text,
-                          nil];
-        [self performSegueWithIdentifier:@"BookDetail" sender:self];
+        if (cell) {
+            // 准备segue的参数传递
+            self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"titleStr",cell.title.text,
+                              @"detailStr",cell.detail.text,
+                              nil];
+            [self performSegueWithIdentifier:@"BookDetail" sender:self];
+        }
     }
 }
 
