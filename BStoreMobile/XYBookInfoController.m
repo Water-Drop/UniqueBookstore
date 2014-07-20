@@ -12,12 +12,12 @@
 @interface XYBookInfoController ()
 
 enum BookInfoStatus {
-    details, comments, recommends
+    DETAILS, COMMENTS, RECOMMENDS
 };
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property enum BookInfoStatus status;
-@property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, strong) UIView *toolView;
 @property NSString *imageStr;
 @property NSString *priceStr;
 
@@ -46,7 +46,7 @@ enum BookInfoStatus {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
-    [self prepareForToolBar];
+    [self prepareForToolView];
     [self getInfoFromSegue];
 }
 
@@ -68,20 +68,16 @@ enum BookInfoStatus {
     NSLog(@"getInfoFromSegue at XYBookInfoController");
 }
 
-- (void)prepareForToolBar
+- (void)prepareForToolView
 {
-    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
     NSArray *segItemsArray = [NSArray arrayWithObjects: @"详细信息", @"读者评论", @"相关推荐", nil];
     UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:segItemsArray];
-    segControl.frame = CGRectMake(16, 7, 287, 30);
+    segControl.frame = CGRectMake(16, 8, 287, 29);
     segControl.selectedSegmentIndex = 0;
-    self.status = details;
+    self.status = DETAILS;
     [segControl addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
-    UIBarButtonItem *segItem = [[UIBarButtonItem alloc] initWithCustomView:segControl];
-    NSArray *barArray = [NSArray arrayWithObjects:segItem, nil];
-    [self.toolBar setItems:barArray];
-    // backgroudColor不起作用 ???
-    self.toolBar.backgroundColor = [UIColor whiteColor];
+    [self.toolView addSubview:segControl];
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,7 +152,7 @@ enum BookInfoStatus {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 1) {
-        return 44.0f;
+        return 45.0f;
     }
     return 0.0f;
 }
@@ -165,7 +161,7 @@ enum BookInfoStatus {
 {
     if (section == 1) {
         // 每次reload tableview时，均要调用，因此不能在此处alloc/init toolbar，应当将toolbar作为一个成员变量，只初始化一次
-        return self.toolBar;
+        return self.toolView;
     }
     return nil;
 }
@@ -176,15 +172,15 @@ enum BookInfoStatus {
     switch (index) {
         case 0:
             NSLog(@"Seg Control valued changed to 0");
-            self.status = details;
+            self.status = DETAILS;
             break;
         case 1:
             NSLog(@"Seg Control valued changed to 1");
-            self.status = comments;
+            self.status = COMMENTS;
             break;
         case 2:
             NSLog(@"Seg Control valued changed to 2");
-            self.status = recommends;
+            self.status = RECOMMENDS;
             break;
         default:
             break;

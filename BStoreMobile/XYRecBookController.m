@@ -220,9 +220,6 @@
     }
 }
 
-
-
-
 - (NSArray *) loadTopRated {
     return [self loadPlistFile:@"cart" ofType:@"plist"];
 }

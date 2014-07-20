@@ -11,12 +11,16 @@
 
 @interface XYMyBookController ()
 
+enum MyBookPageStatus {
+    CART, TOBUY, PAID
+};
+
 @property (nonatomic, strong) NSArray *listItem;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSDictionary *valueDict;
+@property enum MyBookPageStatus status;
 
 - (IBAction)valueChanged:(id)sender;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic, strong) NSDictionary *valueDict;
 
 @end
 
@@ -43,6 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
+    self.status = CART;
     [self loadCart];
 }
 
@@ -145,14 +150,17 @@
     switch (index) {
         case 0:
             NSLog(@"Seg Control valued changed to 0");
+            self.status = CART;
             [self loadCart];
             break;
         case 1:
             NSLog(@"Seg Control valued changed to 1");
+            self.status = TOBUY;
             [self loadToBuy];
             break;
         case 2:
             NSLog(@"Seg Control valued changed to 2");
+            self.status = PAID;
             [self loadPaid];
             break;
         default:
