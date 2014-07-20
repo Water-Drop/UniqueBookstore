@@ -78,6 +78,7 @@ enum BookInfoStatus {
     self.status = DETAILS;
     [segControl addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.toolView addSubview:segControl];
+    self.toolView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning
