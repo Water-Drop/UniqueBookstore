@@ -89,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="2440" y="736"/>
         </scene>
-        <!--View Controller - 个人中心-->
+        <!--Admin Controller - 个人中心-->
         <scene sceneID="GWZ-dA-dTi">
             <objects>
-                <viewController storyboardIdentifier="myStoryBoardID" automaticallyAdjustsScrollViewInsets="NO" id="YNj-63-9W6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="myStoryBoardID" automaticallyAdjustsScrollViewInsets="NO" id="YNj-63-9W6" customClass="XYAdminController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eWw-RC-xc5"/>
                         <viewControllerLayoutGuide type="bottom" id="hNs-SH-CWN"/>
@@ -138,15 +138,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="个人中心" id="9dM-3O-0zV"/>
+                    <connections>
+                        <outlet property="detailView" destination="b2f-RB-kR8" id="RSn-da-Ee1"/>
+                        <outlet property="imageView" destination="VUu-wj-Igb" id="e2S-qM-VGe"/>
+                        <outlet property="remaining" destination="LCm-su-oK0" id="qgv-2q-phm"/>
+                        <outlet property="reward" destination="XZC-ZU-bLF" id="C3P-29-4hH"/>
+                        <outlet property="username" destination="Aoq-9q-itZ" id="iKg-h5-ZgH"/>
+                        <segue destination="vaP-8e-b2D" kind="push" identifier="MyFriends" id="945-a2-E3B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C48-jx-Vcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1906" y="-693"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Detail Table Controller-->
         <scene sceneID="J8U-Yz-Mue">
             <objects>
-                <tableViewController id="Ckv-g2-xOE" sceneMemberID="viewController">
+                <tableViewController id="Ckv-g2-xOE" customClass="XYDetailTableController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hiB-mV-tp7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="332"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -269,7 +277,28 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMQ-3L-Ltn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2426" y="-575"/>
+            <point key="canvasLocation" x="2440" y="-399"/>
+        </scene>
+        <!--View Controller - 我的好友-->
+        <scene sceneID="w3F-BL-MfT">
+            <objects>
+                <viewController storyboardIdentifier="MyFriendsView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vaP-8e-b2D" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EOd-EP-9Fk"/>
+                        <viewControllerLayoutGuide type="bottom" id="iPj-X7-8rM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nas-Lk-QRV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我的好友" id="FNv-xt-BgA">
+                        <barButtonItem key="rightBarButtonItem" title="添加朋友" id="sIW-7H-veK"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FWv-uz-pdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2440" y="-1100"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCO-pR-gEx">
