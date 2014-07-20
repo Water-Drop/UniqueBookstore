@@ -9,6 +9,14 @@
 #import "XYSearchController.h"
 #import "XYSaleItemCell.h"
 
+@interface XYSearchController()
+
+@property (nonatomic, strong) NSArray *listItem;
+
+@property (nonatomic, strong) NSDictionary *valueDict;
+
+@end
+
 @implementation XYSearchController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -25,10 +33,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self setExtraCellLineHidden:self.tableView];
-    self.searchBar.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    [self setExtraCellLineHidden:_tableView];
+    _searchBar.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,7 +47,7 @@
 
 #pragma customize table view
 
--(void)setExtraCellLineHidden: (UITableView *)tableView
+- (void)setExtraCellLineHidden: (UITableView *)tableView
 {
     UIView *view =[[UIView alloc]init];
     view.backgroundColor = [UIColor clearColor];
@@ -51,13 +59,13 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     NSLog(@"shouldBeginEditing");
-    self.searchBar.showsCancelButton = YES;
+    _searchBar.showsCancelButton = YES;
     return YES;
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    UIView *topView = self.searchBar.subviews[0];
+    UIView *topView = _searchBar.subviews[0];
     for(UIView* subview in topView.subviews)
     {
         if ([subview isKindOfClass:NSClassFromString(@"UINavigationButton")]) {
@@ -71,27 +79,27 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"cancleButtonClicked");
-    self.searchBar.text = @"";
-    self.searchBar.showsCancelButton = NO;
-    [self.searchBar resignFirstResponder];
+    _searchBar.text = @"";
+    _searchBar.showsCancelButton = NO;
+    [_searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"searchButtonClicked");
-    self.searchBar.showsCancelButton = NO;
-    [self.searchBar resignFirstResponder];
-    [self doSearch:self.searchBar.text];
+    _searchBar.showsCancelButton = NO;
+    [_searchBar resignFirstResponder];
+    [self doSearch:_searchBar.text];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     NSLog(@"SearchBarTextChanged");
-    if (0 == self.searchBar.text.length) {
+    if (0 == _searchBar.text.length) {
         NSLog(@"Clear Table View");
         //clear table view
-        self.listItem = [NSArray array];
-        [self.tableView reloadData];
+        _listItem = [NSArray array];
+        [_tableView reloadData];
     }
 }
 
@@ -107,7 +115,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.listItem count];
+    return [_listItem count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,7 +124,7 @@
     
     // 从xib中创建，不在sb中的tableview里添加prototype(否则关联的outlet是nil，没有初始化，main interface是sb)
     static NSString *CellIdentifier = @"CellIdentifier";
-    XYSaleItemCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    XYSaleItemCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         // XYSaleItemCell.xib as NibName
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYSaleItemCell" owner:nil options:nil];
@@ -129,7 +137,7 @@
     
     // Configure the cell...
     NSUInteger row = [indexPath row];
-    NSDictionary *rowDict = [self.listItem objectAtIndex:row];
+    NSDictionary *rowDict = [_listItem objectAtIndex:row];
     cell.title.text = [rowDict objectForKey:@"name"];
     
     NSString *imagePath = [rowDict objectForKey:@"image"];
@@ -152,7 +160,7 @@
 
 #pragma UITableViewDelegate
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 103.0f;
 }
@@ -164,11 +172,11 @@
     //TODO: sample
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
-    self.listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
-    [self.tableView reloadData];
+    [_tableView reloadData];
     
-    NSLog(@"XYSearchController loadPlistFile of size %lu",(unsigned long)[self.listItem count]);
+    NSLog(@"XYSearchController loadPlistFile of size %lu",(unsigned long)[_listItem count]);
 }
 
 #pragma navigation
@@ -181,11 +189,11 @@
     
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
-    self.listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
-    NSDictionary *rowDict = [self.listItem objectAtIndex:btn.tag];
+    NSDictionary *rowDict = [_listItem objectAtIndex:btn.tag];
     
-    self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+    _valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
                       @"titleStr",[rowDict objectForKey:@"name"],
                       @"detailStr",[rowDict objectForKey:@"detail"],
                       nil];
@@ -200,10 +208,10 @@
 {
     if ([segue.identifier isEqualToString:@"SearchBookDetail"]) {
         UIViewController *dest = segue.destinationViewController;
-        if (self.valueDict) {
-            for (NSString *key in self.valueDict) {
-                NSLog(@"%@, %@", key, self.valueDict[key]);
-                [dest setValue:key forKey:self.valueDict[key]];
+        if (_valueDict) {
+            for (NSString *key in _valueDict) {
+                NSLog(@"%@, %@", key, _valueDict[key]);
+                [dest setValue:key forKey:_valueDict[key]];
             }
         }
     }

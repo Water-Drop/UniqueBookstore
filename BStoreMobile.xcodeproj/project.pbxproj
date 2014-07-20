@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		21A54ED019792F79003F53DB /* XYSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A54ECF19792F79003F53DB /* XYSearchController.m */; };
+		21A54ED419795E8E003F53DB /* XYCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A54ED319795E8E003F53DB /* XYCameraViewController.m */; };
+		21A54ED619796B3F003F53DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A54ED519796B3F003F53DB /* AVFoundation.framework */; };
+		21EAE41D197AA02D00159337 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EAE41C197AA02D00159337 /* ImageIO.framework */; };
 		E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */; };
 		E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3EEA197629F300BA3797 /* XYMyBookController.m */; };
 		E33A3EF019762A0E00BA3797 /* cart.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EED19762A0E00BA3797 /* cart.plist */; };
@@ -147,6 +150,10 @@
 /* Begin PBXFileReference section */
 		21A54ECE19792F79003F53DB /* XYSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSearchController.h; sourceTree = "<group>"; };
 		21A54ECF19792F79003F53DB /* XYSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSearchController.m; sourceTree = "<group>"; };
+		21A54ED219795E8E003F53DB /* XYCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCameraViewController.h; sourceTree = "<group>"; };
+		21A54ED319795E8E003F53DB /* XYCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCameraViewController.m; sourceTree = "<group>"; };
+		21A54ED519796B3F003F53DB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		21EAE41C197AA02D00159337 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		E33A3EE9197629F300BA3797 /* XYMyBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyBookController.h; sourceTree = "<group>"; };
 		E33A3EEA197629F300BA3797 /* XYMyBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyBookController.m; sourceTree = "<group>"; };
@@ -291,6 +298,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21EAE41D197AA02D00159337 /* ImageIO.framework in Frameworks */,
+				21A54ED619796B3F003F53DB /* AVFoundation.framework in Frameworks */,
 				E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */,
 				E35BA3651973630E0055EDF4 /* UIKit.framework in Frameworks */,
 				E35BA3611973630E0055EDF4 /* Foundation.framework in Frameworks */,
@@ -315,6 +324,8 @@
 			children = (
 				21A54ECE19792F79003F53DB /* XYSearchController.h */,
 				21A54ECF19792F79003F53DB /* XYSearchController.m */,
+				21A54ED219795E8E003F53DB /* XYCameraViewController.h */,
+				21A54ED319795E8E003F53DB /* XYCameraViewController.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -468,6 +479,8 @@
 		E35BA35F1973630E0055EDF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21EAE41C197AA02D00159337 /* ImageIO.framework */,
+				21A54ED519796B3F003F53DB /* AVFoundation.framework */,
 				E35BA3601973630E0055EDF4 /* Foundation.framework */,
 				E35BA3621973630E0055EDF4 /* CoreGraphics.framework */,
 				E35BA3641973630E0055EDF4 /* UIKit.framework */,
@@ -783,6 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A54ED419795E8E003F53DB /* XYCameraViewController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,

@@ -231,7 +231,7 @@
             </objects>
             <point key="canvasLocation" x="1906" y="1432"/>
         </scene>
-        <!--Search Controller - 搜索图书-->
+        <!--Search Controller - 搜书-->
         <scene sceneID="IXW-bC-L5p">
             <objects>
                 <viewController id="kqf-05-aJc" customClass="XYSearchController" sceneMemberID="viewController">
@@ -256,7 +256,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="搜索图书" id="fy1-Yd-d07">
+                    <navigationItem key="navigationItem" title="搜书" id="fy1-Yd-d07">
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="0fC-tc-glg">
                             <connections>
                                 <segue destination="bjH-vI-Wtw" kind="push" id="Sin-yh-wXE"/>
@@ -271,22 +271,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCw-2J-IWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1898" y="2146"/>
+            <point key="canvasLocation" x="1906" y="2146"/>
         </scene>
-        <!--View Controller - 随意拍-->
+        <!--Camera View Controller - 随意拍-->
         <scene sceneID="LOf-Zl-Ieq">
             <objects>
-                <viewController id="bjH-vI-Wtw" sceneMemberID="viewController">
+                <viewController id="bjH-vI-Wtw" customClass="XYCameraViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="UYy-SC-eIO"/>
-                        <viewControllerLayoutGuide type="bottom" id="FUJ-if-9Nj"/>
+                        <viewControllerLayoutGuide type="top" id="Mi8-Nt-iVr"/>
+                        <viewControllerLayoutGuide type="bottom" id="XNI-s4-oz7"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ovv-ST-7yt">
+                    <view key="view" contentMode="scaleToFill" id="ePe-wN-bRT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peJ-nI-nhS">
+                                <rect key="frame" x="0.0" y="109" width="320" height="350"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V99-8C-jfU">
+                                <rect key="frame" x="20" y="484" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5nT-x2-xtA">
+                                <rect key="frame" x="20" y="73" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="扫码"/>
+                                    <segment title="拍图"/>
+                                </segments>
+                                <connections>
+                                    <action selector="valueChanged:" destination="bjH-vI-Wtw" eventType="valueChanged" id="dKV-vQ-ujZ"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="随意拍" id="vLr-sc-lQg"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="lblStatus" destination="V99-8C-jfU" id="pH5-yL-XvE"/>
+                        <outlet property="viewPreview" destination="peJ-nI-nhS" id="Ct7-Lk-eJF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7S-Ei-DQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
