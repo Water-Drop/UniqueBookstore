@@ -68,6 +68,7 @@ enum BookInfoStatus {
     NSLog(@"getInfoFromSegue at XYBookInfoController");
 }
 
+// add ToolView with SegControl in section#1's header
 - (void)prepareForToolView
 {
     self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
