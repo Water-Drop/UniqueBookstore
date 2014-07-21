@@ -11,8 +11,6 @@
 
 @interface XYCameraViewController()
 
-@property (nonatomic) BOOL isReading;
-
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
@@ -42,7 +40,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _isReading = NO;
     
     [self loadBeepSound];
     
@@ -74,6 +71,8 @@
     [_viewPreview.layer addSublayer:_videoPreviewLayer];
     
     [_captureSession startRunning];
+    
+    [self startReadingBarcode];
 
 }
 
@@ -211,34 +210,32 @@
         // the barcode is QR
         if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeQRCode]) {
             [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
-
-            _isReading = NO;
             
             if (_audioPlayer) {
                 [_audioPlayer play];
             }
         // the barcode is ISBN
         } else if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeEAN13Code]) {
+            
+            [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[metadataObj stringValue] waitUntilDone:NO];
+            
             // cast to EAN-10, for first 9 digits
-            NSString *isbnBaseCodeStr = [[metadataObj stringValue] substringWithRange:NSMakeRange(3, 9)];
-            
-            int isbnBaseCode = [isbnBaseCodeStr intValue];
-            
-            // from 4 to 12
-            int count = 0;
-            int baseTemp = isbnBaseCode;
-            for (int i = 0; i < 9; i++) {
-                int digit = baseTemp % 10;
-                baseTemp /= 10;
-                count += digit * (i+2);
-            }
-            
-            int isbnCode10 = isbnBaseCode * 10 + 11 - count % 11;
-            
-            // display
-            [_lblStatus performSelectorOnMainThread:@selector(setText:) withObject:[NSString stringWithFormat:@"%d", isbnCode10] waitUntilDone:NO];
-            
-            _isReading = NO;
+//            NSString *isbnBaseCodeStr = [[metadataObj stringValue] substringWithRange:NSMakeRange(3, 9)];
+//            
+//            int isbnBaseCode = [isbnBaseCodeStr intValue];
+//            
+//            NSLog(@"%d", isbnBaseCode);
+//            
+//            // from 4 to 12
+//            int count = 0;
+//            int baseTemp = isbnBaseCode;
+//            for (int i = 0; i < 9; i++) {
+//                int digit = baseTemp % 10;
+//                baseTemp /= 10;
+//                count += digit * (i+2);
+//            }
+//            
+//            int isbnCode10 = isbnBaseCode * 10 + 11 - count % 11;
             
             if (_audioPlayer) {
                 [_audioPlayer play];

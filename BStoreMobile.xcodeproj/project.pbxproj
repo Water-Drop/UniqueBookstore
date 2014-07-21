@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2165B3B7197CB0E7005B9F34 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */; };
+		2165B3B9197CB0F0005B9F34 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */; };
+		2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2165B3BC197CF05D005B9F34 /* XYLocationManager.m */; };
 		21A54ED019792F79003F53DB /* XYSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A54ECF19792F79003F53DB /* XYSearchController.m */; };
 		21A54ED419795E8E003F53DB /* XYCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A54ED319795E8E003F53DB /* XYCameraViewController.m */; };
 		21A54ED619796B3F003F53DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A54ED519796B3F003F53DB /* AVFoundation.framework */; };
@@ -148,6 +151,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2165B3BB197CF05D005B9F34 /* XYLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLocationManager.h; sourceTree = "<group>"; };
+		2165B3BC197CF05D005B9F34 /* XYLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLocationManager.m; sourceTree = "<group>"; };
 		21A54ECE19792F79003F53DB /* XYSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSearchController.h; sourceTree = "<group>"; };
 		21A54ECF19792F79003F53DB /* XYSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSearchController.m; sourceTree = "<group>"; };
 		21A54ED219795E8E003F53DB /* XYCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCameraViewController.h; sourceTree = "<group>"; };
@@ -298,6 +305,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2165B3B9197CB0F0005B9F34 /* CoreLocation.framework in Frameworks */,
+				2165B3B7197CB0E7005B9F34 /* CoreBluetooth.framework in Frameworks */,
 				21EAE41D197AA02D00159337 /* ImageIO.framework in Frameworks */,
 				21A54ED619796B3F003F53DB /* AVFoundation.framework in Frameworks */,
 				E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */,
@@ -319,6 +328,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2165B3BA197CEEFA005B9F34 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				2165B3BB197CF05D005B9F34 /* XYLocationManager.h */,
+				2165B3BC197CF05D005B9F34 /* XYLocationManager.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		21A54ED119792F83003F53DB /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +497,8 @@
 		E35BA35F1973630E0055EDF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */,
+				2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */,
 				21EAE41C197AA02D00159337 /* ImageIO.framework */,
 				21A54ED519796B3F003F53DB /* AVFoundation.framework */,
 				E35BA3601973630E0055EDF4 /* Foundation.framework */,
@@ -499,6 +519,7 @@
 				E33A3F0F1977BB5000BA3797 /* images */,
 				E35BA39319736BF20055EDF4 /* DataSource */,
 				21A54ED119792F83003F53DB /* Search */,
+				2165B3BA197CEEFA005B9F34 /* Location */,
 				E35BA36F1973630E0055EDF4 /* XYAppDelegate.h */,
 				E35BA3701973630E0055EDF4 /* XYAppDelegate.m */,
 				E33A3F091977973500BA3797 /* AFViewController.h */,
@@ -645,6 +666,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = SJTU;
 				TargetAttributes = {
+					E35BA35C1973630E0055EDF4 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					E35BA3771973630E0055EDF4 = {
 						TestTargetID = E35BA35C1973630E0055EDF4;
 					};
@@ -799,6 +827,7 @@
 				21A54ED419795E8E003F53DB /* XYCameraViewController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
+				2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */,
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
@@ -932,7 +961,7 @@
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -947,7 +976,7 @@
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
