@@ -295,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMQ-3L-Ltn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="289"/>
+            <point key="canvasLocation" x="2440" y="417"/>
         </scene>
         <!--View Controller - 我的好友-->
         <scene sceneID="w3F-BL-MfT">
