@@ -118,6 +118,18 @@
     return [_listItem count];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell) {
+        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"titleStr",cell.title.text,
+                          @"detailStr",cell.detail.text,
+                          nil];
+        [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"cellForRowAtIndexPath");
@@ -151,8 +163,10 @@
     price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
     [cell.buyButton setTitle:price forState: UIControlStateNormal];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     //Add action method
-    [cell.navButton addTarget:self action:@selector(navBookInfo:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.navButton addTarget:self action:@selector(navBook:) forControlEvents:UIControlEventTouchUpInside];
     [cell.navButton setTag:indexPath.row];
     
     return cell;
@@ -181,23 +195,23 @@
 
 #pragma navigation
 
-- (void)navBookInfo:(id)sender
+- (void)navBook:(id)sender
 {
-    UIButton *btn = (UIButton*) sender;
-    //TODO: use btn.tag to access json
-    NSLog(@"%lu", (unsigned long)btn.tag);
-    
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
-    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
-    
-    NSDictionary *rowDict = [_listItem objectAtIndex:btn.tag];
-    
-    _valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                      @"titleStr",[rowDict objectForKey:@"name"],
-                      @"detailStr",[rowDict objectForKey:@"detail"],
-                      nil];
-    [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
+//    UIButton *btn = (UIButton*) sender;
+//    //TODO: use btn.tag to access json
+//    NSLog(@"%lu", (unsigned long)btn.tag);
+//    
+//    NSBundle *bundle = [NSBundle mainBundle];
+//    NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
+//    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
+//    
+//    NSDictionary *rowDict = [_listItem objectAtIndex:btn.tag];
+//    
+//    _valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
+//                      @"titleStr",[rowDict objectForKey:@"name"],
+//                      @"detailStr",[rowDict objectForKey:@"detail"],
+//                      nil];
+//    [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
     
 }
 
