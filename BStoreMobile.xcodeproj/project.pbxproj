@@ -347,6 +347,13 @@
 			name = AdminPage;
 			sourceTree = "<group>";
 		};
+		E315CEDE197CA61B006BD8CA /* Frineds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frineds;
+			sourceTree = "<group>";
+		};
 		E33A3F0F1977BB5000BA3797 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +516,7 @@
 		E35BA3661973630E0055EDF4 /* BStoreMobile */ = {
 			isa = PBXGroup;
 			children = (
+				E315CEDE197CA61B006BD8CA /* Frineds */,
 				E315CED7197BC363006BD8CA /* AdminPage */,
 				E3B0027D197A5A7C00BF3CBF /* BookInfo */,
 				E3B0027C197A5A5F00BF3CBF /* RecBook */,
