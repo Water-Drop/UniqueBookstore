@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		211B271F197E2D1B00052039 /* XYPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 211B271E197E2D1B00052039 /* XYPoint.m */; };
 		2165B3B7197CB0E7005B9F34 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */; };
 		2165B3B9197CB0F0005B9F34 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */; };
 		2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2165B3BC197CF05D005B9F34 /* XYLocationManager.m */; };
@@ -153,6 +154,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		211B271D197E2D1B00052039 /* XYPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPoint.h; sourceTree = "<group>"; };
+		211B271E197E2D1B00052039 /* XYPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPoint.m; sourceTree = "<group>"; };
 		2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2165B3BB197CF05D005B9F34 /* XYLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLocationManager.h; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 			children = (
 				2165B3BB197CF05D005B9F34 /* XYLocationManager.h */,
 				2165B3BC197CF05D005B9F34 /* XYLocationManager.m */,
+				211B271D197E2D1B00052039 /* XYPoint.h */,
+				211B271E197E2D1B00052039 /* XYPoint.m */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				E315CEDA197BC65F006BD8CA /* XYDetailTableController.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
 				E315CED6197BC356006BD8CA /* XYAdminController.m in Sources */,
+				211B271F197E2D1B00052039 /* XYPoint.m in Sources */,
 				E33A3F0D1977973500BA3797 /* AFViewController.m in Sources */,
 				E33A3F081977706200BA3797 /* XYRecBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
@@ -987,7 +993,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1002,7 +1010,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "BStoreMobile/BStoreMobile-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

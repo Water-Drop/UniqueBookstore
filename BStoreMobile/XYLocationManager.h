@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "XYPoint.h"
 
 @interface XYLocationManager : NSObject <CLLocationManagerDelegate>
 
@@ -15,6 +16,12 @@
 
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSArray *beacons;
+
+@property (strong, nonatomic) NSDictionary *beaconPoints;
+@property (strong, nonatomic) NSMutableDictionary *beaconDistance;
+
+@property int rangeCount;
+
+@property XYPoint *current;
 
 @end

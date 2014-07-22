@@ -87,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTF-aX-s2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="1424"/>
+            <point key="canvasLocation" x="2440" y="1424"/>
         </scene>
         <!--Admin Controller - 个人中心-->
         <scene sceneID="GWZ-dA-dTi">
@@ -372,7 +372,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBX-TN-oPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2983" y="-714"/>
+            <point key="canvasLocation" x="2985" y="-720"/>
         </scene>
         <!--Table View Controller - 详细信息-->
         <scene sceneID="IPd-xb-NQQ">
@@ -495,7 +495,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m9H-tL-SA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3551" y="-720"/>
+            <point key="canvasLocation" x="3556" y="-720"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCO-pR-gEx">
@@ -676,7 +676,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCw-2J-IWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="2146"/>
+            <point key="canvasLocation" x="1898" y="2146"/>
         </scene>
         <!--Camera View Controller - 随意拍-->
         <scene sceneID="LOf-Zl-Ieq">
@@ -725,7 +725,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7S-Ei-DQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2448" y="2146"/>
+            <point key="canvasLocation" x="2440" y="2146"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9LW-mN-Vei">
@@ -772,8 +772,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="3o2-qs-Tyw"/>
         <segue reference="Cd5-aU-63D"/>
-        <segue reference="tFE-eq-5b4"/>
-        <segue reference="rrf-j9-eDb"/>
     </inferredMetricsTieBreakers>
 </document>
