@@ -7,11 +7,14 @@
 //
 
 #import "XYAppDelegate.h"
+#import "XYLocationManager.h"
 
 @implementation XYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [XYLocationManager sharedInstance];
+    
     return YES;
 }
 
