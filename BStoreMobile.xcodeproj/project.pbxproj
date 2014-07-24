@@ -13,6 +13,7 @@
 		21EAE41D197AA02D00159337 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EAE41C197AA02D00159337 /* ImageIO.framework */; };
 		E315CED6197BC356006BD8CA /* XYAdminController.m in Sources */ = {isa = PBXBuildFile; fileRef = E315CED5197BC356006BD8CA /* XYAdminController.m */; };
 		E315CEDA197BC65F006BD8CA /* XYDetailTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = E315CED9197BC65F006BD8CA /* XYDetailTableController.m */; };
+		E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */; };
 		E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */; };
 		E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3EEA197629F300BA3797 /* XYMyBookController.m */; };
 		E33A3EF019762A0E00BA3797 /* cart.plist in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EED19762A0E00BA3797 /* cart.plist */; };
@@ -160,6 +161,8 @@
 		E315CED5197BC356006BD8CA /* XYAdminController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAdminController.m; sourceTree = "<group>"; };
 		E315CED8197BC65F006BD8CA /* XYDetailTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYDetailTableController.h; sourceTree = "<group>"; };
 		E315CED9197BC65F006BD8CA /* XYDetailTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYDetailTableController.m; sourceTree = "<group>"; };
+		E315CEDF197D0BA9006BD8CA /* XYPubMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPubMsgController.h; sourceTree = "<group>"; };
+		E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPubMsgController.m; sourceTree = "<group>"; };
 		E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		E33A3EE9197629F300BA3797 /* XYMyBookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyBookController.h; sourceTree = "<group>"; };
 		E33A3EEA197629F300BA3797 /* XYMyBookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyBookController.m; sourceTree = "<group>"; };
@@ -350,6 +353,8 @@
 		E315CEDE197CA61B006BD8CA /* Frineds */ = {
 			isa = PBXGroup;
 			children = (
+				E315CEDF197D0BA9006BD8CA /* XYPubMsgController.h */,
+				E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */,
 			);
 			name = Frineds;
 			sourceTree = "<group>";
@@ -824,6 +829,7 @@
 			files = (
 				21A54ED419795E8E003F53DB /* XYCameraViewController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
+				E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
