@@ -1,15 +1,15 @@
 //
-//  XYBookInfoMainCell.m
+//  XYPaidItemCell.m
 //  BStoreMobile
 //
-//  Created by Julie on 14-7-17.
+//  Created by Julie on 14-7-25.
 //  Copyright (c) 2014年 SJTU. All rights reserved.
 //
 
-#import "XYBookInfoMainCell.h"
+#import "XYPaidItemCell.h"
 #import "XYUtil.h"
 
-@implementation XYBookInfoMainCell
+@implementation XYPaidItemCell
 
 - (void)awakeFromNib
 {
@@ -26,9 +26,7 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     if (iOS7) {
-        [XYUtil showButtonBorder:self.buyButton];
-        [XYUtil showButtonBorder:self.navButton];
-        [XYUtil showButtonBorder:self.toBuyButton];
+        [XYUtil showButtonBorder:self.comButton];
     }
 }
 

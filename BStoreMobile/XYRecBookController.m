@@ -9,6 +9,7 @@
 #import "XYRecBookController.h"
 #import "XYRecBookCell.h"
 #import "XYCollectionCell.h"
+#import "XYUtil.h"
 
 #define IMAGECNT 31
 
@@ -18,6 +19,8 @@
 @property NSInteger imageIndex;
 
 @property (nonatomic, strong) NSDictionary *valueDict;
+
+@property (nonatomic, strong) NSDictionary *outputDict;
 
 @end
 
@@ -56,6 +59,7 @@
     [self setExtraCellLineHidden:self.tableView];
     [self prepareImageArray];
     self.imageIndex = arc4random() % IMAGECNT;
+    self.outputDict = [XYUtil parseRecBookInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,7 +92,7 @@
             title = @"大家都在看";
             break;
         case 3:
-            title = @"分类";
+            title = @"推荐主题";
             break;
         default:
             break;
@@ -138,7 +142,7 @@
 #pragma mark - UITableViewDelegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 152;
+    return 152.0f;
 }
 
 #pragma mark - UICollectionViewDataSource Methods
@@ -148,10 +152,12 @@
     NSArray *listItem;
     switch (fileIndex) {
         case 1:
-            listItem = [self loadTopRated];
+            // listItem = [self loadTopRated];
+            listItem = [self.outputDict objectForKey:@"toprated"];
             break;
         case 2:
-            listItem = [self loadFriends];
+            // listItem = [self loadFriends];
+            listItem = [self.outputDict objectForKey:@"recommend"];
             break;
         case 3:
             listItem = [self loadCategory];
@@ -160,7 +166,7 @@
             break;
     }
     NSLog(@"collectionView:numberOfItemsInSection %lu", (unsigned long)[listItem count]);
-    return [listItem count];
+    return listItem == nil ? 0 : [listItem count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -177,29 +183,43 @@
     NSUInteger row = [indexPath row];
     NSInteger fileIndex = collectionView.tag;
     NSArray *listItem;
+    NSString *imgKey;
+    NSString *detailKey;
+    NSString *nameKey;
     switch (fileIndex) {
         case 1:
-            listItem = [self loadTopRated];
+            // listItem = [self loadTopRated];
+            listItem = [self.outputDict objectForKey:@"toprated"];
+            nameKey = @"title";
+            imgKey = @"coverimg";
+            detailKey = @"author";
             break;
         case 2:
-            listItem = [self loadFriends];
+            // listItem = [self loadFriends];
+            listItem = [self.outputDict objectForKey:@"recommend"];
+            nameKey = @"title";
+            imgKey = @"coverimg";
+            detailKey = @"author";
             break;
         case 3:
             listItem = [self loadCategory];
+            nameKey = @"name";
+            imgKey = @"image";
+            detailKey = @"detail";
             break;
         default:
             break;
     }
     NSDictionary *rowDict = [listItem objectAtIndex:row];
-    cell.title.text = [rowDict objectForKey:@"name"];
-    NSLog(@"cell.title.text: %@", [rowDict objectForKey:@"name"]);
+    cell.title.text = [rowDict objectForKey:nameKey];
+    NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
     
-    NSString *imagePath = [rowDict objectForKey:@"image"];
+    NSString *imagePath = [rowDict objectForKey:imgKey];
     imagePath = [imagePath stringByAppendingString:@".png"];
     cell.coverImage.image = [UIImage imageNamed:imagePath];
     
-    NSString *detail = [rowDict objectForKey:@"detail"];
-    NSLog(@"cell.title.text: %@", [rowDict objectForKey:@"detail"]);
+    NSString *detail = [rowDict objectForKey:detailKey];
+    NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
     cell.detail.text = detail;
     
     return cell;

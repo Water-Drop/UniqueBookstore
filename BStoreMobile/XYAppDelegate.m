@@ -8,6 +8,7 @@
 
 #import "XYAppDelegate.h"
 #import "XYLocationManager.h"
+#import "XYUtil.h"
 
 @implementation XYAppDelegate
 

@@ -28,6 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];
+    [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
 }
 
@@ -47,5 +50,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)dismissKeyboardByTouchDownBG
+{
+    NSLog(@"dismissKeyboardByTouchDownBG");
+    [self.textView resignFirstResponder];
+}
 
 @end

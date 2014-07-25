@@ -33,9 +33,9 @@
     
     // beacon points are indexed by their minor keys
     _beaconPoints = [NSDictionary dictionaryWithObjectsAndKeys:
-                     [XYPoint point:@"B1" x:10 y:10], @"1",
-                     [XYPoint point:@"B2" x:30 y:20], @"2",
-                     [XYPoint point:@"B3" x:10 y:30], @"3", nil];
+                     [XYPoint point:@"B1" x:0 y:0], @"1",
+                     [XYPoint point:@"B2" x:2.6 y:1.3], @"2",
+                     [XYPoint point:@"B3" x:0 y:2.6], @"3", nil];
     
     current = [XYPoint point:@"Current" x:0 y:0];
     
@@ -120,6 +120,7 @@
         double distance = [(NSNumber*)[array objectAtIndex:1] doubleValue] / [(NSNumber*)[array objectAtIndex:0] intValue];
         
         [averageDistance setObject:[NSNumber numberWithDouble:distance] forKey:key];
+        NSLog(@"%@ %f", key, distance);
     }
     
     
