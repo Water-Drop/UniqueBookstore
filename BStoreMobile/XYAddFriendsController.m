@@ -125,13 +125,13 @@
 
 - (IBAction)dismissKeyboardByReturn:(id)sender
 {
-    NSLog(@"dismissKeyboardByReturn");
+    // NSLog(@"dismissKeyboardByReturn");
     [sender resignFirstResponder];
 }
 
 - (void)dismissKeyboardByTouchDownBG
 {
-    NSLog(@"dismissKeyboardByTouchDownBG");
+    // NSLog(@"dismissKeyboardByTouchDownBG");
     [self.textField resignFirstResponder];
 }
 

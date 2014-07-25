@@ -173,15 +173,15 @@ enum BookInfoStatus {
     NSInteger index = ((UISegmentedControl *)sender).selectedSegmentIndex;
     switch (index) {
         case 0:
-            NSLog(@"Seg Control valued changed to 0");
+            // NSLog(@"Seg Control valued changed to 0");
             self.status = DETAILS;
             break;
         case 1:
-            NSLog(@"Seg Control valued changed to 1");
+            // NSLog(@"Seg Control valued changed to 1");
             self.status = COMMENTS;
             break;
         case 2:
-            NSLog(@"Seg Control valued changed to 2");
+            // NSLog(@"Seg Control valued changed to 2");
             self.status = RECOMMENDS;
             break;
         default:

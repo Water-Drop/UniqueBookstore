@@ -143,9 +143,6 @@
         //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
         cell = [nib objectAtIndex:0];
     }
-    if (cell == nil) {
-        NSLog(@"NILLLLL");
-    }
     
     // Configure the cell...
     NSUInteger row = [indexPath row];

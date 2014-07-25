@@ -86,7 +86,7 @@ enum MyBookPageStatus {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"XYMyBookController cellForRowAtIndexPath");
+    // NSLog(@"XYMyBookController cellForRowAtIndexPath");
     
     /* // 不在/在sb中的tableview里添加prototype，从storyboard创建
     static NSString *CellIdentifier = @"CellIdentifier";
@@ -207,15 +207,15 @@ enum MyBookPageStatus {
     NSInteger index = ((UISegmentedControl *)sender).selectedSegmentIndex;
     switch (index) {
         case 0:
-            NSLog(@"Seg Control valued changed to 0");
+            // NSLog(@"Seg Control valued changed to 0");
             [self changeStatus:CART];
             break;
         case 1:
-            NSLog(@"Seg Control valued changed to 1");
+            // NSLog(@"Seg Control valued changed to 1");
             [self changeStatus:TOBUY];
             break;
         case 2:
-            NSLog(@"Seg Control valued changed to 2");
+            // NSLog(@"Seg Control valued changed to 2");
             [self changeStatus:PAID];
             break;
         default:

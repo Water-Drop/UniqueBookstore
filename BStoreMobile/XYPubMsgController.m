@@ -53,7 +53,7 @@
 
 - (void)dismissKeyboardByTouchDownBG
 {
-    NSLog(@"dismissKeyboardByTouchDownBG");
+    // NSLog(@"dismissKeyboardByTouchDownBG");
     [self.textView resignFirstResponder];
 }
 

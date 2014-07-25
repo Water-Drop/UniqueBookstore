@@ -165,13 +165,13 @@
         default:
             break;
     }
-    NSLog(@"collectionView:numberOfItemsInSection %lu", (unsigned long)[listItem count]);
+    // NSLog(@"collectionView:numberOfItemsInSection %lu", (unsigned long)[listItem count]);
     return listItem == nil ? 0 : [listItem count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"collectionView:cellForItemAtIndexPath");
+    // NSLog(@"collectionView:cellForItemAtIndexPath");
     XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         // XYSaleItemCell.xib as NibName
@@ -212,14 +212,14 @@
     }
     NSDictionary *rowDict = [listItem objectAtIndex:row];
     cell.title.text = [rowDict objectForKey:nameKey];
-    NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
+    // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
     
     NSString *imagePath = [rowDict objectForKey:imgKey];
     imagePath = [imagePath stringByAppendingString:@".png"];
     cell.coverImage.image = [UIImage imageNamed:imagePath];
     
     NSString *detail = [rowDict objectForKey:detailKey];
-    NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
+    // NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
     cell.detail.text = detail;
     
     return cell;
