@@ -1,18 +1,22 @@
 //
-//  XYDetailTableController.m
+//  XYAdminPageController.m
 //  BStoreMobile
 //
-//  Created by Julie on 14-7-20.
+//  Created by Julie on 14-7-26.
 //  Copyright (c) 2014年 SJTU. All rights reserved.
 //
 
-#import "XYDetailTableController.h"
+#import "XYAdminPageController.h"
 
-@interface XYDetailTableController ()
+@interface XYAdminPageController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *uname;
+@property (weak, nonatomic) IBOutlet UILabel *remaining;
+@property (weak, nonatomic) IBOutlet UILabel *credit;
 
 @end
 
-@implementation XYDetailTableController
+@implementation XYAdminPageController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -66,19 +70,6 @@
     return cell;
 }
 */
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 0 && indexPath.row == 3) {
-        NSLog(@"我的好友 selected");
-        // get @"MyFriendsView" controller from storyboard
-//        UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-//        UITableViewController *myFriendsViewController = [mainStoryBoard instantiateViewControllerWithIdentifier:@"MyFriendsView"];
-//        myFriendsViewController.title = @"我的好友";
-//        [self.parentViewController.navigationController pushViewController:myFriendsViewController animated:YES];
-        [self.parentViewController performSegueWithIdentifier:@"MyFriends" sender:self.parentViewController];
-    }
-}
 
 /*
 // Override to support conditional editing of the table view.
