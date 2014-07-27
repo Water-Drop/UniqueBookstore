@@ -59,7 +59,7 @@
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vli-KS-yHr" customClass="XYBookInfoController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BookInfo" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vli-KS-yHr" customClass="XYBookInfoController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UDW-5R-ctH"/>
                         <viewControllerLayoutGuide type="bottom" id="441-IO-fK0"/>
@@ -865,7 +865,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tFE-eq-5b4"/>
         <segue reference="3o2-qs-Tyw"/>
+        <segue reference="Cd5-aU-63D"/>
     </inferredMetricsTieBreakers>
 </document>

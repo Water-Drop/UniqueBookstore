@@ -27,8 +27,8 @@ enum BookInfoStatus {
 @property NSString *priceStr;
 @property (nonatomic, strong) NSDictionary *outputDict;
 @property (nonatomic, strong) NSDictionary *bookInfoDict;
-@property (nonatomic, strong) NSArray *listItem;
-@property (nonatomic, strong) NSDictionary *valueDict;
+@property (nonatomic, strong) NSArray *listComments;
+@property (nonatomic, strong) NSArray *listRecommends;
 
 @end
 
@@ -125,9 +125,15 @@ enum BookInfoStatus {
         } else {
             return 0;
         }
-    } else {
-        if (self.bookInfoDict && self.listItem) {
+    } else if(self.status == RECOMMENDS) {
+        if (self.bookInfoDict && self.listRecommends) {
             return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        if (self.bookInfoDict && self.listComments) {
+            return [self.listComments count];
         } else {
             return 0;
         }
@@ -265,7 +271,7 @@ enum BookInfoStatus {
                 NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCommentViewCell" owner:nil options:nil];
                 cell = [nib objectAtIndex:0];
             }
-            NSDictionary *rowDict = [self.listItem objectAtIndex:indexPath.row];
+            NSDictionary *rowDict = [self.listComments objectAtIndex:indexPath.row];
             cell.uname.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"username"]];
             cell.pubDate.text = rowDict[@"date"];
             cell.upCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"favorCount"] intValue]];
@@ -316,8 +322,8 @@ enum BookInfoStatus {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.bookInfoDict && self.listItem) {
-        return [self.listItem count];
+    if (self.bookInfoDict && self.listRecommends && self.status == RECOMMENDS) {
+        return [self.listRecommends count];
     } else {
         return 0;
     }
@@ -334,7 +340,7 @@ enum BookInfoStatus {
         cell = [nib objectAtIndex:0];
     }
     // configure collection view cell
-    NSDictionary *rowDict = [self.listItem objectAtIndex:indexPath.row];
+    NSDictionary *rowDict = [self.listRecommends objectAtIndex:indexPath.row];
     cell.title.text = rowDict[@"title"];
     cell.detail.text = rowDict[@"author"];
     NSNumber *num = rowDict[@"bookID"];
@@ -364,10 +370,11 @@ enum BookInfoStatus {
     if (collectionView.tag == 1 && self.status == RECOMMENDS) {
         XYCollectionCell * cell = (XYCollectionCell *) [collectionView cellForItemAtIndexPath:indexPath];
         if (cell) {
-            // 准备segue的参数传递
-            self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]]};
-            NSLog(@"BookInfo Segue %@", self.valueDict);
-            // [self performSegueWithIdentifier:@"BookDetail" sender:self];
+            // pushViewController
+            UIStoryboard *mainsb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+            XYBookInfoController *bookInfoController = [mainsb instantiateViewControllerWithIdentifier:@"BookInfo"];
+            bookInfoController.bookID = [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]];
+            [self.navigationController pushViewController:bookInfoController animated:YES];
         }
     }
 }
@@ -451,7 +458,7 @@ enum BookInfoStatus {
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *tmp = (NSDictionary *)responseObject;
         if (tmp) {
-            self.listItem = tmp[@"comments"];
+            self.listComments = tmp[@"comments"];
         }
         NSLog(@"loadBookCommentsFromServer Success");
         [self.tableView reloadData];
@@ -471,7 +478,7 @@ enum BookInfoStatus {
     NSString *path = [@"BookRelated/" stringByAppendingString:self.bookID];
     NSLog(@"path:%@",path);
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.listItem = (NSArray *)responseObject;
+        self.listRecommends = (NSArray *)responseObject;
         NSLog(@"loadBookRecommendsFromServer Success");
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
