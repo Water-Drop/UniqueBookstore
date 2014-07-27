@@ -10,6 +10,8 @@
 
 #define iOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 
+static NSString * const BASEURLSTRING = @"http://218.244.128.72:8080/BookStoreService/";
+
 @interface XYUtil : NSObject
 
 + (void) parseJsonTest;

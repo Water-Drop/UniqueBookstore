@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYBookInfoController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XYBookInfoController : UIViewController<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property NSString *titleStr;
 @property NSString *detailStr;
+@property NSString *bookID;
 
 @end

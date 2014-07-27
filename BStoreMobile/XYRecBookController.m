@@ -10,6 +10,7 @@
 #import "XYRecBookCell.h"
 #import "XYCollectionCell.h"
 #import "XYUtil.h"
+#import "UIImageView+AFNetworking.h"
 
 #define IMAGECNT 31
 
@@ -59,7 +60,12 @@
     [self setExtraCellLineHidden:self.tableView];
     [self prepareImageArray];
     self.imageIndex = arc4random() % IMAGECNT;
-    self.outputDict = [XYUtil parseRecBookInfo];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    [self loadRecBookFromServer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,12 +158,10 @@
     NSArray *listItem;
     switch (fileIndex) {
         case 1:
-            // listItem = [self loadTopRated];
-            listItem = [self.outputDict objectForKey:@"toprated"];
+            listItem = [self loadTopRated];
             break;
         case 2:
-            // listItem = [self loadFriends];
-            listItem = [self.outputDict objectForKey:@"recommend"];
+            listItem = [self loadFriends];
             break;
         case 3:
             listItem = [self loadCategory];
@@ -165,7 +169,7 @@
         default:
             break;
     }
-    // NSLog(@"collectionView:numberOfItemsInSection %lu", (unsigned long)[listItem count]);
+    NSLog(@"collectionView:numberOfItemsInSection %lu", (unsigned long)[listItem count]);
     return listItem == nil ? 0 : [listItem count];
 }
 
@@ -188,15 +192,13 @@
     NSString *nameKey;
     switch (fileIndex) {
         case 1:
-            // listItem = [self loadTopRated];
-            listItem = [self.outputDict objectForKey:@"toprated"];
+            listItem = [self loadTopRated];
             nameKey = @"title";
             imgKey = @"coverimg";
             detailKey = @"author";
             break;
         case 2:
-            // listItem = [self loadFriends];
-            listItem = [self.outputDict objectForKey:@"recommend"];
+            listItem = [self loadFriends];
             nameKey = @"title";
             imgKey = @"coverimg";
             detailKey = @"author";
@@ -214,9 +216,24 @@
     cell.title.text = [rowDict objectForKey:nameKey];
     // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
     
-    NSString *imagePath = [rowDict objectForKey:imgKey];
-    imagePath = [imagePath stringByAppendingString:@".png"];
-    cell.coverImage.image = [UIImage imageNamed:imagePath];
+    if (fileIndex == 3) {
+        NSString *imagePath = [rowDict objectForKey:imgKey];
+        imagePath = [imagePath stringByAppendingString:@".png"];
+        cell.coverImage.image = [UIImage imageNamed:imagePath];
+        cell.title.tag = 100;
+    } else {
+        NSNumber *num = [rowDict objectForKey:@"bookID"];
+        cell.title.tag = [num integerValue];
+        NSString *imagePath = [rowDict objectForKey:imgKey];
+        __weak XYCollectionCell *weakCell = cell;
+        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            weakCell.coverImage.image = image;
+            [weakCell setNeedsLayout];
+            [weakCell setNeedsDisplay];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Get Image from Server Error.");
+        }];
+    }
     
     NSString *detail = [rowDict objectForKey:detailKey];
     // NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
@@ -227,25 +244,39 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView.tag <= 3) {
+    if (collectionView.tag == 3) {
         XYCollectionCell * cell = (XYCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
         if (cell) {
             // 准备segue的参数传递
-            self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"titleStr",cell.title.text,
-                              @"detailStr",cell.detail.text,
-                              nil];
+            self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
+            [self performSegueWithIdentifier:@"BookDetail" sender:self];
+        }
+    } else if(collectionView.tag < 3) {
+        XYCollectionCell * cell = (XYCollectionCell *) [collectionView cellForItemAtIndexPath:indexPath];
+        if (cell) {
+            // 准备segue的参数传递
+            self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]]};
             [self performSegueWithIdentifier:@"BookDetail" sender:self];
         }
     }
 }
 
 - (NSArray *) loadTopRated {
-    return [self loadPlistFile:@"cart" ofType:@"plist"];
+    //return [self loadPlistFile:@"cart" ofType:@"plist"];
+    NSArray *array = nil;
+    if (self.outputDict) {
+        array = self.outputDict[@"toprated"];
+    }
+    return array;
 }
 
 - (NSArray *) loadFriends {
-    return [self loadPlistFile:@"tobuy" ofType:@"plist"];
+    //return [self loadPlistFile:@"tobuy" ofType:@"plist"];
+    NSArray *array = nil;
+    if (self.outputDict) {
+        array = self.outputDict[@"recommend"];
+    }
+    return array;
 }
 
 - (NSArray *) loadCategory {
@@ -258,7 +289,7 @@
     
     // 获取属性列表文件中的全部数据
     NSArray *listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
-    NSLog(@"XYRecBookController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[listItem count]);
+    // NSLog(@"XYRecBookController loadPlistFile from %@.%@ %lu",path, type,(unsigned long)[listItem count]);
     return listItem;
 }
 
@@ -271,12 +302,31 @@
         if (self.valueDict) {
             for (NSString *key in self.valueDict) {
 //                if ([dest respondsToSelector:@selector(setData:)]) {
-                    NSLog(@"%@, %@", key, self.valueDict[key]);
-                    [dest setValue:key forKey:self.valueDict[key]];
+                    NSLog(@"prepareForSegue: %@, %@", key, self.valueDict[key]);
+                    [dest setValue:self.valueDict[key] forKey:key];
 //                }
             }
         }
     }
+}
+
+#pragma mark - Network
+
+- (void) loadRecBookFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    [manager GET:@"BookRecommend" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.outputDict = (NSDictionary *)responseObject;
+        NSLog(@"loadRecBookFromServer Success");
+        [self.tableView reloadData];
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadRecBookFromServer Error:%@", error);
+    }];
 }
 
 @end

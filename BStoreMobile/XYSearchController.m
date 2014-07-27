@@ -122,10 +122,7 @@
 {
     XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"titleStr",cell.title.text,
-                          @"detailStr",cell.detail.text,
-                          nil];
+        self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
         [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
     }
 }
@@ -222,7 +219,7 @@
         if (_valueDict) {
             for (NSString *key in _valueDict) {
                 NSLog(@"%@, %@", key, _valueDict[key]);
-                [dest setValue:key forKey:_valueDict[key]];
+                [dest setValue:_valueDict[key] forKey:key];
             }
         }
     }

@@ -76,10 +76,7 @@ enum MyBookPageStatus {
 {
     XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"titleStr",cell.title.text,
-                          @"detailStr",cell.detail.text,
-                          nil];
+        self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
         [self performSegueWithIdentifier:@"BookDetail" sender:self];
     }
 }
@@ -329,7 +326,7 @@ enum MyBookPageStatus {
         if (self.valueDict) {
             for (NSString *key in self.valueDict) {
                 NSLog(@"%@, %@", key, self.valueDict[key]);
-                [dest setValue:key forKey:self.valueDict[key]];
+                [dest setValue:self.valueDict[key] forKey:key];
             }
         }
     }

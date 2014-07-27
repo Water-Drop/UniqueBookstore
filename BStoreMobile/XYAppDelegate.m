@@ -9,12 +9,15 @@
 #import "XYAppDelegate.h"
 #import "XYLocationManager.h"
 #import "XYUtil.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @implementation XYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [XYLocationManager sharedInstance];
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;
 }
