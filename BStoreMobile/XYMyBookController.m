@@ -97,7 +97,7 @@ enum MyBookPageStatus {
     // Return the number of rows in the section.
     switch (self.status) {
         case PAID: {
-            return self.listItem == nil ? 0 : [self.listItem count];
+            return self.listPaid == nil ? 0 : [self.listPaid count];
         }
         case TOBUY: {
             return self.listToBuy == nil ? 0 : [self.listToBuy count];
@@ -129,18 +129,10 @@ enum MyBookPageStatus {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.status == PAID) {
-        XYPaidItemCell *cell = (XYPaidItemCell *)[tableView cellForRowAtIndexPath:indexPath];
-        if (cell) {
-            self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
-            [self performSegueWithIdentifier:@"BookDetail" sender:self];
-        }
-    } else {
-        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        if (cell) {
-            self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.tag]]};
-            [self performSegueWithIdentifier:@"BookDetail" sender:self];
-        }
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell) {
+        self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.tag]]};
+        [self performSegueWithIdentifier:@"BookDetail" sender:self];
     }
 }
 
@@ -263,15 +255,25 @@ enum MyBookPageStatus {
         
         // Configure the cell...
         NSUInteger row = [indexPath row];
-        NSDictionary *rowDict = [self.listItem objectAtIndex:row];
-        cell.title.text = [rowDict objectForKey:@"name"];
+        NSDictionary *rowDict = [self.listToBuy objectAtIndex:row];
+        cell.title.text = rowDict[@"title"];
         
-        NSString *imagePath = [rowDict objectForKey:@"image"];
-        imagePath = [imagePath stringByAppendingString:@".png"];
-        cell.coverImage.image = [UIImage imageNamed:imagePath];
-        
-        NSString *detail = [rowDict objectForKey:@"detail"];
+        NSString *detail = rowDict[@"author"];
         cell.detail.text = detail;
+        
+        NSNumber *num = rowDict[@"bookID"];
+        cell.title.tag = [num integerValue];
+        NSString *imagePath = rowDict[@"coverimg"];
+        __weak XYPaidItemCell *weakCell = cell;
+        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            weakCell.coverImage.image = image;
+            [weakCell setNeedsLayout];
+            [weakCell setNeedsDisplay];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Get Image from Server Error.");
+        }];
+        
+        cell.tag = [num integerValue];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -354,7 +356,7 @@ enum MyBookPageStatus {
             [self loadToBuyFromServer];
             break;
         case PAID:
-            [self loadPaid];
+            [self loadPaidFromServer];
             self.navigationItem.rightBarButtonItem = rightBtn;
             break;
         default:
@@ -462,13 +464,13 @@ enum MyBookPageStatus {
             break;
         }
         case PAID: {
-            tmp = self.listItem;
+            tmp = self.listPaid;
         }
         default:
             break;
     }
     if (tmp) {
-        if (editingStyle == UITableViewCellEditingStyleDelete)
+        if (editingStyle == UITableViewCellEditingStyleDelete) // 等价于 self.status != PAID(defined in tableView:editingStyleForRowAtIndexPath:)
         {
             [tmp removeObjectAtIndex:indexPath.row];  //删除数组里的数据
             [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
@@ -496,12 +498,12 @@ enum MyBookPageStatus {
             self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
         }
         NSLog(@"loadCartFromServer Success");
-        [self.tableView reloadData];
         UIBarButtonItem *rightBtn = nil;
         if (self.listCart && [self.listCart count] > 0) {
             rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
         }
         self.navigationItem.rightBarButtonItem = rightBtn;
+        [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadCartFromServer Error:%@", error);
     }];
@@ -523,12 +525,12 @@ enum MyBookPageStatus {
             self.listToBuy = [[NSMutableArray alloc]initWithArray:tmp];
         }
         NSLog(@"loadToBuyFromServer Success");
-        [self.tableView reloadData];
         UIBarButtonItem *rightBtn = nil;
         if (self.listToBuy && [self.listToBuy count] > 0) {
             rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
         }
         self.navigationItem.rightBarButtonItem = rightBtn;
+        [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadToBuyFromServer Error:%@", error);
     }];
@@ -536,7 +538,25 @@ enum MyBookPageStatus {
 
 -(void) loadPaidFromServer
 {
-    
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tmp = (NSArray *)responseObject;
+        if (tmp) {
+            self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
+        }
+        NSLog(@"loadPaidFromServer Success");
+        self.navigationItem.rightBarButtonItem = nil;
+        [self.tableView reloadData];
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadPaidFromServer Error:%@", error);
+    }];
 }
 
 -(void) deleteItemsInCartFromServer
