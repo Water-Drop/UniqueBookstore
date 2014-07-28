@@ -13,6 +13,7 @@
 #import "XYRecBookCell.h"
 #import "XYCollectionCell.h"
 #import "XYUtil.h"
+#import "XYStarRatedView.h"
 
 @interface XYBookInfoController ()
 
@@ -167,6 +168,20 @@ enum BookInfoStatus {
                 cell.detail.text = self.bookInfoDict[@"author"];
                 int priceAtCent = [self.bookInfoDict[@"price"] intValue];
                 self.priceStr = [XYUtil printMoneyAtCent:priceAtCent];
+                
+                CGRect rect = CGRectMake(0, 0, cell.totScoreView.frame.size.width, cell.totScoreView.frame.size.height);
+                XYStarRatedView *starRateView = [[XYStarRatedView alloc] initWithFrame:rect numberOfStar:5 AtStatus:SHOWED];
+                starRateView.delegate = self;
+                [cell.totScoreView addSubview:starRateView];
+                
+                NSNumber *cnt = self.bookInfoDict[@"countScore"];
+                NSString *cntStr = [NSString stringWithFormat:@"(%@)", cnt];
+                cell.cntScore.text = cntStr;
+                
+                NSNumber *tot = self.bookInfoDict[@"sumScore"];
+                int avg = [tot intValue] / [cnt intValue];
+                CGPoint p = CGPointMake(avg * (rect.size.width / 5), rect.size.height);
+                [starRateView changeStarForegroundViewWithPoint:p];
                 
                 NSString *imagePath = self.bookInfoDict[@"coverimg"];
                 __weak XYBookInfoMainCell *weakCell = cell;

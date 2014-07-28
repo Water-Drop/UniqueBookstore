@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7o-Lk-eat">
-                        <rect key="frame" x="119" y="15" width="98" height="45"/>
+                        <rect key="frame" x="119" y="15" width="98" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqT-Yd-uRe">
-                        <rect key="frame" x="119" y="67" width="98" height="61"/>
+                        <rect key="frame" x="119" y="52" width="98" height="52"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,15 +54,29 @@
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9k-Cg-g9x">
+                        <rect key="frame" x="181" y="107" width="42" height="15"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="who-Cc-aKK">
+                        <rect key="frame" x="119" y="110" width="50" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="buyButton" destination="gJr-rc-hEs" id="dBG-hp-Emi"/>
+                <outlet property="cntScore" destination="c9k-Cg-g9x" id="vHR-sM-jxz"/>
                 <outlet property="coverImage" destination="4u5-EE-eQL" id="Yn2-IW-SZn"/>
                 <outlet property="detail" destination="dqT-Yd-uRe" id="c8s-PR-dN9"/>
                 <outlet property="navButton" destination="0B4-mS-SQo" id="HaD-xM-dfp"/>
                 <outlet property="title" destination="C7o-Lk-eat" id="LGb-MC-gze"/>
                 <outlet property="toBuyButton" destination="Vhs-4Z-cF9" id="7Sr-qw-8NP"/>
+                <outlet property="totScoreView" destination="who-Cc-aKK" id="QMK-lt-sYs"/>
             </connections>
         </tableViewCell>
     </objects>

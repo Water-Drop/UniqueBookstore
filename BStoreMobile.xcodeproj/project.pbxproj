@@ -162,6 +162,11 @@
 		E3BF9EDC198503F000855279 /* book.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3BF9EDB198503F000855279 /* book.jpg */; };
 		E3BF9EDE1985302B00855279 /* XYCommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */; };
 		E3BF9EE1198544DF00855279 /* XYCommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */; };
+		E3D1A0A91986AADD00DC244B /* star_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A51986AADD00DC244B /* star_empty.png */; };
+		E3D1A0AA1986AADD00DC244B /* star_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A61986AADD00DC244B /* star_empty@2x.png */; };
+		E3D1A0AB1986AADD00DC244B /* star_full.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A71986AADD00DC244B /* star_full.png */; };
+		E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A81986AADD00DC244B /* star_full@2x.png */; };
+		E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -372,6 +377,12 @@
 		E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYCommentViewCell.xib; sourceTree = "<group>"; };
 		E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCommentViewCell.h; sourceTree = "<group>"; };
 		E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCommentViewCell.m; sourceTree = "<group>"; };
+		E3D1A0A51986AADD00DC244B /* star_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_empty.png; sourceTree = "<group>"; };
+		E3D1A0A61986AADD00DC244B /* star_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_empty@2x.png"; sourceTree = "<group>"; };
+		E3D1A0A71986AADD00DC244B /* star_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_full.png; sourceTree = "<group>"; };
+		E3D1A0A81986AADD00DC244B /* star_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_full@2x.png"; sourceTree = "<group>"; };
+		E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYStarRatedView.h; sourceTree = "<group>"; };
+		E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYStarRatedView.m; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -461,6 +472,10 @@
 		E33A3F0F1977BB5000BA3797 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E3D1A0A51986AADD00DC244B /* star_empty.png */,
+				E3D1A0A61986AADD00DC244B /* star_empty@2x.png */,
+				E3D1A0A71986AADD00DC244B /* star_full.png */,
+				E3D1A0A81986AADD00DC244B /* star_full@2x.png */,
 				E3BF9EDB198503F000855279 /* book.jpg */,
 				E33A3F921977BFD800BA3797 /* full */,
 				E33A3F101977BB5000BA3797 /* thumb */,
@@ -688,6 +703,8 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
+				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
 				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
 				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
 				E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */,
@@ -883,12 +900,14 @@
 				E33A3F7C1977BB5000BA3797 /* Germany.png in Resources */,
 				E33A3F6A1977BB5000BA3797 /* 30.JPG in Resources */,
 				E33A3F6B1977BB5000BA3797 /* 31.JPG in Resources */,
+				E3D1A0A91986AADD00DC244B /* star_empty.png in Resources */,
 				E33A3EF019762A0E00BA3797 /* cart.plist in Resources */,
 				E33A3F5F1977BB5000BA3797 /* 20.JPG in Resources */,
 				E33A3F7A1977BB5000BA3797 /* England.png in Resources */,
 				E33A3F571977BB5000BA3797 /* 13.JPG in Resources */,
 				E33A3F671977BB5000BA3797 /* 28.JPG in Resources */,
 				E33A3FC51977BFD800BA3797 /* 26_full.JPG in Resources */,
+				E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */,
 				E30190FD19821A4200D04906 /* XYPaidItemCell.xib in Resources */,
 				E33A3F901977BB5000BA3797 /* Uruguay.png in Resources */,
 				E33A3FD01977BFD800BA3797 /* 7_full.JPG in Resources */,
@@ -954,6 +973,7 @@
 				E33A3FC61977BFD800BA3797 /* 27_full.JPG in Resources */,
 				E33A3FD21977BFD800BA3797 /* 9_full.JPG in Resources */,
 				E33A3F861977BB5000BA3797 /* NorthKorea.png in Resources */,
+				E3D1A0AA1986AADD00DC244B /* star_empty@2x.png in Resources */,
 				E33A3F521977BB5000BA3797 /* 0.JPG in Resources */,
 				E33A3F6E1977BB5000BA3797 /* 6.JPG in Resources */,
 				E33A3F7D1977BB5000BA3797 /* Ghana.png in Resources */,
@@ -978,6 +998,7 @@
 				E33A3FCB1977BFD800BA3797 /* 31_full.JPG in Resources */,
 				E33A3F701977BB5000BA3797 /* 8.JPG in Resources */,
 				E33A3F551977BB5000BA3797 /* 11.JPG in Resources */,
+				E3D1A0AB1986AADD00DC244B /* star_full.png in Resources */,
 				E33A3FCD1977BFD800BA3797 /* 4_full.JPG in Resources */,
 				E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */,
 				E33A3F641977BB5000BA3797 /* 25.JPG in Resources */,
@@ -1017,6 +1038,7 @@
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E3BF9ED31984A6B200855279 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3BF9ED51984A6B200855279 /* UIAlertView+AFNetworking.m in Sources */,
+				E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */,
 				E30190FC19821A4200D04906 /* XYPaidItemCell.m in Sources */,
 				E3BF9CE319836B0600855279 /* XYAdminPageController.m in Sources */,
 				E3BF9ECB1984A6B200855279 /* AFHTTPRequestOperationManager.m in Sources */,
