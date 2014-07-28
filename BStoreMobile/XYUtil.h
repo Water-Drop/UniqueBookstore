@@ -12,6 +12,8 @@
 
 static NSString * const BASEURLSTRING = @"http://218.244.128.72:8080/BookStoreService/";
 
+static NSString * USERID = @"1";
+
 @interface XYUtil : NSObject
 
 + (void) parseJsonTest;
@@ -19,5 +21,7 @@ static NSString * const BASEURLSTRING = @"http://218.244.128.72:8080/BookStoreSe
 + (NSDictionary *) parseRecBookInfo;
 
 + (void)showButtonBorder: (UIButton *)button;
+
++ (NSString *)printMoneyAtCent:(int) moneyAtCent;
 
 @end

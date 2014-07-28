@@ -10,6 +10,8 @@
 #import "XYSaleItemCell.h"
 #import "XYCartItemCell.h"
 #import "XYPaidItemCell.h"
+#import "XYUtil.h"
+#import "UIKit+AFNetworking.h"
 
 @interface XYMyBookController ()
 
@@ -21,6 +23,10 @@ enum MyBookPageStatus {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSDictionary *valueDict;
 @property enum MyBookPageStatus status;
+@property (nonatomic,strong) NSMutableArray *listCart;
+@property (nonatomic,strong) NSMutableArray *listToBuy;
+@property (nonatomic,strong) NSMutableArray *listPaid;
+@property UIButton *doneInKeyboardButton;
 
 - (IBAction)valueChanged:(id)sender;
 
@@ -52,6 +58,12 @@ enum MyBookPageStatus {
     [self changeStatus:CART];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    [self changeStatus:self.status];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -69,15 +81,35 @@ enum MyBookPageStatus {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.listItem count];
+    switch (self.status) {
+        case PAID: {
+            return self.listItem == nil ? 0 : [self.listItem count];
+        }
+        case TOBUY: {
+            return self.listToBuy == nil ? 0 : [self.listToBuy count];
+        }
+        case CART: {
+            return self.listCart == nil ? 0 : [self.listCart count];
+        }
+        default:
+            return 0;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if (cell) {
-        self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
-        [self performSegueWithIdentifier:@"BookDetail" sender:self];
+    if (self.status == PAID) {
+        XYPaidItemCell *cell = (XYPaidItemCell *)[tableView cellForRowAtIndexPath:indexPath];
+        if (cell) {
+            self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
+            [self performSegueWithIdentifier:@"BookDetail" sender:self];
+        }
+    } else {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if (cell) {
+            self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.tag]]};
+            [self performSegueWithIdentifier:@"BookDetail" sender:self];
+        }
     }
 }
 
@@ -106,19 +138,29 @@ enum MyBookPageStatus {
         
         // Configure the cell...
         NSUInteger row = [indexPath row];
-        NSDictionary *rowDict = [self.listItem objectAtIndex:row];
-        cell.title.text = [rowDict objectForKey:@"name"];
+        NSDictionary *rowDict = [self.listToBuy objectAtIndex:row];
+        cell.title.text = rowDict[@"title"];
         
-        NSString *imagePath = [rowDict objectForKey:@"image"];
-        imagePath = [imagePath stringByAppendingString:@".png"];
-        cell.coverImage.image = [UIImage imageNamed:imagePath];
-        
-        NSString *detail = [rowDict objectForKey:@"detail"];
+        NSString *detail = rowDict[@"author"];
         cell.detail.text = detail;
         
-        NSString *price = @"￥";
-        price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
-        [cell.buyButton setTitle:price forState:UIControlStateNormal];
+        int priceAtCent = [rowDict[@"price"] intValue];
+        NSString *priceStr = [XYUtil printMoneyAtCent:priceAtCent];
+        [cell.buyButton setTitle:priceStr forState:UIControlStateNormal];
+        
+        NSNumber *num = rowDict[@"bookID"];
+        cell.title.tag = [num integerValue];
+        NSString *imagePath = rowDict[@"coverimg"];
+        __weak XYSaleItemCell *weakCell = cell;
+        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            weakCell.coverImage.image = image;
+            [weakCell setNeedsLayout];
+            [weakCell setNeedsDisplay];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Get Image from Server Error.");
+        }];
+        
+        cell.tag = [num integerValue];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -136,17 +178,34 @@ enum MyBookPageStatus {
         
         // Configure the cell...
         NSUInteger row = [indexPath row];
-        NSDictionary *rowDict = [self.listItem objectAtIndex:row];
-        cell.title.text = [rowDict objectForKey:@"name"];
+        NSDictionary *rowDict = [self.listCart objectAtIndex:row];
+        cell.title.text = rowDict[@"title"];
         
-        NSString *imagePath = [rowDict objectForKey:@"image"];
-        imagePath = [imagePath stringByAppendingString:@".png"];
-        cell.coverImage.image = [UIImage imageNamed:imagePath];
-        
-        NSString *detail = [rowDict objectForKey:@"detail"];
+        NSString *detail = rowDict[@"author"];
         cell.detail.text = detail;
         
-        cell.cntText.text = @"1";
+        int amount = [rowDict[@"amount"] intValue];
+        cell.cntText.text = [NSString stringWithFormat:@"%d", amount];
+        
+        int eachPriceAtCent = [rowDict[@"price"] intValue];
+        int totPriceAtCent = eachPriceAtCent * amount;
+        
+        cell.eachPrice.text = [XYUtil printMoneyAtCent:eachPriceAtCent];
+        cell.totalPrice.text = [XYUtil printMoneyAtCent:totPriceAtCent];
+        
+        NSNumber *num = rowDict[@"bookID"];
+        cell.title.tag = [num integerValue];
+        NSString *imagePath = rowDict[@"coverimg"];
+        __weak XYCartItemCell *weakCell = cell;
+        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            weakCell.coverImage.image = image;
+            [weakCell setNeedsLayout];
+            [weakCell setNeedsDisplay];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Get Image from Server Error.");
+        }];
+        
+        cell.tag = [num integerValue];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -249,18 +308,10 @@ enum MyBookPageStatus {
     UIBarButtonItem *rightBtn = nil;
     switch (status) {
         case CART:
-            [self loadCart];
-            if (self.listItem && [self.listItem count] > 0) {
-                rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
-            }
-            self.navigationItem.rightBarButtonItem = rightBtn;
+            [self loadCartFromServer];
             break;
         case TOBUY:
-            [self loadToBuy];
-            if (self.listItem && [self.listItem count] > 0) {
-                rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
-            }
-            self.navigationItem.rightBarButtonItem = rightBtn;
+            [self loadToBuyFromServer];
             break;
         case PAID:
             [self loadPaid];
@@ -301,7 +352,8 @@ enum MyBookPageStatus {
         case 0:
             NSLog(@"CartAlertView: %ld", (long)buttonIndex);
             if (buttonIndex == 1) {
-                [self.listItem removeAllObjects];
+                [self.listCart removeAllObjects];
+                [self deleteItemsInCartFromServer];
                 self.navigationItem.rightBarButtonItem = nil;
                 [self.tableView reloadData];
             }
@@ -309,7 +361,8 @@ enum MyBookPageStatus {
         case 1:
             NSLog(@"TobuyAlertView: %ld", (long)buttonIndex);
             if (buttonIndex == 1) {
-                [self.listItem removeAllObjects];
+                [self.listToBuy removeAllObjects];
+                [self deleteItemsInWishlistFromServer];
                 self.navigationItem.rightBarButtonItem = nil;
                 [self.tableView reloadData];
             }
@@ -352,13 +405,182 @@ enum MyBookPageStatus {
 /*删除用到的函数*/
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        [self.listItem removeObjectAtIndex:indexPath.row];  //删除数组里的数据
-        [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
-        if (!self.listItem || [self.listItem count] == 0) {
-            self.navigationItem.rightBarButtonItem = nil;
+    NSMutableArray *tmp = nil;
+    switch (self.status) {
+        case CART: {
+            tmp = self.listCart;
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSInteger tag = cell.tag;
+            [self deleteOneItemInCartFromServer:tag];
+            break;
+        }
+        case TOBUY: {
+            tmp = self.listToBuy;
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSInteger tag = cell.tag;
+            [self deleteOneItemInWishlistFromServer:tag];
+            break;
+        }
+        case PAID: {
+            tmp = self.listItem;
+        }
+        default:
+            break;
+    }
+    if (tmp) {
+        if (editingStyle == UITableViewCellEditingStyleDelete)
+        {
+            [tmp removeObjectAtIndex:indexPath.row];  //删除数组里的数据
+            [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+            if (!tmp || [tmp count] == 0) {
+                self.navigationItem.rightBarButtonItem = nil;
+            }
         }
     }
 }
+
+#pragma mark - Network
+-(void) loadCartFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"User/MyCart/" stringByAppendingString:USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tmp = (NSArray *)responseObject;
+        if (tmp) {
+            self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
+        }
+        NSLog(@"loadCartFromServer Success");
+        [self.tableView reloadData];
+        UIBarButtonItem *rightBtn = nil;
+        if (self.listCart && [self.listCart count] > 0) {
+            rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
+        }
+        self.navigationItem.rightBarButtonItem = rightBtn;
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadCartFromServer Error:%@", error);
+    }];
+}
+
+-(void) loadToBuyFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"User/MyWishlist/" stringByAppendingString:USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tmp = (NSArray *)responseObject;
+        if (tmp) {
+            self.listToBuy = [[NSMutableArray alloc]initWithArray:tmp];
+        }
+        NSLog(@"loadToBuyFromServer Success");
+        [self.tableView reloadData];
+        UIBarButtonItem *rightBtn = nil;
+        if (self.listToBuy && [self.listToBuy count] > 0) {
+            rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
+        }
+        self.navigationItem.rightBarButtonItem = rightBtn;
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadToBuyFromServer Error:%@", error);
+    }];
+}
+
+-(void) loadPaidFromServer
+{
+    
+}
+
+-(void) deleteItemsInCartFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/DeleteCart/All?userID=%@", USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        NSLog(@"deleteItemsInCartFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"deleteItemsInCartFromServer Error:%@", error);
+    }];
+}
+
+-(void) deleteItemsInWishlistFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/All?userID=%@", USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        NSLog(@"deleteItemsInWishlistFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"deleteItemsInWishlistFromServer Error:%@", error);
+    }];
+}
+
+-(void) deleteOneItemInCartFromServer:(NSInteger) bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/DeleteCart/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        NSLog(@"deleteOneItemInCartFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"deleteOneItemInCartFromServer Error:%@", error);
+    }];
+}
+
+-(void) deleteOneItemInWishlistFromServer:(NSInteger) bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        NSLog(@"deleteOneItemInWishlistFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"deleteOneItemInWishlistFromServer Error:%@", error);
+    }];
+}
+
 @end

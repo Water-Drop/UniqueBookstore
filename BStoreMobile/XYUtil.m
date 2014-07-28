@@ -52,4 +52,12 @@
     }
 }
 
++ (NSString *)printMoneyAtCent:(int) moneyAtCent
+{
+    int money0 = moneyAtCent / 100;
+    int money1 = moneyAtCent % 100;
+    NSString *money = [NSString stringWithFormat:@"￥%d.%d", money0, money1];
+    return money;
+}
+
 @end

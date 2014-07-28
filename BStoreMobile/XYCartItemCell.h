@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *detail;
 @property (weak, nonatomic) IBOutlet UITextField *cntText;
 @property (weak, nonatomic) IBOutlet UIButton *tobuyBtn;
+@property (weak, nonatomic) IBOutlet UILabel *eachPrice;
+@property (weak, nonatomic) IBOutlet UILabel *totalPrice;
 
 @end

@@ -166,9 +166,7 @@ enum BookInfoStatus {
                 cell.title.text = self.bookInfoDict[@"title"];
                 cell.detail.text = self.bookInfoDict[@"author"];
                 int priceAtCent = [self.bookInfoDict[@"price"] intValue];
-                int price0 = priceAtCent / 100;
-                int price1 = priceAtCent % 100;
-                self.priceStr = [NSString stringWithFormat:@"￥%d.%d", price0, price1];
+                self.priceStr = [XYUtil printMoneyAtCent:priceAtCent];
                 
                 NSString *imagePath = self.bookInfoDict[@"coverimg"];
                 __weak XYBookInfoMainCell *weakCell = cell;
@@ -179,6 +177,11 @@ enum BookInfoStatus {
                 } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                     NSLog(@"Get Image from Server Error.");
                 }];
+                cell.buyButton.tag = [self.bookID intValue];
+                [cell.buyButton addTarget:self action:@selector(buyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                cell.toBuyButton.tag = [self.bookID intValue];
+                [cell.toBuyButton addTarget:self action:@selector(toBuyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                cell.navButton.tag = [self.bookID intValue];
             }
         }
         [cell.buyButton setTitle:self.priceStr forState:UIControlStateNormal];
@@ -483,6 +486,74 @@ enum BookInfoStatus {
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadBookRecommendsFromServer Error:%@", error);
+    }];
+}
+
+- (IBAction)buyButtonClicked:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (self.bookID && tag > 0) {
+        NSLog(@"Add bookID #%@ amount:1", self.bookID);
+        [self addOneItemToCart:tag];
+    }
+}
+
+- (void) addOneItemToCart:(NSInteger)bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/AddCart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        NSLog(@"addOneItemToCart Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"addOneItemToCart Error:%@", error);
+    }];
+}
+
+- (IBAction)toBuyButtonClicked:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (self.bookID && tag > 0) {
+        NSLog(@"Add bookID #%@ To Wishlist", self.bookID);
+        [self addItemToWishlist:tag];
+    }
+}
+
+- (void) addItemToWishlist:(NSInteger)bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/AddWishlist?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"] || [retDict[@"message"] isEqualToString:@"already exist"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到心愿单" message:@"该商品已成功添加到心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        NSLog(@"addItemToWishlist Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"addItemToWishlist Error:%@", error);
     }];
 }
 
