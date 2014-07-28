@@ -122,10 +122,7 @@
 {
     XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        self.valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"titleStr",cell.title.text,
-                          @"detailStr",cell.detail.text,
-                          nil];
+        self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
         [self performSegueWithIdentifier:@"BookDetail" sender:self];
     }
 }
@@ -142,9 +139,6 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYSaleItemCell" owner:nil options:nil];
         //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
         cell = [nib objectAtIndex:0];
-    }
-    if (cell == nil) {
-        NSLog(@"NILLLLL");
     }
     
     // Configure the cell...
@@ -225,7 +219,7 @@
         if (_valueDict) {
             for (NSString *key in _valueDict) {
                 NSLog(@"%@, %@", key, _valueDict[key]);
-                [dest setValue:key forKey:_valueDict[key]];
+                [dest setValue:_valueDict[key] forKey:key];
             }
         }
     }

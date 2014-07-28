@@ -75,10 +75,7 @@
 
 - (void)detailAction
 {
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
-                        @"titleStr",@"A1-南非",
-                        @"detailStr",@"南非，南非",
-                        nil];
+    NSDictionary *dic = @{@"titleStr": @"A1-南非", @"detailStr": @"南非，南非"};
     [controller performSegueWithIdentifier:@"BookDetail" sender:dic];
 }
 

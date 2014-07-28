@@ -17,7 +17,7 @@
     if (self) {
         // Initialization code
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.sectionInset = UIEdgeInsetsMake(7.5,7.5,7.5,7.5);
+        layout.sectionInset = UIEdgeInsetsMake(7,7,7,7);
         layout.itemSize = CGSizeMake(100, 137);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];

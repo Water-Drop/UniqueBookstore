@@ -170,7 +170,7 @@
         if (_valueDict) {
             for (NSString *key in _valueDict) {
                 NSLog(@"%@, %@", key, _valueDict[key]);
-                [dest setValue:key forKey:_valueDict[key]];
+                [dest setValue:_valueDict[key] forKey:key];
             }
         }
     }
