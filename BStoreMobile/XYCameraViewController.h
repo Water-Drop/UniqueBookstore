@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "XYCameraSession.h"
+#import "XYCameraView.h"
+#import <QCAR/DataSet.h>
 
-@interface XYCameraViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate>
+@interface XYCameraViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate, XYCameraSessionControl> {
+    CGRect viewFrame;
+    XYCameraSession * vapp;
+    QCAR::DataSet*  dataSetCurrent;
+}
 
-@property (weak, nonatomic) IBOutlet UIView *viewPreview;
+@property (weak, nonatomic) IBOutlet XYCameraView *viewPreview;
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 - (IBAction)valueChanged:(id)sender;
+
 
 @end

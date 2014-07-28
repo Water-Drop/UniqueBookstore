@@ -126,7 +126,7 @@
                           @"titleStr",cell.title.text,
                           @"detailStr",cell.detail.text,
                           nil];
-        [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
+        [self performSegueWithIdentifier:@"BookDetail" sender:self];
     }
 }
 
@@ -220,7 +220,7 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"SearchBookDetail"]) {
+    if ([segue.identifier isEqualToString:@"BookDetail"]) {
         UIViewController *dest = segue.destinationViewController;
         if (_valueDict) {
             for (NSString *key in _valueDict) {
