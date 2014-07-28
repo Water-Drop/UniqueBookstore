@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYMyBookController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+@interface XYMyBookController : UITableViewController<UIAlertViewDelegate>
 
 @end

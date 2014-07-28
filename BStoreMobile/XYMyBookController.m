@@ -20,15 +20,13 @@ enum MyBookPageStatus {
 };
 
 @property (nonatomic, strong) NSMutableArray *listItem;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSDictionary *valueDict;
 @property enum MyBookPageStatus status;
 @property (nonatomic,strong) NSMutableArray *listCart;
 @property (nonatomic,strong) NSMutableArray *listToBuy;
 @property (nonatomic,strong) NSMutableArray *listPaid;
-@property UIButton *doneInKeyboardButton;
-
-- (IBAction)valueChanged:(id)sender;
+@property (nonatomic, strong) UIButton *doneInKeyboardButton;
+@property (nonatomic, strong) UIView *toolView;
 
 @end
 
@@ -55,7 +53,23 @@ enum MyBookPageStatus {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setExtraCellLineHidden:self.tableView];
+    [self prepareForToolView];
     [self changeStatus:CART];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];
+//    [self.view addGestureRecognizer:tap];
+}
+
+// add ToolView with SegControl in section#1's header
+- (void)prepareForToolView
+{
+    self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
+    NSArray *segItemsArray = [NSArray arrayWithObjects: @"购物车", @"心愿单", @"已购书籍", nil];
+    UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:segItemsArray];
+    segControl.frame = CGRectMake(16, 8, 287, 29);
+    segControl.selectedSegmentIndex = 0;
+    [segControl addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.toolView addSubview:segControl];
+    self.toolView.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -94,6 +108,23 @@ enum MyBookPageStatus {
         default:
             return 0;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 45.0f;
+    }
+    return 0.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        // 每次reload tableview时，均要调用，因此不能在此处alloc/init toolbar，应当将toolbar作为一个成员变量，只初始化一次
+        return self.toolView;
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -186,6 +217,15 @@ enum MyBookPageStatus {
         
         int amount = [rowDict[@"amount"] intValue];
         cell.cntText.text = [NSString stringWithFormat:@"%d", amount];
+        // add Done key in CntTextField
+        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"更新" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonDidPressed:)];
+        doneItem.tag = row;
+        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonDidPressed:)];
+        cancelItem.tag = row;
+        UIBarButtonItem *flexableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[self class] toolbarHeight])];
+        [toolbar setItems:[NSArray arrayWithObjects:cancelItem,flexableItem,doneItem, nil]];
+        cell.cntText.inputAccessoryView = toolbar;
         
         int eachPriceAtCent = [rowDict[@"price"] intValue];
         int totPriceAtCent = eachPriceAtCent * amount;
@@ -582,5 +622,94 @@ enum MyBookPageStatus {
         NSLog(@"deleteOneItemInWishlistFromServer Error:%@", error);
     }];
 }
+
+- (void)updateOneItemInCart:(NSInteger)bookID amount:(NSInteger)amount
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/UpdateCart?userID=%@&bookID=%@&amount=%@", USERID, [NSNumber numberWithInteger:bookID], [NSNumber numberWithInteger:amount]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        [self.tableView reloadData];
+        NSLog(@"updateOneItemInCart Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"updateOneItemInCart Error:%@", error);
+    }];
+}
+
+- (void)doneButtonDidPressed:(id)sender {
+    NSInteger tag = ((UIBarButtonItem *)sender).tag;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tag inSection:0];
+    XYCartItemCell* cell = (XYCartItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [cell.cntText resignFirstResponder];
+    NSLog(@"doneButtonDidPressed Cell.cnText:%@", cell.cntText.text);
+    if (cell.cntText.text && ![cell.cntText.text isEqualToString:@""]) {
+        NSInteger amount = [cell.cntText.text intValue];
+        if (amount == 0) {
+            [self deleteOneItemInCartFromServer:cell.tag];
+            [self.listCart removeObjectAtIndex:indexPath.row];  //删除数组里的数据
+            [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+            if (!self.listCart || [self.listCart count] == 0) {
+                self.navigationItem.rightBarButtonItem = nil;
+            }
+        } else {
+            [self updateOneItemInCart:cell.tag amount:amount];
+            // 修改本地的listCart对应项的amount
+            NSDictionary *rowDict = self.listCart[indexPath.row];
+            NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithDictionary:rowDict];
+            [tmp setValue:[NSNumber numberWithInteger:amount] forKey:@"amount"];
+            self.listCart[indexPath.row] = tmp;
+        }
+    }
+    [self.tableView reloadData];
+}
+
+- (void)cancelButtonDidPressed:(id)sender {
+    NSInteger tag = ((UIBarButtonItem *)sender).tag;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tag inSection:0];
+    XYCartItemCell* cell = (XYCartItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    [cell.cntText resignFirstResponder];
+    NSLog(@"cancelButtonDidPressed Cell.cnText:%@", cell.cntText.text);
+    [self.tableView reloadData];
+}
+
++ (CGFloat)toolbarHeight {
+    // This method will handle the case that the height of toolbar may change in future iOS.
+    return 44.f;
+}
+
+//- (void)dismissKeyboardByTouchDownBG {
+//    if (self.status == CART) {
+//        NSArray *visibles = self.tableView.visibleCells;
+//        for (XYCartItemCell *cell in visibles) {
+//            if ([cell.cntText isFirstResponder]) {
+//                [cell.cntText resignFirstResponder];
+//                NSLog(@"dismissKeyboardByTouchDownBG Cell.cnText:%@", cell.cntText.text);
+//                return;
+//            }
+//        }
+//    }
+//}
+
+//#pragma mark - UIGestureRecognizerDelegate
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    // 输出点击的view的类名
+//    NSLog(@"%@", NSStringFromClass([touch.view class]));
+//    
+//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+//    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+//        return NO;
+//    }
+//    return  YES;
+//}
 
 @end

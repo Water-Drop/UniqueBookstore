@@ -4,58 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--My Book Controller - 我的书籍-->
-        <scene sceneID="9ii-yu-pVG">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="pVK-69-RzV" customClass="XYMyBookController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hBX-rm-PWV"/>
-                        <viewControllerLayoutGuide type="bottom" id="FuG-uM-7lM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rg1-bG-oF7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZL-1N-aOy">
-                                <rect key="frame" x="0.0" y="64" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aN1-J3-vcm">
-                                        <rect key="frame" x="16" y="8" width="287" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="购物车"/>
-                                            <segment title="心愿单"/>
-                                            <segment title="已购书籍"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="valueChanged:" destination="pVK-69-RzV" eventType="valueChanged" id="1hj-JN-JSZ"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </subviews>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="CFU-4u-RD3">
-                                <rect key="frame" x="0.0" y="108" width="320" height="412"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="pVK-69-RzV" id="3mh-go-plZ"/>
-                                    <outlet property="delegate" destination="pVK-69-RzV" id="TMc-4D-4Ii"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="我的书籍" id="65e-Ub-aIc"/>
-                    <connections>
-                        <outlet property="tableView" destination="CFU-4u-RD3" id="QlX-kL-4ij"/>
-                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="iie-G2-nLg"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t23-hj-wpl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1898" y="699"/>
-        </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
             <objects>
@@ -554,12 +502,34 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="pVK-69-RzV" kind="relationship" relationship="rootViewController" id="6ny-d0-nbH"/>
+                        <segue destination="L3c-Sl-x4q" kind="relationship" relationship="rootViewController" id="bBj-tj-wQq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="paj-fs-7J9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="699"/>
+        </scene>
+        <!--My Book Controller - 我的书籍-->
+        <scene sceneID="rHS-51-9ls">
+            <objects>
+                <tableViewController id="L3c-Sl-x4q" customClass="XYMyBookController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vJ3-I1-TBB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="L3c-Sl-x4q" id="f25-te-iza"/>
+                            <outlet property="delegate" destination="L3c-Sl-x4q" id="FIQ-tW-6t6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的书籍" id="mBW-j1-WoF"/>
+                    <connections>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="awM-zn-5XB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EXm-Uc-QCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898" y="699"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cYK-0t-vGN">
@@ -865,7 +835,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="awM-zn-5XB"/>
         <segue reference="3o2-qs-Tyw"/>
-        <segue reference="Cd5-aU-63D"/>
     </inferredMetricsTieBreakers>
 </document>
