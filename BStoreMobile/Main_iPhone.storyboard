@@ -170,7 +170,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="vaP-8e-b2D" kind="push" identifier="MyFriends" id="Hn1-hU-Nvm"/>
+                                            <segue destination="asj-Ak-pm9" kind="push" identifier="myFriends" id="azL-Sy-ddp"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CRW-eA-hpq">
@@ -229,28 +229,28 @@
             </objects>
             <point key="canvasLocation" x="1898" y="-7"/>
         </scene>
-        <!--View Controller - 我的好友-->
-        <scene sceneID="w3F-BL-MfT">
+        <!--My Friends Controller - 我的好友-->
+        <scene sceneID="IfM-Ww-i4Y">
             <objects>
-                <viewController storyboardIdentifier="MyFriendsView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vaP-8e-b2D" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EOd-EP-9Fk"/>
-                        <viewControllerLayoutGuide type="bottom" id="iPj-X7-8rM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nas-Lk-QRV">
+                <tableViewController id="asj-Ak-pm9" customClass="XYMyFriendsController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jjT-ep-duP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="我的好友" id="FNv-xt-BgA">
-                        <barButtonItem key="rightBarButtonItem" title="添加朋友" id="sIW-7H-veK">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="asj-Ak-pm9" id="Woj-IG-7M4"/>
+                            <outlet property="delegate" destination="asj-Ak-pm9" id="1HS-Ph-XWb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="我的好友" id="cBN-zo-1mO">
+                        <barButtonItem key="rightBarButtonItem" title=" 添加朋友" id="TKL-fM-zQi">
                             <connections>
-                                <segue destination="vYh-nI-Hya" kind="push" id="3o2-qs-Tyw"/>
+                                <segue destination="vYh-nI-Hya" kind="push" identifier="addNewFriends" id="Av2-e0-K2i"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FWv-uz-pdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iLc-Td-KX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2440" y="-7"/>
         </scene>
@@ -836,6 +836,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="awM-zn-5XB"/>
-        <segue reference="3o2-qs-Tyw"/>
+        <segue reference="Av2-e0-K2i"/>
     </inferredMetricsTieBreakers>
 </document>

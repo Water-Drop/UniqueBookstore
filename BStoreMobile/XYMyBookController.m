@@ -32,13 +32,6 @@ enum MyBookPageStatus {
 
 @implementation XYMyBookController
 
--(void)setExtraCellLineHidden: (UITableView *)tableView
-{
-    UIView *view =[ [UIView alloc]init];
-    view.backgroundColor = [UIColor clearColor];
-    [tableView setTableFooterView:view];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,7 +45,7 @@ enum MyBookPageStatus {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setExtraCellLineHidden:self.tableView];
+    [XYUtil setExtraCellLineHidden:self.tableView];
     [self prepareForToolView];
     [self changeStatus:CART];
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];

@@ -167,6 +167,7 @@
 		E3D1A0AB1986AADD00DC244B /* star_full.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A71986AADD00DC244B /* star_full.png */; };
 		E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A81986AADD00DC244B /* star_full@2x.png */; };
 		E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */; };
+		E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -383,6 +384,8 @@
 		E3D1A0A81986AADD00DC244B /* star_full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_full@2x.png"; sourceTree = "<group>"; };
 		E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYStarRatedView.h; sourceTree = "<group>"; };
 		E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYStarRatedView.m; sourceTree = "<group>"; };
+		E3D1A0B01986C54C00DC244B /* XYMyFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyFriendsController.h; sourceTree = "<group>"; };
+		E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyFriendsController.m; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -465,6 +468,8 @@
 				E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */,
 				E30190F11980EF1E00D04906 /* XYAddFriendsController.h */,
 				E30190F21980EF1F00D04906 /* XYAddFriendsController.m */,
+				E3D1A0B01986C54C00DC244B /* XYMyFriendsController.h */,
+				E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */,
 			);
 			name = Frineds;
 			sourceTree = "<group>";
@@ -1036,6 +1041,7 @@
 				E30190EF1980D1B100D04906 /* XYCartItemCell.m in Sources */,
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
+				E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */,
 				E3BF9ED31984A6B200855279 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3BF9ED51984A6B200855279 /* UIAlertView+AFNetworking.m in Sources */,
 				E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */,

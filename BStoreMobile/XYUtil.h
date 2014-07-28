@@ -24,4 +24,6 @@ static NSString * USERID = @"1";
 
 + (NSString *)printMoneyAtCent:(int) moneyAtCent;
 
++(void)setExtraCellLineHidden: (UITableView *)tableView;
+
 @end

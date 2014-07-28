@@ -27,13 +27,6 @@
 
 @implementation XYRecBookController
 
--(void)setExtraCellLineHidden: (UITableView *)tableView
-{
-    UIView *view =[ [UIView alloc]init];
-    view.backgroundColor = [UIColor clearColor];
-    [tableView setTableFooterView:view];
-}
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,7 +50,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setExtraCellLineHidden:self.tableView];
+    [XYUtil setExtraCellLineHidden:self.tableView];
     [self prepareImageArray];
     self.imageIndex = arc4random() % IMAGECNT;
 }
