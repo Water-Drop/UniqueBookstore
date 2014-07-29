@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTF-aX-s2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="1424"/>
+            <point key="canvasLocation" x="2985" y="1424"/>
         </scene>
         <!--Admin Page Controller - 个人中心-->
         <scene sceneID="J8U-Yz-Mue">
@@ -733,14 +733,14 @@
                     <connections>
                         <outlet property="searchBar" destination="Fvu-dn-JYL" id="9lv-Na-sCu"/>
                         <outlet property="tableView" destination="Eb7-WT-cWj" id="95q-aw-n8b"/>
-                        <segue destination="vli-KS-yHr" kind="push" identifier="SearchBookDetail" id="Cd5-aU-63D"/>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="Cd5-aU-63D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCw-2J-IWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1898" y="2146"/>
         </scene>
-        <!--Camera View Controller - 随意拍-->
+        <!--Camera View Controller-->
         <scene sceneID="LOf-Zl-Ieq">
             <objects>
                 <viewController id="bjH-vI-Wtw" customClass="XYCameraViewController" sceneMemberID="viewController">
@@ -752,8 +752,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peJ-nI-nhS">
-                                <rect key="frame" x="0.0" y="109" width="320" height="350"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peJ-nI-nhS" customClass="XYCameraView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -763,31 +763,34 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5nT-x2-xtA">
-                                <rect key="frame" x="20" y="73" width="280" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="扫码"/>
-                                    <segment title="拍图"/>
-                                </segments>
-                                <connections>
-                                    <action selector="valueChanged:" destination="bjH-vI-Wtw" eventType="valueChanged" id="dKV-vQ-ujZ"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="随意拍" id="vLr-sc-lQg"/>
+                    <navigationItem key="navigationItem" id="vLr-sc-lQg">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" segmentControlStyle="plain" selectedSegmentIndex="0" id="5nT-x2-xtA">
+                            <rect key="frame" x="89" y="7" width="142" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="拍图"/>
+                                <segment title="扫码"/>
+                            </segments>
+                            <connections>
+                                <action selector="valueChanged:" destination="bjH-vI-Wtw" eventType="valueChanged" id="dKV-vQ-ujZ"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lblStatus" destination="V99-8C-jfU" id="pH5-yL-XvE"/>
-                        <outlet property="viewPreview" destination="peJ-nI-nhS" id="Ct7-Lk-eJF"/>
+                        <outlet property="viewPreview" destination="peJ-nI-nhS" id="dGA-3q-ctw"/>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="OTg-Gh-zCa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7S-Ei-DQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="2146"/>
+            <point key="canvasLocation" x="2440" y="2450"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9LW-mN-Vei">
