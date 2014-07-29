@@ -200,6 +200,7 @@
 		E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */; };
 		E3EA37461987B1490066ECCD /* XYAutoLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */; };
 		E3EA3749198807170066ECCD /* XYFriendsInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3748198807170066ECCD /* XYFriendsInfoController.m */; };
+		E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -506,6 +507,8 @@
 		E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAutoLayoutLabel.m; sourceTree = "<group>"; };
 		E3EA3747198807170066ECCD /* XYFriendsInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsInfoController.h; sourceTree = "<group>"; };
 		E3EA3748198807170066ECCD /* XYFriendsInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsInfoController.m; sourceTree = "<group>"; };
+		E3EA374A19882EA70066ECCD /* XYMakeCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMakeCommentController.h; sourceTree = "<group>"; };
+		E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMakeCommentController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1036,6 +1039,8 @@
 			children = (
 				E33A3EE9197629F300BA3797 /* XYMyBookController.h */,
 				E33A3EEA197629F300BA3797 /* XYMyBookController.m */,
+				E3EA374A19882EA70066ECCD /* XYMakeCommentController.h */,
+				E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */,
 			);
 			name = MyBook;
 			sourceTree = "<group>";
@@ -1361,6 +1366,7 @@
 				E3BF9ED31984A6B200855279 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3BF9ED51984A6B200855279 /* UIAlertView+AFNetworking.m in Sources */,
 				E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */,
+				E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */,
 				E30190FC19821A4200D04906 /* XYPaidItemCell.m in Sources */,
 				E3BF9CE319836B0600855279 /* XYAdminPageController.m in Sources */,
 				E3BF9ECB1984A6B200855279 /* AFHTTPRequestOperationManager.m in Sources */,

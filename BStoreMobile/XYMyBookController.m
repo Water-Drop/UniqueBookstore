@@ -268,6 +268,9 @@ enum MyBookPageStatus {
         
         cell.tag = [num integerValue];
         
+        cell.comButton.tag = indexPath.row;
+        [cell.comButton addTarget:self action:@selector(makeComment:) forControlEvents:UIControlEventTouchUpInside];
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -409,8 +412,14 @@ enum MyBookPageStatus {
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"BookDetail"]) {
-        UIViewController *dest = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"BookDetail"] || [segue.identifier isEqualToString:@"makeComment"]) {
+        UIViewController *dest;
+        if ([segue.identifier isEqualToString:@"BookDetail"]) {
+            dest = segue.destinationViewController;
+        } else {
+            // modal(first is navigation controller)
+            dest = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
+        }
         if (self.valueDict) {
             for (NSString *key in self.valueDict) {
                 NSLog(@"%@, %@", key, self.valueDict[key]);
@@ -697,6 +706,23 @@ enum MyBookPageStatus {
 + (CGFloat)toolbarHeight {
     // This method will handle the case that the height of toolbar may change in future iOS.
     return 44.f;
+}
+
+-(IBAction)unwindToPaid:(UIStoryboardSegue *)segue
+{
+    
+}
+
+- (void)makeComment:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (self.listPaid) {
+        NSDictionary *rowDict = self.listPaid[tag];
+        NSNumber *bookID = rowDict[@"bookID"];
+        NSString *title = rowDict[@"title"];
+        self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", bookID], @"bname": title};
+        [self performSegueWithIdentifier:@"makeComment" sender:self];
+    }
 }
 
 //- (void)dismissKeyboardByTouchDownBG {
