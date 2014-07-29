@@ -195,6 +195,9 @@
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
+		E3EA373E198746350066ECCD /* XYFriendsMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA373D198746350066ECCD /* XYFriendsMsgController.m */; };
+		E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */; };
+		E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -492,6 +495,11 @@
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
 		E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoMainCell.m; sourceTree = "<group>"; };
 		E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYBookInfoMainCell.xib; sourceTree = "<group>"; };
+		E3EA373C198746350066ECCD /* XYFriendsMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsMsgController.h; sourceTree = "<group>"; };
+		E3EA373D198746350066ECCD /* XYFriendsMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsMsgController.m; sourceTree = "<group>"; };
+		E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsMsgCell.h; sourceTree = "<group>"; };
+		E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsMsgCell.m; sourceTree = "<group>"; };
+		E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYFriendsMsgCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -731,6 +739,8 @@
 				E30190F21980EF1F00D04906 /* XYAddFriendsController.m */,
 				E3D1A0B01986C54C00DC244B /* XYMyFriendsController.h */,
 				E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */,
+				E3EA373C198746350066ECCD /* XYFriendsMsgController.h */,
+				E3EA373D198746350066ECCD /* XYFriendsMsgController.m */,
 			);
 			name = Frineds;
 			sourceTree = "<group>";
@@ -998,12 +1008,15 @@
 				E30190FA19821A4200D04906 /* XYPaidItemCell.m */,
 				E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */,
 				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
+				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
+				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
 				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
 				E30190FB19821A4200D04906 /* XYPaidItemCell.xib */,
 				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
 				E30190EE1980D1B100D04906 /* XYCartItemCell.xib */,
 				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
 				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
+				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -1274,6 +1287,7 @@
 				211B281C19823CA100052039 /* letter_A.png in Resources */,
 				211B282019823CA100052039 /* IT_about.html in Resources */,
 				E33A3F651977BB5000BA3797 /* 26.JPG in Resources */,
+				E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */,
 				E33A3FB81977BFD800BA3797 /* 14_full.JPG in Resources */,
 				E33A3FD11977BFD800BA3797 /* 8_full.JPG in Resources */,
 				E33A3FC31977BFD800BA3797 /* 24_full.JPG in Resources */,
@@ -1313,6 +1327,7 @@
 			files = (
 				211B278A1982052100052039 /* XYCameraSession.mm in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
+				E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */,
 				E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */,
 				E30190F31980EF1F00D04906 /* XYAddFriendsController.m in Sources */,
 				E3BF9ECF1984A6B200855279 /* AFURLConnectionOperation.m in Sources */,
@@ -1321,6 +1336,7 @@
 				E3BF9ED41984A6B200855279 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E3BF9EE1198544DF00855279 /* XYCommentViewCell.m in Sources */,
 				E3BF9ED81984A6B200855279 /* UIProgressView+AFNetworking.m in Sources */,
+				E3EA373E198746350066ECCD /* XYFriendsMsgController.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				E3BF9ECC1984A6B200855279 /* AFHTTPSessionManager.m in Sources */,
 				2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */,

@@ -618,40 +618,40 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="QAN-4s-BB8" kind="relationship" relationship="rootViewController" id="6eE-SN-Efj"/>
+                        <segue destination="I00-xo-hg9" kind="relationship" relationship="rootViewController" id="ees-01-az4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSs-Ri-P3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="-720"/>
         </scene>
-        <!--View Controller - 好友圈-->
-        <scene sceneID="ONA-6B-WfE">
+        <!--Friends Msg Controller - 好友圈-->
+        <scene sceneID="OzJ-1u-fQP">
             <objects>
-                <viewController id="QAN-4s-BB8" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xAj-xi-jRu"/>
-                        <viewControllerLayoutGuide type="bottom" id="3Pk-Et-DYt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0ra-gE-Kdd">
+                <tableViewController id="I00-xo-hg9" customClass="XYFriendsMsgController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Jha-D6-hTT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="好友圈" id="kgf-nB-aBf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="dmJ-a2-Wcx">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="I00-xo-hg9" id="rbi-MV-JV2"/>
+                            <outlet property="delegate" destination="I00-xo-hg9" id="QER-hq-UMk"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="好友圈" id="TvZ-PD-rie">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="SfX-Jx-gPy">
                             <connections>
-                                <segue destination="vYh-nI-Hya" kind="push" identifier="addNewFriends" id="rrf-j9-eDb"/>
+                                <segue destination="vYh-nI-Hya" kind="push" id="YyE-96-kFY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Jhf-kE-DnE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="vo6-0m-9Tg">
                             <connections>
-                                <segue destination="9BS-X5-qY9" kind="push" id="brf-mn-Ls4"/>
+                                <segue destination="9BS-X5-qY9" kind="push" id="c0O-6A-bEi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S0b-uf-k7u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PIY-6n-6zA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1898" y="-720"/>
         </scene>
@@ -839,6 +839,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="awM-zn-5XB"/>
-        <segue reference="rrf-j9-eDb"/>
+        <segue reference="YyE-96-kFY"/>
     </inferredMetricsTieBreakers>
 </document>
