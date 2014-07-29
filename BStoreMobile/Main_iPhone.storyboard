@@ -170,7 +170,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="asj-Ak-pm9" kind="push" identifier="myFriends" id="azL-Sy-ddp"/>
+                                            <segue destination="asj-Ak-pm9" kind="push" identifier="MyFriends" id="azL-Sy-ddp"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CRW-eA-hpq">
@@ -836,6 +836,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="awM-zn-5XB"/>
-        <segue reference="Av2-e0-K2i"/>
+        <segue reference="rrf-j9-eDb"/>
     </inferredMetricsTieBreakers>
 </document>

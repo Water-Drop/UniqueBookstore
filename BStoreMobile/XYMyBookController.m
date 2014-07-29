@@ -248,7 +248,7 @@ enum MyBookPageStatus {
         
         // Configure the cell...
         NSUInteger row = [indexPath row];
-        NSDictionary *rowDict = [self.listToBuy objectAtIndex:row];
+        NSDictionary *rowDict = [self.listPaid objectAtIndex:row];
         cell.title.text = rowDict[@"title"];
         
         NSString *detail = rowDict[@"author"];
