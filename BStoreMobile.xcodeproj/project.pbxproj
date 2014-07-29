@@ -1328,6 +1328,8 @@
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */,
+				211B278C1982052100052039 /* XYCameraView.mm in Sources */,
+				211B28411982437A00052039 /* XYBookOverlay.mm in Sources */,
 				E3BF9ED31984A6B200855279 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3BF9ED51984A6B200855279 /* UIAlertView+AFNetworking.m in Sources */,
 				E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */,
@@ -1491,7 +1493,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1522,7 +1524,7 @@
 				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
