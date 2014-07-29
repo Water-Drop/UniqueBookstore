@@ -13,6 +13,7 @@
 @interface XYMyFriendsController ()
 
 @property (nonatomic,strong) NSMutableArray *listFriends;
+@property (nonatomic,strong) NSDictionary *valueDict;
 
 @end
 
@@ -83,6 +84,9 @@
     }
     
     // Configure the cell...
+    for (UIView *view in [cell.contentView subviews]) {
+        [view removeFromSuperview];
+    }
     NSDictionary *rowDict = self.listFriends[indexPath.row];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(13, 8, 52, 57)];
@@ -97,7 +101,30 @@
     NSNumber *num = rowDict[@"userID"];
     cell.tag = [num integerValue];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+     NSString *userID = [NSString stringWithFormat:@"%@",[NSNumber numberWithInteger:cell.tag]];
+    self.valueDict = @{@"userID": userID};
+    [self performSegueWithIdentifier:@"friendsInfo" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"friendsInfo"]) {
+        UIViewController *dest = segue.destinationViewController;
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
+    }
 }
 
 /*

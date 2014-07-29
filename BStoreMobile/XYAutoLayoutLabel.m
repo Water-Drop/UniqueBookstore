@@ -23,7 +23,7 @@
 
 - (void)calculateSize
 {
-    CGSize constraint = CGSizeMake(self.frame.size.width, 20000.0f);
+    CGSize constraint = CGSizeMake(self.frame.size.width, CGFLOAT_MAX);
     
     NSDictionary *attribute = @{NSFontAttributeName : self.font};
     
