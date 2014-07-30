@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+enum purchaseStatus {
+    FROMCART, FROMNOTPAID
+};
+
 @interface XYPurchaseController : UITableViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
 
 @end

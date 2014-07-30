@@ -120,6 +120,28 @@
             </objects>
             <point key="canvasLocation" x="3511" y="1424"/>
         </scene>
+        <!--Confirm Controller - 确认书籍-->
+        <scene sceneID="yhh-6m-uiX">
+            <objects>
+                <tableViewController id="Gnm-Be-nTu" customClass="XYConfirmController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hIJ-Tb-HWZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Gnm-Be-nTu" id="ixa-Pr-wCD"/>
+                            <outlet property="delegate" destination="Gnm-Be-nTu" id="m2L-fR-gY5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="确认书籍" id="N5J-Pu-zU4"/>
+                    <connections>
+                        <segue destination="kVm-MX-TK8" kind="modal" identifier="purchase" id="szb-hM-fSC"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AS0-tF-C9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4056" y="2140"/>
+        </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
             <objects>
@@ -144,7 +166,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="书籍信息" id="AyJ-b3-Vhm"/>
+                    <navigationItem key="navigationItem" title="书籍信息" id="AyJ-b3-Vhm">
+                        <barButtonItem key="rightBarButtonItem" title="Test" id="GhZ-1G-J7r">
+                            <connections>
+                                <segue destination="0w1-ob-wiD" kind="modal" id="j8G-92-yOB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="UL3-7w-Xzk" id="u6a-iy-cX5"/>
                     </connections>
@@ -978,7 +1006,7 @@
         <scene sceneID="lGr-Nb-S8O">
             <objects>
                 <tableViewController id="BiV-dG-AtP" customClass="XYPurchaseController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AoZ-YU-AX7">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AoZ-YU-AX7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -991,7 +1019,7 @@
                     <navigationItem key="navigationItem" title="填写订单" id="N3q-S0-WkE">
                         <barButtonItem key="leftBarButtonItem" title="取消" id="qRM-AE-jJK">
                             <connections>
-                                <segue destination="mkG-yr-7pk" kind="unwind" unwindAction="unwindToCart:" id="e51-oi-fv1"/>
+                                <action selector="cancelAction:" destination="BiV-dG-AtP" id="HCU-qu-bW6"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="付款" id="iu8-Ox-7wZ">
@@ -1002,9 +1030,8 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlW-fq-gQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="mkG-yr-7pk" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3511" y="699"/>
+            <point key="canvasLocation" x="5158" y="699"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EU3-Ip-eTl">
@@ -1040,7 +1067,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckf-F9-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="699"/>
+            <point key="canvasLocation" x="4576" y="699"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="m3I-2u-Dhf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0w1-ob-wiD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hbo-Ch-dFw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Gnm-Be-nTu" kind="relationship" relationship="rootViewController" id="2tr-uJ-ACH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lwk-hf-smM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3530" y="2140"/>
         </scene>
     </scenes>
     <resources>
@@ -1053,8 +1098,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="awM-zn-5XB"/>
         <segue reference="Av2-e0-K2i"/>
+        <segue reference="awM-zn-5XB"/>
+        <segue reference="ze3-Ug-C9Y"/>
         <segue reference="cYO-YM-urh"/>
     </inferredMetricsTieBreakers>
 </document>

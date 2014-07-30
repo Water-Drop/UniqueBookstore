@@ -15,9 +15,12 @@
 
 @interface XYPurchaseController ()
 
-@property (nonatomic,strong) NSMutableArray *listCart;
-@property (nonatomic,strong) NSString *totalPriceStr;
+@property (nonatomic,strong) NSMutableArray *listCart; // getFromServer or byPassParam
+@property (nonatomic,strong) NSString *totalPriceStr; // calculate or byPassParam
 - (IBAction)purchaseAction:(id)sender;
+- (IBAction)cancelAction:(id)sender;
+@property enum purchaseStatus status;
+@property (nonatomic,strong) NSNumber *statusNum; // byPassParam
 
 @end
 
@@ -36,7 +39,10 @@
 {
     [super viewDidLoad];
     
-    [self loadCartFromServer];
+    self.status = [self.statusNum intValue];
+    if (self.status == FROMCART) {
+        [self loadCartFromServer];
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -232,7 +238,49 @@
 
 - (IBAction)purchaseAction:(id)sender
 {
-    [self purchaseToServerByRemaining];
+    if (self.status == FROMCART) {
+        [self purchaseToServerByRemaining];
+    } else {
+        [self purchaseNotPaidByRemaining];
+    }
+}
+
+- (IBAction)cancelAction:(id)sender
+{
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)purchaseNotPaidByRemaining
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *path = [NSString stringWithFormat:@"User/BuyDirectly/%@", USERID];
+    NSMutableArray *paramArray = [[NSMutableArray alloc] init];
+    if (self.listCart) {
+        for (NSDictionary *rowDict in self.listCart) {
+            NSDictionary *newDict = @{@"bookID": rowDict[@"bookID"], @"amount": rowDict[@"amount"]};
+            [paramArray addObject:newDict];
+        }
+    }
+    NSLog(@"path:%@",path);
+    [manager POST:path parameters:paramArray success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                [alert show];
+            }
+        }
+        NSLog(@"purchaseToServerByRemaining Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"purchaseToServerByRemaining Error:%@", error);
+    }];
 }
 
 // User/Pay/ByRemaining/

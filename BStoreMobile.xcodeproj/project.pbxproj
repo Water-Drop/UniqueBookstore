@@ -202,6 +202,7 @@
 		E3EA3749198807170066ECCD /* XYFriendsInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3748198807170066ECCD /* XYFriendsInfoController.m */; };
 		E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */; };
 		E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */; };
+		E3EA375319892AF10066ECCD /* XYConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA375219892AF10066ECCD /* XYConfirmController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -512,6 +513,8 @@
 		E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMakeCommentController.m; sourceTree = "<group>"; };
 		E3EA374E1988F00D0066ECCD /* XYPurchaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPurchaseController.h; sourceTree = "<group>"; };
 		E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPurchaseController.m; sourceTree = "<group>"; };
+		E3EA375119892AF10066ECCD /* XYConfirmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYConfirmController.h; sourceTree = "<group>"; };
+		E3EA375219892AF10066ECCD /* XYConfirmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYConfirmController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1122,6 +1125,8 @@
 			children = (
 				E3EA374E1988F00D0066ECCD /* XYPurchaseController.h */,
 				E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */,
+				E3EA375119892AF10066ECCD /* XYConfirmController.h */,
+				E3EA375219892AF10066ECCD /* XYConfirmController.m */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -1354,6 +1359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				211B278A1982052100052039 /* XYCameraSession.mm in Sources */,
+				E3EA375319892AF10066ECCD /* XYConfirmController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */,
 				E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */,

@@ -12,6 +12,7 @@
 #import "XYPaidItemCell.h"
 #import "XYUtil.h"
 #import "UIKit+AFNetworking.h"
+#import "XYPurchaseController.h"
 
 @interface XYMyBookController ()
 
@@ -163,6 +164,8 @@ enum MyBookPageStatus {
         int priceAtCent = [rowDict[@"price"] intValue];
         NSString *priceStr = [XYUtil printMoneyAtCent:priceAtCent];
         [cell.buyButton setTitle:priceStr forState:UIControlStateNormal];
+        cell.buyButton.tag = indexPath.row;
+        [cell.buyButton addTarget:self action:@selector(wishlistToCart:) forControlEvents:UIControlEventTouchUpInside];
         
         NSNumber *num = rowDict[@"bookID"];
         cell.title.tag = [num integerValue];
@@ -229,6 +232,9 @@ enum MyBookPageStatus {
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
             NSLog(@"Get Image from Server Error.");
         }];
+        
+        cell.tobuyBtn.tag = indexPath.row;
+        [cell.tobuyBtn addTarget:self action:@selector(cartToWishlist:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.tag = [num integerValue];
         
@@ -413,7 +419,7 @@ enum MyBookPageStatus {
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"BookDetail"] || [segue.identifier isEqualToString:@"makeComment"]) {
+    if ([segue.identifier isEqualToString:@"BookDetail"] || [segue.identifier isEqualToString:@"makeComment"] || [segue.identifier isEqualToString:@"purchase"]) {
         UIViewController *dest;
         if ([segue.identifier isEqualToString:@"BookDetail"]) {
             dest = segue.destinationViewController;
@@ -517,6 +523,7 @@ enum MyBookPageStatus {
 }
 
 -(void) goToPurchase {
+    self.valueDict = @{@"statusNum": [NSNumber numberWithInteger:FROMCART]};
     [self performSegueWithIdentifier:@"purchase" sender:self];
 }
 
@@ -736,9 +743,88 @@ enum MyBookPageStatus {
     }
 }
 
--(IBAction)unwindToCart:(UIStoryboardSegue *)segue
+- (void)cartToWishlist:(id)sender
 {
-    
+    NSInteger tag = ((UIButton *)sender).tag;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tag inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    [self cartToWishlistInServer:cell.tag];
+    if (self.listCart) {
+        [self.listCart removeObjectAtIndex:indexPath.row];  //删除数组里的数据
+        [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+        if (!self.listCart || [self.listCart count] == 0) {
+            self.navigationItem.rightBarButtonItem = nil;
+            self.navigationItem.leftBarButtonItem = nil;
+        }
+    }
+}
+
+- (void)cartToWishlistInServer:(NSInteger)bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/Cart2Wishlist?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"移入心愿单" message:@"该商品已成功移入心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        [self.tableView reloadData];
+        NSLog(@"cartToWishlistInServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"cartToWishlistInServer Error:%@", error);
+    }];
+}
+
+- (void)wishlistToCart:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:tag inSection:0];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    [self wishlistToCartInServer:cell.tag];
+    if (self.listToBuy) {
+        [self.listToBuy removeObjectAtIndex:indexPath.row];  //删除数组里的数据
+        [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+        if (!self.listToBuy || [self.listToBuy count] == 0) {
+            self.navigationItem.rightBarButtonItem = nil;
+            self.navigationItem.leftBarButtonItem = nil;
+        }
+    }
+}
+
+- (void)wishlistToCartInServer:(NSInteger)bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/Wishlist2Cart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        [self.tableView reloadData];
+        NSLog(@"wishlistToCartInServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"wishlistToCartInServer Error:%@", error);
+    }];
 }
 
 //- (void)dismissKeyboardByTouchDownBG {
