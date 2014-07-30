@@ -393,6 +393,7 @@ enum MyBookPageStatus {
                 [self.listCart removeAllObjects];
                 [self deleteItemsInCartFromServer];
                 self.navigationItem.rightBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItem = nil;
                 [self.tableView reloadData];
             }
             break;
@@ -478,6 +479,7 @@ enum MyBookPageStatus {
             [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
             if (!tmp || [tmp count] == 0) {
                 self.navigationItem.rightBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItem = nil;
             }
         }
     }
@@ -501,14 +503,21 @@ enum MyBookPageStatus {
         }
         NSLog(@"loadCartFromServer Success");
         UIBarButtonItem *rightBtn = nil;
+        UIBarButtonItem *leftBtn = nil;
         if (self.listCart && [self.listCart count] > 0) {
             rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
+            leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"去付款" style:UIBarButtonItemStylePlain target:self action:@selector(goToPurchase)];
         }
         self.navigationItem.rightBarButtonItem = rightBtn;
+        self.navigationItem.leftBarButtonItem = leftBtn;
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadCartFromServer Error:%@", error);
     }];
+}
+
+-(void) goToPurchase {
+    [self performSegueWithIdentifier:@"purchase" sender:self];
 }
 
 -(void) loadToBuyFromServer
@@ -532,6 +541,7 @@ enum MyBookPageStatus {
             rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
         }
         self.navigationItem.rightBarButtonItem = rightBtn;
+        self.navigationItem.leftBarButtonItem = nil;
         [self.tableView reloadData];
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadToBuyFromServer Error:%@", error);
@@ -681,6 +691,7 @@ enum MyBookPageStatus {
             [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
             if (!self.listCart || [self.listCart count] == 0) {
                 self.navigationItem.rightBarButtonItem = nil;
+                self.navigationItem.leftBarButtonItem = nil;
             }
         } else {
             [self updateOneItemInCart:cell.tag amount:amount];
@@ -723,6 +734,11 @@ enum MyBookPageStatus {
         self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", bookID], @"bname": title};
         [self performSegueWithIdentifier:@"makeComment" sender:self];
     }
+}
+
+-(IBAction)unwindToCart:(UIStoryboardSegue *)segue
+{
+    
 }
 
 //- (void)dismissKeyboardByTouchDownBG {

@@ -118,7 +118,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vs7-TN-7FH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9pg-Id-GyH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3511" y="699"/>
+            <point key="canvasLocation" x="3511" y="1424"/>
         </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
@@ -151,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTF-aX-s2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="1424"/>
+            <point key="canvasLocation" x="2985" y="2140"/>
         </scene>
         <!--Admin Page Controller - 个人中心-->
         <scene sceneID="J8U-Yz-Mue">
@@ -624,6 +624,7 @@
                     <connections>
                         <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="awM-zn-5XB"/>
                         <segue destination="RXB-hO-yGY" kind="modal" identifier="makeComment" id="Kb4-Bg-Rfl"/>
+                        <segue destination="kVm-MX-TK8" kind="modal" identifier="purchase" id="ze3-Ug-C9Y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EXm-Uc-QCg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -973,6 +974,38 @@
             </objects>
             <point key="canvasLocation" x="3511" y="-720"/>
         </scene>
+        <!--Purchase Controller - 填写订单-->
+        <scene sceneID="lGr-Nb-S8O">
+            <objects>
+                <tableViewController id="BiV-dG-AtP" customClass="XYPurchaseController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AoZ-YU-AX7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="BiV-dG-AtP" id="hpw-fx-kpl"/>
+                            <outlet property="delegate" destination="BiV-dG-AtP" id="Koi-8q-7CZ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="填写订单" id="N3q-S0-WkE">
+                        <barButtonItem key="leftBarButtonItem" title="取消" id="qRM-AE-jJK">
+                            <connections>
+                                <segue destination="mkG-yr-7pk" kind="unwind" unwindAction="unwindToCart:" id="e51-oi-fv1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="付款" id="iu8-Ox-7wZ">
+                            <connections>
+                                <action selector="purchaseAction:" destination="BiV-dG-AtP" id="5Gs-DW-ojs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WlW-fq-gQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mkG-yr-7pk" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3511" y="699"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="EU3-Ip-eTl">
             <objects>
@@ -988,6 +1021,24 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcS-OA-ksT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2985" y="1424"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="l1r-MP-Pbp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kVm-MX-TK8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tkK-Xz-8vh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BiV-dG-AtP" kind="relationship" relationship="rootViewController" id="505-d5-fu4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ckf-F9-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2985" y="699"/>
         </scene>

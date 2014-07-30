@@ -201,6 +201,7 @@
 		E3EA37461987B1490066ECCD /* XYAutoLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */; };
 		E3EA3749198807170066ECCD /* XYFriendsInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3748198807170066ECCD /* XYFriendsInfoController.m */; };
 		E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */; };
+		E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -509,6 +510,8 @@
 		E3EA3748198807170066ECCD /* XYFriendsInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsInfoController.m; sourceTree = "<group>"; };
 		E3EA374A19882EA70066ECCD /* XYMakeCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMakeCommentController.h; sourceTree = "<group>"; };
 		E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMakeCommentController.m; sourceTree = "<group>"; };
+		E3EA374E1988F00D0066ECCD /* XYPurchaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPurchaseController.h; sourceTree = "<group>"; };
+		E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPurchaseController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -938,6 +941,7 @@
 		E35BA3661973630E0055EDF4 /* BStoreMobile */ = {
 			isa = PBXGroup;
 			children = (
+				E3EA374D1988EFE00066ECCD /* Purchase */,
 				E3BF9EA41984A6B200855279 /* AFNetworking */,
 				E3BF9EB81984A6B200855279 /* UIKit+AFNetworking */,
 				E30190E8198099B400D04906 /* Util */,
@@ -1111,6 +1115,15 @@
 				E3BF9EC91984A6B200855279 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		E3EA374D1988EFE00066ECCD /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				E3EA374E1988F00D0066ECCD /* XYPurchaseController.h */,
+				E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */,
+			);
+			name = Purchase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1375,6 +1388,7 @@
 				E3BF9ECA1984A6B200855279 /* AFHTTPRequestOperation.m in Sources */,
 				E3BF9ED91984A6B200855279 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E3BF9ED21984A6B200855279 /* AFURLSessionManager.m in Sources */,
+				E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */,
 				211B271F197E2D1B00052039 /* XYPoint.m in Sources */,
 				E3BF9ECD1984A6B200855279 /* AFNetworkReachabilityManager.m in Sources */,
 				E3BF9ED11984A6B200855279 /* AFURLResponseSerialization.m in Sources */,
