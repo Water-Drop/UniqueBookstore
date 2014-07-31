@@ -13,10 +13,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="MmS-Tv-tB3">
-                        <rect key="frame" x="11" y="12" width="41" height="42"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;用户名&quot;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iYa-8Y-JLD">
                         <rect key="frame" x="98" y="12" width="162" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -59,12 +55,17 @@
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" id="2ns-wZ-709" customClass="XYRoundView">
+                        <rect key="frame" x="11" y="11" width="42" height="42"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="content" destination="RWP-Gt-6eg" id="0uc-CS-rvo"/>
                 <outlet property="delButton" destination="HA2-a1-Fv4" id="R5a-3X-ahi"/>
-                <outlet property="headImg" destination="MmS-Tv-tB3" id="xu1-qt-bJG"/>
+                <outlet property="headImg" destination="2ns-wZ-709" id="wmf-vl-lOv"/>
                 <outlet property="pubDate" destination="oQW-35-9gp" id="itz-gy-wPU"/>
                 <outlet property="username" destination="iYa-8Y-JLD" id="usq-o0-n79"/>
             </connections>

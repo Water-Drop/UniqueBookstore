@@ -84,7 +84,12 @@
     
     // Configure the cell...
     NSDictionary *rowDict = self.listMsg[indexPath.row];
-    cell.headImg.image = [UIImage imageNamed:@"5.JPG"];
+    cell.headImg.range = 4;
+    int imgIndex = [rowDict[@"headerimg"] intValue];
+    NSString *imagePath = [NSString stringWithFormat:@"headImg_%d.jpg", imgIndex];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.headImg.frame.size.width, cell.headImg.frame.size.height)];
+    imageView.image = [UIImage imageNamed:imagePath];
+    [cell.headImg addSubview:imageView];
     cell.username.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"username"]];
     cell.content.font = [UIFont fontWithName:@"Helvetica" size:12];
     cell.content.text = rowDict[@"content"];

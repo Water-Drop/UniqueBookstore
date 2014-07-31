@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomIOS7AlertView.h"
 
-@interface XYFriendsNearByController : UIViewController
+@interface XYFriendsNearByController : UIViewController<CustomIOS7AlertViewDelegate>
 
 @end

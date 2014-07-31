@@ -10,5 +10,9 @@
 		<key>image</key>
 		<string>theme_1.png</string>
 	</dict>
+	<dict>
+		<key>image</key>
+		<string>theme_2.png</string>
+	</dict>
 </array>
 </plist>

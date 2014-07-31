@@ -8,9 +8,10 @@
 
 #import "XYFriendsInfoController.h"
 #import "XYUtil.h"
+#import "XYRoundView.h"
 
 @interface XYFriendsInfoController ()
-@property (weak, nonatomic) IBOutlet UIImageView *headImg;
+@property (weak, nonatomic) IBOutlet XYRoundView *headImg;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *gender;
 @property (weak, nonatomic) IBOutlet UILabel *address;
@@ -50,7 +51,12 @@
 
 - (void)loadFriendInfo
 {
-    self.headImg.image = [UIImage imageNamed:@"5.JPG"];
+    self.headImg.range = 4;
+    int imgIndex = [self.head intValue];
+    NSString *imagePath = [NSString stringWithFormat:@"headImg_%d.jpg", imgIndex];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.headImg.frame.size.width, self.headImg.frame.size.height)];
+    imageView.image = [UIImage imageNamed:imagePath];
+    [self.headImg addSubview:imageView];
     self.username.text = self.uname;
     self.gender.text = self.gen;
     self.address.text = self.addr;
@@ -157,6 +163,7 @@
             self.sg = tmp[@"sign"];
             self.addr = tmp[@"address"];
             self.uname = tmp[@"username"];
+            self.head = tmp[@"headerimg"];
             self.gen = @"男";
             [self loadFriendInfo];
             [self.tableView reloadData];

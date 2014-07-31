@@ -166,8 +166,9 @@
                 NSString *sign = tmp[@"sign"];
                 NSString *address = tmp[@"address"];
                 NSString *username = tmp[@"username"];
+                NSNumber *head = tmp[@"headerimg"];
                 enum friendsInfoStatus status = ADD;
-                self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status]};
+                self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status], @"head":head};
                 [self performSegueWithIdentifier:@"friendsInfo" sender:self];
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];

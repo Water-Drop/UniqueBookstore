@@ -9,6 +9,7 @@
 #import "XYMyFriendsController.h"
 #import "XYUtil.h"
 #import "UIKit+AFNetworking.h"
+#import "XYRoundView.h"
 
 @interface XYMyFriendsController ()
 
@@ -89,12 +90,17 @@
     }
     NSDictionary *rowDict = self.listFriends[indexPath.row];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(13, 8, 52, 57)];
-    imageView.image = [UIImage imageNamed:@"5.JPG"];
+    XYRoundView *headImg = [[XYRoundView alloc] initWithFrame:CGRectMake(13, 8, 57, 57)];
+    headImg.range = 4;
+    int imgIndex = [rowDict[@"headerimg"] intValue];
+    NSString *imagePath = [NSString stringWithFormat:@"headImg_%d.jpg", imgIndex];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headImg.frame.size.width, headImg.frame.size.height)];
+    imageView.image = [UIImage imageNamed:imagePath];
+    [headImg addSubview:imageView];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(89, 26, 211, 21)];
     label.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
     label.text = rowDict[@"username"];
-    [cell.contentView addSubview:imageView];
+    [cell.contentView addSubview:headImg];
     [cell.contentView addSubview:label];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

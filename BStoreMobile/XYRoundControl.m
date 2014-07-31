@@ -1,14 +1,14 @@
 //
-//  XYRoundView.m
+//  XYRoundControl.m
 //  BStoreMobile
 //
 //  Created by Julie on 14-7-31.
 //  Copyright (c) 2014年 SJTU. All rights reserved.
 //
 
-#import "XYRoundView.h"
+#import "XYRoundControl.h"
 
-@implementation XYRoundView
+@implementation XYRoundControl
 
 - (id)initWithFrame:(CGRect)frame
 {

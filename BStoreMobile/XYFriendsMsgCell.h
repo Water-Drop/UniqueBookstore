@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYRoundView.h"
 
 @interface XYFriendsMsgCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *headImg;
+@property (weak, nonatomic) IBOutlet XYRoundView *headImg;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UILabel *content;
 @property (weak, nonatomic) IBOutlet UIButton *delButton;

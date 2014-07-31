@@ -1,5 +1,5 @@
 //
-//  XYRoundView.h
+//  XYRoundControl.h
 //  BStoreMobile
 //
 //  Created by Julie on 14-7-31.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYRoundView : UIView
+@interface XYRoundControl : UIControl
 
 @property int range;
 
