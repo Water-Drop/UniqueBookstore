@@ -203,6 +203,13 @@
 		E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */; };
 		E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */; };
 		E3EA375319892AF10066ECCD /* XYConfirmController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA375219892AF10066ECCD /* XYConfirmController.m */; };
+		E3EA375D198A1F6B0066ECCD /* XYThemeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA375C198A1F6B0066ECCD /* XYThemeCollectionCell.m */; };
+		E3EA375F198A1F840066ECCD /* XYThemeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */; };
+		E3EA3762198A206C0066ECCD /* XYThemeBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */; };
+		E3EA3766198A2B060066ECCD /* theme_0.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3763198A2B060066ECCD /* theme_0.png */; };
+		E3EA3767198A2B060066ECCD /* theme_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3764198A2B060066ECCD /* theme_1.png */; };
+		E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3765198A2B060066ECCD /* 后会无期.jpg */; };
+		E3EA376A198A2B300066ECCD /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3769198A2B300066ECCD /* theme.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -515,6 +522,15 @@
 		E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPurchaseController.m; sourceTree = "<group>"; };
 		E3EA375119892AF10066ECCD /* XYConfirmController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYConfirmController.h; sourceTree = "<group>"; };
 		E3EA375219892AF10066ECCD /* XYConfirmController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYConfirmController.m; sourceTree = "<group>"; };
+		E3EA375B198A1F6B0066ECCD /* XYThemeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYThemeCollectionCell.h; sourceTree = "<group>"; };
+		E3EA375C198A1F6B0066ECCD /* XYThemeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYThemeCollectionCell.m; sourceTree = "<group>"; };
+		E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYThemeCollectionCell.xib; sourceTree = "<group>"; };
+		E3EA3760198A206C0066ECCD /* XYThemeBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYThemeBookCell.h; sourceTree = "<group>"; };
+		E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYThemeBookCell.m; sourceTree = "<group>"; };
+		E3EA3763198A2B060066ECCD /* theme_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_0.png; sourceTree = "<group>"; };
+		E3EA3764198A2B060066ECCD /* theme_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_1.png; sourceTree = "<group>"; };
+		E3EA3765198A2B060066ECCD /* 后会无期.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "后会无期.jpg"; sourceTree = "<group>"; };
+		E3EA3769198A2B300066ECCD /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -765,6 +781,9 @@
 		E33A3F0F1977BB5000BA3797 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E3EA3763198A2B060066ECCD /* theme_0.png */,
+				E3EA3764198A2B060066ECCD /* theme_1.png */,
+				E3EA3765198A2B060066ECCD /* 后会无期.jpg */,
 				E3D1A0A51986AADD00DC244B /* star_empty.png */,
 				E3D1A0A61986AADD00DC244B /* star_empty@2x.png */,
 				E3D1A0A71986AADD00DC244B /* star_full.png */,
@@ -1002,6 +1021,7 @@
 				E33A3EED19762A0E00BA3797 /* cart.plist */,
 				E33A3EEE19762A0E00BA3797 /* paid.plist */,
 				E33A3EEF19762A0E00BA3797 /* tobuy.plist */,
+				E3EA3769198A2B300066ECCD /* theme.plist */,
 			);
 			name = DataSource;
 			path = ..;
@@ -1016,6 +1036,8 @@
 				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
 				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
 				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
+				E3EA3760198A206C0066ECCD /* XYThemeBookCell.h */,
+				E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */,
 				E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */,
 				E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */,
 				E39D05B1197575AA006A8F53 /* XYSaleItemCell.h */,
@@ -1030,6 +1052,8 @@
 				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
 				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
 				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
+				E3EA375B198A1F6B0066ECCD /* XYThemeCollectionCell.h */,
+				E3EA375C198A1F6B0066ECCD /* XYThemeCollectionCell.m */,
 				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
 				E30190FB19821A4200D04906 /* XYPaidItemCell.xib */,
 				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
@@ -1037,6 +1061,7 @@
 				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
 				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
 				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
+				E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -1224,6 +1249,7 @@
 				211B281E19823CA100052039 /* letter_Q.png in Resources */,
 				E33A3F721977BB5000BA3797 /* Algeria.png in Resources */,
 				E33A3F7C1977BB5000BA3797 /* Germany.png in Resources */,
+				E3EA376A198A2B300066ECCD /* theme.plist in Resources */,
 				E33A3F6A1977BB5000BA3797 /* 30.JPG in Resources */,
 				E33A3F6B1977BB5000BA3797 /* 31.JPG in Resources */,
 				E3D1A0A91986AADD00DC244B /* star_empty.png in Resources */,
@@ -1246,6 +1272,8 @@
 				E33A3FCF1977BFD800BA3797 /* 6_full.JPG in Resources */,
 				E33A3F7B1977BB5000BA3797 /* France.png in Resources */,
 				E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */,
+				E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */,
+				E3EA3766198A2B060066ECCD /* theme_0.png in Resources */,
 				E33A3F8D1977BB5000BA3797 /* SouthKorea.png in Resources */,
 				E33A3F6D1977BB5000BA3797 /* 5.JPG in Resources */,
 				211B281F19823CA100052039 /* letter_R.png in Resources */,
@@ -1271,6 +1299,7 @@
 				E33A3F601977BB5000BA3797 /* 21.JPG in Resources */,
 				E33A3FBA1977BFD800BA3797 /* 16_full.JPG in Resources */,
 				E33A3F871977BB5000BA3797 /* Paraguay.png in Resources */,
+				E3EA375F198A1F840066ECCD /* XYThemeCollectionCell.xib in Resources */,
 				E33A3F541977BB5000BA3797 /* 10.JPG in Resources */,
 				E33A3F8F1977BB5000BA3797 /* Switzerland.png in Resources */,
 				E33A3FC41977BFD800BA3797 /* 25_full.JPG in Resources */,
@@ -1336,6 +1365,7 @@
 				E33A3FCB1977BFD800BA3797 /* 31_full.JPG in Resources */,
 				E33A3F701977BB5000BA3797 /* 8.JPG in Resources */,
 				E33A3F551977BB5000BA3797 /* 11.JPG in Resources */,
+				E3EA3767198A2B060066ECCD /* theme_1.png in Resources */,
 				E3D1A0AB1986AADD00DC244B /* star_full.png in Resources */,
 				E33A3FCD1977BFD800BA3797 /* 4_full.JPG in Resources */,
 				E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */,
@@ -1369,6 +1399,7 @@
 				E3BF9ECE1984A6B200855279 /* AFSecurityPolicy.m in Sources */,
 				E3BF9ED61984A6B200855279 /* UIButton+AFNetworking.m in Sources */,
 				E3BF9ED41984A6B200855279 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				E3EA3762198A206C0066ECCD /* XYThemeBookCell.m in Sources */,
 				E3BF9EE1198544DF00855279 /* XYCommentViewCell.m in Sources */,
 				E3EA37461987B1490066ECCD /* XYAutoLayoutLabel.m in Sources */,
 				E3BF9ED81984A6B200855279 /* UIProgressView+AFNetworking.m in Sources */,
@@ -1395,6 +1426,7 @@
 				E3BF9ED91984A6B200855279 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E3BF9ED21984A6B200855279 /* AFURLSessionManager.m in Sources */,
 				E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */,
+				E3EA375D198A1F6B0066ECCD /* XYThemeCollectionCell.m in Sources */,
 				211B271F197E2D1B00052039 /* XYPoint.m in Sources */,
 				E3BF9ECD1984A6B200855279 /* AFNetworkReachabilityManager.m in Sources */,
 				E3BF9ED11984A6B200855279 /* AFURLResponseSerialization.m in Sources */,

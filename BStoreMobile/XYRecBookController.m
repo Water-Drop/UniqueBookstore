@@ -11,6 +11,8 @@
 #import "XYCollectionCell.h"
 #import "XYUtil.h"
 #import "UIImageView+AFNetworking.h"
+#import "XYThemeBookCell.h"
+#import "XYThemeCollectionCell.h"
 
 #define IMAGECNT 31
 
@@ -113,35 +115,60 @@
         recImageView.animationImages = self.imageArray;
 //        [recImageView startAnimating];
 //        recImageView.animationRepeatCount = 0;
-        recImageView.image = self.imageArray[self.imageIndex];
+//        recImageView.image = self.imageArray[self.imageIndex];
+        recImageView.image = [UIImage imageNamed:@"后会无期.jpg"];
         [cell.contentView addSubview:recImageView];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     
-    static NSString *cellIdentifier = @"RecItemCellIdentifier";
-    XYRecBookCell *cell = (XYRecBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil) {
-        cell = [[XYRecBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if (indexPath.section == 1 || indexPath.section == 2) {
+        static NSString *cellIdentifier = @"RecItemCellIdentifier";
+        XYRecBookCell *cell = (XYRecBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[XYRecBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    return cell;
+    if (indexPath.section == 3) {
+        static NSString *cellIdentifier = @"ThemeItemCellIdentifier";
+        XYThemeBookCell *cell = (XYThemeBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[XYThemeBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
+    }
+    
+    return nil;
 }
 
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
-- (void)tableView:(UITableView *)tableView willDisplayCell:(XYRecBookCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section != 0) {
-        [cell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+    if (indexPath.section != 0 && indexPath.section != 3) {
+        XYRecBookCell *newcell = (XYRecBookCell *)cell;
+        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+    }
+    if (indexPath.section == 3) {
+        XYThemeBookCell *newcell = (XYThemeBookCell *)cell;
+        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
     }
 }
 
 #pragma mark - UITableViewDelegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 152.0f;
+    if (indexPath.section < 3) {
+        return 152.0f;
+    } else {
+        return 106.0f;
+    }
 }
 
 #pragma mark - UICollectionViewDataSource Methods
@@ -168,83 +195,92 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // NSLog(@"collectionView:cellForItemAtIndexPath");
-    XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        // XYSaleItemCell.xib as NibName
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCollectionCell" owner:nil options:nil];
-        //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
-        cell = [nib objectAtIndex:0];
-    }
-    // configure collection view cell
-    NSUInteger row = [indexPath row];
-    NSInteger fileIndex = collectionView.tag;
-    NSArray *listItem;
-    NSString *imgKey;
-    NSString *detailKey;
-    NSString *nameKey;
-    switch (fileIndex) {
-        case 1:
-            listItem = [self loadTopRated];
-            nameKey = @"title";
-            imgKey = @"coverimg";
-            detailKey = @"author";
-            break;
-        case 2:
-            listItem = [self loadFriends];
-            nameKey = @"title";
-            imgKey = @"coverimg";
-            detailKey = @"author";
-            break;
-        case 3:
-            listItem = [self loadCategory];
-            nameKey = @"name";
-            imgKey = @"image";
-            detailKey = @"detail";
-            break;
-        default:
-            break;
-    }
-    NSDictionary *rowDict = [listItem objectAtIndex:row];
-    cell.title.text = [rowDict objectForKey:nameKey];
-    // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
-    
-    if (fileIndex == 3) {
-        NSString *imagePath = [rowDict objectForKey:imgKey];
+    if (collectionView.tag < 3) {
+        // NSLog(@"collectionView:cellForItemAtIndexPath");
+        XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
+        if (cell == nil) {
+            // XYSaleItemCell.xib as NibName
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCollectionCell" owner:nil options:nil];
+            //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
+            cell = [nib objectAtIndex:0];
+        }
+        // configure collection view cell
+        NSUInteger row = [indexPath row];
+        NSInteger fileIndex = collectionView.tag;
+        NSArray *listItem;
+        NSString *imgKey;
+        NSString *detailKey;
+        NSString *nameKey;
+        switch (fileIndex) {
+            case 1:
+                listItem = [self loadTopRated];
+                nameKey = @"title";
+                imgKey = @"coverimg";
+                detailKey = @"author";
+                break;
+            case 2:
+                listItem = [self loadFriends];
+                nameKey = @"title";
+                imgKey = @"coverimg";
+                detailKey = @"author";
+                break;
+            default:
+                break;
+        }
+        NSDictionary *rowDict = [listItem objectAtIndex:row];
+        cell.title.text = [rowDict objectForKey:nameKey];
+        // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
+        
+        if (fileIndex == 3) {
+            NSString *imagePath = [rowDict objectForKey:imgKey];
+            imagePath = [imagePath stringByAppendingString:@".png"];
+            cell.coverImage.image = [UIImage imageNamed:imagePath];
+            cell.title.tag = 100;
+        } else {
+            NSNumber *num = [rowDict objectForKey:@"bookID"];
+            cell.title.tag = [num integerValue];
+            NSString *imagePath = [rowDict objectForKey:imgKey];
+            __weak XYCollectionCell *weakCell = cell;
+            [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                weakCell.coverImage.image = image;
+                [weakCell setNeedsLayout];
+                [weakCell setNeedsDisplay];
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"Get Image from Server Error.");
+            }];
+        }
+        
+        NSString *detail = [rowDict objectForKey:detailKey];
+        // NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
+        cell.detail.text = detail;
+        
+        return cell;
+    } else {
+        // NSLog(@"collectionView:cellForItemAtIndexPath");
+        XYThemeCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:themeCollectionViewCellIdentifier forIndexPath:indexPath];
+        if (cell == nil) {
+            // XYSaleItemCell.xib as NibName
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYThemeBookCell" owner:nil options:nil];
+            //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
+            cell = [nib objectAtIndex:0];
+        }
+        // configure collection view cell
+        NSUInteger row = [indexPath row];
+        NSArray *listItem = [self loadCategory];
+        NSDictionary *rowDict = [listItem objectAtIndex:row];
+        // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
+        
+        NSString *imagePath = [rowDict objectForKey:@"image"];
         imagePath = [imagePath stringByAppendingString:@".png"];
         cell.coverImage.image = [UIImage imageNamed:imagePath];
-        cell.title.tag = 100;
-    } else {
-        NSNumber *num = [rowDict objectForKey:@"bookID"];
-        cell.title.tag = [num integerValue];
-        NSString *imagePath = [rowDict objectForKey:imgKey];
-        __weak XYCollectionCell *weakCell = cell;
-        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            weakCell.coverImage.image = image;
-            [weakCell setNeedsLayout];
-            [weakCell setNeedsDisplay];
-        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            NSLog(@"Get Image from Server Error.");
-        }];
+        
+        return cell;
     }
-    
-    NSString *detail = [rowDict objectForKey:detailKey];
-    // NSLog(@"cell.title.text: %@", [rowDict objectForKey:detailKey]);
-    cell.detail.text = detail;
-    
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView.tag == 3) {
-        XYCollectionCell * cell = (XYCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        if (cell) {
-            // 准备segue的参数传递
-            self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
-            [self performSegueWithIdentifier:@"BookDetail" sender:self];
-        }
-    } else if(collectionView.tag < 3) {
+    if(collectionView.tag < 3) {
         XYCollectionCell * cell = (XYCollectionCell *) [collectionView cellForItemAtIndexPath:indexPath];
         if (cell) {
             // 准备segue的参数传递
@@ -273,7 +309,7 @@
 }
 
 - (NSArray *) loadCategory {
-    return [self loadPlistFile:@"paid" ofType:@"plist"];
+    return [self loadPlistFile:@"theme" ofType:@"plist"];
 }
 
 - (NSArray *) loadPlistFile:(NSString *)path ofType:(NSString *)type {
