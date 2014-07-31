@@ -126,7 +126,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [self pauseAR];
-//    [self pauseBR];
+    [self pauseBR];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -268,6 +268,12 @@
     }
 }
 
+- (void)callWebView:(NSString*)url
+{
+    NSDictionary *valueDict = @{@"url": url};
+    [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+}
+
 #pragma AVCaptureMetadataOutputObjectsDelegate (For barcode reading)
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
@@ -285,8 +291,8 @@
                 return;
             }
             lastURL = [metadataObj stringValue];
-            NSDictionary *valueDict = @{@"url": [metadataObj stringValue]};
-            [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+            
+            [self performSelectorInBackground:@selector(callWebView:) withObject:lastURL];
             
         // the barcode is ISBN
         } else if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeEAN13Code]) {
@@ -325,6 +331,7 @@
                     [self performSegueWithIdentifier:@"BookDetail" sender:valueDict];
                 }
                 NSLog(@"loadBookISBNFromServer Success");
+                [self hideLoadingAnimation];
                 
             }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"loadBookISBNFromServer Error:%@", error);

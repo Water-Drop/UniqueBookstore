@@ -37,8 +37,8 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="cartButton" destination="h5N-Rv-nyF" id="wOE-jd-Y1w"/>
-                <outlet property="infoButton" destination="lvI-XQ-1LA" id="hbG-rM-yVK"/>
+                <outlet property="cartButton" destination="h5N-Rv-nyF" id="R4Q-nP-iK8"/>
+                <outlet property="infoButton" destination="lvI-XQ-1LA" id="Vm1-AF-Qb9"/>
                 <outlet property="price" destination="nOI-hQ-vD8" id="XgZ-lh-S0t"/>
             </connections>
         </view>
