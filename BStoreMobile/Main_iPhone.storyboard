@@ -4,6 +4,57 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Navigate Controller - 导航-->
+        <scene sceneID="fd7-qt-Kgp">
+            <objects>
+                <viewController id="zTS-1e-ksp" customClass="XYNavigateController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fgx-gQ-Zyi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="JgC-BZ-g44">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="导航" id="3Ol-bz-RM3">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="kvL-cQ-JLS">
+                            <connections>
+                                <action selector="cancelAction:" destination="zTS-1e-ksp" id="Vi9-bd-kYf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="OxJ-5K-UwT">
+                            <connections>
+                                <action selector="miniAction:" destination="zTS-1e-ksp" id="bXM-O7-lEa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cameraView" destination="JgC-BZ-g44" id="zfH-9A-AEd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WrL-NJ-Te0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898" y="3787"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="81R-kD-mR0">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="ti7-QV-Cgi" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bXb-QV-IxT">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zTS-1e-ksp" kind="relationship" relationship="rootViewController" id="Iwh-rP-4xN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vok-TT-AIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1372" y="3787"/>
+        </scene>
         <!--Make Comment Controller - 撰写评论-->
         <scene sceneID="vHa-nV-VmX">
             <objects>
@@ -118,7 +169,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vs7-TN-7FH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9pg-Id-GyH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3711" y="1424"/>
+            <point key="canvasLocation" x="3723" y="1144"/>
         </scene>
         <!--Confirm Controller - 确认书籍-->
         <scene sceneID="yhh-6m-uiX">
@@ -140,7 +191,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS0-tF-C9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4256" y="2140"/>
+            <point key="canvasLocation" x="4240" y="2140"/>
         </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
@@ -725,6 +776,7 @@
                         <segue destination="uDC-Pi-zNw" kind="relationship" relationship="viewControllers" id="fuf-a6-K01"/>
                         <segue destination="2kZ-2A-dGN" kind="relationship" relationship="viewControllers" id="5UR-7A-Z8L"/>
                         <segue destination="Nny-Oa-wLs" kind="relationship" relationship="viewControllers" id="rc4-QV-M6z"/>
+                        <segue destination="ti7-QV-Cgi" kind="modal" identifier="Navigation" id="OGY-yB-6Wm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzR-gu-oVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1109,7 +1161,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcS-OA-ksT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3185" y="1424"/>
+            <point key="canvasLocation" x="3185" y="1144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l1r-MP-Pbp">
@@ -1163,9 +1215,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="awM-zn-5XB"/>
+        <segue reference="ze3-Ug-C9Y"/>
+        <segue reference="YyE-96-kFY"/>
         <segue reference="tMo-Tm-dC1"/>
-        <segue reference="Av2-e0-K2i"/>
-        <segue reference="Cd5-aU-63D"/>
-        <segue reference="szb-hM-fSC"/>
     </inferredMetricsTieBreakers>
 </document>

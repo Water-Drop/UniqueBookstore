@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "XYStarRatedView.h"
+#import "XYViewController.h"
 
-@interface XYBookInfoController : UIViewController<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, StarRatedViewDelegate>
+@interface XYBookInfoController : XYViewController<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, StarRatedViewDelegate>
 
 @property NSString *titleStr;
 @property NSString *detailStr;

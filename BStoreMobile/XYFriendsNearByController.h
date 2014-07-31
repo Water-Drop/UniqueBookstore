@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYFriendsNearByController : UIViewController
+@interface XYFriendsNearByController : XYViewController
 
 @end

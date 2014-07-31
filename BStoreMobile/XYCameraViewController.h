@@ -11,8 +11,9 @@
 #import "XYCameraSession.h"
 #import "XYCameraView.h"
 #import <QCAR/DataSet.h>
+#import "XYViewController.h"
 
-@interface XYCameraViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate, XYCameraSessionControl> {
+@interface XYCameraViewController : XYViewController<AVCaptureMetadataOutputObjectsDelegate, XYCameraSessionControl> {
     CGRect viewFrame;
     XYCameraSession * vapp;
     QCAR::DataSet*  dataSetCurrent;

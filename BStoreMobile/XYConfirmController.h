@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
-@interface XYConfirmController : UITableViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
+@interface XYConfirmController : XYTableViewController<UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate>
 
 @end

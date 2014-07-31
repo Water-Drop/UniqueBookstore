@@ -191,6 +191,7 @@ enum BookInfoStatus {
                 cell.toBuyButton.tag = [self.bookID intValue];
                 [cell.toBuyButton addTarget:self action:@selector(toBuyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 cell.navButton.tag = [self.bookID intValue];
+                [cell.navButton addTarget:self action:@selector(navButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
         [cell.buyButton setTitle:self.priceStr forState:UIControlStateNormal];
@@ -592,6 +593,11 @@ enum BookInfoStatus {
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"addItemToWishlist Error:%@", error);
     }];
+}
+
+- (IBAction)navButtonClicked:(id)sender
+{
+    [[XYLocationManager sharedManager] showNavigationModal];
 }
 
 @end

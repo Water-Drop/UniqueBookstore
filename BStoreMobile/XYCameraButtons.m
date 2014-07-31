@@ -41,7 +41,7 @@
 //    [self.layer setBorderWidth:1.0];   //边框宽度
 //    CGColorRef colorref = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
 //    [self.layer setBorderColor:colorref];//边框颜色
-    [self.layer setOpacity:0.65f];
+//    [self.layer setOpacity:0.65f];
 }
 
 

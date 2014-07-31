@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
 enum friendsInfoStatus {
     DELETE, ADD
 };
 
-@interface XYFriendsInfoController : UITableViewController<UIAlertViewDelegate>
+@interface XYFriendsInfoController : XYTableViewController<UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *uname;
 @property (nonatomic, strong) NSString *gen;

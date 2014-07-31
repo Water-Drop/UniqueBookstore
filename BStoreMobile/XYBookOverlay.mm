@@ -42,17 +42,22 @@
     [self styleComment:comment2];
     [self styleComment:comment3];
     
-    UIImage *bubble = [[UIImage imageNamed:@"mbubble2.png"]
+//    UIImage *bubble = [[UIImage imageNamed:@"1.png"]
+//                       stretchableImageWithLeftCapWidth:41 topCapHeight:14];
+    
+    UIImage *bubble = [[UIImage imageNamed:@"mbubble6.png"]
                        stretchableImageWithLeftCapWidth:21 topCapHeight:14];
     image1 = [[UIImageView alloc] initWithImage:bubble];
     image2 = [[UIImageView alloc] initWithImage:bubble];
     image3 = [[UIImageView alloc] initWithImage:bubble];
     
-    UIImage *avatar = [UIImage imageNamed:@"talk-50.png"];
+//    UIImage *avatar = [UIImage imageNamed:@"talk-50.png"];
     
-    avatar1 = [[UIImageView alloc] initWithImage:avatar];
-    avatar2 = [[UIImageView alloc] initWithImage:avatar];
-    avatar3 = [[UIImageView alloc] initWithImage:avatar];
+    int index = (int)(rand()%5);
+    
+    avatar1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat: @"headImg_%d.jpg", index]]];
+    avatar2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat: @"headImg_%d.jpg", (index+2)%5]]];
+    avatar3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat: @"headImg_%d.jpg", (index+4)%5]]];
     
     [self styleAvatar:avatar1];
     [self styleAvatar:avatar2];
@@ -224,14 +229,14 @@
 - (void)styleAvatar:(UIImageView*)avatar
 {
     [avatar.layer setMasksToBounds:YES];
-    [avatar.layer setCornerRadius:16.0f];
-    [avatar.layer setOpacity:0.65f];
+    [avatar.layer setCornerRadius:5.0f];
+    [avatar.layer setOpacity:0.85f];
     [avatar.layer setBackgroundColor:[UIColor whiteColor].CGColor];
 }
 
 - (void)styleComment:(UILabel*)comment
 {
-    comment.font = [UIFont systemFontOfSize:11];
+    comment.font = [UIFont systemFontOfSize:12];
     [comment setNumberOfLines:1];
 }
 

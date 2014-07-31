@@ -54,4 +54,9 @@
     [_window.rootViewController performSegueWithIdentifier:@"Payment" sender:nil];
 }
 
+- (void)showNavigationModal
+{
+    [_window.rootViewController performSegueWithIdentifier:@"Navigation" sender:nil];
+}
+
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
-@interface XYMyBookController : UITableViewController<UIAlertViewDelegate>
+@interface XYMyBookController : XYTableViewController<UIAlertViewDelegate>
 
 @end
