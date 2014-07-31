@@ -118,7 +118,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vs7-TN-7FH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9pg-Id-GyH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3511" y="1424"/>
+            <point key="canvasLocation" x="3711" y="1424"/>
         </scene>
         <!--Confirm Controller - 确认书籍-->
         <scene sceneID="yhh-6m-uiX">
@@ -140,7 +140,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS0-tF-C9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4056" y="2140"/>
+            <point key="canvasLocation" x="4256" y="2140"/>
         </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
@@ -179,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eTF-aX-s2q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="2140"/>
+            <point key="canvasLocation" x="3185" y="2140"/>
         </scene>
         <!--Admin Page Controller - 个人中心-->
         <scene sceneID="J8U-Yz-Mue">
@@ -503,12 +503,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="142"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="sLN-2G-rxe">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="sLN-2G-rxe">
                                                     <rect key="frame" x="20" y="20" width="95" height="102"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HelloWorld" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hha-xx-Zdh">
-                                                    <rect key="frame" x="139" y="20" width="84" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="海之子" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hha-xx-Zdh">
+                                                    <rect key="frame" x="139" y="20" width="51" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -877,7 +877,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCw-2J-IWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1898" y="2202"/>
+            <point key="canvasLocation" x="2440" y="2140"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="LOf-Zl-Ieq">
@@ -959,7 +959,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTd-pv-7Jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="2926"/>
+            <point key="canvasLocation" x="3185" y="2926"/>
         </scene>
         <!--Navigation Controller - 扫一扫-->
         <scene sceneID="9LW-mN-Vei">
@@ -1061,7 +1061,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlW-fq-gQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5158" y="699"/>
+            <point key="canvasLocation" x="5358" y="699"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EU3-Ip-eTl">
@@ -1079,7 +1079,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KcS-OA-ksT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2985" y="1424"/>
+            <point key="canvasLocation" x="3185" y="1424"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l1r-MP-Pbp">
@@ -1097,7 +1097,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckf-F9-bhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4576" y="699"/>
+            <point key="canvasLocation" x="4776" y="699"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m3I-2u-Dhf">
@@ -1115,11 +1115,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lwk-hf-smM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3530" y="2140"/>
+            <point key="canvasLocation" x="3730" y="2140"/>
         </scene>
     </scenes>
     <resources>
-        <image name="2.JPG" width="181" height="136"/>
         <image name="5.JPG" width="181" height="136"/>
         <image name="camera-50.png" width="25" height="25"/>
         <image name="courses-50.png" width="25" height="25"/>
@@ -1133,9 +1132,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Av2-e0-K2i"/>
-        <segue reference="awM-zn-5XB"/>
-        <segue reference="ze3-Ug-C9Y"/>
         <segue reference="cYO-YM-urh"/>
+        <segue reference="Cd5-aU-63D"/>
+        <segue reference="szb-hM-fSC"/>
+        <segue reference="Av2-e0-K2i"/>
     </inferredMetricsTieBreakers>
 </document>

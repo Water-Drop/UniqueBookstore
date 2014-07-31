@@ -50,7 +50,7 @@
 
 - (void)loadFriendInfo
 {
-    self.headImg.image = [UIImage imageNamed:@"12.JPG"];
+    self.headImg.image = [UIImage imageNamed:@"5.JPG"];
     self.username.text = self.uname;
     self.gender.text = self.gen;
     self.address.text = self.addr;

@@ -167,7 +167,7 @@
     if (indexPath.section < 3) {
         return 152.0f;
     } else {
-        return 106.0f;
+        return 107.0f;
     }
 }
 

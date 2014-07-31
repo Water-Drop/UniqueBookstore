@@ -874,6 +874,7 @@
 		E33A3F0F1977BB5000BA3797 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EBEF1987D80F00CC9D4C /* icon */,
 				E3EA3763198A2B060066ECCD /* theme_0.png */,
 				E3EA3764198A2B060066ECCD /* theme_1.png */,
 				E3EA3765198A2B060066ECCD /* 后会无期.jpg */,
@@ -1057,6 +1058,7 @@
 		E35BA3661973630E0055EDF4 /* BStoreMobile */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EC6D1989D6BF00CC9D4C /* BlurView */,
 				E3EA374D1988EFE00066ECCD /* Purchase */,
 				E3BF9EA41984A6B200855279 /* AFNetworking */,
 				E3BF9EB81984A6B200855279 /* UIKit+AFNetworking */,

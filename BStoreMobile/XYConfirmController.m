@@ -187,8 +187,8 @@
         UIBarButtonItem *leftBtn = nil;
         if (self.listOutput && [self.listOutput count] > 0) {
             rightBtn = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStylePlain target:self action:@selector(confirmAction)];
-            leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
         }
+        leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
         self.navigationItem.rightBarButtonItem = rightBtn;
         self.navigationItem.leftBarButtonItem = leftBtn;
         [self.tableView reloadData];
