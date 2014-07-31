@@ -38,6 +38,30 @@
 		2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2165B3BC197CF05D005B9F34 /* XYLocationManager.m */; };
 		21A54ED019792F79003F53DB /* XYSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A54ECF19792F79003F53DB /* XYSearchController.m */; };
 		21A54ED619796B3F003F53DB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A54ED519796B3F003F53DB /* AVFoundation.framework */; };
+		21C4EBE81987CAC200CC9D4C /* Ister.dat in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EBE61987CAC200CC9D4C /* Ister.dat */; };
+		21C4EBE91987CAC200CC9D4C /* Ister.xml in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EBE71987CAC200CC9D4C /* Ister.xml */; };
+		21C4EC4A1987EE9000CC9D4C /* bookmark-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC411987EE9000CC9D4C /* bookmark-50@2x.png */; };
+		21C4EC4B1987EE9000CC9D4C /* camera-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC421987EE9000CC9D4C /* camera-50@2x.png */; };
+		21C4EC4C1987EE9000CC9D4C /* courses-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC431987EE9000CC9D4C /* courses-50@2x.png */; };
+		21C4EC4D1987EE9000CC9D4C /* elective-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC441987EE9000CC9D4C /* elective-50@2x.png */; };
+		21C4EC4E1987EE9000CC9D4C /* exterior-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC451987EE9000CC9D4C /* exterior-50@2x.png */; };
+		21C4EC4F1987EE9000CC9D4C /* like-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC461987EE9000CC9D4C /* like-50@2x.png */; };
+		21C4EC501987EE9000CC9D4C /* put_in-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC471987EE9000CC9D4C /* put_in-50@2x.png */; };
+		21C4EC511987EE9000CC9D4C /* star-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC481987EE9000CC9D4C /* star-50@2x.png */; };
+		21C4EC521987EE9000CC9D4C /* talk-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC491987EE9000CC9D4C /* talk-50@2x.png */; };
+		21C4EC59198907C000CC9D4C /* XYCameraButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4EC57198907C000CC9D4C /* XYCameraButtons.m */; };
+		21C4EC5A198907C000CC9D4C /* XYCameraButtons.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC58198907C000CC9D4C /* XYCameraButtons.xib */; };
+		21C4EC6319892CA300CC9D4C /* speech_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC6119892CA300CC9D4C /* speech_bubble.png */; };
+		21C4EC6419892CA300CC9D4C /* speech_bubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC6219892CA300CC9D4C /* speech_bubble@2x.png */; };
+		21C4EC6B1989406100CC9D4C /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC691989406100CC9D4C /* bubbleSomeone.png */; };
+		21C4EC6C1989406100CC9D4C /* bubbleSomeone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC6A1989406100CC9D4C /* bubbleSomeone@2x.png */; };
+		21C4EC701989D6D400CC9D4C /* JCRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4EC6F1989D6D400CC9D4C /* JCRBlurView.m */; };
+		21C4EC731989DEFC00CC9D4C /* UIERealTimeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4EC721989DEFC00CC9D4C /* UIERealTimeBlurView.m */; };
+		21C4EC751989DF1000CC9D4C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C4EC741989DF1000CC9D4C /* Accelerate.framework */; };
+		21C4EC781989DF6200CC9D4C /* UIImage+BoxBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4EC771989DF6200CC9D4C /* UIImage+BoxBlur.m */; };
+		21C4EC7A1989E86800CC9D4C /* mbubble@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC791989E86800CC9D4C /* mbubble@2x.png */; };
+		21C4EC7C1989E9E700CC9D4C /* mbubble2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21C4EC7B1989E9E700CC9D4C /* mbubble2@2x.png */; };
+		21C4EC7F198A104800CC9D4C /* XYWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21C4EC7E198A104800CC9D4C /* XYWebViewController.m */; };
 		21EAE41D197AA02D00159337 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EAE41C197AA02D00159337 /* ImageIO.framework */; };
 		E30190EB19809AA300D04906 /* XYUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190EA19809AA300D04906 /* XYUtil.m */; };
 		E30190EF1980D1B100D04906 /* XYCartItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190ED1980D1B100D04906 /* XYCartItemCell.m */; };
@@ -198,6 +222,9 @@
 		E3EA373E198746350066ECCD /* XYFriendsMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA373D198746350066ECCD /* XYFriendsMsgController.m */; };
 		E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */; };
 		E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */; };
+		E3EA37461987B1490066ECCD /* XYAutoLayoutLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */; };
+		E3EA3749198807170066ECCD /* XYFriendsInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3748198807170066ECCD /* XYFriendsInfoController.m */; };
+		E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +326,35 @@
 		21A54ECF19792F79003F53DB /* XYSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSearchController.m; sourceTree = "<group>"; };
 		21A54ED219795E8E003F53DB /* XYCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCameraViewController.h; sourceTree = "<group>"; };
 		21A54ED519796B3F003F53DB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		21C4EBE61987CAC200CC9D4C /* Ister.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ister.dat; sourceTree = "<group>"; };
+		21C4EBE71987CAC200CC9D4C /* Ister.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Ister.xml; sourceTree = "<group>"; };
+		21C4EC411987EE9000CC9D4C /* bookmark-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bookmark-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC421987EE9000CC9D4C /* camera-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC431987EE9000CC9D4C /* courses-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "courses-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC441987EE9000CC9D4C /* elective-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elective-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC451987EE9000CC9D4C /* exterior-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exterior-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC461987EE9000CC9D4C /* like-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC471987EE9000CC9D4C /* put_in-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "put_in-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC481987EE9000CC9D4C /* star-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC491987EE9000CC9D4C /* talk-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk-50@2x.png"; sourceTree = "<group>"; };
+		21C4EC56198907C000CC9D4C /* XYCameraButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCameraButtons.h; sourceTree = "<group>"; };
+		21C4EC57198907C000CC9D4C /* XYCameraButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYCameraButtons.m; sourceTree = "<group>"; };
+		21C4EC58198907C000CC9D4C /* XYCameraButtons.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYCameraButtons.xib; sourceTree = "<group>"; };
+		21C4EC6119892CA300CC9D4C /* speech_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speech_bubble.png; sourceTree = "<group>"; };
+		21C4EC6219892CA300CC9D4C /* speech_bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speech_bubble@2x.png"; sourceTree = "<group>"; };
+		21C4EC691989406100CC9D4C /* bubbleSomeone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSomeone.png; sourceTree = "<group>"; };
+		21C4EC6A1989406100CC9D4C /* bubbleSomeone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubbleSomeone@2x.png"; sourceTree = "<group>"; };
+		21C4EC6E1989D6D400CC9D4C /* JCRBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCRBlurView.h; sourceTree = "<group>"; };
+		21C4EC6F1989D6D400CC9D4C /* JCRBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCRBlurView.m; sourceTree = "<group>"; };
+		21C4EC711989DEFC00CC9D4C /* UIERealTimeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIERealTimeBlurView.h; sourceTree = "<group>"; };
+		21C4EC721989DEFC00CC9D4C /* UIERealTimeBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIERealTimeBlurView.m; sourceTree = "<group>"; };
+		21C4EC741989DF1000CC9D4C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		21C4EC761989DF6200CC9D4C /* UIImage+BoxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BoxBlur.h"; sourceTree = "<group>"; };
+		21C4EC771989DF6200CC9D4C /* UIImage+BoxBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BoxBlur.m"; sourceTree = "<group>"; };
+		21C4EC791989E86800CC9D4C /* mbubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mbubble@2x.png"; sourceTree = "<group>"; };
+		21C4EC7B1989E9E700CC9D4C /* mbubble2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mbubble2@2x.png"; sourceTree = "<group>"; };
+		21C4EC7D198A104800CC9D4C /* XYWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYWebViewController.h; sourceTree = "<group>"; };
+		21C4EC7E198A104800CC9D4C /* XYWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYWebViewController.m; sourceTree = "<group>"; };
 		21EAE41C197AA02D00159337 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E30190E919809AA300D04906 /* XYUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUtil.h; sourceTree = "<group>"; };
 		E30190EA19809AA300D04906 /* XYUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUtil.m; sourceTree = "<group>"; };
@@ -500,6 +556,12 @@
 		E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsMsgCell.h; sourceTree = "<group>"; };
 		E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsMsgCell.m; sourceTree = "<group>"; };
 		E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYFriendsMsgCell.xib; sourceTree = "<group>"; };
+		E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAutoLayoutLabel.h; sourceTree = "<group>"; };
+		E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAutoLayoutLabel.m; sourceTree = "<group>"; };
+		E3EA3747198807170066ECCD /* XYFriendsInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsInfoController.h; sourceTree = "<group>"; };
+		E3EA3748198807170066ECCD /* XYFriendsInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsInfoController.m; sourceTree = "<group>"; };
+		E3EA374A19882EA70066ECCD /* XYMakeCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMakeCommentController.h; sourceTree = "<group>"; };
+		E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMakeCommentController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +569,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C4EC751989DF1000CC9D4C /* Accelerate.framework in Frameworks */,
 				211B27D81982071500052039 /* QuartzCore.framework in Frameworks */,
 				211B27D61982070600052039 /* Security.framework in Frameworks */,
 				211B27D4198206FF00052039 /* CoreMotion.framework in Frameworks */,
@@ -673,6 +736,8 @@
 		211B27EF19823CA100052039 /* ImageTargets */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EBE61987CAC200CC9D4C /* Ister.dat */,
+				21C4EBE71987CAC200CC9D4C /* Ister.xml */,
 				211B27F019823CA100052039 /* IT_about.html */,
 				211B27F119823CA100052039 /* StonesAndChips.dat */,
 				211B27F219823CA100052039 /* StonesAndChips.xml */,
@@ -708,8 +773,45 @@
 				211B27881982052100052039 /* XYCameraView.mm */,
 				21A54ED219795E8E003F53DB /* XYCameraViewController.h */,
 				211B27891982052100052039 /* XYCameraViewController.mm */,
+				21C4EC7D198A104800CC9D4C /* XYWebViewController.h */,
+				21C4EC7E198A104800CC9D4C /* XYWebViewController.m */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		21C4EBEF1987D80F00CC9D4C /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				21C4EC7B1989E9E700CC9D4C /* mbubble2@2x.png */,
+				21C4EC791989E86800CC9D4C /* mbubble@2x.png */,
+				21C4EC691989406100CC9D4C /* bubbleSomeone.png */,
+				21C4EC6A1989406100CC9D4C /* bubbleSomeone@2x.png */,
+				21C4EC6119892CA300CC9D4C /* speech_bubble.png */,
+				21C4EC6219892CA300CC9D4C /* speech_bubble@2x.png */,
+				21C4EC411987EE9000CC9D4C /* bookmark-50@2x.png */,
+				21C4EC421987EE9000CC9D4C /* camera-50@2x.png */,
+				21C4EC431987EE9000CC9D4C /* courses-50@2x.png */,
+				21C4EC441987EE9000CC9D4C /* elective-50@2x.png */,
+				21C4EC451987EE9000CC9D4C /* exterior-50@2x.png */,
+				21C4EC461987EE9000CC9D4C /* like-50@2x.png */,
+				21C4EC471987EE9000CC9D4C /* put_in-50@2x.png */,
+				21C4EC481987EE9000CC9D4C /* star-50@2x.png */,
+				21C4EC491987EE9000CC9D4C /* talk-50@2x.png */,
+			);
+			path = icon;
+			sourceTree = "<group>";
+		};
+		21C4EC6D1989D6BF00CC9D4C /* BlurView */ = {
+			isa = PBXGroup;
+			children = (
+				21C4EC761989DF6200CC9D4C /* UIImage+BoxBlur.h */,
+				21C4EC771989DF6200CC9D4C /* UIImage+BoxBlur.m */,
+				21C4EC711989DEFC00CC9D4C /* UIERealTimeBlurView.h */,
+				21C4EC721989DEFC00CC9D4C /* UIERealTimeBlurView.m */,
+				21C4EC6E1989D6D400CC9D4C /* JCRBlurView.h */,
+				21C4EC6F1989D6D400CC9D4C /* JCRBlurView.m */,
+			);
+			name = BlurView;
 			sourceTree = "<group>";
 		};
 		E30190E8198099B400D04906 /* Util */ = {
@@ -741,6 +843,8 @@
 				E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */,
 				E3EA373C198746350066ECCD /* XYFriendsMsgController.h */,
 				E3EA373D198746350066ECCD /* XYFriendsMsgController.m */,
+				E3EA3747198807170066ECCD /* XYFriendsInfoController.h */,
+				E3EA3748198807170066ECCD /* XYFriendsInfoController.m */,
 			);
 			name = Frineds;
 			sourceTree = "<group>";
@@ -748,6 +852,7 @@
 		E33A3F0F1977BB5000BA3797 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EBEF1987D80F00CC9D4C /* icon */,
 				E3D1A0A51986AADD00DC244B /* star_empty.png */,
 				E3D1A0A61986AADD00DC244B /* star_empty@2x.png */,
 				E3D1A0A71986AADD00DC244B /* star_full.png */,
@@ -903,6 +1008,7 @@
 		E35BA35F1973630E0055EDF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EC741989DF1000CC9D4C /* Accelerate.framework */,
 				211B27DB1982080C00052039 /* libstdc++.dylib */,
 				211B27D9198207FC00052039 /* libc++.dylib */,
 				211B27D71982071500052039 /* QuartzCore.framework */,
@@ -927,6 +1033,7 @@
 		E35BA3661973630E0055EDF4 /* BStoreMobile */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EC6D1989D6BF00CC9D4C /* BlurView */,
 				E3BF9EA41984A6B200855279 /* AFNetworking */,
 				E3BF9EB81984A6B200855279 /* UIKit+AFNetworking */,
 				E30190E8198099B400D04906 /* Util */,
@@ -992,6 +1099,10 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				21C4EC56198907C000CC9D4C /* XYCameraButtons.h */,
+				21C4EC57198907C000CC9D4C /* XYCameraButtons.m */,
+				E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */,
+				E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */,
 				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
 				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
 				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
@@ -1011,6 +1122,7 @@
 				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
 				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
 				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
+				21C4EC58198907C000CC9D4C /* XYCameraButtons.xib */,
 				E30190FB19821A4200D04906 /* XYPaidItemCell.xib */,
 				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
 				E30190EE1980D1B100D04906 /* XYCartItemCell.xib */,
@@ -1026,6 +1138,8 @@
 			children = (
 				E33A3EE9197629F300BA3797 /* XYMyBookController.h */,
 				E33A3EEA197629F300BA3797 /* XYMyBookController.m */,
+				E3EA374A19882EA70066ECCD /* XYMakeCommentController.h */,
+				E3EA374B19882EA70066ECCD /* XYMakeCommentController.m */,
 			);
 			name = MyBook;
 			sourceTree = "<group>";
@@ -1185,8 +1299,10 @@
 				E33A3F791977BB5000BA3797 /* Denmark.png in Resources */,
 				E33A3F761977BB5000BA3797 /* Cameroon.png in Resources */,
 				E33A3F561977BB5000BA3797 /* 12.JPG in Resources */,
+				21C4EC6319892CA300CC9D4C /* speech_bubble.png in Resources */,
 				E33A3FBC1977BFD800BA3797 /* 18_full.JPG in Resources */,
 				E3AB0DD2197596DF0041A318 /* XYCollectionCell.xib in Resources */,
+				21C4EC7C1989E9E700CC9D4C /* mbubble2@2x.png in Resources */,
 				E33A3F8B1977BB5000BA3797 /* Slovenia.png in Resources */,
 				211B281E19823CA100052039 /* letter_Q.png in Resources */,
 				E33A3F721977BB5000BA3797 /* Algeria.png in Resources */,
@@ -1196,6 +1312,7 @@
 				E3D1A0A91986AADD00DC244B /* star_empty.png in Resources */,
 				E33A3EF019762A0E00BA3797 /* cart.plist in Resources */,
 				E33A3F5F1977BB5000BA3797 /* 20.JPG in Resources */,
+				21C4EBE91987CAC200CC9D4C /* Ister.xml in Resources */,
 				E33A3F7A1977BB5000BA3797 /* England.png in Resources */,
 				E33A3F571977BB5000BA3797 /* 13.JPG in Resources */,
 				211B281D19823CA100052039 /* letter_C.png in Resources */,
@@ -1203,14 +1320,17 @@
 				E33A3FC51977BFD800BA3797 /* 26_full.JPG in Resources */,
 				E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */,
 				E30190FD19821A4200D04906 /* XYPaidItemCell.xib in Resources */,
+				21C4EC7A1989E86800CC9D4C /* mbubble@2x.png in Resources */,
 				E33A3F901977BB5000BA3797 /* Uruguay.png in Resources */,
 				E33A3FD01977BFD800BA3797 /* 7_full.JPG in Resources */,
+				21C4EC511987EE9000CC9D4C /* star-50@2x.png in Resources */,
 				E33A3FBF1977BFD800BA3797 /* 20_full.JPG in Resources */,
 				E33A3F731977BB5000BA3797 /* Argentina.png in Resources */,
 				E3BF9EDC198503F000855279 /* book.jpg in Resources */,
 				E33A3EF219762A0E00BA3797 /* tobuy.plist in Resources */,
 				E33A3F811977BB5000BA3797 /* Italy.png in Resources */,
 				E33A3FCF1977BFD800BA3797 /* 6_full.JPG in Resources */,
+				21C4EC4C1987EE9000CC9D4C /* courses-50@2x.png in Resources */,
 				E33A3F7B1977BB5000BA3797 /* France.png in Resources */,
 				E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */,
 				E33A3F8D1977BB5000BA3797 /* SouthKorea.png in Resources */,
@@ -1228,13 +1348,16 @@
 				E33A3F5C1977BB5000BA3797 /* 18.JPG in Resources */,
 				E33A3F911977BB5000BA3797 /* USA.png in Resources */,
 				E33A3FC81977BFD800BA3797 /* 29_full.JPG in Resources */,
+				21C4EC4D1987EE9000CC9D4C /* elective-50@2x.png in Resources */,
 				E33A3FB71977BFD800BA3797 /* 13_full.JPG in Resources */,
+				21C4EC6C1989406100CC9D4C /* bubbleSomeone@2x.png in Resources */,
 				211B282219823CA100052039 /* StonesAndChips.xml in Resources */,
 				E33A3F5A1977BB5000BA3797 /* 16.JPG in Resources */,
 				E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */,
 				E33A3F7F1977BB5000BA3797 /* Holland.png in Resources */,
 				E33A3FBD1977BFD800BA3797 /* 19_full.JPG in Resources */,
 				E33A3F8E1977BB5000BA3797 /* Spain.png in Resources */,
+				21C4EC521987EE9000CC9D4C /* talk-50@2x.png in Resources */,
 				E33A3F601977BB5000BA3797 /* 21.JPG in Resources */,
 				E33A3FBA1977BFD800BA3797 /* 16_full.JPG in Resources */,
 				E33A3F871977BB5000BA3797 /* Paraguay.png in Resources */,
@@ -1246,6 +1369,8 @@
 				E33A3F661977BB5000BA3797 /* 27.JPG in Resources */,
 				E33A3FCC1977BFD800BA3797 /* 3_full.JPG in Resources */,
 				E33A3F631977BB5000BA3797 /* 24.JPG in Resources */,
+				21C4EC6419892CA300CC9D4C /* speech_bubble@2x.png in Resources */,
+				21C4EC6B1989406100CC9D4C /* bubbleSomeone.png in Resources */,
 				E33A3F711977BB5000BA3797 /* 9.JPG in Resources */,
 				E33A3FB51977BFD800BA3797 /* 11_full.JPG in Resources */,
 				E33A3FC21977BFD800BA3797 /* 23_full.JPG in Resources */,
@@ -1253,6 +1378,9 @@
 				E33A3FB61977BFD800BA3797 /* 12_full.JPG in Resources */,
 				E33A3F781977BB5000BA3797 /* CoteDIvoire.png in Resources */,
 				E33A3F831977BB5000BA3797 /* Mexico.png in Resources */,
+				21C4EC5A198907C000CC9D4C /* XYCameraButtons.xib in Resources */,
+				21C4EBE81987CAC200CC9D4C /* Ister.dat in Resources */,
+				21C4EC4E1987EE9000CC9D4C /* exterior-50@2x.png in Resources */,
 				E35BA36B1973630E0055EDF4 /* InfoPlist.strings in Resources */,
 				E33A3F5E1977BB5000BA3797 /* 2.JPG in Resources */,
 				E33A3F851977BB5000BA3797 /* Nigeria.png in Resources */,
@@ -1271,6 +1399,7 @@
 				E33A3F841977BB5000BA3797 /* NewZealand.png in Resources */,
 				E33A3FC61977BFD800BA3797 /* 27_full.JPG in Resources */,
 				211B27C71982054800052039 /* frame-markers-transparent.zip in Resources */,
+				21C4EC501987EE9000CC9D4C /* put_in-50@2x.png in Resources */,
 				E33A3FD21977BFD800BA3797 /* 9_full.JPG in Resources */,
 				E33A3F861977BB5000BA3797 /* NorthKorea.png in Resources */,
 				E3D1A0AA1986AADD00DC244B /* star_empty@2x.png in Resources */,
@@ -1280,6 +1409,7 @@
 				E33A3F7D1977BB5000BA3797 /* Ghana.png in Resources */,
 				E33A3F611977BB5000BA3797 /* 22.JPG in Resources */,
 				E33A3F591977BB5000BA3797 /* 15.JPG in Resources */,
+				21C4EC4B1987EE9000CC9D4C /* camera-50@2x.png in Resources */,
 				E33A3FC11977BFD800BA3797 /* 22_full.JPG in Resources */,
 				E33A3FCA1977BFD800BA3797 /* 30_full.JPG in Resources */,
 				E33A3F741977BB5000BA3797 /* Australia.png in Resources */,
@@ -1293,9 +1423,11 @@
 				E33A3FC31977BFD800BA3797 /* 24_full.JPG in Resources */,
 				E33A3F5D1977BB5000BA3797 /* 19.JPG in Resources */,
 				E33A3F751977BB5000BA3797 /* Brazil.png in Resources */,
+				21C4EC4F1987EE9000CC9D4C /* like-50@2x.png in Resources */,
 				E33A3F8C1977BB5000BA3797 /* SouthAfrica.png in Resources */,
 				E33A3F801977BB5000BA3797 /* Honduras.png in Resources */,
 				211B282319823CA100052039 /* Tarmac.dat in Resources */,
+				21C4EC4A1987EE9000CC9D4C /* bookmark-50@2x.png in Resources */,
 				E33A3F531977BB5000BA3797 /* 1.JPG in Resources */,
 				E35BA3731973630E0055EDF4 /* Images.xcassets in Resources */,
 				E39D05B519758D1B006A8F53 /* XYSaleItemCell.xib in Resources */,
@@ -1327,14 +1459,18 @@
 			files = (
 				211B278A1982052100052039 /* XYCameraSession.mm in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
+				21C4EC7F198A104800CC9D4C /* XYWebViewController.m in Sources */,
 				E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */,
 				E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */,
+				E3EA3749198807170066ECCD /* XYFriendsInfoController.m in Sources */,
 				E30190F31980EF1F00D04906 /* XYAddFriendsController.m in Sources */,
 				E3BF9ECF1984A6B200855279 /* AFURLConnectionOperation.m in Sources */,
 				E3BF9ECE1984A6B200855279 /* AFSecurityPolicy.m in Sources */,
 				E3BF9ED61984A6B200855279 /* UIButton+AFNetworking.m in Sources */,
 				E3BF9ED41984A6B200855279 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				21C4EC59198907C000CC9D4C /* XYCameraButtons.m in Sources */,
 				E3BF9EE1198544DF00855279 /* XYCommentViewCell.m in Sources */,
+				E3EA37461987B1490066ECCD /* XYAutoLayoutLabel.m in Sources */,
 				E3BF9ED81984A6B200855279 /* UIProgressView+AFNetworking.m in Sources */,
 				E3EA373E198746350066ECCD /* XYFriendsMsgController.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
@@ -1344,12 +1480,15 @@
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */,
+				21C4EC781989DF6200CC9D4C /* UIImage+BoxBlur.m in Sources */,
 				211B278C1982052100052039 /* XYCameraView.mm in Sources */,
 				211B28411982437A00052039 /* XYBookOverlay.mm in Sources */,
 				E3BF9ED31984A6B200855279 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E3BF9ED51984A6B200855279 /* UIAlertView+AFNetworking.m in Sources */,
 				E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */,
+				E3EA374C19882EA70066ECCD /* XYMakeCommentController.m in Sources */,
 				E30190FC19821A4200D04906 /* XYPaidItemCell.m in Sources */,
+				21C4EC701989D6D400CC9D4C /* JCRBlurView.m in Sources */,
 				E3BF9CE319836B0600855279 /* XYAdminPageController.m in Sources */,
 				E3BF9ECB1984A6B200855279 /* AFHTTPRequestOperationManager.m in Sources */,
 				E3BF9EDA1984A6B200855279 /* UIWebView+AFNetworking.m in Sources */,
@@ -1367,6 +1506,7 @@
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
 				E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */,
 				211B278D1982052100052039 /* XYCameraViewController.mm in Sources */,
+				21C4EC731989DEFC00CC9D4C /* UIERealTimeBlurView.m in Sources */,
 				E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */,
 				E3BF9ED71984A6B200855279 /* UIImageView+AFNetworking.m in Sources */,
 				E30190EB19809AA300D04906 /* XYUtil.m in Sources */,
@@ -1494,7 +1634,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Liang Zhenjing (28262WS4C5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1509,7 +1649,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
+				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1526,7 +1666,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Liang Zhenjing (28262WS4C5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1540,7 +1680,7 @@
 				);
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
+				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

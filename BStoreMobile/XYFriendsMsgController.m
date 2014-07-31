@@ -9,6 +9,7 @@
 #import "XYFriendsMsgController.h"
 #import "XYUtil.h"
 #import "XYFriendsMsgCell.h"
+#import "XYAutoLayoutLabel.h"
 
 @interface XYFriendsMsgController ()
 
@@ -84,7 +85,8 @@
     // Configure the cell...
     NSDictionary *rowDict = self.listMsg[indexPath.row];
     cell.headImg.image = [UIImage imageNamed:@"5.JPG"];
-    cell.username.text = rowDict[@"username"];
+    cell.username.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"username"]];
+    cell.content.font = [UIFont fontWithName:@"Helvetica" size:12];
     cell.content.text = rowDict[@"content"];
     cell.pubDate.text = rowDict[@"date"];
     [cell.delButton setHidden:YES];
@@ -119,7 +121,16 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 158.0f;
+    XYAutoLayoutLabel *lbl = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(68, 56, 232, 21)];
+    NSDictionary *rowDict = self.listMsg[indexPath.row];
+    lbl.font = [UIFont fontWithName:@"Helvetica" size:12];
+    lbl.text = rowDict[@"content"];
+    return lbl.frame.origin.y + lbl.frame.size.height + 10.0f;
+}
+
+-(IBAction)unwindToFriendsMsg:(UIStoryboardSegue *)segue
+{
+    
 }
 
 

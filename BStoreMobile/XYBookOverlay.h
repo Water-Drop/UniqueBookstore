@@ -11,22 +11,39 @@
 #import <QCAR/QCAR.h>
 #import <QCAR/Matrices.h>
 #import <QCAR/ImageTarget.h>
+#import "XYCameraButtons.h"
 
 @interface XYBookOverlay : NSObject {
     
 @private
     
-    UIButton *detail;
-    UIButton *navigate;
-    UIButton *buy;
-    NSString *name;
+    XYCameraButtons *btns;
+    UIButton *info;
+    
+    UILabel *comments;
+    
+    UILabel *comment1;
+    UILabel *comment2;
+    UILabel *comment3;
+    
+    UIImageView *avatar1;
+    UIImageView *avatar2;
+    UIImageView *avatar3;
+    
+    UIImageView *image1;
+    UIImageView *image2;
+    UIImageView *image3;
+    
+    NSString *bookId;
+    NSDictionary *bookInfoDict;
+    NSArray *listComments;
     __weak UIViewController *controller;
 }
 
 @property NSString *name;
 @property (weak) UIViewController *controller;
 
-- (id)initWithName:(NSString*)name;
+- (id)initWithId:(NSString*)key;
 
 - (void)hide;
 

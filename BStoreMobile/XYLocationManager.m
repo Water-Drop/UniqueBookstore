@@ -12,14 +12,14 @@
 
 @synthesize current;
 
-+ (XYLocationManager *)sharedInstance
++ (XYLocationManager *)sharedManager
 {
-    static XYLocationManager *myInstance = nil;
+    static XYLocationManager *globalManager = nil;
     
-    if (nil == myInstance) {
-        myInstance  = [[[self class] alloc] init];
+    if (nil == globalManager) {
+        globalManager  = [[[self class] alloc] init];
     }
-    return myInstance;
+    return globalManager;
 }
 
 - (id)init {
@@ -61,6 +61,7 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     NSLog(@"Beacon Found");
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    [self.delegate performPayment];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {

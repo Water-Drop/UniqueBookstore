@@ -16,6 +16,9 @@
     CGRect viewFrame;
     XYCameraSession * vapp;
     QCAR::DataSet*  dataSetCurrent;
+    NSString* lastISBN;
+    NSString* lastURL;
+    int segmentState;
 }
 
 @property (weak, nonatomic) IBOutlet XYCameraView *viewPreview;

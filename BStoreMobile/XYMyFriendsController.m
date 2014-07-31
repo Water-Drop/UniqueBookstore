@@ -13,6 +13,7 @@
 @interface XYMyFriendsController ()
 
 @property (nonatomic,strong) NSMutableArray *listFriends;
+@property (nonatomic,strong) NSDictionary *valueDict;
 
 @end
 
@@ -83,6 +84,9 @@
     }
     
     // Configure the cell...
+    for (UIView *view in [cell.contentView subviews]) {
+        [view removeFromSuperview];
+    }
     NSDictionary *rowDict = self.listFriends[indexPath.row];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(13, 8, 52, 57)];
@@ -97,7 +101,30 @@
     NSNumber *num = rowDict[@"userID"];
     cell.tag = [num integerValue];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+     NSString *userID = [NSString stringWithFormat:@"%@",[NSNumber numberWithInteger:cell.tag]];
+    self.valueDict = @{@"userID": userID};
+    [self performSegueWithIdentifier:@"friendsInfo" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"friendsInfo"]) {
+        UIViewController *dest = segue.destinationViewController;
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
+    }
 }
 
 /*
@@ -170,5 +197,56 @@
         NSLog(@"loadFriendsFromServer Error:%@", error);
     }];
 }
+
+// delete from table view in listFriends
+/*设置状态 only in cart and tobuy list*/
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return  UITableViewCellEditingStyleDelete;
+}
+
+/*改变删除按钮的title*/
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+/*删除用到的函数*/
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.listFriends) {
+        if (editingStyle == UITableViewCellEditingStyleDelete)
+        {
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            NSInteger tag = cell.tag;
+            [self delFriendFromServer:tag];
+            [self.listFriends removeObjectAtIndex:indexPath.row];  //删除数组里的数据
+            [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+        }
+    }
+}
+
+- (void) delFriendFromServer:(NSInteger)userID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/DeleteFriend?userID1=%@&userID2=%@", USERID, [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:userID]]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+        }
+        NSLog(@"delFriendFromServer Success");
+        [self.tableView reloadData];
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"delFriendFromServer Error:%@", error);
+    }];
+}
+
 
 @end

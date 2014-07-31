@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYPubMsgController : UIViewController
+@interface XYPubMsgController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @end

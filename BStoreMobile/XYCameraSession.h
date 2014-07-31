@@ -90,6 +90,7 @@
 @property (nonatomic, readwrite) BOOL isRetinaDisplay;
 @property (nonatomic, readwrite) BOOL cameraIsStarted;
 @property (nonatomic, readwrite) QCAR::Matrix44F projectionMatrix;
+@property (nonatomic, readwrite) BOOL running;
 
 // Viewport geometry
 @property (nonatomic, readwrite) struct tagViewport {

@@ -14,6 +14,7 @@
 #import "XYCollectionCell.h"
 #import "XYUtil.h"
 #import "XYStarRatedView.h"
+#import "XYAutoLayoutLabel.h"
 
 @interface XYBookInfoController ()
 
@@ -206,32 +207,45 @@ enum BookInfoStatus {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             switch (indexPath.row) {
                 case 0: {
+                    for (UIView *view in [cell.contentView subviews]) {
+                        if ([view isKindOfClass:[UILabel class]]) {
+                            [view removeFromSuperview];
+                        }
+                    }
                     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 100, 21)];
                     lbl.text = @"书籍简介";
                     lbl.textColor = [UIColor darkGrayColor];
                     [cell.contentView addSubview:lbl];
-                    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 28, 280, 110)];
-                    textView.text = self.outputDict[@"brief"];
-                    textView.editable = NO;
-                    textView.scrollEnabled = YES;
-                    [cell.contentView addSubview:textView];
+                    XYAutoLayoutLabel *textLabel = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(20, 28, 280, 110)];
+                    textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+                    textLabel.text = self.outputDict[@"brief"];
+                    [cell.contentView addSubview:textLabel];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
                 case 1: {
+                    for (UIView *view in [cell.contentView subviews]) {
+                        if ([view isKindOfClass:[UILabel class]]) {
+                            [view removeFromSuperview];
+                        }
+                    }
                     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 110, 21)];
                     lbl.text = @"主要作者简介";
                     lbl.textColor = [UIColor darkGrayColor];
                     [cell.contentView addSubview:lbl];
-                    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 28, 280, 110)];
-                    textView.text = self.outputDict[@"authorinfo"];
-                    textView.editable = NO;
-                    textView.scrollEnabled = YES;
-                    [cell.contentView addSubview:textView];
+                    XYAutoLayoutLabel *textLabel = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(20, 28, 280, 110)];
+                    textLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+                    textLabel.text = self.outputDict[@"authorinfo"];
+                    [cell.contentView addSubview:textLabel];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
                 case 2: {
+                    for (UIView *view in [cell.contentView subviews]) {
+                        if ([view isKindOfClass:[UILabel class]]) {
+                            [view removeFromSuperview];
+                        }
+                    }
                     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, 110, 21)];
                     lbl.text = @"其它信息";
                     lbl.textColor = [UIColor darkGrayColor];
@@ -287,6 +301,7 @@ enum BookInfoStatus {
             cell.pubDate.text = rowDict[@"date"];
             cell.upCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"favorCount"] intValue]];
             cell.downCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"againstCount"] intValue]];
+            cell.content.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
             cell.content.text = rowDict[@"content"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -308,7 +323,21 @@ enum BookInfoStatus {
     if (self.status == RECOMMENDS && indexPath.section == 1) {
         return 152.0f;
     } else {
-        return 143.0f;
+        if (self.status == DETAILS && indexPath.section == 1 && indexPath.row < 2) {
+            NSString *key = indexPath.row == 0 ? @"brief" : @"authorinfo";
+            XYAutoLayoutLabel *lbl = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(20, 28, 280, 110)];
+            lbl.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+            lbl.text = self.outputDict[key];
+            return lbl.frame.origin.y + lbl.frame.size.height + 10.0f;
+        } else if (self.status == COMMENTS && indexPath.section == 1) {
+            XYAutoLayoutLabel *lbl = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(20, 44, 280, 20)];
+            lbl.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+            NSDictionary *rowDict = self.listComments[indexPath.row];
+            lbl.text = rowDict[@"content"];
+            return lbl.frame.origin.y + lbl.frame.size.height + 10.0f;
+        } else {
+            return  143.0f;
+        }
     }
 }
 

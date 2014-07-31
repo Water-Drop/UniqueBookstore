@@ -1,20 +1,18 @@
 //
-//  XYPubMsgController.m
+//  XYWebViewController.m
 //  BStoreMobile
 //
-//  Created by Julie on 14-7-21.
-//  Copyright (c) 2014年 SJTU. All rights reserved.
+//  Created by Jiguang on 7/31/14.
+//  Copyright (c) 2014 SJTU. All rights reserved.
 //
 
-#import "XYPubMsgController.h"
+#import "XYWebViewController.h"
 
-@interface XYPubMsgController ()
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
+@interface XYWebViewController ()
 
 @end
 
-@implementation XYPubMsgController
+@implementation XYWebViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,10 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];
-    [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
+    NSLog(@"%@", _url);
+    NSURL *url = [NSURL URLWithString:self.url];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:urlRequest];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,11 +49,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (void)dismissKeyboardByTouchDownBG
-{
-    // NSLog(@"dismissKeyboardByTouchDownBG");
-    [self.textView resignFirstResponder];
-}
 
 @end

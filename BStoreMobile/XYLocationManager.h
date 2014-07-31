@@ -10,9 +10,17 @@
 #import <CoreLocation/CoreLocation.h>
 #import "XYPoint.h"
 
+@protocol XYLocationManagerDelegate
+
+@required
+
+- (void)performPayment;
+
+@end
+
 @interface XYLocationManager : NSObject <CLLocationManagerDelegate>
 
-+ (XYLocationManager *)sharedInstance;
++ (XYLocationManager *)sharedManager;
 
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -24,4 +32,7 @@
 
 @property XYPoint *current;
 
+@property(nonatomic,assign)id delegate;
+
 @end
+

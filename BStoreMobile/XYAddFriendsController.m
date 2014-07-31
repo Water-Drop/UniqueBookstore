@@ -7,10 +7,15 @@
 //
 
 #import "XYAddFriendsController.h"
+#import "XYUtil.h"
+#import "XYFriendsInfoController.h"
 
 @interface XYAddFriendsController ()
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 - (IBAction)dismissKeyboardByReturn:(id)sender;
+- (IBAction)searchUserByName:(id)sender;
+- (IBAction)cancelAction:(id)sender;
+@property (nonatomic,strong) NSDictionary *valueDict;
 
 @end
 
@@ -31,6 +36,8 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];
     [self.view addGestureRecognizer:tap];
+    
+    self.textField.enablesReturnKeyAutomatically = YES;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -125,14 +132,73 @@
 
 - (IBAction)dismissKeyboardByReturn:(id)sender
 {
-    // NSLog(@"dismissKeyboardByReturn");
     [sender resignFirstResponder];
+    [self searchUserByNameFromServer];
+}
+
+- (IBAction)searchUserByName:(id)sender {
+    if (self.textField.text && ![self.textField.text isEqual:@""]) {
+        [self.textField resignFirstResponder];
+        [self searchUserByNameFromServer];
+    }
+}
+
+- (IBAction)cancelAction:(id)sender {
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) searchUserByNameFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"User/UserInfoUsername/" stringByAppendingString:[self.textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *tmp = (NSDictionary *)responseObject;
+        if (tmp && [tmp count] > 0) {
+            if ([tmp[@"userID"] intValue] != [USERID intValue]) {
+                NSString *userID = [NSString stringWithFormat:@"%@",tmp[@"userID"]];
+                NSString *sign = tmp[@"sign"];
+                NSString *address = tmp[@"address"];
+                NSString *username = tmp[@"username"];
+                enum friendsInfoStatus status = ADD;
+                self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status]};
+                [self performSegueWithIdentifier:@"friendsInfo" sender:self];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"该用户不存在" message:@"无法找到该用户，请检查你填写的账号是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+        }
+        NSLog(@"searchUserNameFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"searchUserNameFromServer Error:%@", error);
+    }];
 }
 
 - (void)dismissKeyboardByTouchDownBG
 {
     // NSLog(@"dismissKeyboardByTouchDownBG");
     [self.textField resignFirstResponder];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"friendsInfo"]) {
+        UIViewController *dest = segue.destinationViewController;
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
+    }
 }
 
 @end
