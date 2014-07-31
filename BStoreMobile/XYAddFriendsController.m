@@ -35,6 +35,7 @@
     [super viewDidLoad];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboardByTouchDownBG)];
+    tap.delegate = self;
     [self.view addGestureRecognizer:tap];
     
     self.textField.enablesReturnKeyAutomatically = YES;
@@ -200,5 +201,19 @@
         }
     }
 }
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // 输出点击的view的类名
+    NSLog(@"Click View Name:%@", NSStringFromClass([touch.view class]));
+    
+    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return  YES;
+}
+
 
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XYAddFriendsController : UITableViewController
+@interface XYAddFriendsController : UITableViewController<UIGestureRecognizerDelegate>
 
 @end

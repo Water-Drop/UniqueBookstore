@@ -234,6 +234,14 @@
 		E3EA3767198A2B060066ECCD /* theme_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3764198A2B060066ECCD /* theme_1.png */; };
 		E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3765198A2B060066ECCD /* 后会无期.jpg */; };
 		E3EA376A198A2B300066ECCD /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3769198A2B300066ECCD /* theme.plist */; };
+		E3EA376C198A58CC0066ECCD /* hklibrary.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA376B198A58CC0066ECCD /* hklibrary.jpg */; };
+		E3EA376F198A5D9E0066ECCD /* XYFriendsNearByController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA376E198A5D9E0066ECCD /* XYFriendsNearByController.m */; };
+		E3EA3775198A65440066ECCD /* XYRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3774198A65440066ECCD /* XYRoundView.m */; };
+		E3EA377B198A6E140066ECCD /* headImg_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3776198A6E140066ECCD /* headImg_0.jpg */; };
+		E3EA377C198A6E140066ECCD /* headImg_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3777198A6E140066ECCD /* headImg_1.jpg */; };
+		E3EA377D198A6E140066ECCD /* headImg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3778198A6E140066ECCD /* headImg_2.jpg */; };
+		E3EA377E198A6E140066ECCD /* headImg_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3779198A6E140066ECCD /* headImg_3.jpg */; };
+		E3EA377F198A6E140066ECCD /* headImg_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA377A198A6E140066ECCD /* headImg_4.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -584,6 +592,16 @@
 		E3EA3764198A2B060066ECCD /* theme_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_1.png; sourceTree = "<group>"; };
 		E3EA3765198A2B060066ECCD /* 后会无期.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "后会无期.jpg"; sourceTree = "<group>"; };
 		E3EA3769198A2B300066ECCD /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
+		E3EA376B198A58CC0066ECCD /* hklibrary.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hklibrary.jpg; sourceTree = "<group>"; };
+		E3EA376D198A5D9E0066ECCD /* XYFriendsNearByController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsNearByController.h; sourceTree = "<group>"; };
+		E3EA376E198A5D9E0066ECCD /* XYFriendsNearByController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsNearByController.m; sourceTree = "<group>"; };
+		E3EA3773198A65440066ECCD /* XYRoundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYRoundView.h; sourceTree = "<group>"; };
+		E3EA3774198A65440066ECCD /* XYRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRoundView.m; sourceTree = "<group>"; };
+		E3EA3776198A6E140066ECCD /* headImg_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_0.jpg; sourceTree = "<group>"; };
+		E3EA3777198A6E140066ECCD /* headImg_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_1.jpg; sourceTree = "<group>"; };
+		E3EA3778198A6E140066ECCD /* headImg_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_2.jpg; sourceTree = "<group>"; };
+		E3EA3779198A6E140066ECCD /* headImg_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_3.jpg; sourceTree = "<group>"; };
+		E3EA377A198A6E140066ECCD /* headImg_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_4.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -867,6 +885,8 @@
 				E3EA373D198746350066ECCD /* XYFriendsMsgController.m */,
 				E3EA3747198807170066ECCD /* XYFriendsInfoController.h */,
 				E3EA3748198807170066ECCD /* XYFriendsInfoController.m */,
+				E3EA376D198A5D9E0066ECCD /* XYFriendsNearByController.h */,
+				E3EA376E198A5D9E0066ECCD /* XYFriendsNearByController.m */,
 			);
 			name = Frineds;
 			sourceTree = "<group>";
@@ -883,6 +903,12 @@
 				E3D1A0A71986AADD00DC244B /* star_full.png */,
 				E3D1A0A81986AADD00DC244B /* star_full@2x.png */,
 				E3BF9EDB198503F000855279 /* book.jpg */,
+				E3EA376B198A58CC0066ECCD /* hklibrary.jpg */,
+				E3EA3776198A6E140066ECCD /* headImg_0.jpg */,
+				E3EA3777198A6E140066ECCD /* headImg_1.jpg */,
+				E3EA3778198A6E140066ECCD /* headImg_2.jpg */,
+				E3EA3779198A6E140066ECCD /* headImg_3.jpg */,
+				E3EA377A198A6E140066ECCD /* headImg_4.jpg */,
 				E33A3F921977BFD800BA3797 /* full */,
 				E33A3F101977BB5000BA3797 /* thumb */,
 				E33A3F311977BB5000BA3797 /* 球队图片 */,
@@ -1126,6 +1152,8 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				E3EA3773198A65440066ECCD /* XYRoundView.h */,
+				E3EA3774198A65440066ECCD /* XYRoundView.m */,
 				21F1CBA3198A1C620089C9EA /* XYCameraButtons.h */,
 				21F1CBA6198A1EA10089C9EA /* XYCameraButtons.m */,
 				E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */,
@@ -1349,6 +1377,7 @@
 				E33A3F8B1977BB5000BA3797 /* Slovenia.png in Resources */,
 				211B281E19823CA100052039 /* letter_Q.png in Resources */,
 				E33A3F721977BB5000BA3797 /* Algeria.png in Resources */,
+				E3EA377C198A6E140066ECCD /* headImg_1.jpg in Resources */,
 				E33A3F7C1977BB5000BA3797 /* Germany.png in Resources */,
 				E3EA376A198A2B300066ECCD /* theme.plist in Resources */,
 				E33A3F6A1977BB5000BA3797 /* 30.JPG in Resources */,
@@ -1362,6 +1391,7 @@
 				211B281D19823CA100052039 /* letter_C.png in Resources */,
 				E33A3F671977BB5000BA3797 /* 28.JPG in Resources */,
 				E33A3FC51977BFD800BA3797 /* 26_full.JPG in Resources */,
+				E3EA377B198A6E140066ECCD /* headImg_0.jpg in Resources */,
 				E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */,
 				E30190FD19821A4200D04906 /* XYPaidItemCell.xib in Resources */,
 				21C4EC7A1989E86800CC9D4C /* mbubble@2x.png in Resources */,
@@ -1406,6 +1436,7 @@
 				21C4EC521987EE9000CC9D4C /* talk-50@2x.png in Resources */,
 				E33A3F601977BB5000BA3797 /* 21.JPG in Resources */,
 				E33A3FBA1977BFD800BA3797 /* 16_full.JPG in Resources */,
+				E3EA376C198A58CC0066ECCD /* hklibrary.jpg in Resources */,
 				E33A3F871977BB5000BA3797 /* Paraguay.png in Resources */,
 				E3EA375F198A1F840066ECCD /* XYThemeCollectionCell.xib in Resources */,
 				E33A3F541977BB5000BA3797 /* 10.JPG in Resources */,
@@ -1418,6 +1449,7 @@
 				E33A3F631977BB5000BA3797 /* 24.JPG in Resources */,
 				21C4EC6419892CA300CC9D4C /* speech_bubble@2x.png in Resources */,
 				21C4EC6B1989406100CC9D4C /* bubbleSomeone.png in Resources */,
+				E3EA377F198A6E140066ECCD /* headImg_4.jpg in Resources */,
 				E33A3F711977BB5000BA3797 /* 9.JPG in Resources */,
 				E33A3FB51977BFD800BA3797 /* 11_full.JPG in Resources */,
 				E33A3FC21977BFD800BA3797 /* 23_full.JPG in Resources */,
@@ -1438,6 +1470,7 @@
 				211B281B19823CA100052039 /* FM_about.html in Resources */,
 				E33A3F621977BB5000BA3797 /* 23.JPG in Resources */,
 				E33A3F821977BB5000BA3797 /* Japan.png in Resources */,
+				E3EA377E198A6E140066ECCD /* headImg_3.jpg in Resources */,
 				E33A3F5B1977BB5000BA3797 /* 17.JPG in Resources */,
 				E33A3F6F1977BB5000BA3797 /* 7.JPG in Resources */,
 				E33A3F881977BB5000BA3797 /* Portugal.png in Resources */,
@@ -1475,6 +1508,7 @@
 				E33A3F801977BB5000BA3797 /* Honduras.png in Resources */,
 				211B282319823CA100052039 /* Tarmac.dat in Resources */,
 				21C4EC4A1987EE9000CC9D4C /* bookmark-50@2x.png in Resources */,
+				E3EA377D198A6E140066ECCD /* headImg_2.jpg in Resources */,
 				E33A3F531977BB5000BA3797 /* 1.JPG in Resources */,
 				E35BA3731973630E0055EDF4 /* Images.xcassets in Resources */,
 				E39D05B519758D1B006A8F53 /* XYSaleItemCell.xib in Resources */,
@@ -1506,6 +1540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				211B278A1982052100052039 /* XYCameraSession.mm in Sources */,
+				E3EA3775198A65440066ECCD /* XYRoundView.m in Sources */,
 				E3EA375319892AF10066ECCD /* XYConfirmController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				21C4EC7F198A104800CC9D4C /* XYWebViewController.m in Sources */,
@@ -1516,6 +1551,7 @@
 				E3BF9ECF1984A6B200855279 /* AFURLConnectionOperation.m in Sources */,
 				E3BF9ECE1984A6B200855279 /* AFSecurityPolicy.m in Sources */,
 				E3BF9ED61984A6B200855279 /* UIButton+AFNetworking.m in Sources */,
+				E3EA376F198A5D9E0066ECCD /* XYFriendsNearByController.m in Sources */,
 				E3BF9ED41984A6B200855279 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E3EA3762198A206C0066ECCD /* XYThemeBookCell.m in Sources */,
 				E3BF9EE1198544DF00855279 /* XYCommentViewCell.m in Sources */,
