@@ -321,7 +321,7 @@
             NSLog(@"path:%@",path);
             [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSArray *retArry = (NSArray *)responseObject;
-                if (!retArry) {
+                if (!retArry && retArry.count > 0) {
                     return;
                 }
                 NSNumber *bookId = (NSNumber*)[(NSDictionary*)[retArry objectAtIndex:0] objectForKey:@"bookID"];
