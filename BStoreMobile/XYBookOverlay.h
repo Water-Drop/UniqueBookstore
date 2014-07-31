@@ -17,6 +17,8 @@
     
 @private
     
+    int cmtCount;
+    
     XYCameraButtons *btns;
     UIButton *info;
     

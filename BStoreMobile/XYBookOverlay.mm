@@ -20,6 +20,8 @@
     self = [super init];
     bookId = key;
     
+    cmtCount = 0;
+    
     btns = [[NSBundle mainBundle] loadNibNamed:@"XYCameraButtons" owner:nil options:nil][0];
     
     [btns.infoButton addTarget:self action:@selector(bookInfoAction) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +89,7 @@
 //    buy.hidden = NO;
 //    price.hidden = NO;
     
-    btns.hidden = NO;
+//    btns.hidden = NO;
     
     // original image width and height
     float iw = image.getSize().data[0];
@@ -110,8 +112,8 @@
     float by = ( matrix.data[1] * iw / 2 - matrix.data[5] * ih / 2 + matrix.data[13] ) / bw;
     
     // center point position
-    float cx = matrix.data[12]/matrix.data[15];
-    float cy = matrix.data[13]/matrix.data[15];
+//    float cx = matrix.data[12]/matrix.data[15];
+//    float cy = matrix.data[13]/matrix.data[15];
     
     // true topleft point position
     float txt = vw/2*(tx+1);
@@ -122,99 +124,89 @@
     float byt = vh-vh/2*(by+1);
     
     if (bxt-txt > 100 && byt-tyt > 194) {
-        image1.hidden = NO;
-        image2.hidden = NO;
-        image3.hidden = NO;
-        
-        avatar1.hidden = NO;
-        avatar2.hidden = NO;
-        avatar3.hidden = NO;
-        
-        comment1.hidden = NO;
-        comment2.hidden = NO;
-        comment3.hidden = NO;
+        if (cmtCount > 0) {
+            image1.hidden = NO;
+            avatar1.hidden = NO;
+            comment1.hidden = NO;
+        }
+        if (cmtCount > 1) {
+            image2.hidden = NO;
+            avatar2.hidden = NO;
+            comment2.hidden = NO;
+        }
+        if (cmtCount > 2) {
+            image3.hidden = NO;
+            avatar3.hidden = NO;
+            comment3.hidden = NO;
+        }
     }
     
-    CGRect infoBound = CGRectMake(bxt-34, byt-34, 34, 34);
+    if (bxt - txt > 80) {
+        btns.hidden = NO;
+        CGRect btnsBound = CGRectMake(bxt-92, byt-70, 92, 70);
+        btns.frame = btnsBound;
+        [view addSubview:btns];
+        [view bringSubviewToFront:btns];
+    } else {
+        info.hidden = NO;
+        CGRect infoBound = CGRectMake(bxt-34, byt-34, 34, 34);
+        info.frame = infoBound;
+        [view addSubview:info];
+        [view bringSubviewToFront:info];
+    }
     
-    CGRect btnsBound = CGRectMake(bxt-92, byt-70, 92, 70);
+    if (cmtCount > 0) {
+        //
+        [comment1 sizeToFit];
+        float cmtw1 = bxt-txt-36-18 > comment1.frame.size.width ? comment1.frame.size.width : bxt-txt-36-18;
+        CGRect lblBound1 = CGRectMake(txt+36+12, tyt, cmtw1, 40);
+        CGRect cmtBound1 = CGRectMake(txt+36, tyt, cmtw1+18, 40);
+        CGRect avaBound1 = CGRectMake(txt+4, tyt+4, 32, 32);
+        image1.frame = cmtBound1;
+        avatar1.frame = avaBound1;
+        comment1.frame = lblBound1;
+        [view addSubview:image1];
+        [view bringSubviewToFront:image1];
+        [view addSubview:avatar1];
+        [view bringSubviewToFront:avatar1];
+        [view addSubview:comment1];
+        [view bringSubviewToFront:comment1];
+    }
+    if (cmtCount > 1) {
+        //
+        [comment2 sizeToFit];
+        float cmtw2 = bxt-txt-36-18 > comment2.frame.size.width ? comment2.frame.size.width : bxt-txt-36-18;
+        CGRect lblBound2 = CGRectMake(txt+36+12, tyt+42, cmtw2, 40);
+        CGRect cmtBound2 = CGRectMake(txt+36, tyt+42, cmtw2+18, 40);
+        CGRect avaBound2 = CGRectMake(txt+4, tyt+46, 32, 32);
+        [view addSubview:image2];
+        image2.frame = cmtBound2;
+        avatar2.frame = avaBound2;
+        comment2.frame = lblBound2;
+        [view bringSubviewToFront:image2];
+        [view addSubview:avatar2];
+        [view bringSubviewToFront:avatar2];
+        [view addSubview:comment2];
+        [view bringSubviewToFront:comment2];
+    }
+    if (cmtCount > 2) {
+        //
+        [comment3 sizeToFit];
+        float cmtw3 = bxt-txt-36-18 > comment3.frame.size.width ? comment3.frame.size.width : bxt-txt-36-18;
+        CGRect lblBound3 = CGRectMake(txt+36+12, tyt+84, cmtw3, 40);
+        CGRect cmtBound3 = CGRectMake(txt+36, tyt+84, cmtw3+18, 40);
+        CGRect avaBound3 = CGRectMake(txt+4, tyt+88, 32, 32);
+        image3.frame = cmtBound3;
+        avatar3.frame = avaBound3;
+        comment3.frame = lblBound3;
+        [view addSubview:image3];
+        [view bringSubviewToFront:image3];
+        [view addSubview:avatar3];
+        [view bringSubviewToFront:avatar3];
+        [view addSubview:comment3];
+        [view bringSubviewToFront:comment3];
+    }
     
-    CGRect commentBound = CGRectMake(txt, tyt, bxt-txt, byt-tyt-40);
-    
-    //
-    [comment1 sizeToFit];
-    float cmtw1 = bxt-txt-36-18 > comment1.frame.size.width ? comment1.frame.size.width : bxt-txt-36-18;
-    
-    CGRect lblBound1 = CGRectMake(txt+36+12, tyt, cmtw1, 40);
-    
-    CGRect cmtBound1 = CGRectMake(txt+36, tyt, cmtw1+18, 40);
-    
-    //
-    [comment2 sizeToFit];
-    float cmtw2 = bxt-txt-36-18 > comment2.frame.size.width ? comment2.frame.size.width : bxt-txt-36-18;
-    
-    CGRect lblBound2 = CGRectMake(txt+36+12, tyt+42, cmtw2, 40);
-    
-    CGRect cmtBound2 = CGRectMake(txt+36, tyt+42, cmtw2+18, 40);
-    
-    //
-    [comment3 sizeToFit];
-    float cmtw3 = bxt-txt-36-18 > comment3.frame.size.width ? comment3.frame.size.width : bxt-txt-36-18;
-    
-    CGRect lblBound3 = CGRectMake(txt+36+12, tyt+84, cmtw3, 40);
-    
-    CGRect cmtBound3 = CGRectMake(txt+36, tyt+84, cmtw3+18, 40);
-    
-    CGRect avaBound1 = CGRectMake(txt+4, tyt+4, 32, 32);
-    
-    CGRect avaBound2 = CGRectMake(txt+4, tyt+46, 32, 32);
-    
-    CGRect avaBound3 = CGRectMake(txt+4, tyt+88, 32, 32);
-    
-    info.frame = infoBound;
-    
-    btns.frame = btnsBound;
-    
-    comments.frame = commentBound;
-    
-    image1.frame = cmtBound1;
-    image2.frame = cmtBound2;
-    image3.frame = cmtBound3;
-    
-    avatar1.frame = avaBound1;
-    avatar2.frame = avaBound2;
-    avatar3.frame = avaBound3;
-    
-    comment1.frame = lblBound1;
-    comment2.frame = lblBound2;
-    comment3.frame = lblBound3;
-    
-    [view addSubview:image1];
-    [view bringSubviewToFront:image1];
-    [view addSubview:image2];
-    [view bringSubviewToFront:image2];
-    [view addSubview:image3];
-    [view bringSubviewToFront:image3];
-    
-    [view addSubview:avatar1];
-    [view bringSubviewToFront:avatar1];
-    [view addSubview:avatar2];
-    [view bringSubviewToFront:avatar2];
-    [view addSubview:avatar3];
-    [view bringSubviewToFront:avatar3];
-    
-    [view addSubview:comment1];
-    [view bringSubviewToFront:comment1];
-    [view addSubview:comment2];
-    [view bringSubviewToFront:comment2];
-    [view addSubview:comment3];
-    [view bringSubviewToFront:comment3];
-    
-    [view addSubview:info];
-    [view bringSubviewToFront:info];
-    
-    [view addSubview:btns];
-    [view bringSubviewToFront:btns];
 }
 
 - (void)styleBtn:(UIButton*)btn
@@ -226,6 +218,7 @@
     btn.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
     btn.layer.masksToBounds = YES;
     btn.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    btn.layer.opacity = 0.65f;
 }
 
 - (void)styleAvatar:(UIImageView*)avatar
@@ -311,9 +304,17 @@
         NSDictionary *tmp = (NSDictionary *)responseObject;
         if (tmp) {
             listComments = tmp[@"comments"];
-            [comment1 setText:listComments[0][@"content"]];
-            [comment2 setText:listComments[1][@"content"]];
-            [comment3 setText:listComments[2][@"content"]];
+            cmtCount = listComments.count;
+            
+            if (cmtCount > 0) {
+                [comment1 setText:listComments[0][@"content"]];
+            }
+            if (cmtCount > 1) {
+                [comment2 setText:listComments[1][@"content"]];
+            }
+            if (cmtCount > 2) {
+                [comment3 setText:listComments[2][@"content"]];
+            }
         }
         NSLog(@"loadBookCommentsFromServer Success");
     
