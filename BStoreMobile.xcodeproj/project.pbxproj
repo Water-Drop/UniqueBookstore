@@ -242,6 +242,7 @@
 		E3EA377D198A6E140066ECCD /* headImg_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3778198A6E140066ECCD /* headImg_2.jpg */; };
 		E3EA377E198A6E140066ECCD /* headImg_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3779198A6E140066ECCD /* headImg_3.jpg */; };
 		E3EA377F198A6E140066ECCD /* headImg_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA377A198A6E140066ECCD /* headImg_4.jpg */; };
+		E3EA3781198A6FA00066ECCD /* hklib_06th.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3780198A6FA00066ECCD /* hklib_06th.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -602,6 +603,7 @@
 		E3EA3778198A6E140066ECCD /* headImg_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_2.jpg; sourceTree = "<group>"; };
 		E3EA3779198A6E140066ECCD /* headImg_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_3.jpg; sourceTree = "<group>"; };
 		E3EA377A198A6E140066ECCD /* headImg_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = headImg_4.jpg; sourceTree = "<group>"; };
+		E3EA3780198A6FA00066ECCD /* hklib_06th.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hklib_06th.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -897,6 +899,7 @@
 				21C4EBEF1987D80F00CC9D4C /* icon */,
 				E3EA3763198A2B060066ECCD /* theme_0.png */,
 				E3EA3764198A2B060066ECCD /* theme_1.png */,
+				E3EA3780198A6FA00066ECCD /* hklib_06th.jpg */,
 				E3EA3765198A2B060066ECCD /* 后会无期.jpg */,
 				E3D1A0A51986AADD00DC244B /* star_empty.png */,
 				E3D1A0A61986AADD00DC244B /* star_empty@2x.png */,
@@ -1386,6 +1389,7 @@
 				E33A3EF019762A0E00BA3797 /* cart.plist in Resources */,
 				E33A3F5F1977BB5000BA3797 /* 20.JPG in Resources */,
 				21C4EBE91987CAC200CC9D4C /* Ister.xml in Resources */,
+				E3EA3781198A6FA00066ECCD /* hklib_06th.jpg in Resources */,
 				E33A3F7A1977BB5000BA3797 /* England.png in Resources */,
 				E33A3F571977BB5000BA3797 /* 13.JPG in Resources */,
 				211B281D19823CA100052039 /* letter_C.png in Resources */,
