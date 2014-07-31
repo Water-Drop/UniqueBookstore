@@ -1099,8 +1099,11 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				21C4EC56198907C000CC9D4C /* XYCameraButtons.h */,
 				21C4EC57198907C000CC9D4C /* XYCameraButtons.m */,
+=======
+>>>>>>> FETCH_HEAD
 				E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */,
 				E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */,
 				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
