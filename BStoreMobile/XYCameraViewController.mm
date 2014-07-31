@@ -292,7 +292,7 @@
             }
             lastURL = [metadataObj stringValue];
             
-            [self performSelectorInBackground:@selector(callWebView:) withObject:lastURL];
+            [self performSelectorOnMainThread:@selector(callWebView:) withObject:lastURL waitUntilDone:NO];
             
         // the barcode is ISBN
         } else if ([[metadataObj type] isEqualToString:AVMetadataObjectTypeEAN13Code]) {

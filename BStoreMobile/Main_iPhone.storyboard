@@ -914,13 +914,23 @@
                     <view key="view" contentMode="scaleToFill" id="UUP-iI-I1q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYa-Pa-Ogy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="611-ZK-NO1"/>
+                    <connections>
+                        <outlet property="webView" destination="qYa-Pa-Ogy" id="ZgG-Vm-sqU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTd-pv-7Jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2966" y="2926"/>
+            <point key="canvasLocation" x="2985" y="2926"/>
         </scene>
         <!--Navigation Controller - 扫一扫-->
         <scene sceneID="9LW-mN-Vei">

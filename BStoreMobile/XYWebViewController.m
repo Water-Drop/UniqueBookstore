@@ -28,15 +28,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"%@", _url);
-    NSURL *url = [NSURL URLWithString:self.url];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:urlRequest];
+    [self performSelectorOnMainThread:@selector(loadWebPage) withObject:nil waitUntilDone:NO];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadWebPage
+{
+    NSURL *url = [NSURL URLWithString:self.url];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:urlRequest];
 }
 
 /*
@@ -50,4 +55,25 @@
 }
 */
 
+#pragma delegate
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.navigationItem setTitle:[webView stringByEvaluatingJavaScriptFromString:@"document.title"]];
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    
+}
 @end
