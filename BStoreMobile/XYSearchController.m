@@ -8,6 +8,8 @@
 
 #import "XYSearchController.h"
 #import "XYSaleItemCell.h"
+#import "XYUtil.h"
+#import "UIKit+AFNetworking.h"
 
 @interface XYSearchController()
 
@@ -89,7 +91,7 @@
     NSLog(@"searchButtonClicked");
     _searchBar.showsCancelButton = NO;
     [_searchBar resignFirstResponder];
-    [self doSearch:_searchBar.text];
+    [self doSearch];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -122,18 +124,16 @@
 {
     XYSaleItemCell *cell = (XYSaleItemCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (cell) {
-        self.valueDict = @{@"titleStr": cell.title.text, @"detailStr": cell.detail.text};
+        self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%d", cell.tag]};
         [self performSegueWithIdentifier:@"BookDetail" sender:self];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath");
-    
     // 从xib中创建，不在sb中的tableview里添加prototype(否则关联的outlet是nil，没有初始化，main interface是sb)
-    static NSString *CellIdentifier = @"CellIdentifier";
-    XYSaleItemCell *cell = [_tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *cellIdentifier = @"SaleItemCellIdentifier";
+    XYSaleItemCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         // XYSaleItemCell.xib as NibName
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYSaleItemCell" owner:nil options:nil];
@@ -143,25 +143,39 @@
     
     // Configure the cell...
     NSUInteger row = [indexPath row];
-    NSDictionary *rowDict = [_listItem objectAtIndex:row];
-    cell.title.text = [rowDict objectForKey:@"name"];
+    NSDictionary *rowDict = [self.listItem objectAtIndex:row];
+    cell.title.text = rowDict[@"title"];
     
-    NSString *imagePath = [rowDict objectForKey:@"image"];
-    imagePath = [imagePath stringByAppendingString:@".png"];
-    cell.coverImage.image = [UIImage imageNamed:imagePath];
-    
-    NSString *detail = [rowDict objectForKey:@"detail"];
+    NSString *detail = rowDict[@"author"];
     cell.detail.text = detail;
     
-    NSString *price = @"￥";
-    price = [price stringByAppendingString:[rowDict objectForKey:@"price"]];
-    [cell.buyButton setTitle:price forState: UIControlStateNormal];
+    int priceAtCent = [rowDict[@"price"] intValue];
+    NSString *priceStr = [XYUtil printMoneyAtCent:priceAtCent];
+    [cell.buyButton setTitle:priceStr forState:UIControlStateNormal];
+    
+    NSNumber *num = rowDict[@"bookID"];
+    cell.title.tag = [num integerValue];
+    NSString *imagePath = rowDict[@"coverimg"];
+    __weak XYSaleItemCell *weakCell = cell;
+    [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakCell.coverImage.image = image;
+        [weakCell setNeedsLayout];
+        [weakCell setNeedsDisplay];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"Get Image from Server Error.");
+    }];
+    
+    cell.tag = [num integerValue];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    //Add action method
-    [cell.navButton addTarget:self action:@selector(navBook:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.navButton setTag:indexPath.row];
+    [cell.buyButton addTarget:self action:@selector(buyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cell.buyButton.tag = [num intValue];
+    
+    [cell.navButton addTarget:self action:@selector(navButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cell.navButton.tag = [num intValue];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -175,39 +189,73 @@
 
 #pragma control display content
 
-- (void)doSearch:(NSString*)searchText {
-    
-    //TODO: sample
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
-    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
-    
-    [_tableView reloadData];
-    
-    NSLog(@"XYSearchController loadPlistFile of size %lu",(unsigned long)[_listItem count]);
-}
-
-#pragma navigation
-
-- (void)navBook:(id)sender
+- (void)doSearch
 {
-//    UIButton *btn = (UIButton*) sender;
-//    //TODO: use btn.tag to access json
-//    NSLog(@"%lu", (unsigned long)btn.tag);
-//    
-//    NSBundle *bundle = [NSBundle mainBundle];
-//    NSString *plistPath = [bundle pathForResource:@"cart" ofType:@"plist"];
-//    _listItem = [[NSArray alloc] initWithContentsOfFile:plistPath];
-//    
-//    NSDictionary *rowDict = [_listItem objectAtIndex:btn.tag];
-//    
-//    _valueDict = [NSDictionary dictionaryWithObjectsAndKeys:
-//                      @"titleStr",[rowDict objectForKey:@"name"],
-//                      @"detailStr",[rowDict objectForKey:@"detail"],
-//                      nil];
-//    [self performSegueWithIdentifier:@"SearchBookDetail" sender:self];
-    
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"SearchBooks/All/" stringByAppendingString:[_searchBar.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tmp = (NSArray *)responseObject;
+        if (tmp) {
+            self.listItem = [[NSMutableArray alloc]initWithArray:tmp];
+        }
+        NSLog(@"doSearch Success");
+        [self.tableView reloadData];
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"doSearch Error:%@", error);
+    }];
 }
+
+
+#pragma button click action
+
+- (IBAction)buyButtonClicked:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (tag > 0) {
+        NSLog(@"Add bookID #%d To Cart", tag);
+        [self addOneItemToCart:tag];
+    }
+}
+
+- (IBAction)navButtonClicked:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (tag > 0) {
+        NSLog(@"Nav bookID #%d ", tag);
+    }
+}
+
+- (void) addOneItemToCart:(NSInteger)bookID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/AddCart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        NSLog(@"addOneItemToCart Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"addOneItemToCart Error:%@", error);
+    }];
+}
+
 
 #pragma mark - Navigation
 
@@ -216,14 +264,13 @@
 {
     if ([segue.identifier isEqualToString:@"BookDetail"]) {
         UIViewController *dest = segue.destinationViewController;
-        if (_valueDict) {
-            for (NSString *key in _valueDict) {
-                NSLog(@"%@, %@", key, _valueDict[key]);
-                [dest setValue:_valueDict[key] forKey:key];
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
             }
         }
     }
-
 }
 
 

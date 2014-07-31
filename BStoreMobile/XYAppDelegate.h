@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYLocationManager.h"
 
-@interface XYAppDelegate : UIResponder <UIApplicationDelegate>
+@interface XYAppDelegate : UIResponder <UIApplicationDelegate, XYLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

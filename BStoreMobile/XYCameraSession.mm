@@ -1,4 +1,4 @@
-//
+ //
 //  XYCameraSession.m
 //  BStoreMobile
 //
@@ -143,6 +143,7 @@ namespace  {
             [self.delegate onInitARDone:[self NSErrorWithCode:E_INITIALIZING_QCAR]];
         }
     }
+    self.running = YES;
 }
 
 // Resume QCAR
@@ -481,6 +482,8 @@ namespace  {
     // Pause and deinitialise QCAR
     QCAR::onPause();
     QCAR::deinit();
+    
+    self.running = NO;
     
     return YES;
 }

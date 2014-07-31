@@ -616,11 +616,11 @@
             </objects>
             <point key="canvasLocation" x="4576" y="-7"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - 我的书籍-->
         <scene sceneID="ZCO-pR-gEx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d7O-7p-f1q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="xD9-dR-BEV"/>
+                    <tabBarItem key="tabBarItem" title="我的书籍" image="courses-50.png" id="xD9-dR-BEV"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Oc-It-NN4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -705,7 +705,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="精品推荐" id="amF-2W-KS2"/>
+                    <navigationItem key="navigationItem" title="精品推荐" id="amF-2W-KS2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="NSY-KF-P61">
+                            <connections>
+                                <segue destination="kqf-05-aJc" kind="push" id="mhs-Bu-LLD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="OyO-3q-kNV" id="oa9-3f-WwC"/>
                         <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="tFE-eq-5b4"/>
@@ -715,11 +721,11 @@
             </objects>
             <point key="canvasLocation" x="1898" y="1424"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - 精品推荐-->
         <scene sceneID="p6O-9y-m6I">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5N5-Gn-IO4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="QJf-uJ-5dl"/>
+                    <tabBarItem key="tabBarItem" title="精品推荐" image="star-50.png" id="QJf-uJ-5dl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Z44-Hi-ZEH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -734,11 +740,11 @@
             </objects>
             <point key="canvasLocation" x="1372" y="1424"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - 好友圈-->
         <scene sceneID="bk4-dY-7FP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2kZ-2A-dGN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="A5G-Mt-pTp"/>
+                    <tabBarItem key="tabBarItem" title="好友圈" image="talk-50.png" id="A5G-Mt-pTp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5RO-vu-Njo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -862,13 +868,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="搜书" id="fy1-Yd-d07">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="0fC-tc-glg">
-                            <connections>
-                                <segue destination="bjH-vI-Wtw" kind="push" id="Sin-yh-wXE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="搜书" id="fy1-Yd-d07"/>
                     <connections>
                         <outlet property="searchBar" destination="Fvu-dn-JYL" id="9lv-Na-sCu"/>
                         <outlet property="tableView" destination="Eb7-WT-cWj" id="95q-aw-n8b"/>
@@ -877,7 +877,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BCw-2J-IWx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1898" y="2146"/>
+            <point key="canvasLocation" x="1898" y="2202"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="LOf-Zl-Ieq">
@@ -925,33 +925,63 @@
                         <outlet property="lblStatus" destination="V99-8C-jfU" id="pH5-yL-XvE"/>
                         <outlet property="viewPreview" destination="peJ-nI-nhS" id="dGA-3q-ctw"/>
                         <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="OTg-Gh-zCa"/>
+                        <segue destination="hLO-lp-7QW" kind="push" identifier="WebView" id="0Eu-qR-Q4r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7S-Ei-DQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="2450"/>
+            <point key="canvasLocation" x="1898" y="2926"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Web View Controller-->
+        <scene sceneID="EJQ-YL-Zky">
+            <objects>
+                <viewController id="hLO-lp-7QW" customClass="XYWebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cIj-dj-jOa"/>
+                        <viewControllerLayoutGuide type="bottom" id="dMD-Md-GYD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UUP-iI-I1q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYa-Pa-Ogy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="611-ZK-NO1"/>
+                    <connections>
+                        <outlet property="webView" destination="qYa-Pa-Ogy" id="ZgG-Vm-sqU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uTd-pv-7Jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2985" y="2926"/>
+        </scene>
+        <!--Navigation Controller - 扫一扫-->
         <scene sceneID="9LW-mN-Vei">
             <objects>
                 <navigationController definesPresentationContext="YES" id="uDC-Pi-zNw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="lyz-o6-E6u"/>
+                    <tabBarItem key="tabBarItem" title="扫一扫" image="camera-50.png" id="lyz-o6-E6u"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BpW-20-c2c">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="kqf-05-aJc" kind="relationship" relationship="rootViewController" id="nYr-9R-89r"/>
+                        <segue destination="bjH-vI-Wtw" kind="relationship" relationship="rootViewController" id="CJ3-En-sNg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Qa-L5-iqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1380" y="2146"/>
+            <point key="canvasLocation" x="1372" y="2926"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - 个人中心-->
         <scene sceneID="Ooq-Xx-Sa7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nny-Oa-wLs" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="ADg-OV-v0I"/>
+                    <tabBarItem key="tabBarItem" title="个人中心" image="exterior-50.png" id="ADg-OV-v0I"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M5L-bZ-084">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1091,6 +1121,11 @@
     <resources>
         <image name="2.JPG" width="181" height="136"/>
         <image name="5.JPG" width="181" height="136"/>
+        <image name="camera-50.png" width="25" height="25"/>
+        <image name="courses-50.png" width="25" height="25"/>
+        <image name="exterior-50.png" width="25" height="25"/>
+        <image name="star-50.png" width="25" height="25"/>
+        <image name="talk-50.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

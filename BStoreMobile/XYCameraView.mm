@@ -147,7 +147,7 @@ namespace  {
         
         XYCameraUtil::translatePoseMatrix(0.0f, 0.0f, kObjectScaleNormal, &modelViewMatrix.data[0]);
         
-        XYCameraUtil::scalePoseMatrix(kObjectScaleNormal, kObjectScaleNormal, kObjectScaleNormal, &modelViewMatrix.data[0]);
+        XYCameraUtil::scalePoseMatrix(1.0f, 1.0f, 1.0f, &modelViewMatrix.data[0]);
         
         XYCameraUtil::multiplyMatrix(&vapp.projectionMatrix.data[0], &modelViewMatrix.data[0], &modelViewProjection.data[0]);
         
@@ -156,12 +156,12 @@ namespace  {
         // Generate Book Overlay
         NSString *name = [NSString stringWithUTF8String:trackable.getName()];
         
-        NSLog(@"%@", name);
+//        NSLog(@"%@", name);
         
         XYBookOverlay *overlay = [overlays objectForKey:name];
         
         if (overlay == nil) {
-            overlay = [[XYBookOverlay alloc] initWithName:name];
+            overlay = [[XYBookOverlay alloc] initWithId:name];
             overlay.controller = controller;
             [overlays setObject:overlay forKey:name];
         }

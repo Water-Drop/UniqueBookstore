@@ -7,76 +7,323 @@
 //
 
 #import "XYBookOverlay.h"
+#import "UIKit+AFNetworking.h"
+#import "XYUtil.h"
+#import "UIERealTimeBlurView.h"
 
 @implementation XYBookOverlay
 
-@synthesize name;
 @synthesize controller;
 
-- (id)initWithName:(NSString*)key
+- (id)initWithId:(NSString*)key
 {
     self = [super init];
+    bookId = key;
     
-    name = key;
+    btns = [[NSBundle mainBundle] loadNibNamed:@"XYCameraButtons" owner:nil options:nil][0];
+    
+    [btns.infoButton addTarget:self action:@selector(bookInfoAction) forControlEvents:UIControlEventTouchUpInside];
+    [btns.cartButton addTarget:self action:@selector(bookCartAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    info = [[UIButton alloc] init];
+    [info addTarget:self action:@selector(bookInfoAction) forControlEvents:UIControlEventTouchUpInside];
+    [self styleBtn:info];
+    
+    [info setImage:[UIImage imageNamed:@"bookmark-50.png"] forState:UIControlStateNormal];
+    
+    comments = [[UILabel alloc] init];
+    comment1 = [[UILabel alloc] init];
+    comment2 = [[UILabel alloc] init];
+    comment3 = [[UILabel alloc] init];
+    
+    [self styleComment:comment1];
+    [self styleComment:comment2];
+    [self styleComment:comment3];
+    
+    UIImage *bubble = [[UIImage imageNamed:@"mbubble2.png"]
+                       stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+    image1 = [[UIImageView alloc] initWithImage:bubble];
+    image2 = [[UIImageView alloc] initWithImage:bubble];
+    image3 = [[UIImageView alloc] initWithImage:bubble];
+    
+    UIImage *avatar = [UIImage imageNamed:@"talk-50.png"];
+    
+    avatar1 = [[UIImageView alloc] initWithImage:avatar];
+    avatar2 = [[UIImageView alloc] initWithImage:avatar];
+    avatar3 = [[UIImageView alloc] initWithImage:avatar];
+    
+    [self styleAvatar:avatar1];
+    [self styleAvatar:avatar2];
+    [self styleAvatar:avatar3];
+    
+    
+    [self loadBookInfoFromServer];
+    [self loadBookCommentsFromServer];
     
     return self;
 }
 
 - (void)hide
 {
-    if (detail != nil) {
-        detail.hidden = YES;
-    }
+    info.hidden = YES;
+    btns.hidden = YES;
     
-    if (navigate != nil) {
-        navigate.hidden = YES;
-    }
+    image1.hidden = YES;
+    image2.hidden = YES;
+    image3.hidden = YES;
     
-    if (buy != nil) {
-        buy.hidden = YES;
-    }
+    avatar1.hidden = YES;
+    avatar2.hidden = YES;
+    avatar3.hidden = YES;
+    
+    comment1.hidden = YES;
+    comment2.hidden = YES;
+    comment3.hidden = YES;
 }
 
 - (void)refresh:(UIView*)view mvp:(QCAR::Matrix44F)matrix image:(const QCAR::ImageTarget&)image
 {
-
-    if (detail == nil) {
-        detail = [[UIButton alloc] init];
-        [detail addTarget:self action:@selector(detailAction) forControlEvents:UIControlEventTouchUpInside];
+//    info.hidden = NO;
+//    buy.hidden = NO;
+//    price.hidden = NO;
+    
+    btns.hidden = NO;
+    
+    // original image width and height
+    float iw = image.getSize().data[0];
+    float ih = image.getSize().data[1];
+    
+//    NSLog(@"Trackable size: %f %f", iw, ih);
+    
+    // viewport width and height
+    float vw = [view bounds].size.width;
+    float vh = [view bounds].size.height;
+    
+    // topleft point position
+    float tw = - matrix.data[3] * iw / 2 + matrix.data[7] * ih / 2 + matrix.data[15];
+    float tx = ( - matrix.data[0] * iw / 2 + matrix.data[4] * ih / 2 + matrix.data[12] ) / tw;
+    float ty = ( - matrix.data[1] * iw / 2 + matrix.data[5] * ih / 2 + matrix.data[13] ) / tw;
+    
+    // bottomright point position
+    float bw = matrix.data[3] * iw / 2 - matrix.data[7] * ih / 2 + matrix.data[15];
+    float bx = ( matrix.data[0] * iw / 2 - matrix.data[4] * ih / 2 + matrix.data[12] ) / bw;
+    float by = ( matrix.data[1] * iw / 2 - matrix.data[5] * ih / 2 + matrix.data[13] ) / bw;
+    
+    // center point position
+    float cx = matrix.data[12]/matrix.data[15];
+    float cy = matrix.data[13]/matrix.data[15];
+    
+    // true topleft point position
+    float txt = vw/2*(tx+1);
+    float tyt = vh-vh/2*(ty+1);
+    
+    // true bottomright point position
+    float bxt = vw/2*(bx+1);
+    float byt = vh-vh/2*(by+1);
+    
+    if (bxt-txt > 100 && byt-tyt > 194) {
+        image1.hidden = NO;
+        image2.hidden = NO;
+        image3.hidden = NO;
+        
+        avatar1.hidden = NO;
+        avatar2.hidden = NO;
+        avatar3.hidden = NO;
+        
+        comment1.hidden = NO;
+        comment2.hidden = NO;
+        comment3.hidden = NO;
     }
     
-    detail.hidden = NO;
+    CGRect infoBound = CGRectMake(bxt-34, byt-34, 34, 34);
     
-    float x = matrix.data[12]/matrix.data[15];
+    CGRect btnsBound = CGRectMake(bxt-92, byt-70, 92, 70);
     
-    float y = matrix.data[13]/matrix.data[15];
+    CGRect commentBound = CGRectMake(txt, tyt, bxt-txt, byt-tyt-40);
     
-    float w = [view bounds].size.width;
+    //
+    [comment1 sizeToFit];
+    float cmtw1 = bxt-txt-36-18 > comment1.frame.size.width ? comment1.frame.size.width : bxt-txt-36-18;
     
-    float h = [view bounds].size.height;
+    CGRect lblBound1 = CGRectMake(txt+36+12, tyt, cmtw1, 40);
     
-    CGRect bound = CGRectMake(w/2*(x+1)-34.5, h-h/2*(y+1)-14.5, 69, 29);
+    CGRect cmtBound1 = CGRectMake(txt+36, tyt, cmtw1+18, 40);
     
-    detail.frame = bound;
+    //
+    [comment2 sizeToFit];
+    float cmtw2 = bxt-txt-36-18 > comment2.frame.size.width ? comment2.frame.size.width : bxt-txt-36-18;
     
-    [detail setTitle:name forState:UIControlStateNormal];
-    [detail setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-    detail.layer.borderWidth = 1.0f;
-    detail.layer.cornerRadius = 5.0f;
-    detail.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
-    detail.layer.masksToBounds = YES;
-    detail.layer.backgroundColor = [UIColor whiteColor].CGColor;
-    detail.layer.opacity = 0.75f;
+    CGRect lblBound2 = CGRectMake(txt+36+12, tyt+42, cmtw2, 40);
     
-    [view addSubview:detail];
-    [view bringSubviewToFront:detail];
-
+    CGRect cmtBound2 = CGRectMake(txt+36, tyt+42, cmtw2+18, 40);
+    
+    //
+    [comment3 sizeToFit];
+    float cmtw3 = bxt-txt-36-18 > comment3.frame.size.width ? comment3.frame.size.width : bxt-txt-36-18;
+    
+    CGRect lblBound3 = CGRectMake(txt+36+12, tyt+84, cmtw3, 40);
+    
+    CGRect cmtBound3 = CGRectMake(txt+36, tyt+84, cmtw3+18, 40);
+    
+    CGRect avaBound1 = CGRectMake(txt+4, tyt+4, 32, 32);
+    
+    CGRect avaBound2 = CGRectMake(txt+4, tyt+46, 32, 32);
+    
+    CGRect avaBound3 = CGRectMake(txt+4, tyt+88, 32, 32);
+    
+    info.frame = infoBound;
+    
+    btns.frame = btnsBound;
+    
+    comments.frame = commentBound;
+    
+    image1.frame = cmtBound1;
+    image2.frame = cmtBound2;
+    image3.frame = cmtBound3;
+    
+    avatar1.frame = avaBound1;
+    avatar2.frame = avaBound2;
+    avatar3.frame = avaBound3;
+    
+    comment1.frame = lblBound1;
+    comment2.frame = lblBound2;
+    comment3.frame = lblBound3;
+    
+    [view addSubview:image1];
+    [view bringSubviewToFront:image1];
+    [view addSubview:image2];
+    [view bringSubviewToFront:image2];
+    [view addSubview:image3];
+    [view bringSubviewToFront:image3];
+    
+    [view addSubview:avatar1];
+    [view bringSubviewToFront:avatar1];
+    [view addSubview:avatar2];
+    [view bringSubviewToFront:avatar2];
+    [view addSubview:avatar3];
+    [view bringSubviewToFront:avatar3];
+    
+    [view addSubview:comment1];
+    [view bringSubviewToFront:comment1];
+    [view addSubview:comment2];
+    [view bringSubviewToFront:comment2];
+    [view addSubview:comment3];
+    [view bringSubviewToFront:comment3];
+    
+    [view addSubview:info];
+    [view bringSubviewToFront:info];
+    
+    [view addSubview:btns];
+    [view bringSubviewToFront:btns];
 }
 
-- (void)detailAction
+- (void)styleBtn:(UIButton*)btn
 {
-    NSDictionary *dic = @{@"titleStr": @"A1-南非", @"detailStr": @"南非，南非"};
+    [btn setImageEdgeInsets:UIEdgeInsetsMake(4.0f, 4.0f, 4.0f, 4.0f)];
+    [btn setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    btn.layer.borderWidth = 1.0f;
+    btn.layer.cornerRadius = 5.0f;
+    btn.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
+    btn.layer.masksToBounds = YES;
+    btn.layer.backgroundColor = [UIColor whiteColor].CGColor;
+}
+
+- (void)styleAvatar:(UIImageView*)avatar
+{
+    [avatar.layer setMasksToBounds:YES];
+    [avatar.layer setCornerRadius:16.0f];
+    [avatar.layer setOpacity:0.65f];
+    [avatar.layer setBackgroundColor:[UIColor whiteColor].CGColor];
+}
+
+- (void)styleComment:(UILabel*)comment
+{
+    comment.font = [UIFont systemFontOfSize:11];
+    [comment setNumberOfLines:1];
+}
+
+- (void)bookInfoAction
+{
+    NSDictionary *dic = @{@"bookID": bookId};
     [controller performSegueWithIdentifier:@"BookDetail" sender:dic];
 }
+
+- (void)bookCartAction
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [NSString stringWithFormat:@"User/AddCart?userID=%@&bookID=%@&amount=1", USERID, bookId];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+        }
+        NSLog(@"addOneItemToCart Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"addOneItemToCart Error:%@", error);
+    }];
+}
+
+- (void)loadBookInfoFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"BookDetail/" stringByAppendingString:bookId];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *tmp = (NSDictionary *)responseObject;
+        if (tmp) {
+            bookInfoDict = tmp[@"bookinfo"];
+        }
+        // set labels
+        [btns.price setText:[NSString stringWithFormat:@"%@", [XYUtil printMoneyAtCent:[bookInfoDict[@"price"] intValue]]]];
+        
+        NSLog(@"loadBookDetailFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadBookDetailFromServer Error:%@", error);
+    }];
+}
+
+- (void)loadBookCommentsFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"BookComment/" stringByAppendingString:bookId];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *tmp = (NSDictionary *)responseObject;
+        if (tmp) {
+            listComments = tmp[@"comments"];
+            [comment1 setText:listComments[0][@"content"]];
+            [comment2 setText:listComments[1][@"content"]];
+            [comment3 setText:listComments[2][@"content"]];
+        }
+        NSLog(@"loadBookCommentsFromServer Success");
+    
+        // set labels
+    
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadBookCommentsFromServer Error:%@", error);
+    }];
+}
+
+
 
 @end
