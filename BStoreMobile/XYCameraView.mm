@@ -156,7 +156,11 @@ namespace  {
         // Generate Book Overlay
         NSString *name = [NSString stringWithUTF8String:trackable.getName()];
         
-//        NSLog(@"%@", name);
+        NSInteger location = [name rangeOfString:@"_"].location;
+        
+        if ( location != NSNotFound) {
+            name = [name substringToIndex:location];
+        }
         
         XYBookOverlay *overlay = [overlays objectForKey:name];
         
