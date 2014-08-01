@@ -1223,6 +1223,10 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+                21F1CBAF198AA5BA0089C9EA /* XYViewController.h */,
+				21F1CBB0198AA5BA0089C9EA /* XYViewController.m */,
+				21F1CBB2198AAC5F0089C9EA /* XYTableViewController.h */,
+				21F1CBB3198AAC5F0089C9EA /* XYTableViewController.m */,
 				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
 				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
 				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
