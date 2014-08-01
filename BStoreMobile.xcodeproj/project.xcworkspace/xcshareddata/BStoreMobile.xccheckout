@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C4EE2652-B566-4158-9E81-867EE57B58A4</string>
+	<string>C77E2284-3512-4142-A3E6-08248818B4B2</string>
 	<key>IDESourceControlProjectName</key>
 	<string>BStoreMobile</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>B96CC3C4-840B-47FB-B9E5-72C4C60419F2</key>
-		<string>https://github.com/codedjw/bsmobile.git</string>
+		<key>30B16571-7929-49F7-BC14-7E22FED3549A</key>
+		<string>https://github.com/Water-Drop/UniqueBookstore.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BStoreMobile.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B96CC3C4-840B-47FB-B9E5-72C4C60419F2</key>
+		<key>30B16571-7929-49F7-BC14-7E22FED3549A</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/codedjw/bsmobile.git</string>
+	<string>https://github.com/Water-Drop/UniqueBookstore.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B96CC3C4-840B-47FB-B9E5-72C4C60419F2</string>
+	<string>30B16571-7929-49F7-BC14-7E22FED3549A</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B96CC3C4-840B-47FB-B9E5-72C4C60419F2</string>
+			<string>30B16571-7929-49F7-BC14-7E22FED3549A</string>
 			<key>IDESourceControlWCCName</key>
-			<string>bsmobile</string>
+			<string>UniqueBookstore</string>
 		</dict>
 	</array>
 </dict>

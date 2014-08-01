@@ -94,8 +94,11 @@
         if (beacon.accuracy > 0) {
             NSString *key = [beacon.minor stringValue];
             
-            if ([beacon.minor intValue] == 1 && beacon.accuracy < 2.0f) {
+            if ([beacon.minor intValue] == 1 && beacon.accuracy < 2.0f && checking == NO) {
                 [self.delegate performPayment];
+                checking = YES;
+            } else if ([beacon.minor intValue] == 1 && beacon.accuracy >= 2.0f) {
+                checking = NO;
             }
             
             NSMutableArray *array = [_beaconDistance objectForKey:key];

@@ -64,7 +64,7 @@
     [self styleAvatar:avatar3];
     
     
-    if ([bookId isEqualToString:@"9"]) {
+    if ([bookId isEqualToString:@"13"]) {
         [btns focus];
     } else {
         [btns normal];

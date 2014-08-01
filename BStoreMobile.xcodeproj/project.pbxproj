@@ -83,6 +83,7 @@
 		21F1CBDA198ACE760089C9EA /* mbubble4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F1CBD8198ACE760089C9EA /* mbubble4@2x.png */; };
 		21F1CBDC198ACF430089C9EA /* mbubble5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F1CBDB198ACF430089C9EA /* mbubble5@2x.png */; };
 		21F1CBDE198AD0150089C9EA /* mbubble6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F1CBDD198AD0150089C9EA /* mbubble6@2x.png */; };
+		21F1CBE0198B6B620089C9EA /* arrow_m.png in Resources */ = {isa = PBXBuildFile; fileRef = 21F1CBDF198B6B620089C9EA /* arrow_m.png */; };
 		E30190EB19809AA300D04906 /* XYUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190EA19809AA300D04906 /* XYUtil.m */; };
 		E30190EF1980D1B100D04906 /* XYCartItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190ED1980D1B100D04906 /* XYCartItemCell.m */; };
 		E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30190EE1980D1B100D04906 /* XYCartItemCell.xib */; };
@@ -420,6 +421,7 @@
 		21F1CBD8198ACE760089C9EA /* mbubble4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mbubble4@2x.png"; sourceTree = "<group>"; };
 		21F1CBDB198ACF430089C9EA /* mbubble5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mbubble5@2x.png"; sourceTree = "<group>"; };
 		21F1CBDD198AD0150089C9EA /* mbubble6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mbubble6@2x.png"; sourceTree = "<group>"; };
+		21F1CBDF198B6B620089C9EA /* arrow_m.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_m.png; sourceTree = "<group>"; };
 		E30190E919809AA300D04906 /* XYUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUtil.h; sourceTree = "<group>"; };
 		E30190EA19809AA300D04906 /* XYUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUtil.m; sourceTree = "<group>"; };
 		E30190EC1980D1B100D04906 /* XYCartItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYCartItemCell.h; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 		21C4EBEF1987D80F00CC9D4C /* icon */ = {
 			isa = PBXGroup;
 			children = (
+				21F1CBDF198B6B620089C9EA /* arrow_m.png */,
 				21F1CBDD198AD0150089C9EA /* mbubble6@2x.png */,
 				21F1CBDB198ACF430089C9EA /* mbubble5@2x.png */,
 				21F1CBD7198ACE760089C9EA /* mbubble3@2x.png */,
@@ -1496,6 +1499,7 @@
 				E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */,
 				E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */,
 				E3EA3766198A2B060066ECCD /* theme_0.png in Resources */,
+				21F1CBE0198B6B620089C9EA /* arrow_m.png in Resources */,
 				E33A3F8D1977BB5000BA3797 /* SouthKorea.png in Resources */,
 				E33A3F6D1977BB5000BA3797 /* 5.JPG in Resources */,
 				211B281F19823CA100052039 /* letter_R.png in Resources */,

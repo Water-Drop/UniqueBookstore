@@ -169,6 +169,13 @@
 
 - (void)loadConfirmListFromServer
 {
+    UIBarButtonItem *rightBtn = nil;
+    UIBarButtonItem *leftBtn = nil;
+    rightBtn = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStylePlain target:self action:@selector(confirmAction)];
+    leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
+    
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    
     NSURL *url = [NSURL URLWithString:BASEURLSTRING];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -183,20 +190,16 @@
             self.listOutput = [[NSMutableArray alloc]initWithArray:tmp];
         }
         [self calculateListPrint];
-        UIBarButtonItem *rightBtn = nil;
-        UIBarButtonItem *leftBtn = nil;
+        
         if (self.listOutput && [self.listOutput count] > 0) {
-            rightBtn = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStylePlain target:self action:@selector(confirmAction)];
+            self.navigationItem.rightBarButtonItem = rightBtn;
         }
-        leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
-        self.navigationItem.rightBarButtonItem = rightBtn;
-        self.navigationItem.leftBarButtonItem = leftBtn;
         [self.tableView reloadData];
         NSLog(@"loadConfirmListFromServer Success");
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"loadConfirmListFromServer Error:%@", error);
     }];
-}
+    }
 
 - (void)confirmAction
 {

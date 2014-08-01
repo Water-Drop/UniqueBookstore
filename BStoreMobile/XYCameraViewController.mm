@@ -274,6 +274,13 @@
     [self performSegueWithIdentifier:@"WebView" sender:valueDict];
 }
 
+- (void)callBookInfo:(NSNumber*)bookId
+{
+    NSLog(@"Get Book ID: %@", bookId);
+    NSDictionary *valueDict = @{@"bookID": [bookId stringValue]};
+    [self performSegueWithIdentifier:@"BookDetail" sender:valueDict];
+}
+
 #pragma AVCaptureMetadataOutputObjectsDelegate (For barcode reading)
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects
@@ -321,14 +328,13 @@
             NSLog(@"path:%@",path);
             [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSArray *retArry = (NSArray *)responseObject;
-                if (!retArry && retArry.count > 0) {
+                if (retArry && retArry.count > 0) {
+                    [self hideLoadingAnimation];
                     return;
                 }
                 NSNumber *bookId = (NSNumber*)[(NSDictionary*)[retArry objectAtIndex:0] objectForKey:@"bookID"];
                 if (bookId) {
-                    NSLog(@"%@", bookId);
-                    NSDictionary *valueDict = @{@"bookID": [bookId stringValue]};
-                    [self performSegueWithIdentifier:@"BookDetail" sender:valueDict];
+                    [self performSelectorOnMainThread:@selector(callBookInfo:) withObject:bookId waitUntilDone:NO];
                 }
                 NSLog(@"loadBookISBNFromServer Success");
                 [self hideLoadingAnimation];

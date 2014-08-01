@@ -21,6 +21,7 @@
 
 @interface XYLocationManager : NSObject <CLLocationManagerDelegate> {
     BOOL showNavigation;
+    BOOL checking;
 }
 
 + (XYLocationManager *)sharedManager;

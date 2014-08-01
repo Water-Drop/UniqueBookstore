@@ -32,12 +32,12 @@
     [navigation addGestureRecognizer:tapGesture];
     
     UIButton *btn = [[UIButton alloc] init];
-    [btn setBackgroundImage:[UIImage imageNamed:@"up_right-50.png"] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"arrow_m.png"] forState:UIControlStateNormal];
     btn.frame = CGRectMake(17, 7, 32, 32);
     [navigation addSubview:btn];
     
     UILabel *lbl = [[UILabel alloc] init];
-    [lbl setText:@"左前方行走约10米..."];
+    [lbl setText:@"前方行走约10米后左转..."];
     lbl.frame = CGRectMake(91, 7, 160, 32);
     [lbl setTextColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
     [navigation addSubview:lbl];
