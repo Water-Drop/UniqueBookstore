@@ -1812,7 +1812,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Liang Zhenjing (28262WS4C5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1827,7 +1827,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1859,7 +1859,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libstdc++.dylib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CF54C344-8461-4A0C-9B6C-69658F6828DD";
+				PROVISIONING_PROFILE = "7B60FD3F-6DAF-4AF8-9D66-1F2886E113AB";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
