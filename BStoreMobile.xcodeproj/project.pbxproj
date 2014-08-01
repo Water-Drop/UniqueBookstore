@@ -1164,13 +1164,47 @@
 		E3B0027A197A59F000BF3CBF /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				E3EA3796198AB85A0066ECCD /* Friend */,
-				E3EA3795198AB8540066ECCD /* Comment */,
-				E3EA3794198AB8210066ECCD /* MyBook */,
-				E3EA3793198AB8160066ECCD /* RecBook */,
-				E3EA3792198AB7FC0066ECCD /* BookInfo */,
-				E3EA3791198AB7E40066ECCD /* Camera */,
-				E3EA378D198AB7930066ECCD /* UtilView */,
+				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
+				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
+				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
+				E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */,
+				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
+				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
+				E39D05B1197575AA006A8F53 /* XYSaleItemCell.h */,
+				E39D05B2197575AA006A8F53 /* XYSaleItemCell.m */,
+				E30190EC1980D1B100D04906 /* XYCartItemCell.h */,
+				E30190ED1980D1B100D04906 /* XYCartItemCell.m */,
+				E30190F919821A4200D04906 /* XYPaidItemCell.h */,
+				E30190FA19821A4200D04906 /* XYPaidItemCell.m */,
+				E30190FB19821A4200D04906 /* XYPaidItemCell.xib */,
+				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
+				E30190EE1980D1B100D04906 /* XYCartItemCell.xib */,
+				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
+				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
+				E3EA3760198A206C0066ECCD /* XYThemeBookCell.h */,
+				E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */,
+				E3AB0DCE197596C90041A318 /* XYCollectionCell.h */,
+				E3AB0DCF197596C90041A318 /* XYCollectionCell.m */,
+				E3EA375B198A1F6B0066ECCD /* XYThemeCollectionCell.h */,
+				E3EA375C198A1F6B0066ECCD /* XYThemeCollectionCell.m */,
+				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
+				E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */,
+				E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */,
+				E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */,
+				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
+				21F1CBA3198A1C620089C9EA /* XYCameraButtons.h */,
+				21F1CBA6198A1EA10089C9EA /* XYCameraButtons.m */,
+				21C4EC58198907C000CC9D4C /* XYCameraButtons.xib */,
+				E3EA378E198AB7B90066ECCD /* CustomIOS7AlertView.h */,
+				E3EA378F198AB7B90066ECCD /* CustomIOS7AlertView.m */,
+				E3EA3785198A7EEA0066ECCD /* XYRoundControl.h */,
+				E3EA3786198A7EEA0066ECCD /* XYRoundControl.m */,
+				E3EA3788198A8A2F0066ECCD /* XYRoundView.h */,
+				E3EA3789198A8A2F0066ECCD /* XYRoundView.m */,
+				E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */,
+				E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */,
+				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
+				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -1263,96 +1297,6 @@
 				E3EA375219892AF10066ECCD /* XYConfirmController.m */,
 			);
 			name = Purchase;
-			sourceTree = "<group>";
-		};
-		E3EA378D198AB7930066ECCD /* UtilView */ = {
-			isa = PBXGroup;
-			children = (
-				E3EA378E198AB7B90066ECCD /* CustomIOS7AlertView.h */,
-				E3EA378F198AB7B90066ECCD /* CustomIOS7AlertView.m */,
-				E3EA3785198A7EEA0066ECCD /* XYRoundControl.h */,
-				E3EA3786198A7EEA0066ECCD /* XYRoundControl.m */,
-				E3EA3788198A8A2F0066ECCD /* XYRoundView.h */,
-				E3EA3789198A8A2F0066ECCD /* XYRoundView.m */,
-				E3EA37441987B1490066ECCD /* XYAutoLayoutLabel.h */,
-				E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */,
-				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
-				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
-			);
-			name = UtilView;
-			sourceTree = "<group>";
-		};
-		E3EA3791198AB7E40066ECCD /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				21F1CBA3198A1C620089C9EA /* XYCameraButtons.h */,
-				21F1CBA6198A1EA10089C9EA /* XYCameraButtons.m */,
-				21C4EC58198907C000CC9D4C /* XYCameraButtons.xib */,
-			);
-			name = Camera;
-			sourceTree = "<group>";
-		};
-		E3EA3792198AB7FC0066ECCD /* BookInfo */ = {
-			isa = PBXGroup;
-			children = (
-				E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */,
-				E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */,
-				E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */,
-			);
-			name = BookInfo;
-			sourceTree = "<group>";
-		};
-		E3EA3793198AB8160066ECCD /* RecBook */ = {
-			isa = PBXGroup;
-			children = (
-				E33A3F03197762AF00BA3797 /* XYRecBookCell.h */,
-				E33A3F04197762AF00BA3797 /* XYRecBookCell.m */,
-				E3EA3760198A206C0066ECCD /* XYThemeBookCell.h */,
-				E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */,
-				E3AB0DCE197596C90041A318 /* XYCollectionCell.h */,
-				E3AB0DCF197596C90041A318 /* XYCollectionCell.m */,
-				E3EA375B198A1F6B0066ECCD /* XYThemeCollectionCell.h */,
-				E3EA375C198A1F6B0066ECCD /* XYThemeCollectionCell.m */,
-				E3AB0DD1197596DF0041A318 /* XYCollectionCell.xib */,
-				E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */,
-			);
-			name = RecBook;
-			sourceTree = "<group>";
-		};
-		E3EA3794198AB8210066ECCD /* MyBook */ = {
-			isa = PBXGroup;
-			children = (
-				E39D05B1197575AA006A8F53 /* XYSaleItemCell.h */,
-				E39D05B2197575AA006A8F53 /* XYSaleItemCell.m */,
-				E30190EC1980D1B100D04906 /* XYCartItemCell.h */,
-				E30190ED1980D1B100D04906 /* XYCartItemCell.m */,
-				E30190F919821A4200D04906 /* XYPaidItemCell.h */,
-				E30190FA19821A4200D04906 /* XYPaidItemCell.m */,
-				E30190FB19821A4200D04906 /* XYPaidItemCell.xib */,
-				E39D05B419758D1B006A8F53 /* XYSaleItemCell.xib */,
-				E30190EE1980D1B100D04906 /* XYCartItemCell.xib */,
-			);
-			name = MyBook;
-			sourceTree = "<group>";
-		};
-		E3EA3795198AB8540066ECCD /* Comment */ = {
-			isa = PBXGroup;
-			children = (
-				E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */,
-				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
-				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
-			);
-			name = Comment;
-			sourceTree = "<group>";
-		};
-		E3EA3796198AB85A0066ECCD /* Friend */ = {
-			isa = PBXGroup;
-			children = (
-				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
-				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
-				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
-			);
-			name = Friend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
