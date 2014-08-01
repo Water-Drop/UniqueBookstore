@@ -328,7 +328,7 @@
             NSLog(@"path:%@",path);
             [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSArray *retArry = (NSArray *)responseObject;
-                if (retArry && retArry.count > 0) {
+                if (!retArry || retArry.count == 0) {
                     [self hideLoadingAnimation];
                     return;
                 }
