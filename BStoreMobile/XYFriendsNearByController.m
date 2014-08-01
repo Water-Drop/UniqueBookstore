@@ -70,16 +70,16 @@
     self.infoArray = [[NSMutableArray alloc] init];
     
     [self.rectArray addObject:@{@"x": [NSNumber numberWithFloat:100], @"y": [NSNumber numberWithFloat:100], @"width": [NSNumber numberWithFloat:50], @"height": [NSNumber numberWithFloat:50]}];
-    [self.infoArray addObject:@{@"favorite": @"计算机", @"username": @"忘.惑", @"distance": @"0.5米"}];
+    [self.infoArray addObject:@{@"favorite": @"计算机、文学", @"username": @"忘.惑", @"distance": @"0.5米"}];
     
     [self.rectArray addObject:@{@"x": [NSNumber numberWithFloat:200], @"y": [NSNumber numberWithFloat:200], @"width": [NSNumber numberWithFloat:50], @"height": [NSNumber numberWithFloat:50]}];
-    [self.infoArray addObject:@{@"favorite": @"儿童文学", @"username": @"小鲸鱼", @"distance": @"1米"}];
+    [self.infoArray addObject:@{@"favorite": @"儿童文学、艺术", @"username": @"小鲸鱼", @"distance": @"1米"}];
     
     [self.rectArray addObject:@{@"x": [NSNumber numberWithFloat:230], @"y": [NSNumber numberWithFloat:20], @"width": [NSNumber numberWithFloat:50], @"height": [NSNumber numberWithFloat:50]}];
     [self.infoArray addObject:@{@"favorite": @"计算机", @"username": @"非天离巢", @"distance": @"1米"}];
     
     [self.rectArray addObject:@{@"x": [NSNumber numberWithFloat:320], @"y": [NSNumber numberWithFloat:60], @"width": [NSNumber numberWithFloat:50], @"height": [NSNumber numberWithFloat:50]}];
-    [self.infoArray addObject:@{@"favorite": @"侦探小说", @"username": @"豌豆", @"distance": @"1米"}];
+    [self.infoArray addObject:@{@"favorite": @"侦探小说、经济学", @"username": @"豌豆", @"distance": @"1米"}];
     
     [self.rectArray addObject:@{@"x": [NSNumber numberWithFloat:580], @"y": [NSNumber numberWithFloat:100], @"width": [NSNumber numberWithFloat:50], @"height": [NSNumber numberWithFloat:50]}];
     [self.infoArray addObject:@{@"favorite": @"历史政治", @"username": @"逍遥南华", @"distance": @"1米"}];
