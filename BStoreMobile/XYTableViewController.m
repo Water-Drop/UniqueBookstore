@@ -18,10 +18,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // delegate
+    ((UIScrollView*)self.view).delegate = self;
+    
     // Do any additional setup after loading the view.
     navigation = [JCRBlurView new];
     navigation.frame = CGRectMake(0, 0, 280, 46);
-    navigation.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-154);
+    navigation.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-90+((UIScrollView*)self.view).contentOffset.y);
     [navigation.layer setMasksToBounds:YES];
     navigation.layer.cornerRadius = 8.0f;
     navigation.layer.zPosition = 1000;
@@ -55,6 +59,17 @@
                                                object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    for (id view in [self.view subviews]) {
+        NSLog(@"%@", [view class]);
+        for (id view2 in [view subviews]) {
+            NSLog(@"\t%@", [view2 class]);
+            
+        }
+    }
+}
+
 - (void)showModal
 {
     [[XYLocationManager sharedManager] showNavigationModal];
@@ -66,6 +81,7 @@
         navigation.hidden = NO;
         [[self view] addSubview:navigation];
     }
+    
     NSLog(@"change");
 }
 
@@ -75,7 +91,14 @@
         navigation.hidden = YES;
         [[self view] addSubview:navigation];
     }
+    
     NSLog(@"change");
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+//    NSLog(@"%f %f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+    navigation.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-90+scrollView.contentOffset.y);
 }
 
 @end

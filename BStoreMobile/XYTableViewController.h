@@ -10,7 +10,7 @@
 #import "XYLocationManager.h"
 #import "JCRBlurView.h"
 
-@interface XYTableViewController : UITableViewController {
+@interface XYTableViewController : UITableViewController<UIScrollViewDelegate, UITableViewDelegate> {
 
     JCRBlurView *navigation;
 }
