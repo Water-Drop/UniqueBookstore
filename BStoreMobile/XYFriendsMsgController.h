@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
-@interface XYFriendsMsgController : UITableViewController
+@interface XYFriendsMsgController : XYTableViewController
 
 @end

@@ -229,6 +229,7 @@
     if (tag > 0) {
         NSLog(@"Nav bookID #%d ", tag);
     }
+    [[XYLocationManager sharedManager] showNavigationModal];
 }
 
 - (void) addOneItemToCart:(NSInteger)bookID

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYSearchController : UIViewController <UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate>
+@interface XYSearchController : XYViewController <UISearchBarDelegate,UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

@@ -166,6 +166,8 @@ enum MyBookPageStatus {
         [cell.buyButton setTitle:priceStr forState:UIControlStateNormal];
         cell.buyButton.tag = indexPath.row;
         [cell.buyButton addTarget:self action:@selector(wishlistToCart:) forControlEvents:UIControlEventTouchUpInside];
+        cell.navButton.tag = indexPath.row;
+        [cell.navButton addTarget:self action:@selector(navButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         NSNumber *num = rowDict[@"bookID"];
         cell.title.tag = [num integerValue];
@@ -825,6 +827,11 @@ enum MyBookPageStatus {
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"wishlistToCartInServer Error:%@", error);
     }];
+}
+
+- (void)navButtonClicked:(id)sender
+{
+    [[XYLocationManager sharedManager] showNavigationModal];
 }
 
 //- (void)dismissKeyboardByTouchDownBG {

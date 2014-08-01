@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "XYStarRatedView.h"
+#import "XYTableViewController.h"
 
-@interface XYMakeCommentController : UITableViewController<StarRatedViewDelegate, UIAlertViewDelegate>
+@interface XYMakeCommentController : XYTableViewController<StarRatedViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *bookID;
 @property (nonatomic, strong) NSString *bname;

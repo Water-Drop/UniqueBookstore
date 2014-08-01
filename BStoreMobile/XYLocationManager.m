@@ -10,6 +10,8 @@
 
 @implementation XYLocationManager
 
+@synthesize showNavigation;
+
 @synthesize current;
 
 + (XYLocationManager *)sharedManager
@@ -24,6 +26,8 @@
 
 - (id)init {
     self = [super init];
+    
+    showNavigation = NO;
     
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -46,10 +50,16 @@
     return self;
 }
 
-- (void)initRegion {
+- (void)initRegion
+{
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"23542266-18D1-4FE4-B4A1-23F8195B9D39"];
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"com.ister.myRegion"];
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
+}
+
+- (void)showNavigationModal
+{
+    [self.delegate showNavigationModal];
 }
 
 #pragma CLLocationManagerDelegate

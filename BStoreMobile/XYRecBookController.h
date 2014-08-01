@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYRecBookController : UIViewController< UITableViewDataSource, UITableViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate >
+@interface XYRecBookController : XYViewController< UITableViewDataSource, UITableViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate >
 
 @end

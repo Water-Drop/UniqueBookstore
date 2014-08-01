@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYPubMsgController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
+@interface XYPubMsgController : XYViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
 
 @end

@@ -15,10 +15,13 @@
 @required
 
 - (void)performPayment;
+- (void)showNavigationModal;
 
 @end
 
-@interface XYLocationManager : NSObject <CLLocationManagerDelegate>
+@interface XYLocationManager : NSObject <CLLocationManagerDelegate> {
+    BOOL showNavigation;
+}
 
 + (XYLocationManager *)sharedManager;
 
@@ -32,7 +35,11 @@
 
 @property XYPoint *current;
 
+@property BOOL showNavigation;
+
 @property(nonatomic,assign)id delegate;
+
+- (void)showNavigationModal;
 
 @end
 

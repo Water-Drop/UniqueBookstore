@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYWebViewController : UIViewController<UIWebViewDelegate>
+@interface XYWebViewController : XYViewController<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
