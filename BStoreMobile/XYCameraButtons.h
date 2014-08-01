@@ -14,4 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (weak, nonatomic) IBOutlet UILabel *price;
 
+- (void)focus;
+- (void)normal;
+
 @end

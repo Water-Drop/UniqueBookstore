@@ -71,7 +71,6 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     NSLog(@"Beacon Found");
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
-    [self.delegate performPayment];
 }
 
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
@@ -94,6 +93,11 @@
         // if the distance is measured, add to dictionary
         if (beacon.accuracy > 0) {
             NSString *key = [beacon.minor stringValue];
+            
+            if ([beacon.minor intValue] == 1 && beacon.accuracy < 2.0f) {
+                [self.delegate performPayment];
+            }
+            
             NSMutableArray *array = [_beaconDistance objectForKey:key];
             
             if (array == nil) {

@@ -1828,7 +1828,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Liang Zhenjing (28262WS4C5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: haijian liu (4TFKS75TCQ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BStoreMobile/BStoreMobile-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

@@ -64,6 +64,13 @@
     [self styleAvatar:avatar3];
     
     
+    if ([bookId isEqualToString:@"9"]) {
+        [btns focus];
+    } else {
+        [btns normal];
+    }
+    
+    
     [self loadBookInfoFromServer];
     [self loadBookCommentsFromServer];
     

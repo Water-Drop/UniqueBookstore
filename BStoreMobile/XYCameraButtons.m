@@ -29,6 +29,10 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
+}
+
+- (void)normal
+{
     if (iOS7) {
         [XYUtil showButtonBorder:_cartButton];
         [XYUtil showButtonBorder:_infoButton];
@@ -38,11 +42,21 @@
     
     [self.layer setMasksToBounds:YES];
     [self.layer setCornerRadius:5.0]; //设置矩圆角半径
-//    [self.layer setBorderWidth:1.0];   //边框宽度
-//    CGColorRef colorref = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
-//    [self.layer setBorderColor:colorref];//边框颜色
-//    [self.layer setOpacity:0.65f];
+    //    [self.layer setBorderWidth:1.0];   //边框宽度
+    //    CGColorRef colorref = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
+    //    [self.layer setBorderColor:colorref];//边框颜色
+    //    [self.layer setOpacity:0.65f];
+
 }
 
+- (void)focus
+{
+    [self normal];
+    [self.layer setBackgroundColor:[UIColor redColor].CGColor];
+    [self.layer setOpacity:0.85f];
+    [self.cartButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.infoButton.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [self.price setTextColor:[UIColor blackColor]];
+}
 
 @end

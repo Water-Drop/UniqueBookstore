@@ -191,7 +191,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AS0-tF-C9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4240" y="2140"/>
+            <point key="canvasLocation" x="4256" y="4652"/>
         </scene>
         <!--Book Info Controller - 书籍信息-->
         <scene sceneID="c8f-BB-ghy">
@@ -772,6 +772,7 @@
                         <segue destination="2kZ-2A-dGN" kind="relationship" relationship="viewControllers" id="5UR-7A-Z8L"/>
                         <segue destination="Nny-Oa-wLs" kind="relationship" relationship="viewControllers" id="rc4-QV-M6z"/>
                         <segue destination="ti7-QV-Cgi" kind="modal" identifier="Navigation" id="OGY-yB-6Wm"/>
+                        <segue destination="0w1-ob-wiD" kind="modal" identifier="Payment" id="hgI-ZJ-oGK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzR-gu-oVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1192,7 +1193,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lwk-hf-smM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3711" y="2140"/>
+            <point key="canvasLocation" x="1372" y="4652"/>
         </scene>
     </scenes>
     <resources>
@@ -1211,8 +1212,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="awM-zn-5XB"/>
-        <segue reference="ze3-Ug-C9Y"/>
         <segue reference="YyE-96-kFY"/>
         <segue reference="tMo-Tm-dC1"/>
+        <segue reference="szb-hM-fSC"/>
     </inferredMetricsTieBreakers>
 </document>

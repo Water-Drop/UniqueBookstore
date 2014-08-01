@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="29" size="2448.000000 3264.000000" />
     <ImageTarget name="9_2" size="831.000000 3240.000000" />
+    <ImageTarget name="13_1" size="288.000000 3072.000000" />
     <ImageTarget name="9_1" size="1536.000000 2048.000000" />
+    <ImageTarget name="13_2" size="2448.000000 3264.000000" />
+    <ImageTarget name="25_1" size="144.000000 3291.428467" />
     <ImageTarget name="1" size="600.000000 840.000000" />
+    <ImageTarget name="24_1" size="180.000000 3200.000000" />
+    <ImageTarget name="11" size="384.000000 3072.000000" />
+    <ImageTarget name="28" size="2448.000000 3264.000000" />
+    <ImageTarget name="24_2" size="2448.000000 3264.000000" />
+    <ImageTarget name="15_1" size="178.000000 3350.588135" />
+    <ImageTarget name="17" size="384.000000 2854.000000" />
+    <ImageTarget name="14" size="438.000000 3144.000000" />
+    <ImageTarget name="19" size="2448.000000 3264.000000" />
+    <ImageTarget name="12" size="2448.000000 3264.000000" />
+    <ImageTarget name="20" size="2448.000000 3264.000000" />
+    <ImageTarget name="15_2" size="2448.000000 3264.000000" />
     <ImageTarget name="3" size="553.000000 3234.000000" />
+    <ImageTarget name="16" size="2448.000000 3264.000000" />
+    <ImageTarget name="25_2" size="2448.000000 3264.000000" />
+    <ImageTarget name="18" size="258.000000 2802.000000" />
   </Tracking>
 </QCARConfig>
