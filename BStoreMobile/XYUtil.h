@@ -14,6 +14,8 @@ static NSString * const BASEURLSTRING = @"http://218.244.128.72:8080/BookStoreSe
 
 static NSString * USERID = @"1";
 
+static NSString * defaultFontName = @"Helvetica Neue";
+
 @interface XYUtil : NSObject
 
 + (void) parseJsonTest;

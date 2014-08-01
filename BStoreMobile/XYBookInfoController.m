@@ -163,19 +163,34 @@ enum BookInfoStatus {
                 int priceAtCent = [self.bookInfoDict[@"price"] intValue];
                 self.priceStr = [XYUtil printMoneyAtCent:priceAtCent];
                 
-                CGRect rect = CGRectMake(0, 0, cell.totScoreView.frame.size.width, cell.totScoreView.frame.size.height);
-                XYStarRatedView *starRateView = [[XYStarRatedView alloc] initWithFrame:rect numberOfStar:5 AtStatus:SHOWED];
-                starRateView.delegate = self;
-                [cell.totScoreView addSubview:starRateView];
-                
                 NSNumber *cnt = self.bookInfoDict[@"countScore"];
-                NSString *cntStr = [NSString stringWithFormat:@"(%@)", cnt];
-                cell.cntScore.text = cntStr;
                 
-                NSNumber *tot = self.bookInfoDict[@"sumScore"];
-                int avg = [tot intValue] / [cnt intValue];
-                CGPoint p = CGPointMake(avg * (rect.size.width / 5), rect.size.height);
-                [starRateView changeStarForegroundViewWithPoint:p];
+                for (UIView *view in [cell.totScoreView subviews]) {
+                    [view removeFromSuperview];
+                }
+                
+                if ([cnt intValue] > 0) {
+                    CGRect rect = CGRectMake(0, 0, cell.totScoreView.frame.size.width, cell.totScoreView.frame.size.height);
+                    XYStarRatedView *starRateView = [[XYStarRatedView alloc] initWithFrame:rect numberOfStar:5 AtStatus:SHOWED];
+                    starRateView.delegate = self;
+                    [cell.totScoreView addSubview:starRateView];
+                    
+                    NSString *cntStr = [NSString stringWithFormat:@"(%@)", cnt];
+                    cell.cntScore.text = cntStr;
+                    
+                    NSNumber *tot = self.bookInfoDict[@"sumScore"];
+                    int avg = [tot intValue] / [cnt intValue];
+                    CGPoint p = CGPointMake(avg * (rect.size.width / 5), rect.size.height);
+                    [starRateView changeStarForegroundViewWithPoint:p];
+                } else {
+                    UILabel *lbl =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.totScoreView.frame.size.width, cell.totScoreView.frame.size.height)];
+                    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:10];
+                    lbl.font = font;
+                    lbl.textColor = [UIColor lightGrayColor];
+                    lbl.text = @"(暂无评分)";
+                    [cell.totScoreView addSubview:lbl];
+                    cell.cntScore.text = @"";
+                }
                 
                 NSString *imagePath = self.bookInfoDict[@"coverimg"];
                 __weak XYBookInfoMainCell *weakCell = cell;
