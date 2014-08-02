@@ -43,7 +43,7 @@
     
     [self.imageView setHidden:YES];
 //    [self.activityIndicator startAnimating];
-    [self performSelector:@selector(showFriendsNearBy) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(showFriendsNearBy) withObject:nil afterDelay:1.5f];
     
     // Do any additional setup after loading the view.
     

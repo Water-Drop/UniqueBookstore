@@ -83,6 +83,7 @@ enum BookInfoStatus {
     self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
     NSArray *segItemsArray = [NSArray arrayWithObjects: @"详细信息", @"读者评论", @"相关推荐", nil];
     UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:segItemsArray];
+    [segControl setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
     segControl.frame = CGRectMake(16, 8, 287, 29);
     segControl.selectedSegmentIndex = 0;
     self.status = DETAILS;
