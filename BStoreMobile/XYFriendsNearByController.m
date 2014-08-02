@@ -13,6 +13,8 @@
 #import "XYRoundView.h"
 
 @interface XYFriendsNearByController ()
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *activityLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -39,8 +41,20 @@
 {
     [super viewDidLoad];
     
+    [self.imageView setHidden:YES];
+//    [self.activityIndicator startAnimating];
+    [self performSelector:@selector(showFriendsNearBy) withObject:nil afterDelay:1.0f];
+    
     // Do any additional setup after loading the view.
     
+}
+
+- (void)showFriendsNearBy
+{
+    [self.activityIndicator stopAnimating];
+//    [self.activityIndicator setHidden:YES];
+    [self.activityLabel setHidden:YES];
+    [self.imageView setHidden:NO];
     self.scrollView.contentSize = self.imageView.frame.size;
     
     [self prepareForData];

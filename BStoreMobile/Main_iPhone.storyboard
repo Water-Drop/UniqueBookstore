@@ -565,6 +565,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="800" height="503"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </imageView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" id="ddu-oe-Ond">
+                                        <rect key="frame" x="144" y="240" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在发现..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQK-GL-Sez">
+                                        <rect key="frame" x="119" y="268" width="83" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -572,6 +583,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="附近的人" id="Fax-dm-gWs"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ddu-oe-Ond" id="VSA-7J-1uc"/>
+                        <outlet property="activityLabel" destination="fQK-GL-Sez" id="4e9-Oe-CVn"/>
                         <outlet property="imageView" destination="JO3-SN-cGK" id="Q5I-8y-Sh4"/>
                         <outlet property="scrollView" destination="azP-kj-Uds" id="TIq-VY-5Hb"/>
                     </connections>
