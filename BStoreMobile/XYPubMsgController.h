@@ -13,5 +13,6 @@
 @interface XYPubMsgController : XYViewController<UIAlertViewDelegate,TITokenFieldDelegate, UITextViewDelegate>
 
 @property NSString *selectItem;
+@property NSNumber *selectID;
 
 @end

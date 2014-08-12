@@ -241,6 +241,15 @@
     }
     if (!isContained) {
         [_tokenField addToken:token];
+        NSString *output = token.title;
+        NSLog(@"token.title:%@", output);
+        NSRange range = [output rangeOfString:@" "];
+        if (range.location > 1) {
+            int r1 = range.location;
+            NSString *bookID = [output substringWithRange:NSMakeRange(1, r1)];
+            NSLog(@"token.tag:%@",bookID);
+            token.tag = [bookID integerValue];
+        }
         NSUInteger tokenCount = self.tokenField.tokens.count;
         NSLog(@"tokens count from type:%@", [NSNumber numberWithInteger:tokenCount]);
         [token setTintColor:((tokenCount % 3) == 0 ? [TIToken redTintColor] : ((tokenCount % 3) == 1 ? [TIToken greenTintColor] : [TIToken blueTintColor]))];
@@ -1226,6 +1235,7 @@ CGPathRef CGPathCreateDisclosureIndicatorPath(CGPoint arrowPointFront, CGFloat h
 //                                              context:nil].size;
 //#else
     CGSize titleSize = [_title sizeWithFont:_font forWidth:(_maxWidth - hTextPadding - accessoryWidth) lineBreakMode:kLineBreakMode];
+//    NSLog(@"titleSize width:%f, %f. %f, %f", titleSize.width, _maxWidth, hTextPadding, accessoryWidth);
 //#endif
     
 	CGFloat height = floorf(titleSize.height + vTextPadding);
@@ -1346,6 +1356,7 @@ CGPathRef CGPathCreateDisclosureIndicatorPath(CGPoint arrowPointFront, CGFloat h
 //                                            context:nil].size;
 //#else
     CGSize titleSize = [_title sizeWithFont:_font forWidth:(_maxWidth - hTextPadding - accessoryWidth) lineBreakMode:kLineBreakMode];
+//   NSLog(@"titleSize 000 width:%f, %f. %f, %f", titleSize.width, _maxWidth, hTextPadding, accessoryWidth);
 //#endif
     
 	CGFloat vPadding = floor((self.bounds.size.height - titleSize.height) / 2);

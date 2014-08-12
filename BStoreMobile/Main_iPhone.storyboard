@@ -957,7 +957,11 @@
                                 <action selector="cancelAction:" destination="gxT-tN-O8V" id="XnW-Tq-7ej"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="更新" id="IUY-px-J9k"/>
+                        <barButtonItem key="rightBarButtonItem" title="更新" id="IUY-px-J9k">
+                            <connections>
+                                <action selector="updateAction:" destination="gxT-tN-O8V" id="3aa-bg-kBs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="OYT-gw-j3G" id="67r-BL-FHe"/>

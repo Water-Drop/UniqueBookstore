@@ -8,6 +8,7 @@
 
 #import "XYPubMsgController.h"
 #import "Names.h"
+#import "XYUtil.h"
 
 #define NAV_BAR_HEIGHT 64
 
@@ -20,7 +21,9 @@ enum pubStatus {
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 //@property enum pubStatus status;
 - (IBAction)pubMsg:(id)sender;
-@property NSMutableArray *bookIDs;
+@property NSMutableArray *listPaid;
+@property NSMutableArray *listPaidName;
+@property NSDictionary *valueDict;
 //@property BOOL pubToPublic;
 
 - (void)resizeViews;
@@ -47,6 +50,8 @@ enum pubStatus {
 {
     [super viewDidLoad];
     
+    [self loadPaidFromServer];
+    
 //    self.status = PRIVATE;
 //    self.pubToPublic = NO;
     
@@ -64,7 +69,7 @@ enum pubStatus {
     rect.origin.y = NAV_BAR_HEIGHT;
     rect.size.height -= NAV_BAR_HEIGHT;
 	_tokenFieldView = [[TITokenFieldView alloc] initWithFrame:rect];
-	[_tokenFieldView setSourceArray:[Names listOfNames]];
+	[_tokenFieldView setSourceArray:self.listPaidName];
 	[self.view addSubview:_tokenFieldView];
 	
 	[_tokenFieldView.tokenField setDelegate:self];
@@ -76,7 +81,7 @@ enum pubStatus {
 	[_tokenFieldView.tokenField setPlaceholder:@"你想要评论的书籍..."];
 	
 	UIButton * addButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-	[addButton addTarget:self action:@selector(showContactsPicker:) forControlEvents:UIControlEventTouchUpInside];
+	[addButton addTarget:self action:@selector(showSelectePaid:) forControlEvents:UIControlEventTouchUpInside];
 	[_tokenFieldView.tokenField setRightView:addButton];
 	[_tokenFieldView.tokenField addTarget:self action:@selector(tokenFieldChangedEditing:) forControlEvents:UIControlEventEditingDidBegin];
 	[_tokenFieldView.tokenField addTarget:self action:@selector(tokenFieldChangedEditing:) forControlEvents:UIControlEventEditingDidEnd];
@@ -96,6 +101,10 @@ enum pubStatus {
 	[_tokenFieldView becomeFirstResponder];
 }
 
+- (void)reloadView {
+    [_tokenFieldView setSourceArray:self.listPaidName];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
@@ -113,7 +122,11 @@ enum pubStatus {
         }
         if (!isContained) {
             NSLog(@"comes here");
-            TIToken * token = [_tokenFieldView.tokenField addTokenWithTitle:self.selectItem];
+            NSString *output = [NSString stringWithFormat:@"#%@ %@", self.selectID, self.selectItem];
+            TIToken * token = [_tokenFieldView.tokenField addTokenWithTitle:output];
+            token.tag = [self.selectID integerValue];
+            NSLog(@"token.title:%@", self.selectItem);
+            NSLog(@"token.tag:%@", self.selectID);
             //            [token setAccessoryType:TITokenAccessoryTypeDisclosureIndicator];
             // If the size of the token might change, it's a good idea to layout again.
             [_tokenFieldView.tokenField layoutTokensAnimated:YES];
@@ -121,6 +134,7 @@ enum pubStatus {
             NSLog(@"tokens count from selection:%@", [NSNumber numberWithInteger:tokenCount]);
             [token setTintColor:((tokenCount % 3) == 0 ? [TIToken redTintColor] : ((tokenCount % 3) == 1 ? [TIToken greenTintColor] : [TIToken blueTintColor]))];
             self.selectItem = nil;
+            self.selectID = nil;
         }
     }
     [_tokenFieldView becomeFirstResponder];
@@ -141,21 +155,26 @@ enum pubStatus {
 	[self resizeViews];
 }
 
-- (void)showContactsPicker:(id)sender {
-	
-	// Show some kind of contacts picker in here.
-	// For now, here's how to add and customize tokens.
-	
-    //	NSArray * names = [Names listOfNames];
-    //
-    //	TIToken * token = [_tokenFieldView.tokenField addTokenWithTitle:[names objectAtIndex:(arc4random() % names.count)]];
-    //	[token setAccessoryType:TITokenAccessoryTypeDisclosureIndicator];
-    //	// If the size of the token might change, it's a good idea to layout again.
-    //	[_tokenFieldView.tokenField layoutTokensAnimated:YES];
-    //
-    //	NSUInteger tokenCount = _tokenFieldView.tokenField.tokens.count;
-    //	[token setTintColor:((tokenCount % 3) == 0 ? [TIToken redTintColor] : ((tokenCount % 2) == 0 ? [TIToken greenTintColor] : [TIToken blueTintColor]))];
+- (void)showSelectePaid:(id)sender {
+    if (self.listPaid && self.listPaidName) {
+        self.valueDict = @{@"listPaid": self.listPaid, @"listPaidName": self.listPaidName};
+    }
     [self performSegueWithIdentifier:@"selectPaid" sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"selectPaid"]) {
+        UIViewController *dest = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
+        if (self.valueDict) {
+            if (dest) {
+                for (NSString *key in self.valueDict) {
+//                    NSLog(@"%@, %@", key, self.valueDict[key]);
+                    [dest setValue:self.valueDict[key] forKey:key];
+                }
+            }
+        }
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -220,6 +239,37 @@ enum pubStatus {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) loadPaidFromServer
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
+    NSLog(@"path:%@",path);
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *tmp = (NSArray *)responseObject;
+        if (tmp) {
+            self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
+            self.listPaidName = [[NSMutableArray alloc] init];
+            for (NSDictionary *rowDict in self.listPaid) {
+                NSString *title = [rowDict objectForKey:@"title"];
+                NSNumber *ID = [rowDict objectForKey:@"bookID"];
+                NSString *output = [NSString stringWithFormat:@"#%@ %@", ID, title];
+                if ([rowDict objectForKey:@"title"]) {
+                    [self.listPaidName addObject:output];
+                }
+            }
+        }
+        [self reloadView];
+        NSLog(@"loadPaidFromServer Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"loadPaidFromServer Error:%@", error);
+    }];
 }
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

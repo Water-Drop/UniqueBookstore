@@ -10,4 +10,7 @@
 
 @interface XYSelectPaidController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
+@property NSMutableArray *listPaid;
+@property NSMutableArray *listPaidName;
+
 @end
