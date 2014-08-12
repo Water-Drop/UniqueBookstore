@@ -899,29 +899,10 @@
         <!--Pub Msg Controller - 发布信息-->
         <scene sceneID="l46-lf-jOC">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9BS-X5-qY9" customClass="XYPubMsgController" sceneMemberID="viewController">
+                <viewController id="9BS-X5-qY9" customClass="XYPubMsgController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1da-cK-uzP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="TXK-3a-Czf">
-                                <rect key="frame" x="0.0" y="65" width="320" height="132"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="w2L-X6-dWA">
-                                <rect key="frame" x="0.0" y="196" width="320" height="322"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="9BS-X5-qY9" id="VLp-zf-1aa"/>
-                                    <outlet property="delegate" destination="9BS-X5-qY9" id="eyM-yd-sRt"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="发布信息" id="mYN-Jd-BYS">
@@ -937,14 +918,54 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="w2L-X6-dWA" id="HpG-46-dRb"/>
-                        <outlet property="textView" destination="TXK-3a-Czf" id="x3s-EQ-uWH"/>
+                        <segue destination="rdd-1i-cLH" kind="modal" identifier="selectPaid" id="Rvt-FZ-KF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqX-rT-GFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mBv-TY-e5m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2966" y="-1268"/>
+            <point key="canvasLocation" x="3084" y="-1432"/>
+        </scene>
+        <!--Select Paid Controller - 已购书籍-->
+        <scene sceneID="0DM-Jb-cNn">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gxT-tN-O8V" customClass="XYSelectPaidController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jAK-gl-8Tg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" text="" placeholder="搜索已购书籍" showsCancelButton="YES" id="ZiR-3G-pze">
+                                <rect key="frame" x="0.0" y="65" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OYT-gw-j3G">
+                                <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gxT-tN-O8V" id="Gyp-yL-vMi"/>
+                                    <outlet property="delegate" destination="gxT-tN-O8V" id="7Hm-7G-h5x"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="已购书籍" id="IMq-Hw-nj4">
+                        <barButtonItem key="leftBarButtonItem" title="关闭" id="cuj-SF-mst">
+                            <connections>
+                                <action selector="cancelAction:" destination="gxT-tN-O8V" id="XnW-Tq-7ej"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="更新" id="IUY-px-J9k"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="OYT-gw-j3G" id="67r-BL-FHe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76R-NB-u67" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4011" y="-1432"/>
         </scene>
         <!--Search Controller - 搜书-->
         <scene sceneID="IXW-bC-L5p">
@@ -1103,7 +1124,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKQ-we-dgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="-1268"/>
+            <point key="canvasLocation" x="2440" y="-1432"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cZ5-po-HZA">
@@ -1207,6 +1228,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lwk-hf-smM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="4652"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Y48-YF-pbp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rdd-1i-cLH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="10r-4k-jph">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gxT-tN-O8V" kind="relationship" relationship="rootViewController" id="Cec-Oq-TUn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iZX-Xp-HFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3555" y="-1432"/>
         </scene>
     </scenes>
     <resources>

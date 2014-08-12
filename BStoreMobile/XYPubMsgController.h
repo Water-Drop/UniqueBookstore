@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "XYViewController.h"
+#import "TITokenField.h"
 
-@interface XYPubMsgController : XYViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
+@interface XYPubMsgController : XYViewController<UIAlertViewDelegate,TITokenFieldDelegate, UITextViewDelegate>
+
+@property NSString *selectItem;
 
 @end
