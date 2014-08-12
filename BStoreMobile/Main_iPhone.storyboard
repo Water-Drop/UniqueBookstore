@@ -924,7 +924,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqX-rT-GFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mBv-TY-e5m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3084" y="-1432"/>
+            <point key="canvasLocation" x="2968" y="-1848"/>
         </scene>
         <!--Select Paid Controller - 已购书籍-->
         <scene sceneID="0DM-Jb-cNn">
@@ -934,13 +934,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="" placeholder="搜索已购书籍" showsCancelButton="YES" id="ZiR-3G-pze">
-                                <rect key="frame" x="0.0" y="65" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OYT-gw-j3G">
-                                <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="505"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -969,7 +964,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="76R-NB-u67" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4011" y="-1432"/>
+            <point key="canvasLocation" x="4037" y="-1432"/>
         </scene>
         <!--Search Controller - 搜书-->
         <scene sceneID="IXW-bC-L5p">
@@ -1128,7 +1123,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKQ-we-dgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="-1432"/>
+            <point key="canvasLocation" x="2440" y="-1848"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cZ5-po-HZA">
@@ -1249,7 +1244,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZX-Xp-HFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3555" y="-1432"/>
+            <point key="canvasLocation" x="3511" y="-1432"/>
         </scene>
     </scenes>
     <resources>

@@ -24,7 +24,7 @@ enum pubStatus {
 @property NSMutableArray *listPaid;
 @property NSMutableArray *listPaidName;
 @property NSDictionary *valueDict;
-//@property BOOL pubToPublic;
+@property BOOL pubToPublic;
 
 - (void)resizeViews;
 
@@ -53,7 +53,7 @@ enum pubStatus {
     [self loadPaidFromServer];
     
 //    self.status = PRIVATE;
-//    self.pubToPublic = NO;
+    self.pubToPublic = NO;
     
 //    self.textView.delegate = self;
     
@@ -352,15 +352,126 @@ enum pubStatus {
 #pragma mark - unused
 
 - (IBAction)pubMsg:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-    [alert show];
+    if (_messageView.text && ![_messageView.text isEqualToString:@""]) {
+        if (_tokenFieldView.tokenField.tokens && [_tokenFieldView.tokenField.tokens count] > 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"选择消息发布方式" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"同步到书评", @"仅好友圈可见",nil];
+            alert.tag = 0;
+            [alert show];
+        } else {
+            [self sendMsg];
+        }
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
+    if (alertView.tag == 1 && buttonIndex == 0) {
         [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
     }
+    if (alertView.tag == 0 && buttonIndex != 0) {
+        if (buttonIndex == 1) {
+            NSLog(@"同步到书评 selected");
+            self.pubToPublic = YES;
+        } else if (buttonIndex == 2) {
+            NSLog(@"仅好友圈可见 selected");
+            self.pubToPublic = NO;
+        }
+//        NSLog(@"before sendMsg....");
+        [self sendMsg];
+    }
+}
+
+- (void)sendMsg
+{
+    if (self.pubToPublic) {
+        [self sendPublicMsg];
+    } else {
+        [self sendPrivateMsg];
+    }
+}
+
+- (NSString *) prepareForMsg {
+    NSString *retStr = _messageView.text;
+    if (_tokenFieldView.tokenField.tokens && [_tokenFieldView.tokenField.tokens count] > 0) {
+        NSString *before = @"关于:";
+        for (TIToken *tt in _tokenFieldView.tokenField.tokens) {
+            NSString *title = tt.title;
+            //            NSLog(@"title:%@", title);
+            NSRange range = [title rangeOfString:@" "];
+            if (range.location < [title length] && range.location > 1) {
+                NSString *subTitle = [title substringFromIndex:(range.location + 1)];
+                NSString * all = [NSString stringWithFormat:@"《%@》", subTitle];
+                //                NSLog(@"all:%@", all);
+                before = [before stringByAppendingString:all];
+                //                NSLog(@"before:%@", before);
+            }
+        }
+        retStr = [NSString stringWithFormat:@"%@\n\n%@", before, retStr];
+    }
+    return retStr;
+}
+
+- (void)sendPrivateMsg
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *path = [NSString stringWithFormat:@"User/AddSaying/OnlySaying"];
+    NSString *content = [self prepareForMsg];
+    NSDictionary *paramDict = @{@"userID": USERID, @"content": content};
+    NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+    [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                alert.tag = 1;
+                [alert show];
+            }
+        }
+        NSLog(@"sendPrivateMsg Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"sendPrivateMsg Error:%@", error);
+    }];
+}
+
+- (void)sendPublicMsg
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *path = [NSString stringWithFormat:@"User/AddSaying/AlsoBookComment"];
+    NSInteger tag = -1;
+    if (_tokenFieldView.tokenField.tokens && [_tokenFieldView.tokenField.tokens count] > 0) {
+        tag = ((TIToken *)_tokenFieldView.tokenField.tokens[0]).tag;
+    }
+    NSNumber *bookID = [NSNumber numberWithInteger:tag];
+    NSString *content = [self prepareForMsg];
+    NSDictionary *paramDict = @{@"userID": USERID, @"bookID": bookID, @"content": content};
+    NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+    [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *retDict = (NSDictionary *)responseObject;
+        if (retDict && retDict[@"message"]) {
+            NSLog(@"message: %@", retDict[@"message"]);
+            if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                alert.tag = 1;
+                [alert show];
+            }
+        }
+        NSLog(@"sendPublicMsg Success");
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"sendPublicMsg Error:%@", error);
+    }];
 }
 
 //- (void)textViewDidChange:(UITextView *)textView

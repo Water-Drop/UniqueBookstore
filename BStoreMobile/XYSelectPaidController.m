@@ -35,6 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [XYUtil setExtraCellLineHidden:self.tableView];
     if (!self.listPaid || !self.listPaidName) {
         NSLog(@"loadPaidFromServer in SelectPaid");
         [self loadPaidFromServer];
