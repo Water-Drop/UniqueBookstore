@@ -10,6 +10,7 @@
 #import "XYRoundView.h"
 
 @interface XYInvoiceView : UIView
+
 @property (weak, nonatomic) IBOutlet UILabel *orderID;
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UILabel *bookStore;
