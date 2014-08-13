@@ -12,6 +12,7 @@
 #import "XYCollectionCell.h"
 #import "XYUtil.h"
 #import "UIImageView+AFNetworking.h"
+#import "XYShowInvoiceController.h"
 
 @interface XYPurchaseController ()
 
@@ -21,6 +22,7 @@
 - (IBAction)cancelAction:(id)sender;
 @property enum purchaseStatus status;
 @property (nonatomic,strong) NSNumber *statusNum; // byPassParam
+@property NSDictionary *valueDict;
 
 @end
 
@@ -299,7 +301,8 @@
         if (retDict && retDict[@"message"]) {
             NSLog(@"message: %@", retDict[@"message"]);
             if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", @"查看电子小票",nil];
+                self.valueDict = @{@"status": [NSNumber numberWithInteger:fromPurchase], @"orderID": [NSString stringWithFormat:@"%@", retDict[@"orderID"]]};
                 [alert show];
             }
         }
@@ -313,6 +316,22 @@
 {
     if (buttonIndex == 0) {
         [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    if (buttonIndex == 1) {
+        [self performSegueWithIdentifier:@"showInvoice" sender:nil];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showInvoice"]) {
+        UIViewController *dest = ((UINavigationController *)segue.destinationViewController).viewControllers[0];
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
     }
 }
 

@@ -924,7 +924,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bqX-rT-GFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mBv-TY-e5m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2968" y="-1848"/>
+            <point key="canvasLocation" x="2984" y="-1432"/>
         </scene>
         <!--Select Paid Controller - 已购书籍-->
         <scene sceneID="0DM-Jb-cNn">
@@ -1123,7 +1123,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YKQ-we-dgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440" y="-1848"/>
+            <point key="canvasLocation" x="2440" y="-1432"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cZ5-po-HZA">
@@ -1169,10 +1169,34 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="qkG-ZV-dJy" kind="modal" identifier="showInvoice" id="rfo-dA-Ezd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WlW-fq-gQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5358" y="699"/>
+            <point key="canvasLocation" x="5330" y="699"/>
+        </scene>
+        <!--Show Invoice Controller - 电子小票-->
+        <scene sceneID="JXI-v2-1Ou">
+            <objects>
+                <viewController id="209-Ll-SJZ" customClass="XYShowInvoiceController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="liZ-Cj-Tgn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="电子小票" id="7vl-qR-lvW">
+                        <barButtonItem key="rightBarButtonItem" title="确认" id="1cN-Dx-yRf">
+                            <connections>
+                                <action selector="doneAction:" destination="209-Ll-SJZ" id="85l-Cv-FPs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PAC-oU-J2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6390" y="699"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EU3-Ip-eTl">
@@ -1246,6 +1270,24 @@
             </objects>
             <point key="canvasLocation" x="3511" y="-1432"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nKX-Pk-o6m">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qkG-ZV-dJy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iIO-nH-zF7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="209-Ll-SJZ" kind="relationship" relationship="rootViewController" id="Vpr-mC-sAq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qes-dY-9hd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5808" y="699"/>
+        </scene>
     </scenes>
     <resources>
         <image name="camera-50.png" width="25" height="25"/>
@@ -1262,9 +1304,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="awM-zn-5XB"/>
         <segue reference="YyE-96-kFY"/>
-        <segue reference="tMo-Tm-dC1"/>
         <segue reference="szb-hM-fSC"/>
+        <segue reference="awM-zn-5XB"/>
+        <segue reference="tMo-Tm-dC1"/>
     </inferredMetricsTieBreakers>
 </document>

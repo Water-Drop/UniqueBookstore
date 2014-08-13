@@ -194,6 +194,9 @@
 		E33A3FD01977BFD800BA3797 /* 7_full.JPG in Resources */ = {isa = PBXBuildFile; fileRef = E33A3FB01977BFD800BA3797 /* 7_full.JPG */; };
 		E33A3FD11977BFD800BA3797 /* 8_full.JPG in Resources */ = {isa = PBXBuildFile; fileRef = E33A3FB11977BFD800BA3797 /* 8_full.JPG */; };
 		E33A3FD21977BFD800BA3797 /* 9_full.JPG in Resources */ = {isa = PBXBuildFile; fileRef = E33A3FB21977BFD800BA3797 /* 9_full.JPG */; };
+		E340FD49199B73AC007A61F5 /* XYInvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E340FD46199B73AC007A61F5 /* XYInvoiceView.xib */; };
+		E340FD4A199B73AC007A61F5 /* XYInvoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = E340FD48199B73AC007A61F5 /* XYInvoiceView.m */; };
+		E340FD4D199B7605007A61F5 /* XYShowInvoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E340FD4C199B7605007A61F5 /* XYShowInvoiceController.m */; };
 		E35BA3611973630E0055EDF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3601973630E0055EDF4 /* Foundation.framework */; };
 		E35BA3631973630E0055EDF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3621973630E0055EDF4 /* CoreGraphics.framework */; };
 		E35BA3651973630E0055EDF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35BA3641973630E0055EDF4 /* UIKit.framework */; };
@@ -543,6 +546,11 @@
 		E33A3FB01977BFD800BA3797 /* 7_full.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7_full.JPG; sourceTree = "<group>"; };
 		E33A3FB11977BFD800BA3797 /* 8_full.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 8_full.JPG; sourceTree = "<group>"; };
 		E33A3FB21977BFD800BA3797 /* 9_full.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9_full.JPG; sourceTree = "<group>"; };
+		E340FD46199B73AC007A61F5 /* XYInvoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYInvoiceView.xib; sourceTree = "<group>"; };
+		E340FD47199B73AC007A61F5 /* XYInvoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYInvoiceView.h; sourceTree = "<group>"; };
+		E340FD48199B73AC007A61F5 /* XYInvoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYInvoiceView.m; sourceTree = "<group>"; };
+		E340FD4B199B7605007A61F5 /* XYShowInvoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYShowInvoiceController.h; sourceTree = "<group>"; };
+		E340FD4C199B7605007A61F5 /* XYShowInvoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYShowInvoiceController.m; sourceTree = "<group>"; };
 		E35BA35D1973630E0055EDF4 /* BStoreMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BStoreMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35BA3601973630E0055EDF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E35BA3621973630E0055EDF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1259,6 +1267,9 @@
 				E3EA373F198747F60066ECCD /* XYFriendsMsgCell.h */,
 				E3EA3740198747F60066ECCD /* XYFriendsMsgCell.m */,
 				E3EA3741198747F60066ECCD /* XYFriendsMsgCell.xib */,
+				E340FD46199B73AC007A61F5 /* XYInvoiceView.xib */,
+				E340FD47199B73AC007A61F5 /* XYInvoiceView.h */,
+				E340FD48199B73AC007A61F5 /* XYInvoiceView.m */,
 				E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */,
 				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
 				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
@@ -1387,6 +1398,8 @@
 				E3EA374F1988F00D0066ECCD /* XYPurchaseController.m */,
 				E3EA375119892AF10066ECCD /* XYConfirmController.h */,
 				E3EA375219892AF10066ECCD /* XYConfirmController.m */,
+				E340FD4B199B7605007A61F5 /* XYShowInvoiceController.h */,
+				E340FD4C199B7605007A61F5 /* XYShowInvoiceController.m */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -1517,6 +1530,7 @@
 				E33A3FCF1977BFD800BA3797 /* 6_full.JPG in Resources */,
 				21F1CBC8198AC12B0089C9EA /* up-50.png in Resources */,
 				21C4EC4C1987EE9000CC9D4C /* courses-50@2x.png in Resources */,
+				E340FD49199B73AC007A61F5 /* XYInvoiceView.xib in Resources */,
 				E33A3F7B1977BB5000BA3797 /* France.png in Resources */,
 				21F1CBC6198AC12B0089C9EA /* up_left-50.png in Resources */,
 				E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */,
@@ -1669,6 +1683,7 @@
 			files = (
 				211B278A1982052100052039 /* XYCameraSession.mm in Sources */,
 				E3EA375319892AF10066ECCD /* XYConfirmController.m in Sources */,
+				E340FD4D199B7605007A61F5 /* XYShowInvoiceController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				21F1CBB4198AAC5F0089C9EA /* XYTableViewController.m in Sources */,
 				21C4EC7F198A104800CC9D4C /* XYWebViewController.m in Sources */,
@@ -1710,6 +1725,7 @@
 				E3EA3787198A7EEA0066ECCD /* XYRoundControl.m in Sources */,
 				E3BF9EDA1984A6B200855279 /* UIWebView+AFNetworking.m in Sources */,
 				E35BA36D1973630E0055EDF4 /* main.m in Sources */,
+				E340FD4A199B73AC007A61F5 /* XYInvoiceView.m in Sources */,
 				E391BB0E199A27BC000B81DC /* Names.m in Sources */,
 				E3BF9ECA1984A6B200855279 /* AFHTTPRequestOperation.m in Sources */,
 				E3BF9ED91984A6B200855279 /* UIRefreshControl+AFNetworking.m in Sources */,
