@@ -19,7 +19,26 @@
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
+    if ([self authenticatedUser])
+    {
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    }
+    else
+    {
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main_iPhone" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"loginController"];
+        
+        self.window.rootViewController = rootController;
+    }
     return YES;
+}
+
+- (BOOL)authenticatedUser
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"userList"]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

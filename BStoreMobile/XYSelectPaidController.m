@@ -125,24 +125,27 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
-            self.listPaidName = [[NSMutableArray alloc] init];
-            for (NSDictionary *rowDict in self.listPaid) {
-                if ([rowDict objectForKey:@"title"]) {
-                    [self.listPaidName addObject:[rowDict objectForKey:@"title"]];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
+                self.listPaidName = [[NSMutableArray alloc] init];
+                for (NSDictionary *rowDict in self.listPaid) {
+                    if ([rowDict objectForKey:@"title"]) {
+                        [self.listPaidName addObject:[rowDict objectForKey:@"title"]];
+                    }
                 }
             }
-        }
-        [self.tableView reloadData];
-        NSLog(@"loadPaidFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadPaidFromServer Error:%@", error);
-    }];
+            [self.tableView reloadData];
+            NSLog(@"loadPaidFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadPaidFromServer Error:%@", error);
+        }];
+    }
 }
 
 /*

@@ -89,22 +89,25 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/AddFriend?userID1=%@&userID2=%@", USERID, self.userID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加成功" message:@"该用户已添加为你的好友" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                alert.tag = ADD;
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/AddFriend?userID1=%@&userID2=%@", USERID, self.userID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加成功" message:@"该用户已添加为你的好友" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    alert.tag = ADD;
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"addFriendFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"addFriendFromServer Error:%@", error);
-    }];
+            NSLog(@"addFriendFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"addFriendFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void) delFriendFromServer
@@ -115,22 +118,25 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteFriend?userID1=%@&userID2=%@", USERID, self.userID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除成功" message:@"该用户已从好友列表中删除" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                alert.tag = DELETE;
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteFriend?userID1=%@&userID2=%@", USERID, self.userID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除成功" message:@"该用户已从好友列表中删除" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    alert.tag = DELETE;
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"delFriendFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"delFriendFromServer Error:%@", error);
-    }];
+            NSLog(@"delFriendFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"delFriendFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

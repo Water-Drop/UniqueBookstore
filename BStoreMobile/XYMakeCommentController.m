@@ -171,20 +171,23 @@
     [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSString *path = @"AddBookComment";
     NSLog(@"path:%@",path);
-    NSDictionary *params = @{@"userID": [NSNumber numberWithInt:[USERID intValue]], @"bookID": [NSNumber numberWithInt:[self.bookID intValue]], @"score":[NSNumber numberWithInt:self.score], @"content":self.content.text};
-    [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"评论发布成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSDictionary *params = @{@"userID": [NSNumber numberWithInt:[USERID intValue]], @"bookID": [NSNumber numberWithInt:[self.bookID intValue]], @"score":[NSNumber numberWithInt:self.score], @"content":self.content.text};
+        [manager POST:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"评论发布成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"pubCommentToServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"pubCommentToServer Error:%@", error);
-    }];
+            NSLog(@"pubCommentToServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"pubCommentToServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

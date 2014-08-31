@@ -109,18 +109,21 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/Sayinglist/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listMsg = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        NSLog(@"loadFriendsMsgFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadFriendsMsgFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/Sayinglist/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listMsg = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            NSLog(@"loadFriendsMsgFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadFriendsMsgFromServer Error:%@", error);
+        }];
+    }
 
 }
 

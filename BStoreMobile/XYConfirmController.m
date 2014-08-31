@@ -182,24 +182,27 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/BooksInSAArea?userID=%@&bsID=%@", USERID, @"1"];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listOutput = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        [self calculateListPrint];
-        
-        if (self.listOutput && [self.listOutput count] > 0) {
-            self.navigationItem.rightBarButtonItem = rightBtn;
-        }
-        [self.tableView reloadData];
-        NSLog(@"loadConfirmListFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadConfirmListFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/BooksInSAArea?userID=%@&bsID=%@", USERID, @"1"];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listOutput = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            [self calculateListPrint];
+            
+            if (self.listOutput && [self.listOutput count] > 0) {
+                self.navigationItem.rightBarButtonItem = rightBtn;
+            }
+            [self.tableView reloadData];
+            NSLog(@"loadConfirmListFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadConfirmListFromServer Error:%@", error);
+        }];
     }
+}
 
 - (void)confirmAction
 {
@@ -219,20 +222,23 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/SettleAccounts?userID=%@&bsID=%@", USERID, @"1"];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"%@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/SettleAccounts?userID=%@&bsID=%@", USERID, @"1"];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"%@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                }
             }
-        }
-        NSLog(@"sendConfirmRequest Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"sendConfirmRequest Error:%@", error);
-    }];
+            NSLog(@"sendConfirmRequest Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"sendConfirmRequest Error:%@", error);
+        }];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

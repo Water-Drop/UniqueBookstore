@@ -503,26 +503,29 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/MyCart/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        NSLog(@"loadCartFromServer Success");
-        UIBarButtonItem *rightBtn = nil;
-        UIBarButtonItem *leftBtn = nil;
-        if (self.listCart && [self.listCart count] > 0) {
-            rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
-            leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"去付款" style:UIBarButtonItemStylePlain target:self action:@selector(goToPurchase)];
-        }
-        self.navigationItem.rightBarButtonItem = rightBtn;
-        self.navigationItem.leftBarButtonItem = leftBtn;
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadCartFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/MyCart/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            NSLog(@"loadCartFromServer Success");
+            UIBarButtonItem *rightBtn = nil;
+            UIBarButtonItem *leftBtn = nil;
+            if (self.listCart && [self.listCart count] > 0) {
+                rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInCart)];
+                leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"去付款" style:UIBarButtonItemStylePlain target:self action:@selector(goToPurchase)];
+            }
+            self.navigationItem.rightBarButtonItem = rightBtn;
+            self.navigationItem.leftBarButtonItem = leftBtn;
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadCartFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) goToPurchase {
@@ -538,24 +541,27 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/MyWishlist/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listToBuy = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        NSLog(@"loadToBuyFromServer Success");
-        UIBarButtonItem *rightBtn = nil;
-        if (self.listToBuy && [self.listToBuy count] > 0) {
-            rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
-        }
-        self.navigationItem.rightBarButtonItem = rightBtn;
-        self.navigationItem.leftBarButtonItem = nil;
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadToBuyFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/MyWishlist/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listToBuy = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            NSLog(@"loadToBuyFromServer Success");
+            UIBarButtonItem *rightBtn = nil;
+            if (self.listToBuy && [self.listToBuy count] > 0) {
+                rightBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteItemsInTobuy)];
+            }
+            self.navigationItem.rightBarButtonItem = rightBtn;
+            self.navigationItem.leftBarButtonItem = nil;
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadToBuyFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) loadPaidFromServer
@@ -566,19 +572,22 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        NSLog(@"loadPaidFromServer Success");
-        self.navigationItem.rightBarButtonItem = nil;
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadPaidFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            NSLog(@"loadPaidFromServer Success");
+            self.navigationItem.rightBarButtonItem = nil;
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadPaidFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) deleteItemsInCartFromServer
@@ -589,17 +598,20 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteCart/All?userID=%@", USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        NSLog(@"deleteItemsInCartFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"deleteItemsInCartFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteCart/All?userID=%@", USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"deleteItemsInCartFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"deleteItemsInCartFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) deleteItemsInWishlistFromServer
@@ -610,17 +622,20 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/All?userID=%@", USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        NSLog(@"deleteItemsInWishlistFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"deleteItemsInWishlistFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/All?userID=%@", USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"deleteItemsInWishlistFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"deleteItemsInWishlistFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) deleteOneItemInCartFromServer:(NSInteger) bookID
@@ -631,17 +646,20 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteCart/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        NSLog(@"deleteOneItemInCartFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"deleteOneItemInCartFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteCart/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"deleteOneItemInCartFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"deleteOneItemInCartFromServer Error:%@", error);
+        }];
+    }
 }
 
 -(void) deleteOneItemInWishlistFromServer:(NSInteger) bookID
@@ -652,17 +670,20 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        NSLog(@"deleteOneItemInWishlistFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"deleteOneItemInWishlistFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteWishlist/Part?userID=%@&bookID=%@", USERID, [NSNumber numberWithInteger:bookID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"deleteOneItemInWishlistFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"deleteOneItemInWishlistFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)updateOneItemInCart:(NSInteger)bookID amount:(NSInteger)amount
@@ -673,18 +694,21 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/UpdateCart?userID=%@&bookID=%@&amount=%@", USERID, [NSNumber numberWithInteger:bookID], [NSNumber numberWithInteger:amount]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        [self.tableView reloadData];
-        NSLog(@"updateOneItemInCart Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"updateOneItemInCart Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/UpdateCart?userID=%@&bookID=%@&amount=%@", USERID, [NSNumber numberWithInteger:bookID], [NSNumber numberWithInteger:amount]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            [self.tableView reloadData];
+            NSLog(@"updateOneItemInCart Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"updateOneItemInCart Error:%@", error);
+        }];
+    }
 }
 
 - (void)doneButtonDidPressed:(id)sender {
@@ -770,22 +794,25 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/Cart2Wishlist?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"移入心愿单" message:@"该商品已成功移入心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/Cart2Wishlist?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"移入心愿单" message:@"该商品已成功移入心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
             }
-        }
-        [self.tableView reloadData];
-        NSLog(@"cartToWishlistInServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"cartToWishlistInServer Error:%@", error);
-    }];
+            [self.tableView reloadData];
+            NSLog(@"cartToWishlistInServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"cartToWishlistInServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)wishlistToCart:(id)sender
@@ -812,22 +839,25 @@ enum MyBookPageStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/Wishlist2Cart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/Wishlist2Cart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
             }
-        }
-        [self.tableView reloadData];
-        NSLog(@"wishlistToCartInServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"wishlistToCartInServer Error:%@", error);
-    }];
+            [self.tableView reloadData];
+            NSLog(@"wishlistToCartInServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"wishlistToCartInServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)navButtonClicked:(id)sender

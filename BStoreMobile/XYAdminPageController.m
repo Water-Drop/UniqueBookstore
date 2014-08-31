@@ -7,6 +7,7 @@
 //
 
 #import "XYAdminPageController.h"
+#import "XYAppDelegate.h"
 
 @interface XYAdminPageController ()
 
@@ -42,6 +43,30 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 3 && indexPath.row == 0) {
+        // logout clicked
+        [self logoutAction];
+    }
+}
+
+- (void)logoutAction {
+    [self logout];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UIViewController *loginController = (UITabBarController *)[storyBoard instantiateViewControllerWithIdentifier:@"loginController"];
+    
+    XYAppDelegate *appDelegateTemp = (XYAppDelegate *) [[UIApplication sharedApplication]delegate];
+    appDelegateTemp.window.rootViewController = loginController;
+    
+}
+- (void)logout {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"userList"];
+    [defaults synchronize];
 }
 
 #pragma mark - Table view data source

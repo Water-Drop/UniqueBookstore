@@ -240,21 +240,24 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/AddCart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/AddCart?userID=%@&bookID=%@&amount=1", USERID, [NSNumber numberWithInteger:bookID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"addOneItemToCart Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"addOneItemToCart Error:%@", error);
-    }];
+            NSLog(@"addOneItemToCart Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"addOneItemToCart Error:%@", error);
+        }];
+    }
 }
 
 

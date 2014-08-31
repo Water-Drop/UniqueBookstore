@@ -161,7 +161,8 @@
     [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *tmp = (NSDictionary *)responseObject;
         if (tmp && [tmp count] > 0) {
-            if ([tmp[@"userID"] intValue] != [USERID intValue]) {
+            NSString *USERID = [XYUtil getUserID];
+            if (USERID && [tmp[@"userID"] intValue] != [USERID intValue]) {
                 NSString *userID = [NSString stringWithFormat:@"%@",tmp[@"userID"]];
                 NSString *sign = tmp[@"sign"];
                 NSString *address = tmp[@"address"];

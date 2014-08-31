@@ -68,19 +68,22 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/MyCart/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
-            [self calculateTotalPrice];
-        }
-        NSLog(@"loadCartFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadCartFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/MyCart/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listCart = [[NSMutableArray alloc]initWithArray:tmp];
+                [self calculateTotalPrice];
+            }
+            NSLog(@"loadCartFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadCartFromServer Error:%@", error);
+        }];
+    }
 }
 
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
@@ -261,28 +264,31 @@
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
     [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    NSString *path = [NSString stringWithFormat:@"User/BuyDirectly/%@", USERID];
-    NSMutableArray *paramArray = [[NSMutableArray alloc] init];
-    if (self.listCart) {
-        for (NSDictionary *rowDict in self.listCart) {
-            NSDictionary *newDict = @{@"bookID": rowDict[@"bookID"], @"amount": rowDict[@"amount"]};
-            [paramArray addObject:newDict];
-        }
-    }
-    NSLog(@"path:%@",path);
-    [manager POST:path parameters:paramArray success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/BuyDirectly/%@", USERID];
+        NSMutableArray *paramArray = [[NSMutableArray alloc] init];
+        if (self.listCart) {
+            for (NSDictionary *rowDict in self.listCart) {
+                NSDictionary *newDict = @{@"bookID": rowDict[@"bookID"], @"amount": rowDict[@"amount"]};
+                [paramArray addObject:newDict];
             }
         }
-        NSLog(@"purchaseToServerByRemaining Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"purchaseToServerByRemaining Error:%@", error);
-    }];
+        NSLog(@"path:%@",path);
+        [manager POST:path parameters:paramArray success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    [alert show];
+                }
+            }
+            NSLog(@"purchaseToServerByRemaining Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"purchaseToServerByRemaining Error:%@", error);
+        }];
+    }
 }
 
 // User/Pay/ByRemaining/
@@ -294,22 +300,25 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/Pay/ByRemaining/%@", USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", @"查看电子小票",nil];
-                self.valueDict = @{@"status": [NSNumber numberWithInteger:fromPurchase], @"orderID": [NSString stringWithFormat:@"%@", retDict[@"orderID"]]};
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/Pay/ByRemaining/%@", USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", @"查看电子小票",nil];
+                    self.valueDict = @{@"status": [NSNumber numberWithInteger:fromPurchase], @"orderID": [NSString stringWithFormat:@"%@", retDict[@"orderID"]]};
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"purchaseToServerByRemaining Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"purchaseToServerByRemaining Error:%@", error);
-    }];
+            NSLog(@"purchaseToServerByRemaining Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"purchaseToServerByRemaining Error:%@", error);
+        }];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -249,27 +249,30 @@ enum pubStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
-            self.listPaidName = [[NSMutableArray alloc] init];
-            for (NSDictionary *rowDict in self.listPaid) {
-                NSString *title = [rowDict objectForKey:@"title"];
-                NSNumber *ID = [rowDict objectForKey:@"bookID"];
-                NSString *output = [NSString stringWithFormat:@"#%@ %@", ID, title];
-                if ([rowDict objectForKey:@"title"]) {
-                    [self.listPaidName addObject:output];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/PurchasedBooks/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listPaid = [[NSMutableArray alloc]initWithArray:tmp];
+                self.listPaidName = [[NSMutableArray alloc] init];
+                for (NSDictionary *rowDict in self.listPaid) {
+                    NSString *title = [rowDict objectForKey:@"title"];
+                    NSNumber *ID = [rowDict objectForKey:@"bookID"];
+                    NSString *output = [NSString stringWithFormat:@"#%@ %@", ID, title];
+                    if ([rowDict objectForKey:@"title"]) {
+                        [self.listPaidName addObject:output];
+                    }
                 }
             }
-        }
-        [self reloadView];
-        NSLog(@"loadPaidFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadPaidFromServer Error:%@", error);
-    }];
+            [self reloadView];
+            NSLog(@"loadPaidFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadPaidFromServer Error:%@", error);
+        }];
+    }
 }
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -422,22 +425,25 @@ enum pubStatus {
     [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSString *path = [NSString stringWithFormat:@"User/AddSaying/OnlySaying"];
     NSString *content = [self prepareForMsg];
-    NSDictionary *paramDict = @{@"userID": USERID, @"content": content};
-    NSLog(@"path:%@\n paramDict:%@",path, paramDict);
-    [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                alert.tag = 1;
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSDictionary *paramDict = @{@"userID": USERID, @"content": content};
+        NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+        [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    alert.tag = 1;
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"sendPrivateMsg Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"sendPrivateMsg Error:%@", error);
-    }];
+            NSLog(@"sendPrivateMsg Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"sendPrivateMsg Error:%@", error);
+        }];
+    }
 }
 
 - (void)sendPublicMsg
@@ -456,22 +462,25 @@ enum pubStatus {
     }
     NSNumber *bookID = [NSNumber numberWithInteger:tag];
     NSString *content = [self prepareForMsg];
-    NSDictionary *paramDict = @{@"userID": USERID, @"bookID": bookID, @"content": content};
-    NSLog(@"path:%@\n paramDict:%@",path, paramDict);
-    [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-            if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                alert.tag = 1;
-                [alert show];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSDictionary *paramDict = @{@"userID": USERID, @"bookID": bookID, @"content": content};
+        NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+        [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    alert.tag = 1;
+                    [alert show];
+                }
             }
-        }
-        NSLog(@"sendPublicMsg Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"sendPublicMsg Error:%@", error);
-    }];
+            NSLog(@"sendPublicMsg Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"sendPublicMsg Error:%@", error);
+        }];
+    }
 }
 
 //- (void)textViewDidChange:(UITextView *)textView

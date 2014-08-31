@@ -190,18 +190,21 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/Friendslist/" stringByAppendingString:USERID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *tmp = (NSArray *)responseObject;
-        if (tmp) {
-            self.listFriends = [[NSMutableArray alloc]initWithArray:tmp];
-        }
-        NSLog(@"loadFriendsFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadFriendsFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/Friendslist/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *tmp = (NSArray *)responseObject;
+            if (tmp) {
+                self.listFriends = [[NSMutableArray alloc]initWithArray:tmp];
+            }
+            NSLog(@"loadFriendsFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadFriendsFromServer Error:%@", error);
+        }];
+    }
 }
 
 // delete from table view in listFriends
@@ -240,18 +243,21 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [NSString stringWithFormat:@"User/DeleteFriend?userID1=%@&userID2=%@", USERID, [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:userID]]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *retDict = (NSDictionary *)responseObject;
-        if (retDict && retDict[@"message"]) {
-            NSLog(@"message: %@", retDict[@"message"]);
-        }
-        NSLog(@"delFriendFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"delFriendFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteFriend?userID1=%@&userID2=%@", USERID, [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:userID]]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"delFriendFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"delFriendFromServer Error:%@", error);
+        }];
+    }
 }
 
 
