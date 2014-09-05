@@ -62,6 +62,7 @@
     }
     NSInteger index = indexPath.section;
     NSDictionary *orderInfo = self.listOrder[index];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.orderID.text = [NSString stringWithFormat:@"2014081322001832%@", orderInfo[@"orderID"]];
     cell.ostatus.text = @"已完成";
     cell.ostore.text = @"新知书店";

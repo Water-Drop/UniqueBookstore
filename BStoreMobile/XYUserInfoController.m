@@ -1,24 +1,29 @@
 //
-//  XYAdminPageController.m
+//  XYUserInfoController.m
 //  BStoreMobile
 //
-//  Created by Julie on 14-7-26.
+//  Created by Julie on 14-9-5.
 //  Copyright (c) 2014年 SJTU. All rights reserved.
 //
 
-#import "XYAdminPageController.h"
-#import "XYAppDelegate.h"
+#import "XYUserInfoController.h"
 #import "XYUtil.h"
 
-@interface XYAdminPageController ()
-
-@property (weak, nonatomic) IBOutlet UILabel *uname;
-@property (weak, nonatomic) IBOutlet UILabel *name;
+@interface XYUserInfoController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
+@property (weak, nonatomic) IBOutlet UILabel *nickname;
+@property (weak, nonatomic) IBOutlet UILabel *uname;
+@property (weak, nonatomic) IBOutlet UILabel *credit;
+@property (weak, nonatomic) IBOutlet UILabel *remaining;
+@property (weak, nonatomic) IBOutlet UILabel *gender;
+@property (weak, nonatomic) IBOutlet UILabel *area;
+@property (weak, nonatomic) IBOutlet UILabel *sign;
+@property (weak, nonatomic) IBOutlet UILabel *email;
+@property (weak, nonatomic) IBOutlet UILabel *phoneNum;
 
 @end
 
-@implementation XYAdminPageController
+@implementation XYUserInfoController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,13 +38,13 @@
 {
     [super viewDidLoad];
     
-    [self loadUserInfoFromServer];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self loadUserInfoFromServer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,31 +53,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)loadUserInfoFromServer
 {
-    if (indexPath.section == 2 && indexPath.row == 0) {
-        // logout clicked
-        [self logoutAction];
-    }
-}
-
-- (void)logoutAction {
-    [self logout];
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UIViewController *loginController = (UITabBarController *)[storyBoard instantiateViewControllerWithIdentifier:@"loginController"];
-    
-    XYAppDelegate *appDelegateTemp = (XYAppDelegate *) [[UIApplication sharedApplication]delegate];
-    appDelegateTemp.window.rootViewController = loginController;
-    
-}
-- (void)logout {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"userInfo"];
-    [defaults synchronize];
-}
-
-- (void)loadUserInfoFromServer {
     NSURL *url = [NSURL URLWithString:BASEURLSTRING];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -87,9 +69,16 @@
             NSDictionary *tmp = (NSDictionary *)responseObject;
             if (tmp && [tmp count] > 0) {
                 self.uname.text = tmp[@"username"];
-                self.name.text = (tmp[@"name"] == nil || [tmp[@"name"] isEqualToString:@""]) ? tmp[@"username"] : tmp[@"name"];
+                self.nickname.text = (tmp[@"name"] == nil || [tmp[@"name"] isEqualToString:@""]) ? tmp[@"username"] : tmp[@"name"];
                 int imageIdx = [tmp[@"headerimg"] intValue];
                 self.headImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"headImg_%d.jpg", imageIdx]];
+                self.credit.text = [NSString stringWithFormat:@"%@", tmp[@"score"]];
+                self.remaining.text = [XYUtil printMoneyAtCent:[tmp[@"remaining"] intValue]];
+                self.email.text = (tmp[@"email"] == nil || [tmp[@"email"] isEqualToString:@""]) ? @"无" : tmp[@"email"];
+                self.gender.text = arc4random() % 2 == 0 ? @"男" : @"女";
+                self.area.text = (tmp[@"address"] == nil || [tmp[@"address"] isEqualToString:@""]) ? @"无" : tmp[@"address"];
+                self.phoneNum.text = (tmp[@"phonenumber"] == nil || [tmp[@"phonenumber"] isEqualToString:@""]) ? @"无" : tmp[@"phonenumber"];
+                self.sign.text = (tmp[@"sign"] == nil || [tmp[@"sign"] isEqualToString:@""]) ? @"无" : tmp[@"sign"];
                 [self.tableView reloadData];
             }
             NSLog(@"loadUserInfoFromServer Success");
@@ -99,22 +88,22 @@
     }
 }
 
-#pragma mark - Table view data source
-/*
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+//#pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-*/
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//#warning Potentially incomplete method implementation.
+//    // Return the number of sections.
+//    return 0;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//#warning Incomplete method implementation.
+//    // Return the number of rows in the section.
+//    return 0;
+//}
+
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
