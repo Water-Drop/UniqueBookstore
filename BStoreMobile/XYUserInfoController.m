@@ -8,6 +8,7 @@
 
 #import "XYUserInfoController.h"
 #import "XYUtil.h"
+#import "XYLabelChangeController.h"
 
 @interface XYUserInfoController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *sign;
 @property (weak, nonatomic) IBOutlet UILabel *email;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNum;
+
+@property NSDictionary *valueDict;
 
 @end
 
@@ -43,6 +46,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self loadUserInfoFromServer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
     
     [self loadUserInfoFromServer];
 }
@@ -75,7 +85,7 @@
                 self.credit.text = [NSString stringWithFormat:@"%@", tmp[@"score"]];
                 self.remaining.text = [XYUtil printMoneyAtCent:[tmp[@"remaining"] intValue]];
                 self.email.text = (tmp[@"email"] == nil || [tmp[@"email"] isEqualToString:@""]) ? @"无" : tmp[@"email"];
-                self.gender.text = arc4random() % 2 == 0 ? @"男" : @"女";
+                self.gender.text = @"无";
                 self.area.text = (tmp[@"address"] == nil || [tmp[@"address"] isEqualToString:@""]) ? @"无" : tmp[@"address"];
                 self.phoneNum.text = (tmp[@"phonenumber"] == nil || [tmp[@"phonenumber"] isEqualToString:@""]) ? @"无" : tmp[@"phonenumber"];
                 self.sign.text = (tmp[@"sign"] == nil || [tmp[@"sign"] isEqualToString:@""]) ? @"无" : tmp[@"sign"];
@@ -85,6 +95,66 @@
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"loadUserInfoFromServer Error:%@", error);
         }];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    enum labelChangeStatus status = NICKNAME;
+    NSString *oldLbl = nil;
+    int pos = 0;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            status = NICKNAME;
+            oldLbl = self.nickname.text;
+            pos = 1;
+        }else if (indexPath.row == 4) {
+            status = EMAIL;
+            oldLbl = [self.email.text isEqualToString:@"无"] ? @"" : self.email.text;
+            pos = 1;
+        }else if (indexPath.row == 5) {
+            status = REMAINING;
+            oldLbl = @"0";
+            pos = 1;
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            status = PHONE;
+            oldLbl = [self.phoneNum.text isEqualToString:@"无"] ? @"" : self.phoneNum.text;
+            pos = 1;
+        } else if (indexPath.row == 2) {
+            status = AREA;
+            oldLbl = [self.area.text isEqualToString:@"无"] ? @"" : self.area.text;
+            pos = 1;
+        }
+    }
+    if (pos == 1) {
+        self.valueDict = @{@"status": [NSNumber numberWithInteger:status], @"oldLbl": oldLbl};
+        [self performSegueWithIdentifier:@"labelChange" sender:nil];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"labelChange"]) {
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        UIViewController *dest = nav.viewControllers[0];
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
+    } else if ([segue.identifier isEqualToString:@"genderChange"]) {
+        UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
+        UIViewController *dest = nav.viewControllers[0];
+        self.valueDict = @{@"gender": self.gender.text};
+        if (self.valueDict) {
+            for (NSString *key in self.valueDict) {
+                NSLog(@"%@, %@", key, self.valueDict[key]);
+                [dest setValue:self.valueDict[key] forKey:key];
+            }
+        }
     }
 }
 

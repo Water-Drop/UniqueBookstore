@@ -280,6 +280,8 @@
 		E3EA3790198AB7B90066ECCD /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA378F198AB7B90066ECCD /* CustomIOS7AlertView.m */; };
 		E3ED73A619B9C81A00FA25C4 /* XYOrderPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED73A519B9C81A00FA25C4 /* XYOrderPageCell.m */; };
 		E3ED73A919B9E0A400FA25C4 /* XYUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED73A819B9E0A400FA25C4 /* XYUserInfoController.m */; };
+		E3ED73AC19B9FC1500FA25C4 /* XYLabelChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED73AB19B9FC1500FA25C4 /* XYLabelChangeController.m */; };
+		E3ED73AF19BA0D1A00FA25C4 /* XYGenderChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED73AE19BA0D1A00FA25C4 /* XYGenderChangeController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -693,6 +695,10 @@
 		E3ED73A519B9C81A00FA25C4 /* XYOrderPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYOrderPageCell.m; sourceTree = "<group>"; };
 		E3ED73A719B9E0A400FA25C4 /* XYUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYUserInfoController.h; sourceTree = "<group>"; };
 		E3ED73A819B9E0A400FA25C4 /* XYUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYUserInfoController.m; sourceTree = "<group>"; };
+		E3ED73AA19B9FC1400FA25C4 /* XYLabelChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLabelChangeController.h; sourceTree = "<group>"; };
+		E3ED73AB19B9FC1500FA25C4 /* XYLabelChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYLabelChangeController.m; sourceTree = "<group>"; };
+		E3ED73AD19BA0D1A00FA25C4 /* XYGenderChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYGenderChangeController.h; sourceTree = "<group>"; };
+		E3ED73AE19BA0D1A00FA25C4 /* XYGenderChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYGenderChangeController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -983,6 +989,10 @@
 				E30E865119B725E7006B293B /* XYOrdersPageController.m */,
 				E3ED73A719B9E0A400FA25C4 /* XYUserInfoController.h */,
 				E3ED73A819B9E0A400FA25C4 /* XYUserInfoController.m */,
+				E3ED73AA19B9FC1400FA25C4 /* XYLabelChangeController.h */,
+				E3ED73AB19B9FC1500FA25C4 /* XYLabelChangeController.m */,
+				E3ED73AD19BA0D1A00FA25C4 /* XYGenderChangeController.h */,
+				E3ED73AE19BA0D1A00FA25C4 /* XYGenderChangeController.m */,
 			);
 			name = AdminPage;
 			sourceTree = "<group>";
@@ -1750,6 +1760,7 @@
 				E30190F31980EF1F00D04906 /* XYAddFriendsController.m in Sources */,
 				E3BF9ECF1984A6B200855279 /* AFURLConnectionOperation.m in Sources */,
 				E3BF9ECE1984A6B200855279 /* AFSecurityPolicy.m in Sources */,
+				E3ED73AC19B9FC1500FA25C4 /* XYLabelChangeController.m in Sources */,
 				E3BF9ED61984A6B200855279 /* UIButton+AFNetworking.m in Sources */,
 				E3EA376F198A5D9E0066ECCD /* XYFriendsNearByController.m in Sources */,
 				E3BF9ED41984A6B200855279 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
@@ -1802,6 +1813,7 @@
 				E33A3F081977706200BA3797 /* XYRecBookController.m in Sources */,
 				E35BA3711973630E0055EDF4 /* XYAppDelegate.m in Sources */,
 				21F1CBB1198AA5BA0089C9EA /* XYViewController.m in Sources */,
+				E3ED73AF19BA0D1A00FA25C4 /* XYGenderChangeController.m in Sources */,
 				211B278B1982052100052039 /* XYCameraUtil.cpp in Sources */,
 				E3AB0DD0197596C90041A318 /* XYCollectionCell.m in Sources */,
 				E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */,
