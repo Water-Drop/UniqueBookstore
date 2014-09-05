@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+// used in change User Info
 enum labelChangeStatus
 {
     NICKNAME, REMAINING, PHONE, AREA, EMAIL
