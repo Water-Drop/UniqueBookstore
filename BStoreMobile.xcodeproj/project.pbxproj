@@ -90,6 +90,8 @@
 		E30190F31980EF1F00D04906 /* XYAddFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190F21980EF1F00D04906 /* XYAddFriendsController.m */; };
 		E30190FC19821A4200D04906 /* XYPaidItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E30190FA19821A4200D04906 /* XYPaidItemCell.m */; };
 		E30190FD19821A4200D04906 /* XYPaidItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30190FB19821A4200D04906 /* XYPaidItemCell.xib */; };
+		E30E865219B725E7006B293B /* XYOrdersPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30E865119B725E7006B293B /* XYOrdersPageController.m */; };
+		E30E865419B9C45F006B293B /* XYOrderPageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30E865319B9C45F006B293B /* XYOrderPageCell.xib */; };
 		E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */; };
 		E33A3EEB197629F300BA3797 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */; };
 		E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */ = {isa = PBXBuildFile; fileRef = E33A3EEA197629F300BA3797 /* XYMyBookController.m */; };
@@ -276,6 +278,7 @@
 		E3EA3787198A7EEA0066ECCD /* XYRoundControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3786198A7EEA0066ECCD /* XYRoundControl.m */; };
 		E3EA378A198A8A2F0066ECCD /* XYRoundView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3789198A8A2F0066ECCD /* XYRoundView.m */; };
 		E3EA3790198AB7B90066ECCD /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA378F198AB7B90066ECCD /* CustomIOS7AlertView.m */; };
+		E3ED73A619B9C81A00FA25C4 /* XYOrderPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3ED73A519B9C81A00FA25C4 /* XYOrderPageCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -441,6 +444,9 @@
 		E30190F919821A4200D04906 /* XYPaidItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPaidItemCell.h; sourceTree = "<group>"; };
 		E30190FA19821A4200D04906 /* XYPaidItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPaidItemCell.m; sourceTree = "<group>"; };
 		E30190FB19821A4200D04906 /* XYPaidItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYPaidItemCell.xib; sourceTree = "<group>"; };
+		E30E865019B725E7006B293B /* XYOrdersPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYOrdersPageController.h; sourceTree = "<group>"; };
+		E30E865119B725E7006B293B /* XYOrdersPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYOrdersPageController.m; sourceTree = "<group>"; };
+		E30E865319B9C45F006B293B /* XYOrderPageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYOrderPageCell.xib; sourceTree = "<group>"; };
 		E315CEDF197D0BA9006BD8CA /* XYPubMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPubMsgController.h; sourceTree = "<group>"; };
 		E315CEE0197D0BA9006BD8CA /* XYPubMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPubMsgController.m; sourceTree = "<group>"; };
 		E33A3EE8197629F300BA3797 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
@@ -682,6 +688,8 @@
 		E3EA3789198A8A2F0066ECCD /* XYRoundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYRoundView.m; sourceTree = "<group>"; };
 		E3EA378E198AB7B90066ECCD /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		E3EA378F198AB7B90066ECCD /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		E3ED73A419B9C81A00FA25C4 /* XYOrderPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYOrderPageCell.h; sourceTree = "<group>"; };
+		E3ED73A519B9C81A00FA25C4 /* XYOrderPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYOrderPageCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -968,6 +976,8 @@
 			children = (
 				E3BF9CE119836B0600855279 /* XYAdminPageController.h */,
 				E3BF9CE219836B0600855279 /* XYAdminPageController.m */,
+				E30E865019B725E7006B293B /* XYOrdersPageController.h */,
+				E30E865119B725E7006B293B /* XYOrdersPageController.m */,
 			);
 			name = AdminPage;
 			sourceTree = "<group>";
@@ -1299,6 +1309,9 @@
 				E3EA37451987B1490066ECCD /* XYAutoLayoutLabel.m */,
 				E3D1A0AD1986AE3F00DC244B /* XYStarRatedView.h */,
 				E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */,
+				E30E865319B9C45F006B293B /* XYOrderPageCell.xib */,
+				E3ED73A419B9C81A00FA25C4 /* XYOrderPageCell.h */,
+				E3ED73A519B9C81A00FA25C4 /* XYOrderPageCell.m */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -1676,6 +1689,7 @@
 				E33A3F651977BB5000BA3797 /* 26.JPG in Resources */,
 				E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */,
 				E33A3FB81977BFD800BA3797 /* 14_full.JPG in Resources */,
+				E30E865419B9C45F006B293B /* XYOrderPageCell.xib in Resources */,
 				E33A3FD11977BFD800BA3797 /* 8_full.JPG in Resources */,
 				E33A3FC31977BFD800BA3797 /* 24_full.JPG in Resources */,
 				E33A3F5D1977BB5000BA3797 /* 19.JPG in Resources */,
@@ -1749,6 +1763,7 @@
 				E3BFD04219B2C31C00E0BB1C /* XYLoginController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */,
+				E3ED73A619B9C81A00FA25C4 /* XYOrderPageCell.m in Sources */,
 				21C4EC781989DF6200CC9D4C /* UIImage+BoxBlur.m in Sources */,
 				211B278C1982052100052039 /* XYCameraView.mm in Sources */,
 				211B28411982437A00052039 /* XYBookOverlay.mm in Sources */,
@@ -1771,6 +1786,7 @@
 				E3BF9ED91984A6B200855279 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E3BF9ED21984A6B200855279 /* AFURLSessionManager.m in Sources */,
 				E3EA37501988F00D0066ECCD /* XYPurchaseController.m in Sources */,
+				E30E865219B725E7006B293B /* XYOrdersPageController.m in Sources */,
 				E3EA375D198A1F6B0066ECCD /* XYThemeCollectionCell.m in Sources */,
 				211B271F197E2D1B00052039 /* XYPoint.m in Sources */,
 				21F1CBAB198A81BD0089C9EA /* XYNavigateController.m in Sources */,

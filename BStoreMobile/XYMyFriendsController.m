@@ -97,7 +97,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headImg.frame.size.width, headImg.frame.size.height)];
     imageView.image = [UIImage imageNamed:imagePath];
     [headImg addSubview:imageView];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(89, 26, 211, 21)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(89, 21, 211, 21)];
     label.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
     label.text = rowDict[@"username"];
     [cell.contentView addSubview:headImg];

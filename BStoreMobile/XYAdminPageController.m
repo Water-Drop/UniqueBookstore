@@ -8,12 +8,13 @@
 
 #import "XYAdminPageController.h"
 #import "XYAppDelegate.h"
+#import "XYUtil.h"
 
 @interface XYAdminPageController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *uname;
-@property (weak, nonatomic) IBOutlet UILabel *remaining;
-@property (weak, nonatomic) IBOutlet UILabel *credit;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UIImageView *headImg;
 
 @end
 
@@ -32,6 +33,8 @@
 {
     [super viewDidLoad];
     
+    [self loadUserInfoFromServer];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -47,7 +50,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 3 && indexPath.row == 0) {
+    if (indexPath.section == 2 && indexPath.row == 0) {
         // logout clicked
         [self logoutAction];
     }
@@ -65,8 +68,35 @@
 }
 - (void)logout {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"userList"];
+    [defaults removeObjectForKey:@"userInfo"];
     [defaults synchronize];
+}
+
+- (void)loadUserInfoFromServer {
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"User/UserInfo/" stringByAppendingString:USERID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *tmp = (NSDictionary *)responseObject;
+            if (tmp && [tmp count] > 0) {
+                self.uname.text = tmp[@"username"];
+                self.name.text = tmp[@"name"];
+                int imageIdx = [tmp[@"headerimg"] intValue];
+                self.headImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"headImg_%d.jpg", imageIdx]];
+                [self.tableView reloadData];
+            }
+            NSLog(@"loadUserInfoFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadUserInfoFromServer Error:%@", error);
+        }];
+    }
 }
 
 #pragma mark - Table view data source

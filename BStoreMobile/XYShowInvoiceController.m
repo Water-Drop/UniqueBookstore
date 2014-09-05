@@ -105,6 +105,8 @@
         [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^(void) {
             [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }];
+    } else if (self.status == fromOrder) {
+        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

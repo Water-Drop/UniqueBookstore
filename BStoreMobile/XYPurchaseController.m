@@ -200,6 +200,7 @@
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.textLabel.text = @"其他支付";
+            cell.textLabel.textColor = [UIColor lightGrayColor];
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
         return cell;
@@ -255,6 +256,7 @@
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+// 在确认环节通过余额支付
 - (void)purchaseNotPaidByRemaining
 {
     NSURL *url = [NSURL URLWithString:BASEURLSTRING];
@@ -311,6 +313,11 @@
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", @"查看电子小票",nil];
                     self.valueDict = @{@"status": [NSNumber numberWithInteger:fromPurchase], @"orderID": [NSString stringWithFormat:@"%@", retDict[@"orderID"]]};
+                    alert.tag = 0;
+                    [alert show];
+                } else if ([retDict[@"message"] isEqualToString:@"remaining not enough"]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付失败" message:@"你的账户余额不足，请充值后付款" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    alert.tag = 1;
                     [alert show];
                 }
             }
@@ -323,11 +330,13 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
-        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
-    }
-    if (buttonIndex == 1) {
-        [self performSegueWithIdentifier:@"showInvoice" sender:nil];
+    if (alertView.tag == 0) {
+        if (buttonIndex == 0) {
+            [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        if (buttonIndex == 1) {
+            [self performSegueWithIdentifier:@"showInvoice" sender:nil];
+        }
     }
 }
 

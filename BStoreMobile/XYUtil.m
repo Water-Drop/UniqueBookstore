@@ -70,9 +70,9 @@
 + (NSString *)getUserID
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userList = [defaults objectForKey:@"userList"];
-    if (userList) {
-        NSString *userID = [userList objectForKey:@"userID"];
+    NSDictionary *userInfo = [defaults objectForKey:@"userInfo"];
+    if (userInfo) {
+        NSString *userID = [userInfo objectForKey:@"userID"];
         if (userID && [XYUtil isPureInt:userID]) {
             return userID;
         }

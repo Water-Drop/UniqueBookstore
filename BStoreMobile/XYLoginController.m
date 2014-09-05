@@ -72,8 +72,8 @@
 - (void)writeLoginName:(NSString* )name AtPwd:(NSString* )pwd WithUserID:(NSString* )userID {
     // 获取注册的值
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userList = @{@"loginName": name, @"loginPwd": pwd, @"userID": userID};
-    [defaults setObject:userList forKey:@"userList"];
+    NSDictionary *userInfo = @{@"loginName": name, @"loginPwd": pwd, @"userID": userID};
+    [defaults setObject:userInfo forKey:@"userInfo"];
     [defaults synchronize];
 }
 

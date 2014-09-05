@@ -21,6 +21,7 @@ enum friendsInfoStatus {
 @property (nonatomic, strong) NSString *sg;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSNumber *head;
+@property (nonatomic, strong) NSString *nickname;
 @property enum friendsInfoStatus status;
 
 @end

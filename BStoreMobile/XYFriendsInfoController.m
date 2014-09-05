@@ -13,6 +13,7 @@
 @interface XYFriendsInfoController ()
 @property (weak, nonatomic) IBOutlet XYRoundView *headImg;
 @property (weak, nonatomic) IBOutlet UILabel *username;
+@property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *gender;
 @property (weak, nonatomic) IBOutlet UILabel *address;
 @property (weak, nonatomic) IBOutlet UILabel *sign;
@@ -61,6 +62,7 @@
     self.gender.text = self.gen;
     self.address.text = self.addr;
     self.sign.text = self.sg;
+    self.name.text = self.nickname;
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,6 +172,7 @@
             self.addr = tmp[@"address"];
             self.uname = tmp[@"username"];
             self.head = tmp[@"headerimg"];
+            self.nickname = tmp[@"name"];
             self.gen = @"男";
             [self loadFriendInfo];
             [self.tableView reloadData];
