@@ -255,6 +255,11 @@
 		E3D7FED019BB3F6F00624CCD /* theme_4.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FECE19BB3F6F00624CCD /* theme_4.png */; };
 		E3D7FED319BB418C00624CCD /* XYAllThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FED219BB418C00624CCD /* XYAllThemeController.m */; };
 		E3D7FED619BB41A400624CCD /* XYSelectThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FED519BB41A400624CCD /* XYSelectThemeController.m */; };
+		E3D7FEDD19BB7CC800624CCD /* 小时代3 签名照.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEDB19BB7CC800624CCD /* 小时代3 签名照.jpg */; };
+		E3D7FEDE19BB7CC800624CCD /* 小时代3：刺金时代.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEDC19BB7CC800624CCD /* 小时代3：刺金时代.jpg */; };
+		E3D7FEE219BB7D3B00624CCD /* others.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEDF19BB7D3B00624CCD /* others.plist */; };
+		E3D7FEE319BB7D3B00624CCD /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEE019BB7D3B00624CCD /* theme.plist */; };
+		E3D7FEE419BB7D3B00624CCD /* weibo.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEE119BB7D3B00624CCD /* weibo.plist */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -271,7 +276,6 @@
 		E3EA3762198A206C0066ECCD /* XYThemeBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */; };
 		E3EA3766198A2B060066ECCD /* theme_0.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3763198A2B060066ECCD /* theme_0.png */; };
 		E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3765198A2B060066ECCD /* 后会无期.jpg */; };
-		E3EA376A198A2B300066ECCD /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3769198A2B300066ECCD /* theme.plist */; };
 		E3EA376C198A58CC0066ECCD /* hklibrary.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA376B198A58CC0066ECCD /* hklibrary.jpg */; };
 		E3EA376F198A5D9E0066ECCD /* XYFriendsNearByController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA376E198A5D9E0066ECCD /* XYFriendsNearByController.m */; };
 		E3EA377B198A6E140066ECCD /* headImg_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3776198A6E140066ECCD /* headImg_0.jpg */; };
@@ -660,6 +664,11 @@
 		E3D7FED219BB418C00624CCD /* XYAllThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAllThemeController.m; sourceTree = "<group>"; };
 		E3D7FED419BB41A400624CCD /* XYSelectThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSelectThemeController.h; sourceTree = "<group>"; };
 		E3D7FED519BB41A400624CCD /* XYSelectThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSelectThemeController.m; sourceTree = "<group>"; };
+		E3D7FEDB19BB7CC800624CCD /* 小时代3 签名照.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小时代3 签名照.jpg"; sourceTree = "<group>"; };
+		E3D7FEDC19BB7CC800624CCD /* 小时代3：刺金时代.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "小时代3：刺金时代.jpg"; sourceTree = "<group>"; };
+		E3D7FEDF19BB7D3B00624CCD /* others.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = others.plist; path = BStoreMobile/DataSource/others.plist; sourceTree = "<group>"; };
+		E3D7FEE019BB7D3B00624CCD /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = theme.plist; path = BStoreMobile/DataSource/theme.plist; sourceTree = "<group>"; };
+		E3D7FEE119BB7D3B00624CCD /* weibo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = weibo.plist; path = BStoreMobile/DataSource/weibo.plist; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -687,7 +696,6 @@
 		E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYThemeBookCell.m; sourceTree = "<group>"; };
 		E3EA3763198A2B060066ECCD /* theme_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_0.png; sourceTree = "<group>"; };
 		E3EA3765198A2B060066ECCD /* 后会无期.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "后会无期.jpg"; sourceTree = "<group>"; };
-		E3EA3769198A2B300066ECCD /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 		E3EA376B198A58CC0066ECCD /* hklibrary.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hklibrary.jpg; sourceTree = "<group>"; };
 		E3EA376D198A5D9E0066ECCD /* XYFriendsNearByController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYFriendsNearByController.h; sourceTree = "<group>"; };
 		E3EA376E198A5D9E0066ECCD /* XYFriendsNearByController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYFriendsNearByController.m; sourceTree = "<group>"; };
@@ -1267,10 +1275,12 @@
 		E35BA39319736BF20055EDF4 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				E3D7FEDF19BB7D3B00624CCD /* others.plist */,
+				E3D7FEE019BB7D3B00624CCD /* theme.plist */,
+				E3D7FEE119BB7D3B00624CCD /* weibo.plist */,
 				E33A3EED19762A0E00BA3797 /* cart.plist */,
 				E33A3EEE19762A0E00BA3797 /* paid.plist */,
 				E33A3EEF19762A0E00BA3797 /* tobuy.plist */,
-				E3EA3769198A2B300066ECCD /* theme.plist */,
 			);
 			name = DataSource;
 			path = ..;
@@ -1429,6 +1439,8 @@
 		E3BFD03C19B2C15900E0BB1C /* app content */ = {
 			isa = PBXGroup;
 			children = (
+				E3D7FEDB19BB7CC800624CCD /* 小时代3 签名照.jpg */,
+				E3D7FEDC19BB7CC800624CCD /* 小时代3：刺金时代.jpg */,
 				E3D7FEC119BAD67300624CCD /* sinalogo.png */,
 				E3BFD03D19B2C1FB00E0BB1C /* LOGO.JPG */,
 				E3EA3763198A2B060066ECCD /* theme_0.png */,
@@ -1579,17 +1591,18 @@
 				E33A3FBC1977BFD800BA3797 /* 18_full.JPG in Resources */,
 				E3AB0DD2197596DF0041A318 /* XYCollectionCell.xib in Resources */,
 				21C4EC7C1989E9E700CC9D4C /* mbubble2@2x.png in Resources */,
+				E3D7FEE219BB7D3B00624CCD /* others.plist in Resources */,
 				E33A3F8B1977BB5000BA3797 /* Slovenia.png in Resources */,
 				211B281E19823CA100052039 /* letter_Q.png in Resources */,
 				E33A3F721977BB5000BA3797 /* Algeria.png in Resources */,
 				E3EA377C198A6E140066ECCD /* headImg_1.jpg in Resources */,
 				E33A3F7C1977BB5000BA3797 /* Germany.png in Resources */,
-				E3EA376A198A2B300066ECCD /* theme.plist in Resources */,
 				E33A3F6A1977BB5000BA3797 /* 30.JPG in Resources */,
 				E33A3F6B1977BB5000BA3797 /* 31.JPG in Resources */,
 				E3D1A0A91986AADD00DC244B /* star_empty.png in Resources */,
 				E33A3EF019762A0E00BA3797 /* cart.plist in Resources */,
 				E33A3F5F1977BB5000BA3797 /* 20.JPG in Resources */,
+				E3D7FEE419BB7D3B00624CCD /* weibo.plist in Resources */,
 				21C4EBE91987CAC200CC9D4C /* Ister.xml in Resources */,
 				E3EA3781198A6FA00066ECCD /* hklib_06th.jpg in Resources */,
 				E33A3F7A1977BB5000BA3797 /* England.png in Resources */,
@@ -1618,6 +1631,7 @@
 				E33A3F7B1977BB5000BA3797 /* France.png in Resources */,
 				21F1CBC6198AC12B0089C9EA /* up_left-50.png in Resources */,
 				E30190F01980D1B100D04906 /* XYCartItemCell.xib in Resources */,
+				E3D7FEDD19BB7CC800624CCD /* 小时代3 签名照.jpg in Resources */,
 				E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */,
 				E3EA3766198A2B060066ECCD /* theme_0.png in Resources */,
 				21F1CBE0198B6B620089C9EA /* arrow_m.png in Resources */,
@@ -1658,6 +1672,7 @@
 				E33A3F871977BB5000BA3797 /* Paraguay.png in Resources */,
 				21F1CBBF198AC12B0089C9EA /* down_left-50.png in Resources */,
 				E3EA375F198A1F840066ECCD /* XYThemeCollectionCell.xib in Resources */,
+				E3D7FEE319BB7D3B00624CCD /* theme.plist in Resources */,
 				E33A3F541977BB5000BA3797 /* 10.JPG in Resources */,
 				E33A3F8F1977BB5000BA3797 /* Switzerland.png in Resources */,
 				E33A3FC41977BFD800BA3797 /* 25_full.JPG in Resources */,
@@ -1693,6 +1708,7 @@
 				E33A3F821977BB5000BA3797 /* Japan.png in Resources */,
 				E3EA377E198A6E140066ECCD /* headImg_3.jpg in Resources */,
 				E33A3F5B1977BB5000BA3797 /* 17.JPG in Resources */,
+				E3D7FEDE19BB7CC800624CCD /* 小时代3：刺金时代.jpg in Resources */,
 				21F1CBD1198ACB750089C9EA /* 2@2x.png in Resources */,
 				E33A3F6F1977BB5000BA3797 /* 7.JPG in Resources */,
 				E33A3F881977BB5000BA3797 /* Portugal.png in Resources */,

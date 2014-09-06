@@ -33,6 +33,8 @@ enum BookInfoStatus {
 @property (nonatomic, strong) NSDictionary *bookInfoDict;
 @property (nonatomic, strong) NSArray *listComments;
 @property (nonatomic, strong) NSArray *listRecommends;
+@property (nonatomic, strong) NSArray *listOthers;
+@property (nonatomic, strong) NSString *weibourl;
 
 @end
 
@@ -85,7 +87,8 @@ enum BookInfoStatus {
     self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 45)];
     NSArray *segItemsArray = [NSArray arrayWithObjects: @"详细信息", @"读者评论", @"相关推荐", nil];
     UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:segItemsArray];
-    [segControl setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+//    [segControl setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+    [segControl setTintColor:[UIColor lightGrayColor]];
     segControl.frame = CGRectMake(16, 8, 287, 29);
     segControl.selectedSegmentIndex = 0;
     self.status = DETAILS;
@@ -125,7 +128,11 @@ enum BookInfoStatus {
         }
     } else if(self.status == RECOMMENDS) {
         if (self.bookInfoDict && self.listRecommends) {
-            return 2;
+            if (self.listOthers) {
+                return 2;
+            } else {
+                return 1;
+            }
         } else {
             return 0;
         }
@@ -163,7 +170,7 @@ enum BookInfoStatus {
             if (self.bookInfoDict) {
                 cell.title.text = self.bookInfoDict[@"title"];
                 cell.detail.text = self.bookInfoDict[@"author"];
-                if ([cell.detail.text isEqualToString:@"柴静"]) {
+                if (self.weibourl) {
                     [cell.weiboBtn setHidden:NO];
                     [cell.weiboBtn setBackgroundImage:[UIImage imageNamed:@"sinalogo.png"] forState:UIControlStateNormal];
                     cell.weiboBtn.tag = [self.bookID intValue];
@@ -409,8 +416,12 @@ enum BookInfoStatus {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.bookInfoDict && self.listRecommends && self.status == RECOMMENDS) {
-        return [self.listRecommends count];
+    if (self.bookInfoDict && self.status == RECOMMENDS) {
+        if (collectionView.tag == 0) {
+            return self.listRecommends == nil ? 0 : [self.listRecommends count];
+        } else {
+            return self.listOthers == nil ? 0 : [self.listOthers count];
+        }
     } else {
         return 0;
     }
@@ -418,50 +429,79 @@ enum BookInfoStatus {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // NSLog(@"collectionView:cellForItemAtIndexPath");
-    XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        // XYSaleItemCell.xib as NibName
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCollectionCell" owner:nil options:nil];
-        //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
-        cell = [nib objectAtIndex:0];
+    if (collectionView.tag == 0) {
+        // NSLog(@"collectionView:cellForItemAtIndexPath");
+        XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
+        if (cell == nil) {
+            // XYSaleItemCell.xib as NibName
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCollectionCell" owner:nil options:nil];
+            //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
+            cell = [nib objectAtIndex:0];
+        }
+        // configure collection view cell
+        NSDictionary *rowDict = [self.listRecommends objectAtIndex:indexPath.row];
+        cell.title.text = rowDict[@"title"];
+        cell.detail.text = rowDict[@"author"];
+        NSNumber *num = rowDict[@"bookID"];
+        cell.title.tag = [num integerValue];
+        NSString *imagePath = rowDict[@"coverimg"];
+        __weak XYCollectionCell *weakCell = cell;
+        [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            weakCell.coverImage.image = image;
+            [weakCell setNeedsLayout];
+            [weakCell setNeedsDisplay];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            NSLog(@"Get Image from Server Error.");
+        }];
+        return cell;
+    } else {
+        // NSLog(@"collectionView:cellForItemAtIndexPath");
+        XYCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
+        if (cell == nil) {
+            // XYSaleItemCell.xib as NibName
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCollectionCell" owner:nil options:nil];
+            //第一个对象就是CellIdentifier了（xib所列子控件中的最高父控件，CellIdentifier）
+            cell = [nib objectAtIndex:0];
+        }
+        // configure collection view cell
+        if (self.listOthers) {
+            NSDictionary *rowDict = [self.listOthers objectAtIndex:indexPath.row];
+            cell.title.text = rowDict[@"itemName"];
+            cell.detail.text = rowDict[@"type"];
+            NSString *imagePath = rowDict[@"image"];
+            cell.coverImage.image = [UIImage imageNamed:imagePath];
+        }
+        return cell;
     }
-    // configure collection view cell
-    NSDictionary *rowDict = [self.listRecommends objectAtIndex:indexPath.row];
-    cell.title.text = rowDict[@"title"];
-    cell.detail.text = rowDict[@"author"];
-    NSNumber *num = rowDict[@"bookID"];
-    cell.title.tag = [num integerValue];
-    NSString *imagePath = rowDict[@"coverimg"];
-    __weak XYCollectionCell *weakCell = cell;
-    [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        weakCell.coverImage.image = image;
-        [weakCell setNeedsLayout];
-        [weakCell setNeedsDisplay];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"Get Image from Server Error.");
-    }];
-    return cell;
 }
 
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(XYRecBookCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section != 0 && self.status == RECOMMENDS) {
-        [cell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+        [cell setCollectionViewDataSourceDelegate:self index:(indexPath.row)];
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView.tag == 1 && self.status == RECOMMENDS) {
-        XYCollectionCell * cell = (XYCollectionCell *) [collectionView cellForItemAtIndexPath:indexPath];
-        if (cell) {
-            // pushViewController
-            UIStoryboard *mainsb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-            XYBookInfoController *bookInfoController = [mainsb instantiateViewControllerWithIdentifier:@"BookInfo"];
-            bookInfoController.bookID = [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]];
-            [self.navigationController pushViewController:bookInfoController animated:YES];
+    if (self.status == RECOMMENDS) {
+        if (collectionView.tag == 0) {
+            XYCollectionCell * cell = (XYCollectionCell *) [collectionView cellForItemAtIndexPath:indexPath];
+            if (cell) {
+                // pushViewController
+                UIStoryboard *mainsb = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+                XYBookInfoController *bookInfoController = [mainsb instantiateViewControllerWithIdentifier:@"BookInfo"];
+                bookInfoController.bookID = [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]];
+                [self.navigationController pushViewController:bookInfoController animated:YES];
+            }
+        } else {
+            if (self.listOthers) {
+                NSDictionary *rowDict = [self.listOthers objectAtIndex:indexPath.row];
+                NSString *url = rowDict[@"url"];
+                NSDictionary *valueDict = @{@"url": url};
+                [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+            }
         }
     }
 }
@@ -508,6 +548,16 @@ enum BookInfoStatus {
     return listItem;
 }
 
+- (NSArray *) loadOthersFile
+{
+    return [self loadPlistFile:@"others" ofType:@"plist"];
+}
+
+- (NSArray *) loadWeiboFile
+{
+    return [self loadPlistFile:@"weibo" ofType:@"plist"];
+}
+
 - (void) loadBookDetailFromServer
 {
     NSURL *url = [NSURL URLWithString:BASEURLSTRING];
@@ -525,8 +575,28 @@ enum BookInfoStatus {
             NSDictionary *tmp = (NSDictionary *)responseObject;
             if (tmp) {
                 self.bookInfoDict = tmp[@"bookinfo"];
+                self.outputDict = tmp[@"details"];
+                NSArray *others = [self loadOthersFile];
+                if (others) {
+                    for (NSDictionary *rowDict in others) {
+                        NSString *key = self.bookInfoDict[@"title"];
+                        if (rowDict[key]) {
+                            self.listOthers = rowDict[key];
+                            break;
+                        }
+                    }
+                }
+                NSArray *weibos = [self loadWeiboFile];
+                if (weibos) {
+                    for (NSDictionary *rowDict in weibos) {
+                        NSString *key = self.bookInfoDict[@"author"];
+                        if (rowDict[key]) {
+                            self.weibourl = rowDict[key];
+                            break;
+                        }
+                    }
+                }
             }
-            self.outputDict = tmp[@"details"];
             NSLog(@"loadBookDetailFromServer Success");
             [self.tableView reloadData];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -591,8 +661,10 @@ enum BookInfoStatus {
 - (IBAction)weiboButtonClicked:(id)sender
 {
     NSLog(@"Weibo View Clicked");
-    NSDictionary *valueDict = @{@"url": @"http://m.weibo.cn/u/3169959511"};
-    [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+    if (self.weibourl) {
+        NSDictionary *valueDict = @{@"url": self.weibourl};
+        [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

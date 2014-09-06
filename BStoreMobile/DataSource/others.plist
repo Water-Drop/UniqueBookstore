@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>小时代3.0刺金时代</key>
+		<array>
+			<dict>
+				<key>image</key>
+				<string>小时代3：刺金时代.jpg</string>
+				<key>url</key>
+				<string>http://www.gewara.com/movie/152358869</string>
+				<key>itemName</key>
+				<string>小时代3：刺金时代</string>
+				<key>type</key>
+				<string>电影</string>
+			</dict>
+			<dict>
+				<key>image</key>
+				<string>小时代3 签名照.jpg</string>
+				<key>url</key>
+				<string>http://item.taobao.com/item.htm?spm=a230r.1.14.228.lOJQXv&amp;id=40482867544&amp;ns=1#detail</string>
+				<key>itemName</key>
+				<string>小时代3 签名照</string>
+				<key>type</key>
+				<string>商品</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>
