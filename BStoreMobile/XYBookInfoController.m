@@ -161,6 +161,19 @@ enum BookInfoStatus {
             if (self.bookInfoDict) {
                 cell.title.text = self.bookInfoDict[@"title"];
                 cell.detail.text = self.bookInfoDict[@"author"];
+                if ([cell.detail.text isEqualToString:@"柴静"]) {
+                    [cell.weiboBtn setHidden:NO];
+                    [cell.weiboBtn setBackgroundImage:[UIImage imageNamed:@"sinalogo.png"] forState:UIControlStateNormal];
+                    cell.weiboBtn.tag = [self.bookID intValue];
+                    [cell.weiboBtn addTarget:self action:@selector(weiboButtonClicked:)forControlEvents:UIControlEventTouchUpInside];
+                } else {
+                    [cell.weiboBtn setHidden:YES];
+                    CGFloat wx = cell.weiboBtn.frame.origin.x;
+                    CGFloat wy = cell.weiboBtn.frame.origin.y;
+                    CGFloat dw = cell.detail.frame.size.width + (cell.detail.frame.origin.x - wx);
+                    CGFloat dh = cell.detail.frame.size.height;
+                    [cell.detail setFrame:CGRectMake(wx, wy, dw, dh)];
+                }
                 int priceAtCent = [self.bookInfoDict[@"price"] intValue];
                 self.priceStr = [XYUtil printMoneyAtCent:priceAtCent];
                 
@@ -436,7 +449,6 @@ enum BookInfoStatus {
     }
 }
 
-
 - (IBAction)valueChanged:(id)sender
 {
     NSInteger index = ((UISegmentedControl *)sender).selectedSegmentIndex;
@@ -487,19 +499,23 @@ enum BookInfoStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"BookDetail/" stringByAppendingString:self.bookID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *tmp = (NSDictionary *)responseObject;
-        if (tmp) {
-            self.bookInfoDict = tmp[@"bookinfo"];
-        }
-        self.outputDict = tmp[@"details"];
-        NSLog(@"loadBookDetailFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadBookDetailFromServer Error:%@", error);
-    }];
+//    NSString *path = [@"BookDetail/" stringByAppendingString:self.bookID];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"BookDetailV2?userID=%@&bookID=%@", USERID, self.bookID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *tmp = (NSDictionary *)responseObject;
+            if (tmp) {
+                self.bookInfoDict = tmp[@"bookinfo"];
+            }
+            self.outputDict = tmp[@"details"];
+            NSLog(@"loadBookDetailFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadBookDetailFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void) loadBookCommentsFromServer
@@ -549,6 +565,27 @@ enum BookInfoStatus {
     if (self.bookID && tag > 0) {
         NSLog(@"Add bookID #%@ amount:1", self.bookID);
         [self addOneItemToCart:tag];
+    }
+}
+
+- (IBAction)weiboButtonClicked:(id)sender
+{
+    NSLog(@"Weibo View Clicked");
+    NSDictionary *valueDict = @{@"url": @"http://m.weibo.cn/u/3169959511"};
+    [self performSegueWithIdentifier:@"WebView" sender:valueDict];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"WebView"]) {
+        UIViewController *dest = segue.destinationViewController;
+        NSDictionary *dic = sender;
+        if (dic) {
+            for (NSString *key in dic) {
+                NSLog(@"%@, %@", key, dic[key]);
+                [dest setValue:dic[key] forKey:key];
+            }
+        }
     }
 }
 

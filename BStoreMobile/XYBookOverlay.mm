@@ -289,20 +289,24 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"BookDetail/" stringByAppendingString:bookId];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *tmp = (NSDictionary *)responseObject;
-        if (tmp) {
-            bookInfoDict = tmp[@"bookinfo"];
-        }
-        // set labels
-        [btns.price setText:[NSString stringWithFormat:@"%@", [XYUtil printMoneyAtCent:[bookInfoDict[@"price"] intValue]]]];
-        
-        NSLog(@"loadBookDetailFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadBookDetailFromServer Error:%@", error);
-    }];
+//    NSString *path = [@"BookDetail/" stringByAppendingString:bookId];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"BookDetailV2?userID=%@&bookID=%@", USERID, bookId];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *tmp = (NSDictionary *)responseObject;
+            if (tmp) {
+                bookInfoDict = tmp[@"bookinfo"];
+            }
+            // set labels
+            [btns.price setText:[NSString stringWithFormat:@"%@", [XYUtil printMoneyAtCent:[bookInfoDict[@"price"] intValue]]]];
+            
+            NSLog(@"loadBookDetailFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadBookDetailFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)loadBookCommentsFromServer

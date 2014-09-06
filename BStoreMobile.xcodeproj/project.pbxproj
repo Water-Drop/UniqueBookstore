@@ -249,6 +249,7 @@
 		E3D1A0AC1986AADD00DC244B /* star_full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D1A0A81986AADD00DC244B /* star_full@2x.png */; };
 		E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */; };
 		E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */; };
+		E3D7FEC219BAD67300624CCD /* sinalogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEC119BAD67300624CCD /* sinalogo.png */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -647,6 +648,7 @@
 		E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYStarRatedView.m; sourceTree = "<group>"; };
 		E3D1A0B01986C54C00DC244B /* XYMyFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyFriendsController.h; sourceTree = "<group>"; };
 		E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyFriendsController.m; sourceTree = "<group>"; };
+		E3D7FEC119BAD67300624CCD /* sinalogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sinalogo.png; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -1413,6 +1415,7 @@
 		E3BFD03C19B2C15900E0BB1C /* app content */ = {
 			isa = PBXGroup;
 			children = (
+				E3D7FEC119BAD67300624CCD /* sinalogo.png */,
 				E3BFD03D19B2C1FB00E0BB1C /* LOGO.JPG */,
 				E3EA3763198A2B060066ECCD /* theme_0.png */,
 				E3EA3764198A2B060066ECCD /* theme_1.png */,
@@ -1621,6 +1624,7 @@
 				21F1CBC2198AC12B0089C9EA /* left-50.png in Resources */,
 				21C4EC4D1987EE9000CC9D4C /* elective-50@2x.png in Resources */,
 				E33A3FB71977BFD800BA3797 /* 13_full.JPG in Resources */,
+				E3D7FEC219BAD67300624CCD /* sinalogo.png in Resources */,
 				21C4EC6C1989406100CC9D4C /* bubbleSomeone@2x.png in Resources */,
 				211B282219823CA100052039 /* StonesAndChips.xml in Resources */,
 				E33A3F5A1977BB5000BA3797 /* 16.JPG in Resources */,

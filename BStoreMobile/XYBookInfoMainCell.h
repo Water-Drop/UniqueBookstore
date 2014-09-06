@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *toBuyButton;
 @property (weak, nonatomic) IBOutlet UILabel *cntScore;
 @property (weak, nonatomic) IBOutlet UIView *totScoreView;
-
+@property (weak, nonatomic) IBOutlet UIButton *weiboBtn;
 
 @end
