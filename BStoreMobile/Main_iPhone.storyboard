@@ -1247,6 +1247,8 @@
                     <connections>
                         <outlet property="tableView" destination="OyO-3q-kNV" id="oa9-3f-WwC"/>
                         <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="tFE-eq-5b4"/>
+                        <segue destination="gEL-6v-zwD" kind="push" identifier="selectTheme" id="Umn-Tq-LWK"/>
+                        <segue destination="NVE-q6-j6q" kind="push" identifier="allTheme" id="NOg-Vz-JIT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NXz-nl-d8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1390,6 +1392,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="76R-NB-u67" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4037" y="160"/>
+        </scene>
+        <!--All Theme Controller - 全部分类-->
+        <scene sceneID="9Eu-ar-05u">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="NVE-q6-j6q" customClass="XYAllThemeController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HLr-Td-t6f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="FmH-Il-1l8">
+                                <rect key="frame" x="0.0" y="63" width="320" height="456"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="NVE-q6-j6q" id="goh-em-3Ql"/>
+                                    <outlet property="delegate" destination="NVE-q6-j6q" id="ghl-UW-mDX"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="全部分类" id="blr-LT-ohz"/>
+                    <connections>
+                        <outlet property="tableView" destination="FmH-Il-1l8" id="0hm-Ca-BmG"/>
+                        <segue destination="gEL-6v-zwD" kind="push" identifier="selectTheme" id="fYM-Cr-6Cv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x4q-yC-M4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1372" y="2140"/>
+        </scene>
+        <!--Select Theme Controller-->
+        <scene sceneID="U5G-ng-R7m">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gEL-6v-zwD" customClass="XYSelectThemeController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OED-e6-9ip">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dcD-Gd-Esb">
+                                <rect key="frame" x="0.0" y="65" width="320" height="454"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="gEL-6v-zwD" id="Mrp-nY-tHk"/>
+                                    <outlet property="delegate" destination="gEL-6v-zwD" id="jOn-3K-hJB"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="imc-WX-fny"/>
+                    <connections>
+                        <outlet property="tableView" destination="dcD-Gd-Esb" id="hx9-pk-rxG"/>
+                        <segue destination="vli-KS-yHr" kind="push" identifier="BookDetail" id="XnJ-eY-p66"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F5H-9L-5fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898" y="2140"/>
         </scene>
         <!--Search Controller - 搜书-->
         <scene sceneID="IXW-bC-L5p">
@@ -1821,10 +1883,11 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="szb-hM-fSC"/>
-        <segue reference="awM-zn-5XB"/>
-        <segue reference="60v-XT-1uc"/>
         <segue reference="cYO-YM-urh"/>
         <segue reference="Av2-e0-K2i"/>
         <segue reference="osy-Kd-D3X"/>
+        <segue reference="fYM-Cr-6Cv"/>
+        <segue reference="XnJ-eY-p66"/>
+        <segue reference="60v-XT-1uc"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -16,6 +16,8 @@
 #import "XYStarRatedView.h"
 #import "XYAutoLayoutLabel.h"
 
+#define OFFSET2 20
+
 @interface XYBookInfoController ()
 
 enum BookInfoStatus {
@@ -123,7 +125,7 @@ enum BookInfoStatus {
         }
     } else if(self.status == RECOMMENDS) {
         if (self.bookInfoDict && self.listRecommends) {
-            return 1;
+            return 2;
         } else {
             return 0;
         }
@@ -342,7 +344,22 @@ enum BookInfoStatus {
             if (cell == nil) {
                 cell = [[XYRecBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recommendsCellID];
             }
+            for (UIView *view in [cell.contentView subviews]) {
+                if ([view isKindOfClass:[UILabel class]]) {
+                    [view removeFromSuperview];
+                }
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            cell.yoffset = OFFSET2;
+            UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, cell.contentView.bounds.size.width, OFFSET2)];
+            lbl.font = [UIFont systemFontOfSize:15.0f];
+            if (indexPath.row == 0) {
+                lbl.text = @"相关书籍";
+            } else {
+                lbl.text = @"周边产品";
+            }
+            [cell.contentView addSubview:lbl];
             return cell;
         }
     }
@@ -351,7 +368,7 @@ enum BookInfoStatus {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.status == RECOMMENDS && indexPath.section == 1) {
-        return 152.0f;
+        return 152.0f + OFFSET2;
     } else {
         if (self.status == DETAILS && indexPath.section == 1 && indexPath.row < 2) {
             NSString *key = indexPath.row == 0 ? @"brief" : @"authorinfo";
@@ -548,15 +565,18 @@ enum BookInfoStatus {
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"BookRelated/" stringByAppendingString:self.bookID];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.listRecommends = (NSArray *)responseObject;
-        NSLog(@"loadBookRecommendsFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadBookRecommendsFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"BookRelatedV2?userID=%@&bookID=%@", USERID, self.bookID];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            self.listRecommends = (NSArray *)responseObject;
+            NSLog(@"loadBookRecommendsFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadBookRecommendsFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (IBAction)buyButtonClicked:(id)sender

@@ -16,4 +16,6 @@ static NSString *themeCollectionViewCellIdentifier = @"ThemeCollectionCell";
 
 -(void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource,UICollectionViewDelegate>)dataSourceDelegate index:(NSInteger)index;
 
+@property CGFloat yoffset;
+
 @end

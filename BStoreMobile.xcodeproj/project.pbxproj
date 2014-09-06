@@ -250,6 +250,11 @@
 		E3D1A0AF1986AE3F00DC244B /* XYStarRatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0AE1986AE3F00DC244B /* XYStarRatedView.m */; };
 		E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */; };
 		E3D7FEC219BAD67300624CCD /* sinalogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEC119BAD67300624CCD /* sinalogo.png */; };
+		E3D7FEC819BB3D6000624CCD /* theme_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FEC719BB3D5F00624CCD /* theme_1.png */; };
+		E3D7FECF19BB3F6F00624CCD /* theme_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FECD19BB3F6F00624CCD /* theme_3.png */; };
+		E3D7FED019BB3F6F00624CCD /* theme_4.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FECE19BB3F6F00624CCD /* theme_4.png */; };
+		E3D7FED319BB418C00624CCD /* XYAllThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FED219BB418C00624CCD /* XYAllThemeController.m */; };
+		E3D7FED619BB41A400624CCD /* XYSelectThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FED519BB41A400624CCD /* XYSelectThemeController.m */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -265,7 +270,6 @@
 		E3EA375F198A1F840066ECCD /* XYThemeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3EA375E198A1F840066ECCD /* XYThemeCollectionCell.xib */; };
 		E3EA3762198A206C0066ECCD /* XYThemeBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */; };
 		E3EA3766198A2B060066ECCD /* theme_0.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3763198A2B060066ECCD /* theme_0.png */; };
-		E3EA3767198A2B060066ECCD /* theme_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3764198A2B060066ECCD /* theme_1.png */; };
 		E3EA3768198A2B060066ECCD /* 后会无期.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3765198A2B060066ECCD /* 后会无期.jpg */; };
 		E3EA376A198A2B300066ECCD /* theme.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3EA3769198A2B300066ECCD /* theme.plist */; };
 		E3EA376C198A58CC0066ECCD /* hklibrary.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E3EA376B198A58CC0066ECCD /* hklibrary.jpg */; };
@@ -649,6 +653,13 @@
 		E3D1A0B01986C54C00DC244B /* XYMyFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyFriendsController.h; sourceTree = "<group>"; };
 		E3D1A0B11986C54C00DC244B /* XYMyFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyFriendsController.m; sourceTree = "<group>"; };
 		E3D7FEC119BAD67300624CCD /* sinalogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sinalogo.png; sourceTree = "<group>"; };
+		E3D7FEC719BB3D5F00624CCD /* theme_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_1.png; sourceTree = "<group>"; };
+		E3D7FECD19BB3F6F00624CCD /* theme_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_3.png; sourceTree = "<group>"; };
+		E3D7FECE19BB3F6F00624CCD /* theme_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_4.png; sourceTree = "<group>"; };
+		E3D7FED119BB418C00624CCD /* XYAllThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYAllThemeController.h; sourceTree = "<group>"; };
+		E3D7FED219BB418C00624CCD /* XYAllThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYAllThemeController.m; sourceTree = "<group>"; };
+		E3D7FED419BB41A400624CCD /* XYSelectThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSelectThemeController.h; sourceTree = "<group>"; };
+		E3D7FED519BB41A400624CCD /* XYSelectThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSelectThemeController.m; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -675,7 +686,6 @@
 		E3EA3760198A206C0066ECCD /* XYThemeBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYThemeBookCell.h; sourceTree = "<group>"; };
 		E3EA3761198A206C0066ECCD /* XYThemeBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYThemeBookCell.m; sourceTree = "<group>"; };
 		E3EA3763198A2B060066ECCD /* theme_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_0.png; sourceTree = "<group>"; };
-		E3EA3764198A2B060066ECCD /* theme_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme_1.png; sourceTree = "<group>"; };
 		E3EA3765198A2B060066ECCD /* 后会无期.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "后会无期.jpg"; sourceTree = "<group>"; };
 		E3EA3769198A2B300066ECCD /* theme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = theme.plist; sourceTree = "<group>"; };
 		E3EA376B198A58CC0066ECCD /* hklibrary.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hklibrary.jpg; sourceTree = "<group>"; };
@@ -1349,6 +1359,10 @@
 			children = (
 				E33A3F061977706200BA3797 /* XYRecBookController.h */,
 				E33A3F071977706200BA3797 /* XYRecBookController.m */,
+				E3D7FED119BB418C00624CCD /* XYAllThemeController.h */,
+				E3D7FED219BB418C00624CCD /* XYAllThemeController.m */,
+				E3D7FED419BB41A400624CCD /* XYSelectThemeController.h */,
+				E3D7FED519BB41A400624CCD /* XYSelectThemeController.m */,
 			);
 			name = RecBook;
 			sourceTree = "<group>";
@@ -1418,8 +1432,10 @@
 				E3D7FEC119BAD67300624CCD /* sinalogo.png */,
 				E3BFD03D19B2C1FB00E0BB1C /* LOGO.JPG */,
 				E3EA3763198A2B060066ECCD /* theme_0.png */,
-				E3EA3764198A2B060066ECCD /* theme_1.png */,
+				E3D7FEC719BB3D5F00624CCD /* theme_1.png */,
 				E35C7F75198B5B1D00F7A79F /* theme_2.png */,
+				E3D7FECD19BB3F6F00624CCD /* theme_3.png */,
+				E3D7FECE19BB3F6F00624CCD /* theme_4.png */,
 				E3EA3780198A6FA00066ECCD /* hklib_06th.jpg */,
 				E3EA3765198A2B060066ECCD /* 后会无期.jpg */,
 				E3D1A0A51986AADD00DC244B /* star_empty.png */,
@@ -1698,6 +1714,7 @@
 				E33A3F591977BB5000BA3797 /* 15.JPG in Resources */,
 				21C4EC4B1987EE9000CC9D4C /* camera-50@2x.png in Resources */,
 				E33A3FC11977BFD800BA3797 /* 22_full.JPG in Resources */,
+				E3D7FEC819BB3D6000624CCD /* theme_1.png in Resources */,
 				E3BFD03E19B2C1FB00E0BB1C /* LOGO.JPG in Resources */,
 				21F1CBC5198AC12B0089C9EA /* topic@2x.png in Resources */,
 				E33A3FCA1977BFD800BA3797 /* 30_full.JPG in Resources */,
@@ -1705,6 +1722,7 @@
 				E33A3FC71977BFD800BA3797 /* 28_full.JPG in Resources */,
 				211B281C19823CA100052039 /* letter_A.png in Resources */,
 				211B282019823CA100052039 /* IT_about.html in Resources */,
+				E3D7FECF19BB3F6F00624CCD /* theme_3.png in Resources */,
 				E33A3F651977BB5000BA3797 /* 26.JPG in Resources */,
 				E3EA3743198747F60066ECCD /* XYFriendsMsgCell.xib in Resources */,
 				E33A3FB81977BFD800BA3797 /* 14_full.JPG in Resources */,
@@ -1716,6 +1734,7 @@
 				21C4EC4F1987EE9000CC9D4C /* like-50@2x.png in Resources */,
 				21F1CBC4198AC12B0089C9EA /* topic.png in Resources */,
 				E33A3F8C1977BB5000BA3797 /* SouthAfrica.png in Resources */,
+				E3D7FED019BB3F6F00624CCD /* theme_4.png in Resources */,
 				E33A3F801977BB5000BA3797 /* Honduras.png in Resources */,
 				211B282319823CA100052039 /* Tarmac.dat in Resources */,
 				21C4EC4A1987EE9000CC9D4C /* bookmark-50@2x.png in Resources */,
@@ -1729,7 +1748,6 @@
 				E33A3FCB1977BFD800BA3797 /* 31_full.JPG in Resources */,
 				E33A3F701977BB5000BA3797 /* 8.JPG in Resources */,
 				E33A3F551977BB5000BA3797 /* 11.JPG in Resources */,
-				E3EA3767198A2B060066ECCD /* theme_1.png in Resources */,
 				E3D1A0AB1986AADD00DC244B /* star_full.png in Resources */,
 				E33A3FCD1977BFD800BA3797 /* 4_full.JPG in Resources */,
 				E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */,
@@ -1780,6 +1798,7 @@
 				2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */,
 				E30190EF1980D1B100D04906 /* XYCartItemCell.m in Sources */,
 				21A54ED019792F79003F53DB /* XYSearchController.m in Sources */,
+				E3D7FED319BB418C00624CCD /* XYAllThemeController.m in Sources */,
 				E3BFD04219B2C31C00E0BB1C /* XYLoginController.m in Sources */,
 				E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */,
 				E3D1A0B21986C54C00DC244B /* XYMyFriendsController.m in Sources */,
@@ -1825,6 +1844,7 @@
 				21F1CBA8198A216F0089C9EA /* XYCameraButtons.m in Sources */,
 				21C4EC731989DEFC00CC9D4C /* UIERealTimeBlurView.m in Sources */,
 				E3EA3790198AB7B90066ECCD /* CustomIOS7AlertView.m in Sources */,
+				E3D7FED619BB41A400624CCD /* XYSelectThemeController.m in Sources */,
 				E33A3EEC197629F300BA3797 /* XYMyBookController.m in Sources */,
 				E3BF9ED71984A6B200855279 /* UIImageView+AFNetworking.m in Sources */,
 				E30190EB19809AA300D04906 /* XYUtil.m in Sources */,

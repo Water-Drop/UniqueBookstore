@@ -15,6 +15,8 @@
 #import "XYThemeCollectionCell.h"
 
 #define IMAGECNT 31
+#define OFFSET 15
+#define OFFSET2 20
 
 @interface XYRecBookController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -74,37 +76,37 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // fixed numOfRows
-    return 1;
+    return 4;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *title = nil;
-    switch (section) {
-        case 1:
-            title = @"图书畅销榜";
-            break;
-        case 2:
-            title = @"大家都在看";
-            break;
-        case 3:
-            title = @"推荐主题";
-            break;
-        default:
-            break;
-    }
-    return title;
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    NSString *title = nil;
+//    switch (section) {
+//        case 1:
+//            title = @"图书畅销榜";
+//            break;
+//        case 2:
+//            title = @"推荐书籍";
+//            break;
+//        case 3:
+//            title = @"分类";
+//            break;
+//        default:
+//            break;
+//    }
+//    return title;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0) {
         NSString *recImageCell = @"recImageCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recImageCell];
         if (cell == nil) {
@@ -122,24 +124,55 @@
         return cell;
     }
     
-    if (indexPath.section == 1 || indexPath.section == 2) {
+    if (indexPath.row == 1 || indexPath.row == 2) {
         static NSString *cellIdentifier = @"RecItemCellIdentifier";
         XYRecBookCell *cell = (XYRecBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (cell == nil) {
             cell = [[XYRecBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        for (UIView *view in [cell.contentView subviews]) {
+            if ([view isKindOfClass:[UILabel class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        cell.yoffset = OFFSET2;
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, cell.contentView.bounds.size.width, OFFSET2)];
+        lbl.font = [UIFont systemFontOfSize:15.0f];
+        if (indexPath.row == 1) {
+            lbl.text = @"图书畅销榜";
+        } else {
+            lbl.text = @"为您推荐";
+        }
+        [cell.contentView addSubview:lbl];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     
-    if (indexPath.section == 3) {
+    if (indexPath.row == 3) {
         static NSString *cellIdentifier = @"ThemeItemCellIdentifier";
         XYThemeBookCell *cell = (XYThemeBookCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         
         if (cell == nil) {
             cell = [[XYThemeBookCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        for (UIView *view in [cell.contentView subviews]) {
+            if ([view isKindOfClass:[UILabel class]] || [view isKindOfClass:[UIButton class]]) {
+                [view removeFromSuperview];
+            }
+        }
+        cell.yoffset = OFFSET;
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 100, OFFSET)];
+        lbl.font = [UIFont systemFontOfSize:15.0f];
+        lbl.text = @"主要分类";
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(cell.contentView.bounds.size.width-80, 8, 80, OFFSET)];
+        [btn setTitle:@"查看更多>" forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [btn setTintColor:[UIColor darkGrayColor]];
+        [btn addTarget:self action:@selector(clickForMore:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:lbl];
+        [cell.contentView addSubview:btn];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
@@ -151,23 +184,25 @@
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section != 0 && indexPath.section != 3) {
+    if (indexPath.row != 0 && indexPath.row != 3) {
         XYRecBookCell *newcell = (XYRecBookCell *)cell;
-        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.row)];
     }
-    if (indexPath.section == 3) {
+    if (indexPath.row == 3) {
         XYThemeBookCell *newcell = (XYThemeBookCell *)cell;
-        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.section)];
+        [newcell setCollectionViewDataSourceDelegate:self index:(indexPath.row)];
     }
 }
 
 #pragma mark - UITableViewDelegate Methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section < 3) {
+    if (indexPath.row == 0) {
         return 152.0f;
+    } else if (indexPath.row < 3) {
+        return 152.0f + OFFSET2;
     } else {
-        return 107.0f;
+        return 107.0f + OFFSET;
     }
 }
 
@@ -349,13 +384,23 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    [manager GET:@"BookRecommend" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.outputDict = (NSDictionary *)responseObject;
-        NSLog(@"loadRecBookFromServer Success");
-        [self.tableView reloadData];
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"loadRecBookFromServer Error:%@", error);
-    }];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [@"BookRecommendV2/" stringByAppendingString:USERID];
+        NSLog(@"path:%@", path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            self.outputDict = (NSDictionary *)responseObject;
+            NSLog(@"loadRecBookFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"loadRecBookFromServer Error:%@", error);
+        }];
+    }
+}
+
+- (IBAction)clickForMore:(id)sender
+{
+    NSLog(@"click For More...");
 }
 
 @end

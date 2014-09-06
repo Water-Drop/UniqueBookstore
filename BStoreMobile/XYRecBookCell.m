@@ -20,7 +20,14 @@
         layout.sectionInset = UIEdgeInsetsMake(7,7,7,7);
         layout.itemSize = CGSizeMake(100, 137);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        if (self.yoffset > 0.0f) {
+            CGRect rect = self.contentView.bounds;
+            rect.origin.y += self.yoffset;
+            rect.size.height -= self.yoffset;
+            self.collectionView = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:layout];
+        } else {
+            self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+        }
         UINib *nib = [UINib nibWithNibName:@"XYCollectionCell" bundle:nil];
         // registerNib for custom collectioncell defined by nib
         // registerClass for UICollecitonViewCell class
@@ -37,7 +44,14 @@
 {
     [super layoutSubviews];
     
-    self.collectionView.frame = self.contentView.bounds;
+    if (self.yoffset > 0.0f) {
+        CGRect rect = self.contentView.bounds;
+        rect.origin.y += self.yoffset;
+        rect.size.height -= self.yoffset;
+        self.collectionView.frame = rect;
+    } else {
+        self.collectionView.frame = self.contentView.bounds;
+    }
 }
 
 - (void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource,UICollectionViewDelegate>)dataSourceDelegate index:(NSInteger)index
