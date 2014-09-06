@@ -99,7 +99,8 @@
     [headImg addSubview:imageView];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(89, 21, 211, 21)];
     label.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
-    label.text = rowDict[@"username"];
+    NSString *displayName = (rowDict[@"name"] == nil || [rowDict[@"name"] isEqualToString:@""]) ? rowDict[@"username"] : rowDict[@"name"];
+    label.text = displayName;
     [cell.contentView addSubview:headImg];
     [cell.contentView addSubview:label];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -7,6 +7,7 @@
 //
 
 #import "XYGenderChangeController.h"
+#import "XYUtil.h"
 
 @interface XYGenderChangeController ()
 - (IBAction)cancelAction:(id)sender;
@@ -106,6 +107,39 @@
     }
 }
 
+- (void)modifyGenderInfo {
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    NSString *path = @"User/UpdateUserInfo/gender";
+    int gen = [self.gender isEqualToString:@"男"] ? 0 : 1;
+    NSNumber *gender = [NSNumber numberWithInt:gen];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSDictionary *paramDict = @{@"userID": USERID, @"gender": gender};
+        NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+        [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+                if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试一次" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
+            NSLog(@"modifyGenderInfo Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"modifyGenderInfo Error:%@", error);
+        }];
+    }
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,6 +194,6 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    [self modifyGenderInfo];
 }
 @end

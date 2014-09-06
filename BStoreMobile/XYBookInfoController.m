@@ -336,7 +336,8 @@ enum BookInfoStatus {
                 cell = [nib objectAtIndex:0];
             }
             NSDictionary *rowDict = [self.listComments objectAtIndex:indexPath.row];
-            cell.uname.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"username"]];
+            NSString *displayName = (rowDict[@"name"] == nil || [rowDict[@"name"] isEqualToString:@""]) ? rowDict[@"username"] : rowDict[@"name"];
+            cell.uname.text = [NSString stringWithFormat:@"\"%@\"", displayName];
             cell.pubDate.text = rowDict[@"date"];
             cell.upCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"favorCount"] intValue]];
             cell.downCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"againstCount"] intValue]];

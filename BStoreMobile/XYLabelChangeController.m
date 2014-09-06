@@ -7,6 +7,7 @@
 //
 
 #import "XYLabelChangeController.h"
+#import "XYUtil.h"
 
 @interface XYLabelChangeController ()
 
@@ -154,5 +155,74 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    [self modifyUserInfo];
 }
+
+- (void)modifyUserInfo {
+    NSString *field = nil;
+    NSString *key = nil;
+    switch (self.status) {
+        case NICKNAME:
+            field = @"name";
+            key = @"name";
+            break;
+        case REMAINING:
+            field = @"AddRemaining";
+            key = @"value";
+            break;
+        case PHONE:
+            field = @"phonenumber";
+            key = @"phonenumber";
+            break;
+        case AREA:
+            field = @"address";
+            key = @"address";
+            break;
+        case EMAIL:
+            field = @"email";
+            key = @"email";
+            break;
+        default:
+            break;
+    }
+    
+    if (field && key) {
+        NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+        [manager.requestSerializer setValue:@"text/plain; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        NSString *path = [@"User/UpdateUserInfo/" stringByAppendingString:field];
+        NSString *content = self.textField.text;
+        NSString *USERID = [XYUtil getUserID];
+        if (USERID) {
+            NSDictionary *paramDict = nil;
+            if (self.status != REMAINING) {
+                paramDict = @{@"userID": USERID, key: content};
+            } else {
+                NSNumber *value = (content == nil || ![XYUtil isPureInt:content]) ? [NSNumber numberWithInt:0*100] : [NSNumber numberWithInt:([content intValue]*100)];
+                paramDict = @{@"userID": USERID, key: value};
+            }
+            NSLog(@"path:%@\n paramDict:%@",path, paramDict);
+            [manager POST:path parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSDictionary *retDict = (NSDictionary *)responseObject;
+                if (retDict && retDict[@"message"]) {
+                    NSLog(@"message: %@", retDict[@"message"]);
+                    if ([retDict[@"message"] isEqualToString:@"successful"]) {
+                        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                    } else {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试一次" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                        [alert show];
+                    }
+                }
+                NSLog(@"modifyUserInfo Success");
+            }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"modifyUserInfo Error:%@", error);
+            }];
+        }
+    }
+}
+
 @end

@@ -90,7 +90,8 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.headImg.frame.size.width, cell.headImg.frame.size.height)];
     imageView.image = [UIImage imageNamed:imagePath];
     [cell.headImg addSubview:imageView];
-    cell.username.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"username"]];
+    NSString *displayName = (rowDict[@"name"] == nil || [rowDict[@"name"] isEqualToString:@""]) ? rowDict[@"username"] : rowDict[@"name"];
+    cell.username.text = [NSString stringWithFormat:@"\"%@\"", displayName];
     cell.content.font = [UIFont fontWithName:@"Helvetica" size:12];
     cell.content.text = rowDict[@"content"];
     cell.pubDate.text = rowDict[@"date"];

@@ -85,7 +85,19 @@
                 self.credit.text = [NSString stringWithFormat:@"%@", tmp[@"score"]];
                 self.remaining.text = [XYUtil printMoneyAtCent:[tmp[@"remaining"] intValue]];
                 self.email.text = (tmp[@"email"] == nil || [tmp[@"email"] isEqualToString:@""]) ? @"无" : tmp[@"email"];
-                self.gender.text = @"无";
+                NSString *genstr = nil;
+                if (tmp[@"gender"]) {
+                    if ([tmp[@"gender"] intValue] == 0) {
+                        genstr = @"男";
+                    } else if([tmp[@"gender"] intValue] == 1) {
+                        genstr = @"女";
+                    } else {
+                        genstr = @"无";
+                    }
+                } else {
+                    genstr = @"无";
+                }
+                self.gender.text = genstr;
                 self.area.text = (tmp[@"address"] == nil || [tmp[@"address"] isEqualToString:@""]) ? @"无" : tmp[@"address"];
                 self.phoneNum.text = (tmp[@"phonenumber"] == nil || [tmp[@"phonenumber"] isEqualToString:@""]) ? @"无" : tmp[@"phonenumber"];
                 self.sign.text = (tmp[@"sign"] == nil || [tmp[@"sign"] isEqualToString:@""]) ? @"无" : tmp[@"sign"];

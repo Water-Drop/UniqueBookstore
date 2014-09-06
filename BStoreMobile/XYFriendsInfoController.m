@@ -173,7 +173,19 @@
             self.uname = tmp[@"username"];
             self.head = tmp[@"headerimg"];
             self.nickname = tmp[@"name"];
-            self.gen = @"男";
+            NSString *genstr = nil;
+            if (tmp[@"gender"]) {
+                if ([tmp[@"gender"] intValue] == 0) {
+                    genstr = @"男";
+                } else if([tmp[@"gender"] intValue] == 1) {
+                    genstr = @"女";
+                } else {
+                    genstr = @"";
+                }
+            } else {
+                genstr = @"";
+            }
+            self.gen = genstr;
             [self loadFriendInfo];
             [self.tableView reloadData];
         }
