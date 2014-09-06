@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYOrdersPageController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface XYOrdersPageController : XYViewController<UITableViewDelegate, UITableViewDataSource>
 
 @end

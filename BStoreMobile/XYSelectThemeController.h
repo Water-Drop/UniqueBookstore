@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYSelectThemeController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XYSelectThemeController : XYViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property NSString *tagName;
 @property NSString *tagID;

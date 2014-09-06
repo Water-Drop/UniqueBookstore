@@ -169,7 +169,7 @@
         [btn setTitle:@"查看更多>" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [btn setTintColor:[UIColor darkGrayColor]];
+        btn.showsTouchWhenHighlighted = NO;
         [btn addTarget:self action:@selector(clickForMore:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:lbl];
         [cell.contentView addSubview:btn];
@@ -306,7 +306,6 @@
         // NSLog(@"cell.title.text: %@", [rowDict objectForKey:nameKey]);
         
         NSString *imagePath = [rowDict objectForKey:@"image"];
-        imagePath = [imagePath stringByAppendingString:@".png"];
         cell.coverImage.image = [UIImage imageNamed:imagePath];
         
         return cell;
@@ -322,6 +321,13 @@
             self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:cell.title.tag]]};
             [self performSegueWithIdentifier:@"BookDetail" sender:self];
         }
+    } else {
+        NSArray *listTheme = [self loadCategory];
+        NSDictionary *rowDict = [listTheme objectAtIndex:indexPath.row];
+        NSNumber *tagID = rowDict[@"tagID"];
+        NSString *name = rowDict[@"name"];
+        self.valueDict = @{@"tagID":[NSString stringWithFormat:@"%@", tagID], @"tagName":name};
+        [self performSegueWithIdentifier:@"selectTheme" sender:nil];
     }
 }
 
@@ -361,7 +367,7 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"BookDetail"]) {
+    if ([segue.identifier isEqualToString:@"BookDetail"] || [segue.identifier isEqualToString:@"selectTheme"]) {
         UIViewController *dest = segue.destinationViewController;
         if (self.valueDict) {
             for (NSString *key in self.valueDict) {
@@ -401,6 +407,7 @@
 - (IBAction)clickForMore:(id)sender
 {
     NSLog(@"click For More...");
+    [self performSegueWithIdentifier:@"allTheme" sender:nil];
 }
 
 @end

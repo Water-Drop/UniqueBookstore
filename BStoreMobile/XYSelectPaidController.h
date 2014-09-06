@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYSelectPaidController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XYSelectPaidController : XYViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property NSMutableArray *listPaid;
 @property NSMutableArray *listPaidName;

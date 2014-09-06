@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYAllThemeController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface XYAllThemeController : XYViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

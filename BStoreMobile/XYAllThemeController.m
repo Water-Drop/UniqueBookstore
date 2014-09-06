@@ -72,8 +72,43 @@
     }
     
     NSDictionary *rowDict = [self.listTheme objectAtIndex:indexPath.row];
+    NSInteger tagID = [rowDict[@"tagID"] integerValue];
+    NSString *name = rowDict[@"name"];
+    
+    cell.tag = tagID;
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
+    cell.textLabel.text = name;
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *rowDict = [self.listTheme objectAtIndex:indexPath.row];
+    NSInteger tagID = [rowDict[@"tagID"] integerValue];
+    NSString *name = rowDict[@"name"];
+    
+    NSDictionary *valueDict = @{@"tagID":[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:tagID]], @"tagName":name};
+    [self performSegueWithIdentifier:@"selectTheme" sender:valueDict];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"selectTheme"]) {
+        UIViewController *dest = segue.destinationViewController;
+        
+        NSDictionary *dic = sender;
+        if (dic) {
+            for (NSString *key in dic) {
+                NSLog(@"%@, %@", key, dic[key]);
+                [dest setValue:dic[key] forKey:key];
+            }
+        }
+    }
 }
 
 /*

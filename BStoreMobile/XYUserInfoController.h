@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
-@interface XYUserInfoController : UITableViewController
+@interface XYUserInfoController : XYTableViewController
 
 @end

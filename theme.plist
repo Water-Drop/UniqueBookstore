@@ -5,7 +5,7 @@
 	<dict>
 		<key>name</key>
 		<string> 儿童文学</string>
-		<key>tag</key>
+		<key>tagID</key>
 		<integer>16</integer>
 		<key>image</key>
 		<string>theme_0.png</string>
@@ -13,7 +13,7 @@
 	<dict>
 		<key>name</key>
 		<string>计算机</string>
-		<key>tag</key>
+		<key>tagID</key>
 		<integer>17</integer>
 		<key>image</key>
 		<string>theme_2.png</string>
@@ -21,7 +21,7 @@
 	<dict>
 		<key>name</key>
 		<string>青春文学</string>
-		<key>tag</key>
+		<key>tagID</key>
 		<string>21</string>
 		<key>image</key>
 		<string>theme_3.png</string>
@@ -29,7 +29,7 @@
 	<dict>
 		<key>name</key>
 		<string>外国文学</string>
-		<key>tag</key>
+		<key>tagID</key>
 		<string>6</string>
 		<key>image</key>
 		<string>theme_4.png</string>
