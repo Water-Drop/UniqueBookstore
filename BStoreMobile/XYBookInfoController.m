@@ -127,11 +127,13 @@ enum BookInfoStatus {
             return 0;
         }
     } else if(self.status == RECOMMENDS) {
-        if (self.bookInfoDict && self.listRecommends) {
-            if (self.listOthers) {
+        if (self.bookInfoDict) {
+            if (self.listOthers && self.listRecommends) {
                 return 2;
-            } else {
+            } if ((self.listRecommends && !self.listOthers) || (self.listOthers && !self.listRecommends)) {
                 return 1;
+            } else {
+                return 0;
             }
         } else {
             return 0;
@@ -470,7 +472,15 @@ enum BookInfoStatus {
             cell.title.text = rowDict[@"itemName"];
             cell.detail.text = rowDict[@"type"];
             NSString *imagePath = rowDict[@"image"];
-            cell.coverImage.image = [UIImage imageNamed:imagePath];
+//            cell.coverImage.image = [UIImage imageNamed:imagePath];
+            __weak XYCollectionCell *weakCell = cell;
+            [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                weakCell.coverImage.image = image;
+                [weakCell setNeedsLayout];
+                [weakCell setNeedsDisplay];
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"Get Image from Server Error.");
+            }];
         }
         return cell;
     }
@@ -480,7 +490,13 @@ enum BookInfoStatus {
 - (void)tableView:(UITableView *)tableView willDisplayCell:(XYRecBookCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section != 0 && self.status == RECOMMENDS) {
-        [cell setCollectionViewDataSourceDelegate:self index:(indexPath.row)];
+        NSInteger tag = indexPath.row;
+        if (indexPath.row == 0) {
+            if (!self.listRecommends) {
+                tag = 1;
+            }
+        }
+        [cell setCollectionViewDataSourceDelegate:self index:tag];
     }
 }
 
@@ -577,26 +593,30 @@ enum BookInfoStatus {
             if (tmp) {
                 self.bookInfoDict = tmp[@"bookinfo"];
                 self.outputDict = tmp[@"details"];
-                NSArray *others = [self loadOthersFile];
-                if (others) {
-                    for (NSDictionary *rowDict in others) {
-                        NSString *key = self.bookInfoDict[@"title"];
-                        if (rowDict[key]) {
-                            self.listOthers = rowDict[key];
-                            break;
-                        }
-                    }
+                NSString *tmpStr = self.bookInfoDict[@"weiboURL"];
+                if (tmpStr && ![tmpStr isEqualToString:@""] && ![tmpStr isEqualToString:@" "]) {
+                    self.weibourl = tmpStr;
                 }
-                NSArray *weibos = [self loadWeiboFile];
-                if (weibos) {
-                    for (NSDictionary *rowDict in weibos) {
-                        NSString *key = self.bookInfoDict[@"author"];
-                        if (rowDict[key]) {
-                            self.weibourl = rowDict[key];
-                            break;
-                        }
-                    }
-                }
+//                NSArray *others = [self loadOthersFile];
+//                if (others) {
+//                    for (NSDictionary *rowDict in others) {
+//                        NSString *key = self.bookInfoDict[@"title"];
+//                        if (rowDict[key]) {
+//                            self.listOthers = rowDict[key];
+//                            break;
+//                        }
+//                    }
+//                }
+//                NSArray *weibos = [self loadWeiboFile];
+//                if (weibos) {
+//                    for (NSDictionary *rowDict in weibos) {
+//                        NSString *key = self.bookInfoDict[@"author"];
+//                        if (rowDict[key]) {
+//                            self.weibourl = rowDict[key];
+//                            break;
+//                        }
+//                    }
+//                }
             }
             NSLog(@"loadBookDetailFromServer Success");
             [self.tableView reloadData];
@@ -638,10 +658,18 @@ enum BookInfoStatus {
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
     NSString *USERID = [XYUtil getUserID];
     if (USERID) {
-        NSString *path = [NSString stringWithFormat:@"BookRelatedV2?userID=%@&bookID=%@", USERID, self.bookID];
+        NSString *path = [NSString stringWithFormat:@"BookRelatedV3?userID=%@&bookID=%@", USERID, self.bookID];
         NSLog(@"path:%@",path);
         [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            self.listRecommends = (NSArray *)responseObject;
+            NSDictionary *tmpDict = (NSDictionary *)responseObject;
+            self.listRecommends = tmpDict[@"bookrelated"];
+            self.listOthers = tmpDict[@"others"];
+            if ([self.listRecommends count] == 0) {
+                self.listRecommends = nil;
+            }
+            if ([self.listOthers count] == 0) {
+                self.listOthers = nil;
+            }
             NSLog(@"loadBookRecommendsFromServer Success");
             [self.tableView reloadData];
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
