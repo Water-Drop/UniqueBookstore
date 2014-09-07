@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
-@interface XYGenderChangeController : UITableViewController
+@interface XYGenderChangeController : XYTableViewController
 
 @property NSString *gender;
 

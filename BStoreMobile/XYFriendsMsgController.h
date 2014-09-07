@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XYTableViewController.h"
 
-@interface XYFriendsMsgController : XYTableViewController
+@interface XYFriendsMsgController : XYTableViewController<UIAlertViewDelegate>
 
 @end

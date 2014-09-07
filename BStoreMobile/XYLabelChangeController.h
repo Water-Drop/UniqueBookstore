@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYTableViewController.h"
 
 // used in change User Info
 enum labelChangeStatus
@@ -14,7 +15,7 @@ enum labelChangeStatus
     NICKNAME, REMAINING, PHONE, AREA, EMAIL
 };
 
-@interface XYLabelChangeController : UITableViewController
+@interface XYLabelChangeController : XYTableViewController
 
 @property enum labelChangeStatus status;
 @property NSString *oldLbl;

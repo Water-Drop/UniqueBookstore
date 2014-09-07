@@ -129,7 +129,7 @@
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
                     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
                 } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试一次" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                     [alert show];
                 }
             }

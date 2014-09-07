@@ -14,6 +14,8 @@
 @interface XYFriendsMsgController ()
 
 @property (nonatomic, strong) NSMutableArray *listMsg;
+@property NSInteger delSayingCellRow;
+@property NSInteger delSayingID;
 
 @end
 
@@ -95,8 +97,21 @@
     cell.content.font = [UIFont fontWithName:@"Helvetica" size:12];
     cell.content.text = rowDict[@"content"];
     cell.pubDate.text = rowDict[@"date"];
-    [cell.delButton setHidden:YES];
     
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID && rowDict[@"userID"]) {
+        if ([USERID intValue] == [rowDict[@"userID"] intValue]) {
+            [cell.delButton setHidden:NO];
+            [cell.delButton addTarget:self action:@selector(delSaying:) forControlEvents:UIControlEventTouchUpInside];
+            cell.delButton.tag = [rowDict[@"sayingID"] intValue];
+            self.delSayingID = cell.delButton.tag;
+        } else {
+            [cell.delButton setHidden:YES];
+        }
+    } else {
+        [cell.delButton setHidden:YES];
+    }
+    self.delSayingCellRow = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -140,6 +155,55 @@
 -(IBAction)unwindToFriendsMsg:(UIStoryboardSegue *)segue
 {
     
+}
+
+- (void)delSaying:(id)sender
+{
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (tag > 0) {
+        NSLog(@"Del sayingID #%d ", tag);
+        NSLog(@"delSaying");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除" message:@"确定要删除所选消息？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+        alert.tag = 0;
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1 && self.delSayingID > 0) {
+            NSLog(@"delSaying button clicked.");
+            [self.listMsg removeObjectAtIndex:self.delSayingCellRow];  //删除数组里的数据
+            [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:self.delSayingCellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+            [self delSayingFromServer:self.delSayingID];
+        }
+    }
+}
+
+- (void)delSayingFromServer:(NSInteger)sayingID
+{
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/DeleteSaying?userID=%@&sayingID=%@", USERID, [NSNumber numberWithInteger:sayingID]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *retDict = (NSDictionary *)responseObject;
+            if (retDict && retDict[@"message"]) {
+                NSLog(@"message: %@", retDict[@"message"]);
+            }
+            NSLog(@"delSayingFromServer Success");
+            [self.tableView reloadData];
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"delSayingFromServer Error:%@", error);
+        }];
+    }
 }
 
 

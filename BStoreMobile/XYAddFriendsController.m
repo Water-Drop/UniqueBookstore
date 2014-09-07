@@ -156,34 +156,42 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
-    NSString *path = [@"User/UserInfoUsername/" stringByAppendingString:[self.textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSLog(@"path:%@",path);
-    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *tmp = (NSDictionary *)responseObject;
-        if (tmp && [tmp count] > 0) {
-            NSString *USERID = [XYUtil getUserID];
-            if (USERID && [tmp[@"userID"] intValue] != [USERID intValue]) {
-                NSString *userID = [NSString stringWithFormat:@"%@",tmp[@"userID"]];
-                NSString *sign = tmp[@"sign"];
-                NSString *address = tmp[@"address"];
-                NSString *username = tmp[@"username"];
-                NSNumber *head = tmp[@"headerimg"];
-                NSString *nickname = tmp[@"name"];
-                enum friendsInfoStatus status = ADD;
-                self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status], @"head":head, @"nickname": nickname};
-                [self performSegueWithIdentifier:@"friendsInfo" sender:self];
+//    NSString *path = [@"User/UserInfoUsername/" stringByAppendingString:[self.textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *USERID = [XYUtil getUserID];
+    if (USERID) {
+        NSString *path = [NSString stringWithFormat:@"User/UserInfoUsernameV2?userID=%@&username=%@", USERID, [self.textField.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSLog(@"path:%@",path);
+        [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *tmp = (NSDictionary *)responseObject;
+            if (tmp && [tmp count] > 0) {
+                NSString *USERID = [XYUtil getUserID];
+                if (USERID && [tmp[@"userID"] intValue] != [USERID intValue]) {
+                    NSString *userID = [NSString stringWithFormat:@"%@",tmp[@"userID"]];
+                    NSString *sign = tmp[@"sign"];
+                    NSString *address = tmp[@"address"];
+                    NSString *username = tmp[@"username"];
+                    NSNumber *head = tmp[@"headerimg"];
+                    NSString *nickname = tmp[@"name"];
+                    NSNumber *isFriends = tmp[@"isFriends"];
+                    enum friendsInfoStatus status = ADD;
+                    if ([isFriends intValue] == 1) {
+                        status = DELETE;
+                    }
+                    self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status], @"head":head, @"nickname": nickname};
+                    [self performSegueWithIdentifier:@"friendsInfo" sender:self];
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"该用户不存在" message:@"无法找到该用户，请检查你填写的账号是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
             }
-        } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"该用户不存在" message:@"无法找到该用户，请检查你填写的账号是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-            [alert show];
-        }
-        NSLog(@"searchUserNameFromServer Success");
-    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"searchUserNameFromServer Error:%@", error);
-    }];
+            NSLog(@"searchUserNameFromServer Success");
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"searchUserNameFromServer Error:%@", error);
+        }];
+    }
 }
 
 - (void)dismissKeyboardByTouchDownBG
