@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "XYLocationManager.h"
 #import "JCRBlurView.h"
+#import "TWMessageBarManager.h"
 
 @interface XYTableViewController : UITableViewController<UIScrollViewDelegate, UITableViewDelegate> {
 
     JCRBlurView *navigation;
 }
+- (id)initWithStyleSheet:(NSObject<TWMessageBarStyleSheet> *)stylesheet;
 
 @end

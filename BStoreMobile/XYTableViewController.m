@@ -9,11 +9,46 @@
 #import "XYTableViewController.h"
 #import "XYUtil.h"
 
+// Messages
+#import "TWMessageBarManager.h"
+
+// Numerics
+CGFloat const kTWMesssageBarDemoControllerButtonPadding = 10.0f;
+CGFloat const kTWMesssageBarDemoControllerButtonHeight = 50.0f;
+
+// Colors
+static UIColor *kTWMesssageBarDemoControllerButtonColor = nil;
+
 @interface XYTableViewController ()
 
 @end
 
 @implementation XYTableViewController
+
+#pragma mark - Alloc/Init
+
++ (void)initialize
+{
+	if (self == [XYTableViewController class])
+	{
+        kTWMesssageBarDemoControllerButtonColor = [UIColor colorWithWhite:0.0 alpha:0.25];
+	}
+}
+
+- (id)initWithStyleSheet:(NSObject<TWMessageBarStyleSheet> *)stylesheet
+{
+    self = [super init];
+    if (self)
+    {
+        [TWMessageBarManager sharedInstance].styleSheet = stylesheet;
+    }
+    return self;
+}
+
+- (id)init
+{
+    return [self initWithStyleSheet:nil];
+}
 
 - (void)viewDidLoad
 {

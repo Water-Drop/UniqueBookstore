@@ -7,6 +7,7 @@
 //
 
 #import "XYLocationManager.h"
+#import "TWMessageBarManager.h"
 
 @implementation XYLocationManager
 
@@ -46,6 +47,8 @@
     _beaconDistance = [[NSMutableDictionary alloc] init];
     
     _rangeCount = 0;
+    
+    [self performSelector:@selector(showPopMsg) withObject:nil afterDelay:10.0];
     
     return self;
 }
@@ -242,6 +245,11 @@
     }
     
     return np;
+}
+
+- (void)showPopMsg
+{
+    [self.delegate showPopMsg];
 }
 
 @end

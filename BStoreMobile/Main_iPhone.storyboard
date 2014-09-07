@@ -43,7 +43,7 @@
         <!--Navigation Controller-->
         <scene sceneID="81R-kD-mR0">
             <objects>
-                <navigationController definesPresentationContext="YES" id="ti7-QV-Cgi" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationNav" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ti7-QV-Cgi" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bXb-QV-IxT">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1191,7 +1191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKZ-Wa-rAo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344" y="-6"/>
+            <point key="canvasLocation" x="336" y="1394"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cYK-0t-vGN">
@@ -1209,13 +1209,11 @@
                         <segue destination="uDC-Pi-zNw" kind="relationship" relationship="viewControllers" id="fuf-a6-K01"/>
                         <segue destination="2kZ-2A-dGN" kind="relationship" relationship="viewControllers" id="5UR-7A-Z8L"/>
                         <segue destination="Nny-Oa-wLs" kind="relationship" relationship="viewControllers" id="rc4-QV-M6z"/>
-                        <segue destination="ti7-QV-Cgi" kind="modal" identifier="Navigation" id="OGY-yB-6Wm"/>
-                        <segue destination="0w1-ob-wiD" kind="modal" identifier="Payment" id="hgI-ZJ-oGK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzR-gu-oVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344" y="699"/>
+            <point key="canvasLocation" x="336" y="2099"/>
         </scene>
         <!--Rec Book Controller - 精品推荐-->
         <scene sceneID="CS2-Ox-CMm">
@@ -1721,10 +1719,46 @@
             </objects>
             <point key="canvasLocation" x="4776" y="699"/>
         </scene>
+        <!--Show Ads Controller - 促销信息-->
+        <scene sceneID="RCO-gZ-DtV">
+            <objects>
+                <viewController storyboardIdentifier="ShowAds" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AwM-bQ-gNs" customClass="XYShowAdsController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wyy-an-MQt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="X49-ey-eem">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AwM-bQ-gNs" id="xTR-JS-F8G"/>
+                                    <outlet property="delegate" destination="AwM-bQ-gNs" id="ceE-Xf-VAG"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="促销信息" id="jN2-jQ-0qH">
+                        <barButtonItem key="rightBarButtonItem" title="确定" id="fKP-GW-uDJ">
+                            <connections>
+                                <action selector="cancelAction:" destination="AwM-bQ-gNs" id="dbu-Sz-dIc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="X49-ey-eem" id="otK-qo-CVn"/>
+                        <segue destination="hLO-lp-7QW" kind="push" identifier="WebView" id="lbE-0i-8nS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wVW-x2-1Od" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1898" y="5529"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="m3I-2u-Dhf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0w1-ob-wiD" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ConfirmNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0w1-ob-wiD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hbo-Ch-dFw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1866,6 +1900,24 @@
             </objects>
             <point key="canvasLocation" x="2984" y="-2249"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MC2-pF-iQn">
+            <objects>
+                <navigationController storyboardIdentifier="ShowAdsNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BvF-Zx-HQE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fvd-4C-jbM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AwM-bQ-gNs" kind="relationship" relationship="rootViewController" id="0vw-rz-NCn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOi-mG-btN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1372" y="5529"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LOGO.JPG" width="1566" height="506"/>
@@ -1886,8 +1938,8 @@
         <segue reference="cYO-YM-urh"/>
         <segue reference="Av2-e0-K2i"/>
         <segue reference="osy-Kd-D3X"/>
+        <segue reference="tFE-eq-5b4"/>
         <segue reference="fYM-Cr-6Cv"/>
-        <segue reference="XnJ-eY-p66"/>
-        <segue reference="60v-XT-1uc"/>
+        <segue reference="lbE-0i-8nS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,6 +10,7 @@
 #import "XYLocationManager.h"
 #import "XYUtil.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "TWMessageBar/TWMessageBarManager.h"
 
 @implementation XYAppDelegate
 
@@ -70,12 +71,71 @@
 
 - (void)performPayment
 {
-    [_window.rootViewController performSegueWithIdentifier:@"Payment" sender:nil];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UINavigationController *confrimNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"ConfirmNav"];
+    [[self getCurrentViewController] presentViewController:confrimNav animated:YES completion:nil];
+
 }
 
 - (void)showNavigationModal
 {
-    [_window.rootViewController performSegueWithIdentifier:@"Navigation" sender:nil];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UINavigationController *navigationNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"NavigationNav"];
+    [[self getCurrentViewController] presentViewController:navigationNav animated:YES completion:nil];
+}
+
+- (void)showPopMsg {
+    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"新书促销：《看见》"
+                                                   description:@"柴静个人的成长告白书 中国社会十年变迁的备忘录"
+                                                          type:TWMessageBarMessageTypeInfo
+                                                      callback:^(void) {
+                                                          [self showAdvertisement];
+                                                      }];
+}
+
+- (void)showAdvertisement {
+    NSDictionary *valueDict = @{@"bookID": @"22"};
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    UINavigationController *showAdsNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"ShowAdsNav"];
+    UINavigationController *showAdsController = showAdsNav.viewControllers[0];
+    if (valueDict) {
+        for (NSString *key in valueDict) {
+            NSLog(@"%@, %@", key, valueDict[key]);
+            [showAdsController setValue:valueDict[key] forKey:key];
+        }
+    }
+    [[self getCurrentViewController] presentViewController:showAdsNav animated:YES completion:nil];
+
+}
+
+- (UIViewController *)getCurrentViewController {
+    UIViewController *result = nil;
+    
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]])
+        result = nextResponder;
+    else
+        result = window.rootViewController;
+    return result;
 }
 
 @end
