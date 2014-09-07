@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.webView.scalesPageToFit = YES;
+    self.webView.delegate = self;
     NSLog(@"%@", _url);
     [self performSelectorOnMainThread:@selector(loadWebPage) withObject:nil waitUntilDone:NO];
 }
@@ -69,7 +71,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self.navigationItem setTitle:[webView stringByEvaluatingJavaScriptFromString:@"document.title"]];
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"title:%@", title);
+    [self.navigationItem setTitle:title];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
