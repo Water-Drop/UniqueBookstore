@@ -207,7 +207,7 @@
 - (void)confirmAction
 {
     if ([self.sectionDict objectForKey:@"notpaid"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证未通过" message:@"部分商品尚未支付" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续支付",nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证未通过" message:@"部分商品尚未支付" delegate:self cancelButtonTitle:@"放弃带走" otherButtonTitles:@"继续支付",nil];
         [alert show];
     } else {
         [self sendConfirmRequest];
@@ -245,6 +245,8 @@
 {
     if (buttonIndex == 1) {// 继续支付
         [self performSegueWithIdentifier:@"purchase" sender:self];
+    } else if (buttonIndex == 0) {
+        [self sendConfirmRequest];
     }
 }
 

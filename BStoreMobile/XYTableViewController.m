@@ -78,8 +78,8 @@ static UIColor *kTWMesssageBarDemoControllerButtonColor = nil;
     [navigation addSubview:btn];
     
     UILabel *lbl = [[UILabel alloc] init];
-    [lbl setText:@"前方行走约10米后左转..."];
-    lbl.frame = CGRectMake(91, 7, 160, 32);
+    [lbl setText:@"前方行走约10米后左转"];
+    lbl.frame = CGRectMake(62, 7, 210, 32);
     [lbl setTextColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
     [navigation addSubview:lbl];
     

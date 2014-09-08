@@ -12,6 +12,8 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "TWMessageBar/TWMessageBarManager.h"
 #import "XYUtil.h"
+#import "XYConfirmController.h"
+#import "XYNavigateController.h"
 
 @implementation XYAppDelegate
 
@@ -72,17 +74,29 @@
 
 - (void)performPayment
 {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UINavigationController *confrimNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"ConfirmNav"];
-    [[self getCurrentViewController] presentViewController:confrimNav animated:YES completion:nil];
-
+    UIViewController * current = [self getCurrentViewController];
+    NSString *currentName = [self getCurrentViewControllerNameWithoutTabAndNav:current];
+    if (currentName) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        UINavigationController *confrimNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"ConfirmNav"];
+        if (![currentName isEqualToString:NSStringFromClass([XYConfirmController class])]) {
+            [current presentViewController:confrimNav animated:YES completion:nil];
+        }
+    }
 }
 
 - (void)showNavigationModal
 {
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    UINavigationController *navigationNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"NavigationNav"];
-    [[self getCurrentViewController] presentViewController:navigationNav animated:YES completion:nil];
+    UIViewController * current = [self getCurrentViewController];
+    NSString *currentName = [self getCurrentViewControllerNameWithoutTabAndNav:current];
+    if (currentName) {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        UINavigationController *navigationNav = (UINavigationController *)[storyBoard instantiateViewControllerWithIdentifier:@"NavigationNav"];
+        // no this situation
+        if (![currentName isEqualToString:NSStringFromClass([XYNavigateController class])]) {
+            [current presentViewController:navigationNav animated:YES completion:nil];
+        }
+    }
 }
 
 - (void)showPopMsg {
@@ -142,6 +156,24 @@
     else
         result = window.rootViewController;
     return result;
+}
+
+- (NSString *)getCurrentViewControllerNameWithoutTabAndNav:(UIViewController *)result
+{
+    UIViewController *current = result;
+    NSString *currentName = (current == nil) ? nil : NSStringFromClass([current class]);
+    while (currentName && ([currentName isEqualToString:NSStringFromClass([UITabBarController class])] || [currentName isEqualToString:NSStringFromClass([UINavigationController class])])) {
+        if ([currentName isEqualToString:NSStringFromClass([UITabBarController class])]) {
+            UITabBarController *tab = (UITabBarController *)current;
+            current = tab.selectedViewController;
+        } else {
+            UINavigationController *nav = (UINavigationController *)current;
+            current = nav.topViewController;
+        }
+        currentName = (current == nil) ? nil : NSStringFromClass([current class]);
+    }
+    NSLog(@"---->  Current ViewController:%@", currentName);
+    return currentName;
 }
 
 @end
