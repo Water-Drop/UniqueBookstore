@@ -158,14 +158,12 @@
 - (void)delSaying:(id)sender
 {
     NSInteger tag = ((UIButton *)sender).tag;
-    if (tag > 0) {
-        NSLog(@"Del sayingRow #%d ", tag);
-        NSLog(@"delSaying");
-        self.delSayingCellRow = tag;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除" message:@"确定要删除所选消息？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-        alert.tag = 0;
-        [alert show];
-    }
+    NSLog(@"Del sayingRow #%d ", tag);
+    NSLog(@"delSaying");
+    self.delSayingCellRow = tag;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除" message:@"确定要删除所选消息？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    alert.tag = 0;
+    [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
