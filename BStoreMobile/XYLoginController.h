@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XYViewController.h"
 
-@interface XYLoginController : UIViewController<UIGestureRecognizerDelegate>
+@interface XYLoginController : XYViewController<UIGestureRecognizerDelegate>
 
 @end

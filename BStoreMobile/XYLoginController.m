@@ -106,8 +106,13 @@
         if (retDict && retDict[@"userID"]) {
             NSNumber *userID = retDict[@"userID"];
             if ([userID intValue] <= 0) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户名或密码错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"用户名或密码错误" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+                [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"用户名或密码错误"
+                                                               description:nil
+                                                                      type:TWMessageBarMessageTypeError
+                                                                  callback:nil];
+                self.pwd.text = @"";
             } else {
                 NSString *uid = [NSString stringWithFormat:@"%@", userID];
                 [self writeLoginName:loginName AtPwd:pwd WithUserID:uid];

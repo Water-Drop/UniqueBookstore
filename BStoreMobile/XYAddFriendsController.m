@@ -180,12 +180,20 @@
                     self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status], @"head":head, @"nickname": nickname};
                     [self performSegueWithIdentifier:@"friendsInfo" sender:self];
                 } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"你不能添加自己为好友" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"你不能添加自己为好友"
+                                                                   description:nil
+                                                                          type:TWMessageBarMessageTypeError
+                                                                      callback:nil];
                 }
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"该用户不存在" message:@"无法找到该用户，请检查你填写的账号是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                [alert show];
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"该用户不存在" message:@"无法找到该用户，请检查你填写的账号是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                [alert show];
+                [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"该用户不存在"
+                                                               description:nil
+                                                                      type:TWMessageBarMessageTypeError
+                                                                  callback:nil];
             }
             NSLog(@"searchUserNameFromServer Success");
         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {

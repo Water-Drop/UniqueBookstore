@@ -129,8 +129,12 @@
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
                     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
                 } else {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"修改失败" message:@"请重新尝试" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"修改失败"
+                                                                   description:@"请重新尝试"
+                                                                          type:TWMessageBarMessageTypeError
+                                                                      callback:nil];
                 }
             }
             NSLog(@"modifyGenderInfo Success");

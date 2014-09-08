@@ -730,8 +730,12 @@ enum BookInfoStatus {
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到购物车" message:@"该商品已成功添加到购物车" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"添加到购物车"
+                                                                   description:@"该商品已成功添加到购物车"
+                                                                          type:TWMessageBarMessageTypeSuccess
+                                                                      callback:nil];
                 }
             }
             NSLog(@"addOneItemToCart Success");
@@ -767,8 +771,12 @@ enum BookInfoStatus {
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"] || [retDict[@"message"] isEqualToString:@"already exist"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到心愿单" message:@"该商品已成功添加到心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加到心愿单" message:@"该商品已成功添加到心愿单" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"添加到心愿单"
+                                                                   description:@"该商品已成功添加到心愿单"
+                                                                          type:TWMessageBarMessageTypeSuccess
+                                                                      callback:nil];
                 }
             }
             NSLog(@"addItemToWishlist Success");

@@ -129,7 +129,12 @@ static UIColor *kTWDefaultMessageBarStyleSheetInfoStrokeColor = nil;
 
 + (CGFloat)durationForMessageType:(TWMessageBarMessageType)messageType
 {
-    return kTWMessageBarManagerDisplayDelay;
+//    return kTWMessageBarManagerDisplayDelay;
+    if (messageType == TWMessageBarMessageTypeSuccess || messageType == TWMessageBarMessageTypeError) {
+        return 1.0f;
+    } else {
+        return 2.0f;
+    }
 }
 
 #pragma mark - Alloc/Init

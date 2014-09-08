@@ -316,9 +316,13 @@
                     alert.tag = 0;
                     [alert show];
                 } else if ([retDict[@"message"] isEqualToString:@"remaining not enough"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付失败" message:@"你的账户余额不足，请充值后付款" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                    alert.tag = 1;
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付失败" message:@"你的账户余额不足，请充值后付款" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//                    alert.tag = 1;
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"支付失败"
+                                                                   description:@"你的账户余额不足，请充值后付款"
+                                                                          type:TWMessageBarMessageTypeError
+                                                                      callback:nil];
                 }
             }
             NSLog(@"purchaseToServerByRemaining Success");
