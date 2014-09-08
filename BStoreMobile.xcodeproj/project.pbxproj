@@ -272,6 +272,8 @@
 		E3D7FF1719BCDEB100624CCD /* subtitle.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FF1619BCDEB100624CCD /* subtitle.png */; };
 		E3D7FF1919BCDF6F00624CCD /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FF1819BCDF6F00624CCD /* main.png */; };
 		E3D7FF1C19BCE55F00624CCD /* XYSignChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF1B19BCE55F00624CCD /* XYSignChangeController.m */; };
+		E3D7FF2019BD5DEF00624CCD /* XYMyCommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7FF1E19BD5DEF00624CCD /* XYMyCommentViewCell.m */; };
+		E3D7FF2119BD5DEF00624CCD /* XYMyCommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3D7FF1F19BD5DEF00624CCD /* XYMyCommentViewCell.xib */; };
 		E3E4A7121977CB2300ED3215 /* XYBookInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */; };
 		E3E4A71B1977D15000ED3215 /* XYBookInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E4A7191977D15000ED3215 /* XYBookInfoMainCell.m */; };
 		E3E4A71C1977D15000ED3215 /* XYBookInfoMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3E4A71A1977D15000ED3215 /* XYBookInfoMainCell.xib */; };
@@ -697,6 +699,9 @@
 		E3D7FF1819BCDF6F00624CCD /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 		E3D7FF1A19BCE55F00624CCD /* XYSignChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSignChangeController.h; sourceTree = "<group>"; };
 		E3D7FF1B19BCE55F00624CCD /* XYSignChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYSignChangeController.m; sourceTree = "<group>"; };
+		E3D7FF1D19BD5DEF00624CCD /* XYMyCommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYMyCommentViewCell.h; sourceTree = "<group>"; };
+		E3D7FF1E19BD5DEF00624CCD /* XYMyCommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYMyCommentViewCell.m; sourceTree = "<group>"; };
+		E3D7FF1F19BD5DEF00624CCD /* XYMyCommentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XYMyCommentViewCell.xib; sourceTree = "<group>"; };
 		E3E4A7101977CB2300ED3215 /* XYBookInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoController.h; sourceTree = "<group>"; };
 		E3E4A7111977CB2300ED3215 /* XYBookInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYBookInfoController.m; sourceTree = "<group>"; };
 		E3E4A7181977D15000ED3215 /* XYBookInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookInfoMainCell.h; sourceTree = "<group>"; };
@@ -1355,6 +1360,9 @@
 				E3BF9EDF198544DF00855279 /* XYCommentViewCell.h */,
 				E3BF9EE0198544DF00855279 /* XYCommentViewCell.m */,
 				E3BF9EDD1985302B00855279 /* XYCommentViewCell.xib */,
+				E3D7FF1D19BD5DEF00624CCD /* XYMyCommentViewCell.h */,
+				E3D7FF1E19BD5DEF00624CCD /* XYMyCommentViewCell.m */,
+				E3D7FF1F19BD5DEF00624CCD /* XYMyCommentViewCell.xib */,
 				E39D05B1197575AA006A8F53 /* XYSaleItemCell.h */,
 				E39D05B2197575AA006A8F53 /* XYSaleItemCell.m */,
 				E30190EC1980D1B100D04906 /* XYCartItemCell.h */,
@@ -1772,6 +1780,7 @@
 				E33A3F621977BB5000BA3797 /* 23.JPG in Resources */,
 				E33A3F821977BB5000BA3797 /* Japan.png in Resources */,
 				E3EA377E198A6E140066ECCD /* headImg_3.jpg in Resources */,
+				E3D7FF2119BD5DEF00624CCD /* XYMyCommentViewCell.xib in Resources */,
 				E33A3F5B1977BB5000BA3797 /* 17.JPG in Resources */,
 				E3D7FEDE19BB7CC800624CCD /* 小时代3：刺金时代.jpg in Resources */,
 				21F1CBD1198ACB750089C9EA /* 2@2x.png in Resources */,
@@ -1859,6 +1868,7 @@
 				E340FD4D199B7605007A61F5 /* XYShowInvoiceController.m in Sources */,
 				E33A3F05197762AF00BA3797 /* XYRecBookCell.m in Sources */,
 				21F1CBB4198AAC5F0089C9EA /* XYTableViewController.m in Sources */,
+				E3D7FF2019BD5DEF00624CCD /* XYMyCommentViewCell.m in Sources */,
 				21C4EC7F198A104800CC9D4C /* XYWebViewController.m in Sources */,
 				E3EA3742198747F60066ECCD /* XYFriendsMsgCell.m in Sources */,
 				E315CEE1197D0BA9006BD8CA /* XYPubMsgController.m in Sources */,

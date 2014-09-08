@@ -8,7 +8,8 @@
 
 #import "XYMyCommentsController.h"
 #import "XYUtil.h"
-#import "XYCommentViewCell.h"
+#import "XYMyCommentViewCell.h"
+#import "UIKit+AFNetworking.h"
 
 @interface XYMyCommentsController ()
 
@@ -51,27 +52,35 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *commentsCellID = @"MyCommentsCellIdentifier";
-    XYCommentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellID];
+    XYMyCommentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellID];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYCommentViewCell" owner:nil options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"XYMyCommentViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:0];
     }
     NSDictionary *rowDict = [self.listComments objectAtIndex:indexPath.row];
-    NSString *displayName = (rowDict[@"name"] == nil || [rowDict[@"name"] isEqualToString:@""]) ? rowDict[@"username"] : rowDict[@"name"];
-    cell.uname.text = [NSString stringWithFormat:@"\"%@\"", displayName];
+    cell.uname.text = [NSString stringWithFormat:@"\"%@\"", rowDict[@"title"]];
     cell.pubDate.text = rowDict[@"date"];
     cell.upCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"favorCount"] intValue]];
     cell.downCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"againstCount"] intValue]];
     cell.content.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
     cell.content.text = rowDict[@"content"];
     cell.tag = [rowDict[@"commentID"] intValue];
+    NSString *imagePath = rowDict[@"coverimg"];
+    __weak XYMyCommentViewCell *weakCell = cell;
+    [cell.coverImage setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:imagePath]] placeholderImage:[UIImage imageNamed:@"book.jpg"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakCell.coverImage.image = image;
+        [weakCell setNeedsLayout];
+        [weakCell setNeedsDisplay];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        NSLog(@"Get Image from Server Error.");
+    }];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    XYAutoLayoutLabel *lbl = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(20, 44, 280, 20)];
+    XYAutoLayoutLabel *lbl = [[XYAutoLayoutLabel alloc] initWithFrame:CGRectMake(63, 44, 237, 20)];
     lbl.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
     NSDictionary *rowDict = self.listComments[indexPath.row];
     lbl.text = rowDict[@"content"];

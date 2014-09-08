@@ -14,8 +14,8 @@
 @interface XYFriendsMsgController ()
 
 @property (nonatomic, strong) NSMutableArray *listMsg;
+
 @property NSInteger delSayingCellRow;
-@property NSInteger delSayingID;
 
 @end
 
@@ -103,15 +103,13 @@
         if ([USERID intValue] == [rowDict[@"userID"] intValue]) {
             [cell.delButton setHidden:NO];
             [cell.delButton addTarget:self action:@selector(delSaying:) forControlEvents:UIControlEventTouchUpInside];
-            cell.delButton.tag = [rowDict[@"sayingID"] intValue];
-            self.delSayingID = cell.delButton.tag;
+            cell.delButton.tag = indexPath.row;
         } else {
             [cell.delButton setHidden:YES];
         }
     } else {
         [cell.delButton setHidden:YES];
     }
-    self.delSayingCellRow = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -161,8 +159,9 @@
 {
     NSInteger tag = ((UIButton *)sender).tag;
     if (tag > 0) {
-        NSLog(@"Del sayingID #%d ", tag);
+        NSLog(@"Del sayingRow #%d ", tag);
         NSLog(@"delSaying");
+        self.delSayingCellRow = tag;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除" message:@"确定要删除所选消息？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
         alert.tag = 0;
         [alert show];
@@ -172,11 +171,17 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 0) {
-        if (buttonIndex == 1 && self.delSayingID > 0) {
+        if (buttonIndex == 1) {
             NSLog(@"delSaying button clicked.");
-            [self.listMsg removeObjectAtIndex:self.delSayingCellRow];  //删除数组里的数据
-            [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:self.delSayingCellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
-            [self delSayingFromServer:self.delSayingID];
+            if (self.listMsg) {
+                NSDictionary *rowDict = [self.listMsg objectAtIndex:self.delSayingCellRow];
+                NSInteger delSayingID = [rowDict[@"sayingID"] intValue];
+                if (delSayingID > 0) {
+                    [self.listMsg removeObjectAtIndex:self.delSayingCellRow];  //删除数组里的数据
+                    [self.tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:[NSIndexPath indexPathForRow:self.delSayingCellRow inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];  //删除对应数据的cell
+                    [self delSayingFromServer:delSayingID];
+                }
+            }
         }
     }
 }
