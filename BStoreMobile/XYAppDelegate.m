@@ -11,6 +11,7 @@
 #import "XYUtil.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "TWMessageBar/TWMessageBarManager.h"
+#import "XYUtil.h"
 
 @implementation XYAppDelegate
 
@@ -85,12 +86,17 @@
 }
 
 - (void)showPopMsg {
-    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"新书促销：《看见》"
-                                                   description:@"柴静个人的成长告白书 中国社会十年变迁的备忘录"
-                                                          type:TWMessageBarMessageTypeInfo
-                                                      callback:^(void) {
-                                                          [self showAdvertisement];
-                                                      }];
+    NSLog(@"Show Advertisement");
+    NSString *USERID = [XYUtil getUserID];
+    // check if login
+    if (USERID) {
+        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"新书促销：《看见》"
+                                                       description:@"柴静个人的成长告白书 中国社会十年变迁的备忘录"
+                                                              type:TWMessageBarMessageTypeInfo
+                                                          callback:^(void) {
+                                                              [self showAdvertisement];
+                                                          }];
+    }
 }
 
 - (void)showAdvertisement {
