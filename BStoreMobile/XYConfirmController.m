@@ -12,6 +12,7 @@
 #import "UIKit+AFNetworking.h"
 #import "XYUtil.h"
 #import "XYPurchaseController.h"
+#import "XYRoundButton.h"
 
 @interface XYConfirmController ()
 
@@ -22,6 +23,12 @@
 @property (nonatomic, strong)NSMutableDictionary *sectionDict;
 
 @property NSInteger notpaidPriceAtCent;
+
+@property (nonatomic, strong) UIView *correct;
+@property (nonatomic, strong) UIView *notpaid;
+@property (nonatomic, strong) UIView *nottaken;
+
+@property BOOL isNotPaidShow;
 
 @end
 
@@ -52,7 +59,9 @@
 - (void)prepareToShow
 {
     self.notpaidPriceAtCent = 0;
+    self.isNotPaidShow = YES;
     
+    [self prepareForSectionHeader];
     [self loadConfirmListFromServer];
 }
 
@@ -83,20 +92,66 @@
     return 1;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (self.sectionDict) {
         if (self.sectionDict[@"correct"] && [self.sectionDict[@"correct"] intValue] == section) {
-            return @"以下书籍验证通过";
+            return self.correct;
         }
         if (self.sectionDict[@"notpaid"] && [self.sectionDict[@"notpaid"] intValue] == section) {
-            return @"以下书籍尚未支付";
+            return self.notpaid;
         }
         if (self.sectionDict[@"nottaken"] && [self.sectionDict[@"nottaken"] intValue] == section) {
-            return @"以下书籍尚未带走";
+            return self.nottaken;
         }
     }
     return nil;
+}
+
+- (void)prepareForSectionHeader
+{
+    CGRect rect = CGRectMake(0, 0, self.tableView.bounds.size.width, 43+5+5);
+    self.correct = [[UIView alloc] initWithFrame:rect];
+    self.notpaid = [[UIView alloc] initWithFrame:rect];
+    self.nottaken = [[UIView alloc] initWithFrame:rect];
+    CGRect rect1 = CGRectMake(10, 10, 160, 43);
+    UIFont *font = [UIFont systemFontOfSize:15.0f];
+    
+    UILabel *lbl0 = [[UILabel alloc] initWithFrame:rect1];
+    lbl0.font = font;
+    lbl0.text = @"以下书籍验证通过";
+    [self.correct addSubview:lbl0];
+    
+    UILabel *lbl1 = [[UILabel alloc] initWithFrame:rect1];
+    lbl1.font = font;
+    lbl1.text = @"以下书籍尚未支付";
+    XYRoundButton *btn0 = [[XYRoundButton alloc] initWithFrame:CGRectMake(160, 15, 69, 33)];
+    UIColor *defaultColor0 = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    [btn0 setTitle:@"放弃带走" forState:UIControlStateNormal];
+    btn0.titleLabel.font = font;
+    [btn0 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn0 setBackgroundColor:defaultColor0];
+    XYRoundButton *btn1 = [[XYRoundButton alloc] initWithFrame:CGRectMake(245, 15, 69, 33)];
+    UIColor *defaultColor1 = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    [btn1 setTitle:@"继续支付" forState:UIControlStateNormal];
+    btn1.titleLabel.font = font;
+    [btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn1 setBackgroundColor:defaultColor1];
+    [btn0 addTarget:self action:@selector(giveUpNotPaid) forControlEvents:UIControlEventTouchUpInside];
+    [btn1 addTarget:self action:@selector(purchaseNotPaid) forControlEvents:UIControlEventTouchUpInside];
+    [self.notpaid addSubview:lbl1];
+    [self.notpaid addSubview:btn0];
+    [self.notpaid addSubview:btn1];
+    
+    UILabel *lbl2 = [[UILabel alloc] initWithFrame:rect1];
+    lbl2.font = font;
+    lbl2.text = @"以下书籍尚未带走";
+    [self.nottaken addSubview:lbl2];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 43+5+5;
 }
 
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
@@ -206,12 +261,13 @@
 
 - (void)confirmAction
 {
-    if ([self.sectionDict objectForKey:@"notpaid"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证未通过" message:@"部分商品尚未支付" delegate:self cancelButtonTitle:@"放弃带走" otherButtonTitles:@"继续支付",nil];
-        [alert show];
-    } else {
-        [self sendConfirmRequest];
-    }
+//    if ([self.sectionDict objectForKey:@"notpaid"]) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证未通过" message:@"部分商品尚未支付" delegate:self cancelButtonTitle:@"放弃带走" otherButtonTitles:@"继续支付",nil];
+//        [alert show];
+//    } else {
+//        [self sendConfirmRequest];
+//    }
+    [self sendConfirmRequest];
 }
 
 - (void)sendConfirmRequest
@@ -232,6 +288,10 @@
                 NSLog(@"%@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
                     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"订单确认成功"
+                                                                   description:@"经确认的商品可带出书店"
+                                                                          type:TWMessageBarMessageTypeSuccess
+                                                                      callback:nil];
                 }
             }
             NSLog(@"sendConfirmRequest Success");
@@ -241,12 +301,40 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {// 继续支付
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (buttonIndex == 1) {// 继续支付
+//        [self performSegueWithIdentifier:@"purchase" sender:self];
+//    } else if (buttonIndex == 0) {
+//        [self sendConfirmRequest];
+//    }
+//}
+
+- (void)purchaseNotPaid {
+    if ([self.sectionDict objectForKey:@"notpaid"]) {
         [self performSegueWithIdentifier:@"purchase" sender:self];
-    } else if (buttonIndex == 0) {
-        [self sendConfirmRequest];
+    }
+}
+
+- (void)giveUpNotPaid {
+    self.isNotPaidShow = NO;
+    // refresh tableview (hide not paid)
+    if (self.listOutput) {
+        UIBarButtonItem *rightBtn = nil;
+        UIBarButtonItem *leftBtn = nil;
+        rightBtn = [[UIBarButtonItem alloc] initWithTitle:@"确认" style:UIBarButtonItemStylePlain target:self action:@selector(confirmAction)];
+        leftBtn = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
+        
+        self.navigationItem.leftBarButtonItem = leftBtn;
+        
+        [self calculateListPrint];
+        
+        if (self.listOutput && [self.listOutput count] > 0) {
+            self.navigationItem.rightBarButtonItem = rightBtn;
+        }
+        [self.tableView reloadData];
+    } else {
+        [self loadConfirmListFromServer];
     }
 }
 
@@ -312,7 +400,7 @@
             [self.listPrint addObject:listCorrect];
             begin ++;
         }
-        if ([listNotPaid count] > 0) {
+        if ([listNotPaid count] > 0 && self.isNotPaidShow) {
             [self.sectionDict setValue:[NSNumber numberWithInt:begin] forKey:@"notpaid"];
             [self.listPrint addObject:listNotPaid];
             begin ++;
