@@ -179,8 +179,13 @@
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"评论发布成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"评论发布成功" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"发布成功"
+                                                                   description:@"评论发布成功"
+                                                                          type:TWMessageBarMessageTypeSuccess
+                                                                      callback:nil];
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
                 }
             }
             NSLog(@"pubCommentToServer Success");

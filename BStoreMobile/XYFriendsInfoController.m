@@ -36,8 +36,11 @@
 {
     [super viewDidLoad];
     
-    if (self.status == ADD) {
+    if (self.status == ADD || self.status == INFO) {
         [self loadFriendInfo];
+        if (self.status == INFO) {
+            self.actionButton.text = @"已经是好友";
+        }
     } else {
         self.actionButton.text = @"删除该好友";
         [self loadFriendFromServer];
@@ -59,10 +62,10 @@
     imageView.image = [UIImage imageNamed:imagePath];
     [self.headImg addSubview:imageView];
     self.username.text = self.uname;
-    self.gender.text = self.gen;
-    self.address.text = self.addr;
-    self.sign.text = self.sg;
-    self.name.text = self.nickname;
+    self.gender.text = (self.gen == nil) ? @"" : self.gen;
+    self.address.text = (self.addr == nil || [self.addr isEqualToString:@""]) ? @"无" : self.addr;
+    self.sign.text = (self.sg == nil || [self.sg isEqualToString:@""]) ? @"无" : self.sg;
+    self.name.text = (self.nickname == nil || [self.nickname isEqualToString:@""]) ? self.uname : self.nickname;
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,9 +103,11 @@
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加成功" message:@"该用户已添加为你的好友" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                    alert.tag = ADD;
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"添加成功" message:@"该用户已添加为你的好友" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//                    alert.tag = ADD;
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"添加成功" description:@"该用户已添加为你的好友" type:TWMessageBarMessageTypeSuccess];
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
                 }
             }
             NSLog(@"addFriendFromServer Success");
@@ -129,9 +134,11 @@
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除成功" message:@"该用户已从好友列表中删除" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                    alert.tag = DELETE;
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除成功" message:@"该用户已从好友列表中删除" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//                    alert.tag = DELETE;
+//                    [alert show];
+                    [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"删除成功" description:@"该用户已从好友列表中删除" type:TWMessageBarMessageTypeSuccess];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }
             NSLog(@"delFriendFromServer Success");

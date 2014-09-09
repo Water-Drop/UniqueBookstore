@@ -166,18 +166,18 @@
         lbl2.text = [NSString stringWithFormat:@"距离:%@", rowDict[@"distance"]];
         lbl2.font = font1;
         
-        UIButton *btn0 = [[UIButton alloc] initWithFrame:CGRectMake(200, 15, 70, 30)];
+        UIButton *btn0 = [[UIButton alloc] initWithFrame:CGRectMake(200, 15+20, 70, 30)];
         UIColor *defaultColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
         [btn0 setTitle:@"加为好友" forState:UIControlStateNormal];
         [btn0 setTitleColor:defaultColor forState:UIControlStateNormal];
         [btn0 setTintColor:defaultColor];
         [btn0.titleLabel setFont:font2];
-        UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(200, 60, 70, 30)];
-        [btn1 setTitle:@"去找他(她)" forState:UIControlStateNormal];
-        [btn1 setTitleColor:defaultColor forState:UIControlStateNormal];
-        [btn1 setTintColor:defaultColor];
-        [btn1.titleLabel setFont:font2];
-        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(200, 105, 70, 30)];
+//        UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(200, 60, 70, 30)];
+//        [btn1 setTitle:@"去找他(她)" forState:UIControlStateNormal];
+//        [btn1 setTitleColor:defaultColor forState:UIControlStateNormal];
+//        [btn1 setTintColor:defaultColor];
+//        [btn1.titleLabel setFont:font2];
+        UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(200, 105-20, 70, 30)];
         [btn2 setTitle:@"取消" forState:UIControlStateNormal];
         [btn2 setTitleColor:defaultColor forState:UIControlStateNormal];
         [btn2 setTintColor:defaultColor];
@@ -185,7 +185,7 @@
         [btn2 addTarget:self action:@selector(closeAlertView:) forControlEvents:UIControlEventTouchUpInside];
         
         [XYUtil showButtonBorder:btn0];
-        [XYUtil showButtonBorder:btn1];
+//        [XYUtil showButtonBorder:btn1];
         [XYUtil showButtonBorder:btn2];
         
         [view addSubview:round];
@@ -193,7 +193,7 @@
         [view addSubview:lbl1];
         [view addSubview:lbl2];
         [view addSubview:btn0];
-        [view addSubview:btn1];
+//        [view addSubview:btn1];
         [view addSubview:btn2];
         
         return view;

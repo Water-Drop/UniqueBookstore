@@ -345,6 +345,11 @@ enum BookInfoStatus {
             cell.downCnt.text = [NSString stringWithFormat:@"%d", [rowDict[@"againstCount"] intValue]];
             cell.content.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
             cell.content.text = rowDict[@"content"];
+//            if ([rowDict[@"score"] intValue] < 0) {
+//                [cell.publicMsg setHidden:NO];
+//            } else {
+//                [cell.publicMsg setHidden:YES];
+//            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }

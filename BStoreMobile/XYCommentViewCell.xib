@@ -21,7 +21,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UyE-YK-uJ1">
-                        <rect key="frame" x="58" y="7" width="242" height="21"/>
+                        <rect key="frame" x="58" y="7" width="155" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
@@ -74,6 +74,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来自公开的好友圈消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VNq-CI-BXS">
+                        <rect key="frame" x="221" y="7" width="90" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -82,6 +89,7 @@
                 <outlet property="downCnt" destination="1yp-7E-jOg" id="rJz-GT-LC4"/>
                 <outlet property="fromlbl" destination="rTA-Lb-kgn" id="2ie-gQ-7ZI"/>
                 <outlet property="pubDate" destination="byL-tX-7DL" id="0eV-xH-DZo"/>
+                <outlet property="publicMsg" destination="VNq-CI-BXS" id="W1U-h0-S8n"/>
                 <outlet property="uname" destination="UyE-YK-uJ1" id="sdN-Yh-rh9"/>
                 <outlet property="upButton" destination="gG6-3K-VeN" id="gXo-6o-1kc"/>
                 <outlet property="upCnt" destination="hP5-50-Stz" id="kcX-0A-uES"/>

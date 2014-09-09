@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "XYTableViewController.h"
 
+enum genderChangeStatus
+{
+    GENDER, LOCATION
+};
+
 @interface XYGenderChangeController : XYTableViewController
 
 @property NSString *gender;
+@property enum genderChangeStatus status;
 
 @end

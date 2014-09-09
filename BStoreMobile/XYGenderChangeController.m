@@ -30,6 +30,17 @@
 {
     [super viewDidLoad];
     
+    switch (self.status) {
+        case GENDER:
+            self.navigationItem.title = @"修改性别";
+            break;
+        case LOCATION:
+            self.navigationItem.title = @"修改公开地理位置信息";
+            break;
+        default:
+            break;
+    }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -60,50 +71,97 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = @"GenderChangeCellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    
-    // Configure the cell...
-    
-    NSString *lbl = @"男";
-    if (indexPath.row == 1) {
-        lbl = @"女";
-    }
-    
-    UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:15];
-    cell.textLabel.font = font;
-    cell.textLabel.text = lbl;
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    BOOL pos = NO;
-    if (self.gender) {
-        if ([self.gender isEqualToString:@"男"] && indexPath.row == 0) {
-            pos = YES;
-        } else if ([self.gender isEqualToString:@"女"] && indexPath.row == 1) {
-            pos = YES;
+    if (self.status == GENDER) {
+        NSString *cellIdentifier = @"GenderChangeCellID";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
-    }
-    if (pos) {
-         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        // Configure the cell...
+        
+        NSString *lbl = @"男";
+        if (indexPath.row == 1) {
+            lbl = @"女";
+        }
+        
+        UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:15];
+        cell.textLabel.font = font;
+        cell.textLabel.text = lbl;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        BOOL pos = NO;
+        if (self.gender) {
+            if ([self.gender isEqualToString:@"男"] && indexPath.row == 0) {
+                pos = YES;
+            } else if ([self.gender isEqualToString:@"女"] && indexPath.row == 1) {
+                pos = YES;
+            }
+        }
+        if (pos) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        return cell;
     } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        NSString *cellIdentifier = @"GenderChangeCellID";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        }
+        
+        // Configure the cell...
+        
+        NSString *lbl = @"公开";
+        if (indexPath.row == 1) {
+            lbl = @"不公开";
+        }
+        
+        UIFont *font = [UIFont fontWithName:@"Helvetica Neue" size:15];
+        cell.textLabel.font = font;
+        cell.textLabel.text = lbl;
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        BOOL pos = NO;
+        if (self.gender) {
+            if ([self.gender isEqualToString:@"公开"] && indexPath.row == 0) {
+                pos = YES;
+            } else if ([self.gender isEqualToString:@"不公开"] && indexPath.row == 1) {
+                pos = YES;
+            }
+        }
+        if (pos) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        self.gender = @"男";
-        [self.tableView reloadData];
-    } else if (indexPath.row == 1) {
-        self.gender = @"女";
-        [self.tableView reloadData];
+    if (self.status == GENDER) {
+        if (indexPath.row == 0) {
+            self.gender = @"男";
+            [self.tableView reloadData];
+        } else if (indexPath.row == 1) {
+            self.gender = @"女";
+            [self.tableView reloadData];
+        }
+    } else if (self.status == LOCATION) {
+        if (indexPath.row == 0) {
+            self.gender = @"公开";
+            [self.tableView reloadData];
+        } else if (indexPath.row == 1) {
+            self.gender = @"不公开";
+            [self.tableView reloadData];
+        }
     }
 }
 
@@ -198,6 +256,21 @@
 }
 
 - (IBAction)saveAction:(id)sender {
-    [self modifyGenderInfo];
+    if (self.status == GENDER) {
+        [self modifyGenderInfo];
+    } else if (self.status == LOCATION) {
+        [self modifyLocationInfo];
+    }
 }
+
+- (void)modifyLocationInfo {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userInfo = [defaults objectForKey:@"userInfo"];
+    NSMutableDictionary *newUserInfo = [[NSMutableDictionary alloc] initWithDictionary:userInfo];
+    [newUserInfo setObject:self.gender forKey:@"isToPublic"];
+    [defaults setObject:newUserInfo forKey:@"userInfo"];
+    [defaults synchronize];
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end
