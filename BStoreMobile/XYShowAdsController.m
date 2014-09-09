@@ -788,7 +788,13 @@ enum BookInfoStatus {
 
 - (IBAction)navButtonClicked:(id)sender
 {
-    [[XYLocationManager sharedManager] showNavigationModal];
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (tag > 0) {
+        NSLog(@"Nav bookID #%d ", tag);
+        [XYLocationManager sharedManager].navigateBook = tag;
+        [[XYLocationManager sharedManager] showNavigationModal];
+        [[XYLocationManager sharedManager] startNavigation];
+    }
 }
 
 - (IBAction)cancelAction:(id)sender {

@@ -8,12 +8,15 @@
 
 #import "XYLocationManager.h"
 #import "TWMessageBarManager.h"
+#import "XYUtil.h"
 
 @implementation XYLocationManager
 
 @synthesize showNavigation;
 
 @synthesize current;
+
+@synthesize navigateBook;
 
 + (XYLocationManager *)sharedManager
 {
@@ -35,12 +38,36 @@
     [self initRegion];
     [self locationManager:self.locationManager didStartMonitoringForRegion:self.beaconRegion];
     
+    _beaconPoints = nil;
     
-    // beacon points are indexed by their minor keys
-    _beaconPoints = [NSDictionary dictionaryWithObjectsAndKeys:
-                     [XYPoint point:@"B1" x:0 y:0], @"1",
-                     [XYPoint point:@"B2" x:2.6 y:1.3], @"2",
-                     [XYPoint point:@"B3" x:0 y:2.6], @"3", nil];
+    
+    // load beacon points
+    NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+    NSString *path = @"RFID/BeaconList";
+    NSLog(@"path:%@",path);
+    
+    [manager GET:path
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSArray *retArray = (NSArray *)responseObject;
+             _beaconPoints = [[NSMutableDictionary alloc] init];
+             for (NSDictionary* dic in retArray) {
+                 NSString* key = [NSString stringWithFormat:@"%@_%@", dic[@"major"], dic[@"minor"]];
+                 XYPoint* point = [XYPoint point:key
+                                               x:[dic[@"xposition"] doubleValue]
+                                               y:[dic[@"yposition"] doubleValue]];
+                 [_beaconPoints setObject:point forKey:key];
+             }
+              
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"confirmLoginInfo Error:%@", error);
+         }];
     
     current = [XYPoint point:@"Current" x:0 y:0];
     
@@ -83,6 +110,10 @@
 
 -(void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
     
+    if (!_beaconPoints) {
+        return;
+    }
+    
     // clear records
     if (_rangeCount == 0) {
         [_beaconDistance removeAllObjects];
@@ -95,7 +126,7 @@
     for (beacon in beacons){
         // if the distance is measured, add to dictionary
         if (beacon.accuracy > 0) {
-            NSString *key = [beacon.minor stringValue];
+            NSString *key = [NSString stringWithFormat:@"%@_%@", [beacon.major stringValue], [beacon.minor stringValue]];
             
             if ([beacon.minor intValue] == 1 && beacon.accuracy < 2.0f && checking == NO) {
                 [self.delegate performPayment];
@@ -171,6 +202,31 @@
     current.y = current.y / count;
     
     NSLog(@"%f %f", current.x, current.y);
+    
+    NSString* userId = [XYUtil getUserID];
+    
+    if (userId) {
+        NSURL *url = [NSURL URLWithString:BASEURLSTRING];
+        AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        NSSet *set = [NSSet setWithObjects:@"text/plain", @"text/html" , nil];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObjectsFromSet:set];
+        NSString *path = @"User/UpdateUserPosition";
+        NSLog(@"path:%@",path);
+        
+        NSDictionary *params = @{@"userID": userId, @"xposition": [NSString stringWithFormat:@"%f", current.x], @"yposition": [NSString stringWithFormat:@"%f", current.y]};
+        
+        [manager POST:path
+           parameters:params
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSDictionary *retDict = (NSDictionary *)responseObject;
+                  NSLog(@"update user location %@", retDict[@"message"]);
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"confirmLoginInfo Error:%@", error);
+              }];
+    }
 }
 
 // approximate point location for given 2 beacons and distance to them

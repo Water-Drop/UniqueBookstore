@@ -871,7 +871,13 @@ enum MyBookPageStatus {
 
 - (void)navButtonClicked:(id)sender
 {
-    [[XYLocationManager sharedManager] showNavigationModal];
+    NSInteger tag = ((UIButton *)sender).tag;
+    if (self.listToBuy) {
+        NSDictionary *rowDict = self.listToBuy[tag];
+        [XYLocationManager sharedManager].navigateBook = [rowDict[@"bookID"] intValue];
+        [[XYLocationManager sharedManager] showNavigationModal];
+        [[XYLocationManager sharedManager] startNavigation];
+    }
 }
 
 //- (void)dismissKeyboardByTouchDownBG {

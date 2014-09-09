@@ -22,6 +22,7 @@
 @interface XYLocationManager : NSObject <CLLocationManagerDelegate> {
     BOOL showNavigation;
     BOOL checking;
+    int navigateBook;
 }
 
 + (XYLocationManager *)sharedManager;
@@ -29,10 +30,12 @@
 @property (strong, nonatomic) CLBeaconRegion *beaconRegion;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
-@property (strong, nonatomic) NSDictionary *beaconPoints;
+@property (strong, nonatomic) NSMutableDictionary *beaconPoints;
 @property (strong, nonatomic) NSMutableDictionary *beaconDistance;
 
 @property int rangeCount;
+
+@property int navigateBook;
 
 @property XYPoint *current;
 
@@ -41,6 +44,8 @@
 @property(nonatomic,assign)id delegate;
 
 - (void)showNavigationModal;
+
+- (void)startNavigation;
 
 @end
 

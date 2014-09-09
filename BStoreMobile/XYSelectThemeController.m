@@ -171,8 +171,11 @@
     NSInteger tag = ((UIButton *)sender).tag;
     if (tag > 0) {
         NSLog(@"Nav bookID #%d ", tag);
+        [XYLocationManager sharedManager].navigateBook = tag;
+        [[XYLocationManager sharedManager] showNavigationModal];
+        [[XYLocationManager sharedManager] startNavigation];
     }
-    [[XYLocationManager sharedManager] showNavigationModal];
+    
 }
 
 - (void) addOneItemToCart:(NSInteger)bookID

@@ -11,6 +11,7 @@
 #import "XYUtil.h"
 #import "UIERealTimeBlurView.h"
 #import "TWMessageBar/TWMessageBarManager.h"
+#import "XYLocationManager.h"
 
 @implementation XYBookOverlay
 
@@ -65,7 +66,7 @@
     [self styleAvatar:avatar3];
     
     
-    if ([bookId isEqualToString:@"13"]) {
+    if ([bookId intValue] == [XYLocationManager sharedManager].navigateBook) {
         [btns focus];
     } else {
         [btns normal];

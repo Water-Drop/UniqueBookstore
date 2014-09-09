@@ -29,6 +29,8 @@
 {
     [XYLocationManager sharedManager].showNavigation = YES;
     
+    NSLog(@"Navigate to book %d", [XYLocationManager sharedManager].navigateBook);
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -76,6 +78,7 @@
 
 - (IBAction)cancelAction:(id)sender {
     [XYLocationManager sharedManager].showNavigation = NO;
+    [XYLocationManager sharedManager].navigateBook = -1;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hideNav"
                                                         object:self];
     [captureSession stopRunning];

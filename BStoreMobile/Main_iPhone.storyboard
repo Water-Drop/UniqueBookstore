@@ -2072,12 +2072,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="szb-hM-fSC"/>
+        <segue reference="0Eu-qR-Q4r"/>
+        <segue reference="Umn-Tq-LWK"/>
+        <segue reference="XnJ-eY-p66"/>
         <segue reference="cYO-YM-urh"/>
         <segue reference="Av2-e0-K2i"/>
         <segue reference="osy-Kd-D3X"/>
-        <segue reference="tFE-eq-5b4"/>
-        <segue reference="fYM-Cr-6Cv"/>
-        <segue reference="lbE-0i-8nS"/>
+        <segue reference="szb-hM-fSC"/>
     </inferredMetricsTieBreakers>
 </document>

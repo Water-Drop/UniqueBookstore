@@ -15,6 +15,7 @@
 #import "XYUtil.h"
 #import "XYStarRatedView.h"
 #import "XYAutoLayoutLabel.h"
+#import "XYLocationManager.h"
 
 #define OFFSET2 20
 
@@ -785,7 +786,10 @@ enum BookInfoStatus {
 
 - (IBAction)navButtonClicked:(id)sender
 {
+    NSInteger tag = ((UIButton *)sender).tag;
+    [XYLocationManager sharedManager].navigateBook = tag;
     [[XYLocationManager sharedManager] showNavigationModal];
+    [[XYLocationManager sharedManager] startNavigation];
 }
 
 @end

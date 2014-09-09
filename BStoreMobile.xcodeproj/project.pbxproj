@@ -33,6 +33,7 @@
 		211B282319823CA100052039 /* Tarmac.dat in Resources */ = {isa = PBXBuildFile; fileRef = 211B27F319823CA100052039 /* Tarmac.dat */; };
 		211B282419823CA100052039 /* Tarmac.xml in Resources */ = {isa = PBXBuildFile; fileRef = 211B27F419823CA100052039 /* Tarmac.xml */; };
 		211B28411982437A00052039 /* XYBookOverlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 211B28401982437A00052039 /* XYBookOverlay.mm */; };
+		2138BA5C19BF43D5005C4774 /* MapUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2138BA5819BF43D5005C4774 /* MapUtil.mm */; };
 		2165B3B7197CB0E7005B9F34 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */; };
 		2165B3B9197CB0F0005B9F34 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */; };
 		2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2165B3BC197CF05D005B9F34 /* XYLocationManager.m */; };
@@ -398,6 +399,8 @@
 		211B27F419823CA100052039 /* Tarmac.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Tarmac.xml; sourceTree = "<group>"; };
 		211B283F1982437A00052039 /* XYBookOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYBookOverlay.h; sourceTree = "<group>"; };
 		211B28401982437A00052039 /* XYBookOverlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XYBookOverlay.mm; sourceTree = "<group>"; };
+		2138BA5819BF43D5005C4774 /* MapUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MapUtil.mm; path = MapUtil/MapUtil.mm; sourceTree = "<group>"; };
+		2138BA5919BF43D5005C4774 /* MapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapUtil.h; path = MapUtil/MapUtil.h; sourceTree = "<group>"; };
 		2165B3B6197CB0E7005B9F34 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2165B3B8197CB0F0005B9F34 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2165B3BB197CF05D005B9F34 /* XYLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYLocationManager.h; sourceTree = "<group>"; };
@@ -940,6 +943,8 @@
 		2165B3BA197CEEFA005B9F34 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				2138BA5819BF43D5005C4774 /* MapUtil.mm */,
+				2138BA5919BF43D5005C4774 /* MapUtil.h */,
 				2165B3BB197CF05D005B9F34 /* XYLocationManager.h */,
 				2165B3BC197CF05D005B9F34 /* XYLocationManager.m */,
 				211B271D197E2D1B00052039 /* XYPoint.h */,
@@ -1889,6 +1894,7 @@
 				E3EA373E198746350066ECCD /* XYFriendsMsgController.m in Sources */,
 				E39D05B3197575AA006A8F53 /* XYSaleItemCell.m in Sources */,
 				E3D7FF0F19BCC3FA00624CCD /* XYMyCommentsController.m in Sources */,
+				2138BA5C19BF43D5005C4774 /* MapUtil.mm in Sources */,
 				E3BF9ECC1984A6B200855279 /* AFHTTPSessionManager.m in Sources */,
 				2165B3BD197CF05D005B9F34 /* XYLocationManager.m in Sources */,
 				E30190EF1980D1B100D04906 /* XYCartItemCell.m in Sources */,
