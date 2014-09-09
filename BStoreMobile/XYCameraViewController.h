@@ -20,11 +20,27 @@
     NSString* lastISBN;
     NSString* lastURL;
     int segmentState;
+    
+//    CGRect viewFrame;
+//    CloudRecoEAGLView* eaglView;
+    UITapGestureRecognizer * tapGestureRecognizer;
+//    SampleApplicationSession * vapp;
+    
+    BOOL scanningMode;
+    BOOL isVisualSearchOn;
+    BOOL offTargetTrackingEnabled;
+    
+    BOOL isShowingAnAlertView;
+    int lastErrorCode;
+
 }
 
 @property (weak, nonatomic) IBOutlet XYCameraView *viewPreview;
 @property (weak, nonatomic) IBOutlet UILabel *lblStatus;
 - (IBAction)valueChanged:(id)sender;
+
+- (BOOL) isVisualSearchOn ;
+- (void) toggleVisualSearch;
 
 
 @end

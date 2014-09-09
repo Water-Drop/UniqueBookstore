@@ -14,7 +14,16 @@
 #import <QCAR/Trackable.h>
 #import <QCAR/DataSet.h>
 #import <QCAR/CameraDevice.h>
+#import <QCAR/TargetFinder.h>
 #import "XYUtil.h"
+
+// vuforia
+//static const char* const kAccessKey = "869a299f9911cd84f189d69fe8d5f79f35304372";
+//static const char* const kSecretKey = "ad4a7110ad50100b22474f166d7ef4f5b3887a30";
+
+// quanquan
+static const char* const kAccessKey = "856196a1b9f162cc719f0b401132361ed7e1a7c8";
+static const char* const kSecretKey = "1629ba2744350e55cca0bba82a596c131c1d9d96";
 
 @interface XYCameraViewController()
 
@@ -92,8 +101,11 @@
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     
     [self showLoadingAnimation];
+    
     // initialize the AR session
     [vapp initAR:QCAR::GL_20 ARViewBoundsSize:viewFrame.size orientation:UIInterfaceOrientationPortrait];
+    
+    lastErrorCode = 99;
 }
 
 - (void)loadView
@@ -102,19 +114,32 @@
     
     NSLog(@"Init XYCameraViewController");
     
-    vapp = [[XYCameraSession alloc] initWithDelegate:self];
+    vapp = [[XYCameraSession alloc]initWithDelegate:self];
     
-    dataSetCurrent = nil;
+    scanningMode = YES;
+    isVisualSearchOn = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(pauseAR)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
+    // single tap will trigger focus
+    tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(autofocus:)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(resumeAR)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
+    // we use the iOS notification to pause/resume the AR when the application goes (or comeback from) background
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(pauseAR)
+     name:UIApplicationWillResignActiveNotification
+     object:nil];
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(resumeAR)
+     name:UIApplicationDidBecomeActiveNotification
+     object:nil];
+    
+    
+    offTargetTrackingEnabled = NO;
+    isShowingAnAlertView = NO;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -354,191 +379,229 @@
 // usually the application then starts the AR through a call to startAR
 - (void) onInitARDone:(NSError *)initError
 {
+//    [self hideLoadingAnimation];
+//    
+//    if (initError == nil) {
+//        // If you want multiple targets being detected at once,
+//        // you can comment out this line
+//        QCAR::setHint(QCAR::HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 5);
+//        
+//        NSError * error = nil;
+//        [vapp startAR:QCAR::CameraDevice::CAMERA_BACK error:&error];
+//        
+//    } else {
+//        NSLog(@"Error initializing AR:%@", [initError description]);
+//    }
+    
+    // remove loading animation
+//    UIActivityIndicatorView *loadingIndicator = (UIActivityIndicatorView *)[eaglView viewWithTag:1];
     [self hideLoadingAnimation];
     
     if (initError == nil) {
-        // If you want multiple targets being detected at once,
-        // you can comment out this line
-        QCAR::setHint(QCAR::HINT_MAX_SIMULTANEOUS_IMAGE_TARGETS, 5);
-        
         NSError * error = nil;
         [vapp startAR:QCAR::CameraDevice::CAMERA_BACK error:&error];
         
+        // by default, we try to set the continuous auto focus mode
+        // and we update menu to reflect the state of continuous auto-focus
+//        bool isContinuousAutofocus = QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_CONTINUOUSAUTO);
+//        SampleAppMenu * menu = [SampleAppMenu instance];
+//        [menu setSelectionValueForCommand:C_AUTOFOCUS value:isContinuousAutofocus];
     } else {
         NSLog(@"Error initializing AR:%@", [initError description]);
     }
+
 }
 
 // the application must initialize its tracker(s)
 - (bool) doInitTrackers
 {
-    // Initialize the image or marker tracker
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    // Initialize the image or marker tracker
+//    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    
+//    // Image Tracker...
+//    QCAR::Tracker* trackerBase = trackerManager.initTracker(QCAR::ImageTracker::getClassType());
+//    if (trackerBase == NULL)
+//    {
+//        NSLog(@"Failed to initialize ImageTracker.");
+//        return false;
+//    }
+//    NSLog(@"Successfully initialized ImageTracker.");
+//    return true;
     
-    // Image Tracker...
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
     QCAR::Tracker* trackerBase = trackerManager.initTracker(QCAR::ImageTracker::getClassType());
-    if (trackerBase == NULL)
+    // Set the visual search credentials:
+    QCAR::TargetFinder* targetFinder = static_cast<QCAR::ImageTracker*>(trackerBase)->getTargetFinder();
+    if (targetFinder == NULL)
     {
-        NSLog(@"Failed to initialize ImageTracker.");
-        return false;
+        NSLog(@"Failed to get target finder.");
+        return NO;
     }
+    
+    targetFinder->setUIPointColor(255, 255, 255);
+    
     NSLog(@"Successfully initialized ImageTracker.");
-    return true;
+    return YES;
 
 }
 
 // the application must initialize the data associated to its tracker(s)
 - (bool) doLoadTrackersData
 {
-    dataSetCurrent = [self loadImageTrackerDataSet:@"Ister.xml"];
+//    dataSetCurrent = [self loadImageTrackerDataSet:@"Ister.xml"];
+//    
+//    if (! [self activateDataSet:dataSetCurrent]) {
+//        NSLog(@"Failed to activate dataset");
+//        return NO;
+//    }
+//    
+//    return YES;
     
-    if (! [self activateDataSet:dataSetCurrent]) {
-        NSLog(@"Failed to activate dataset");
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+    if (imageTracker == NULL)
+    {
+        NSLog(@">doLoadTrackersData>Failed to load tracking data set because the ImageTracker has not been initialized.");
+        return NO;
+        
+    }
+    
+    // Initialize visual search:
+    QCAR::TargetFinder* targetFinder = imageTracker->getTargetFinder();
+    if (targetFinder == NULL)
+    {
+        NSLog(@">doLoadTrackersData>Failed to get target finder.");
         return NO;
     }
     
+    NSDate *start = [NSDate date];
+    
+    // Start initialization:
+    if (targetFinder->startInit(kAccessKey, kSecretKey))
+    {
+        targetFinder->waitUntilInitFinished();
+        
+        NSDate *methodFinish = [NSDate date];
+        NSTimeInterval executionTime = [methodFinish timeIntervalSinceDate:start];
+        
+        NSLog(@"waitUntilInitFinished Execution Time: %f", executionTime);
+        
+        
+    }
+    
+    int resultCode = targetFinder->getInitState();
+    if ( resultCode != QCAR::TargetFinder::INIT_SUCCESS)
+    {
+        NSLog(@">doLoadTrackersData>Failed to initialize target finder.");
+        if (resultCode == QCAR::TargetFinder::INIT_ERROR_NO_NETWORK_CONNECTION) {
+            NSLog(@"CloudReco error:QCAR::TargetFinder::INIT_ERROR_NO_NETWORK_CONNECTION");
+        } else if (resultCode == QCAR::TargetFinder::INIT_ERROR_SERVICE_NOT_AVAILABLE) {
+            NSLog(@"CloudReco error:QCAR::TargetFinder::INIT_ERROR_SERVICE_NOT_AVAILABLE");
+        } else {
+            NSLog(@"CloudReco error:%d", resultCode);
+        }
+        
+        int initErrorCode;
+        if(resultCode == QCAR::TargetFinder::INIT_ERROR_NO_NETWORK_CONNECTION)
+        {
+            initErrorCode = QCAR::TargetFinder::UPDATE_ERROR_NO_NETWORK_CONNECTION;
+        }
+        else
+        {
+            initErrorCode = QCAR::TargetFinder::UPDATE_ERROR_SERVICE_NOT_AVAILABLE;
+        }
+        [self showUIAlertFromErrorCode: initErrorCode];
+        return NO;
+    } else {
+        NSLog(@">doLoadTrackersData>target finder initialized");
+    }
+    
     return YES;
+
 }
 
 // the application must starts its tracker(s)
 - (bool) doStartTrackers
 {
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    QCAR::Tracker* tracker = trackerManager.getTracker(QCAR::ImageTracker::getClassType());
-    if(tracker == 0) {
-        return NO;
-    }
+//    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    QCAR::Tracker* tracker = trackerManager.getTracker(QCAR::ImageTracker::getClassType());
+//    if(tracker == 0) {
+//        return NO;
+//    }
+//    
+//    tracker->start();
+//    return YES;
     
-    tracker->start();
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+    
+    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(
+                                                                        trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+    assert(imageTracker != 0);
+    imageTracker->start();
+    
+    // Start cloud based recognition if we are in scanning mode:
+    if (scanningMode)
+    {
+        QCAR::TargetFinder* targetFinder = imageTracker->getTargetFinder();
+        assert (targetFinder != 0);
+        isVisualSearchOn = targetFinder->startRecognition();
+    }
     return YES;
+
 }
 
 // the application must stop its tracker(s)
 - (bool) doStopTrackers
 {
-    // Stop the tracker
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    QCAR::Tracker* tracker = trackerManager.getTracker(QCAR::ImageTracker::getClassType());
+//    // Stop the tracker
+//    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    QCAR::Tracker* tracker = trackerManager.getTracker(QCAR::ImageTracker::getClassType());
+//    
+//    if (NULL != tracker) {
+//        tracker->stop();
+//        NSLog(@"INFO: successfully stopped tracker");
+//        return YES;
+//    }
+//    else {
+//        NSLog(@"ERROR: failed to get the tracker from the tracker manager");
+//        return NO;
+//    }
     
-    if (NULL != tracker) {
-        tracker->stop();
-        NSLog(@"INFO: successfully stopped tracker");
-        return YES;
-    }
-    else {
-        NSLog(@"ERROR: failed to get the tracker from the tracker manager");
-        return NO;
-    }
+    // Stop the tracker
+    // Stop the tracker:
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(
+                                                                        trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+    assert(imageTracker != 0);
+    imageTracker->stop();
+    
+    // Stop cloud based recognition:
+    QCAR::TargetFinder* targetFinder = imageTracker->getTargetFinder();
+    assert (targetFinder != 0);
+    isVisualSearchOn = !targetFinder->stop();
+    return YES;
+
 }
 
 // the application must unload the data associated its tracker(s)
 - (bool) doUnloadTrackersData
 {
-    [self deactivateDataSet: dataSetCurrent];
-    
-    // Get the image tracker:
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
-    
-    // Destroy the data sets:
-    if (!imageTracker->destroyDataSet(dataSetCurrent))
-    {
-        NSLog(@"Failed to destroy data set.");
-    }
-    
-    dataSetCurrent = nil;
-    
-    NSLog(@"datasets destroyed");
-    return YES;
-}
-
-// the application must deinititalize its tracker(s)
-- (bool) doDeinitTrackers
-{
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    trackerManager.deinitTracker(QCAR::ImageTracker::getClassType());
-    return YES;
-}
-
-#pragma Load, active and deactive data set
-
-// Load the image tracker data set
-- (QCAR::DataSet *)loadImageTrackerDataSet:(NSString*)dataFile
-{
-    NSLog(@"loadImageTrackerDataSet (%@)", dataFile);
-    QCAR::DataSet * dataSet = NULL;
-    
-    // Get the QCAR tracker manager image tracker
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
-    
-    if (NULL == imageTracker) {
-        NSLog(@"ERROR: failed to get the ImageTracker from the tracker manager");
-        return NULL;
-    } else {
-        dataSet = imageTracker->createDataSet();
-        
-        if (NULL != dataSet) {
-            NSLog(@"INFO: successfully loaded data set");
-            
-            // Load the data set from the app's resources location
-            if (!dataSet->load([dataFile cStringUsingEncoding:NSASCIIStringEncoding], QCAR::STORAGE_APPRESOURCE)) {
-                NSLog(@"ERROR: failed to load data set");
-                imageTracker->destroyDataSet(dataSet);
-                dataSet = NULL;
-            }
-        }
-        else {
-            NSLog(@"ERROR: failed to create data set");
-        }
-    }
-    
-    return dataSet;
-}
-
-- (BOOL)activateDataSet:(QCAR::DataSet *)theDataSet
-{
-    // if we've previously recorded an activation, deactivate it
-    if (dataSetCurrent != nil)
-    {
-        [self deactivateDataSet:dataSetCurrent];
-    }
-    BOOL success = NO;
-    
-    // Get the image tracker:
-    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
-    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
-    
-    if (imageTracker == NULL) {
-        NSLog(@"Failed to load tracking data set because the ImageTracker has not been initialized.");
-    }
-    else
-    {
-        // Activate the data set:
-        if (!imageTracker->activateDataSet(theDataSet))
-        {
-            NSLog(@"Failed to activate data set.");
-        }
-        else
-        {
-            NSLog(@"Successfully activated data set.");
-            dataSetCurrent = theDataSet;
-            success = YES;
-        }
-    }
-    
-    return success;
-}
-
-- (BOOL)deactivateDataSet:(QCAR::DataSet *)theDataSet
-{
-    if ((dataSetCurrent == nil) || (theDataSet != dataSetCurrent))
-    {
-        NSLog(@"Invalid request to deactivate data set.");
-        return NO;
-    }
-    
-    BOOL success = NO;
+//    [self deactivateDataSet: dataSetCurrent];
+//    
+//    // Get the image tracker:
+//    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+//    
+//    // Destroy the data sets:
+//    if (!imageTracker->destroyDataSet(dataSetCurrent))
+//    {
+//        NSLog(@"Failed to destroy data set.");
+//    }
+//    
+//    dataSetCurrent = nil;
+//    
+//    NSLog(@"datasets destroyed");
+//    return YES;
     
     // Get the image tracker:
     QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
@@ -547,24 +610,217 @@
     if (imageTracker == NULL)
     {
         NSLog(@"Failed to unload tracking data set because the ImageTracker has not been initialized.");
+        return NO;
+    }
+    
+    // Deinitialize visual search:
+    QCAR::TargetFinder* finder = imageTracker->getTargetFinder();
+    finder->deinit();
+    return YES;
+
+}
+
+// the application must deinititalize its tracker(s)
+- (bool) doDeinitTrackers
+{
+//    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+//    trackerManager.deinitTracker(QCAR::ImageTracker::getClassType());
+//    return YES;
+    
+    return YES;
+}
+
+- (void) onQCARUpdate: (QCAR::State *) state {
+    // Get the tracker manager:
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+    
+    // Get the image tracker:
+    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+    
+    // Get the target finder:
+    QCAR::TargetFinder* finder = imageTracker->getTargetFinder();
+    
+    // Check if there are new results available:
+    const int statusCode = finder->updateSearchResults();
+    if (statusCode < 0)
+    {
+        // Show a message if we encountered an error:
+        NSLog(@"update search result failed:%d", statusCode);
+        if (statusCode == QCAR::TargetFinder::UPDATE_ERROR_NO_NETWORK_CONNECTION) {
+            [self showUIAlertFromErrorCode:statusCode];
+        }
+    }
+    else if (statusCode == QCAR::TargetFinder::UPDATE_RESULTS_AVAILABLE)
+    {
+        
+        // Iterate through the new results:
+        for (int i = 0; i < finder->getResultCount(); ++i)
+        {
+            const QCAR::TargetSearchResult* result = finder->getResult(i);
+            
+            // Check if this target is suitable for tracking:
+            if (result->getTrackingRating() > 0)
+            {
+                // Create a new Trackable from the result:
+                QCAR::Trackable* newTrackable = (QCAR::Trackable*) finder->enableTracking(*result);
+                if (newTrackable != 0)
+                {
+                    //  Avoid entering on ContentMode when a bad target is found
+                    //  (Bad Targets are targets that are exists on the CloudReco database but not on our
+                    //  own book database)
+                    NSLog(@"Successfully created new trackable '%s' with rating '%d'.",
+                          newTrackable->getName(), result->getTrackingRating());
+                    if (offTargetTrackingEnabled) {
+                        newTrackable->startExtendedTracking();
+                    }
+                }
+                else
+                {
+                    NSLog(@"Failed to create new trackable.");
+                }
+            }
+        }
+    }
+    
+}
+
+
+#pragma visual search
+- (BOOL) isVisualSearchOn {
+    return isVisualSearchOn;
+}
+
+- (void) setVisualSearchOn:(BOOL) isOn {
+    isVisualSearchOn = isOn;
+}
+
+- (void) toggleVisualSearch {
+    [self toggleVisualSearch:isVisualSearchOn];
+}
+
+- (void) toggleVisualSearch:(BOOL)visualSearchOn
+{
+    QCAR::TrackerManager& trackerManager = QCAR::TrackerManager::getInstance();
+    QCAR::ImageTracker* imageTracker = static_cast<QCAR::ImageTracker*>(trackerManager.getTracker(QCAR::ImageTracker::getClassType()));
+    assert(imageTracker != 0);
+    QCAR::TargetFinder* targetFinder = imageTracker->getTargetFinder();
+    assert (targetFinder != 0);
+    if (visualSearchOn == NO)
+    {
+        NSLog(@"Starting target finder");
+        targetFinder->startRecognition();
+        isVisualSearchOn = YES;
     }
     else
     {
-        // Activate the data set:
-        if (!imageTracker->deactivateDataSet(theDataSet))
+        NSLog(@"Stopping target finder");
+        targetFinder->stop();
+        isVisualSearchOn = NO;
+    }
+}
+
+#pragma other
+
+-(void)showUIAlertFromErrorCode:(int)code
+{
+    
+    if (!isShowingAnAlertView)
+    {
+        if (lastErrorCode == code)
         {
-            NSLog(@"Failed to deactivate data set.");
+            // we don't want to show twice the same error
+            return;
+        }
+        lastErrorCode = code;
+        
+        NSString *title = nil;
+        NSString *message = nil;
+        
+        if (code == QCAR::TargetFinder::UPDATE_ERROR_NO_NETWORK_CONNECTION)
+        {
+            title = @"Network Unavailable";
+            message = @"Please check your internet connection and try again.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_REQUEST_TIMEOUT)
+        {
+            title = @"Request Timeout";
+            message = @"The network request has timed out, please check your internet connection and try again.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_SERVICE_NOT_AVAILABLE)
+        {
+            title = @"Service Unavailable";
+            message = @"The cloud recognition service is unavailable, please try again later.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_UPDATE_SDK)
+        {
+            title = @"Unsupported Version";
+            message = @"The application is using an unsupported version of Vuforia.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_TIMESTAMP_OUT_OF_RANGE)
+        {
+            title = @"Clock Sync Error";
+            message = @"Please update the date and time and try again.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_AUTHORIZATION_FAILED)
+        {
+            title = @"Authorization Error";
+            message = @"The cloud recognition service access keys are incorrect or have expired.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_PROJECT_SUSPENDED)
+        {
+            title = @"Authorization Error";
+            message = @"The cloud recognition service has been suspended.";
+        }
+        else if (code == QCAR::TargetFinder::UPDATE_ERROR_BAD_FRAME_QUALITY)
+        {
+            title = @"Poor Camera Image";
+            message = @"The camera does not have enough detail, please try again later";
         }
         else
         {
-            success = YES;
+            title = @"Unknown error";
+            message = [NSString stringWithFormat:@"An unknown error has occurred (Code %d)", code];
         }
+        
+        //  Call the UIAlert on the main thread to avoid undesired behaviors
+        dispatch_async( dispatch_get_main_queue(), ^{
+            if (title && message)
+            {
+                UIAlertView *anAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                                       message:message
+                                                                      delegate:self
+                                                             cancelButtonTitle:@"OK"
+                                                             otherButtonTitles:nil];
+                anAlertView.tag = 42;
+                [anAlertView show];
+                isShowingAnAlertView = YES;
+            }
+        });
     }
-    
-    dataSetCurrent = nil;
-    
-    return success;
 }
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // we go back to the about page
+    isShowingAnAlertView = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kMenuDismissViewController" object:nil];
+}
+
+
+// enable auto-focus mode
+- (void)autofocus:(UITapGestureRecognizer *)sender
+{
+    [self performSelector:@selector(cameraPerformAutoFocus) withObject:nil afterDelay:.4];
+}
+
+- (void)cameraPerformAutoFocus
+{
+    QCAR::CameraDevice::getInstance().setFocusMode(QCAR::CameraDevice::FOCUS_MODE_TRIGGERAUTO);
+}
+
+
 
 
 @end

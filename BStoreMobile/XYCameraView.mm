@@ -19,6 +19,7 @@
 #import <QCAR/ImageTargetResult.h>
 #import <QCAR/ImageTarget.h>
 #import <QCAR/VideoBackgroundConfig.h>
+#import "XYCameraViewController.h"
     
 // Model scale factor
 namespace  {
@@ -64,6 +65,7 @@ namespace  {
     }
     
     overlays = [NSMutableDictionary dictionary];
+
 }
 
 - (void)dealloc
@@ -182,6 +184,18 @@ namespace  {
     
     QCAR::Renderer::getInstance().end();
     [self presentFramebuffer];
+    
+    if (state.getNumTrackableResults() > 0) {
+        // we have a trackable so we stop the finder if it was on
+        if ([(XYCameraViewController*)controller isVisualSearchOn]) {
+            [(XYCameraViewController*)controller toggleVisualSearch];
+        }
+    } else {
+        // we have a no trackable so we retsrat the finder if not already started
+        if (! [(XYCameraViewController*)controller isVisualSearchOn]) {
+            [(XYCameraViewController*)controller toggleVisualSearch];
+        }
+    }
 }
 
 
