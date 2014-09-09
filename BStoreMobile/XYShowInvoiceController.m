@@ -107,6 +107,14 @@
         }];
     } else if (self.status == fromOrder) {
         [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    } else if (self.status == fromNotPaid) {
+        UINavigationController *nav1 = (UINavigationController *)self.presentingViewController;
+        UINavigationController *nav2 = (UINavigationController *)nav1.presentingViewController;
+        NSLog(@"nav1: %@",NSStringFromClass([nav1.viewControllers[0] class]));
+        NSLog(@"nav2: %@", NSStringFromClass([nav2.viewControllers[0] class]));
+        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^(void) {
+            [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+        }];
     }
 }
 

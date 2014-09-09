@@ -282,7 +282,9 @@
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", @"查看电子小票",nil];
+                    self.valueDict = @{@"status": [NSNumber numberWithInteger:fromNotPaid], @"orderID": [NSString stringWithFormat:@"%@", retDict[@"orderID"]]};
+                    alert.tag = 1;
                     [alert show];
                 }
             }
@@ -334,7 +336,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 0) {
+    if (alertView.tag == 0 || alertView.tag == 1) {
         if (buttonIndex == 0) {
             [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
         }

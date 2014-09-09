@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 enum showInvoiceStatus {
-    fromPurchase, fromOrder
+    fromPurchase, fromOrder, fromNotPaid
 };
 
 @interface XYShowInvoiceController : UIViewController<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
