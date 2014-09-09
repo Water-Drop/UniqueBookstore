@@ -20,12 +20,14 @@
 
 @interface XYRecBookController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *imageArray;
-@property NSInteger imageIndex;
+@property (nonatomic, strong) NSArray *imageArray;
+@property NSInteger imageIndex; // start index
 
 @property (nonatomic, strong) NSDictionary *valueDict;
-
 @property (nonatomic, strong) NSDictionary *outputDict;
+
+@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
@@ -42,12 +44,13 @@
 
 - (void)prepareImageArray
 {
-    self.imageArray = [[NSMutableArray alloc]initWithCapacity:IMAGECNT];
-    for (NSInteger i = 0; i < IMAGECNT; i++) {
-        NSString *filename = [NSString stringWithFormat:@"%ld", (long)i];
-        filename = [filename stringByAppendingString:@"_full.JPG"];
-        [self.imageArray addObject:[UIImage imageNamed:filename]];
-    }
+//    self.imageArray = [[NSMutableArray alloc]initWithCapacity:IMAGECNT];
+//    for (NSInteger i = 0; i < IMAGECNT; i++) {
+//        NSString *filename = [NSString stringWithFormat:@"%ld", (long)i];
+//        filename = [filename stringByAppendingString:@"_full.JPG"];
+//        [self.imageArray addObject:[UIImage imageNamed:filename]];
+//    }
+    self.imageArray = [self loadPlistFile:@"page" ofType:@"plist"];
 }
 
 - (void)viewDidLoad
@@ -56,7 +59,34 @@
     // Do any additional setup after loading the view.
     [XYUtil setExtraCellLineHidden:self.tableView];
     [self prepareImageArray];
-    self.imageIndex = arc4random() % IMAGECNT;
+    NSInteger total = [self.imageArray count];
+    self.imageIndex = arc4random() % total;
+    NSLog(@"index:%d, count:%d", self.imageIndex, [self.imageArray count]);
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 152.0f)];
+    [self.scrollView setContentSize:CGSizeMake(self.scrollView.bounds.size.width*[self.imageArray count], 152.0f)];
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.bounces = NO;
+    self.scrollView.delegate = self;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    for (int i=0; i<[self.imageArray count]; i++) {
+        NSDictionary *rowDict = self.imageArray[(i+self.imageIndex)%total];
+        UIControl *control = [[UIControl alloc] initWithFrame:CGRectMake(0+i*self.scrollView.bounds.size.width, 0, self.scrollView.bounds.size.width, 152.0f)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:control.bounds];
+        [imageView setImage:[UIImage imageNamed:rowDict[@"image"]]];
+        [control addSubview:imageView];
+        [control addTarget:self action:@selector(touchRecImage:) forControlEvents:UIControlEventTouchUpInside];
+        control.tag = [rowDict[@"bookID"] intValue];
+        [self.scrollView addSubview:control];
+    }
+    
+    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 142.0f, self.scrollView.bounds.size.width, 30)];
+    self.pageControl.numberOfPages = [self.imageArray count];
+    self.pageControl.currentPage = self.imageIndex;
+    self.pageControl.alpha = 0.0f;
+    [self.pageControl addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -105,21 +135,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (indexPath.row == 0) {
         NSString *recImageCell = @"recImageCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recImageCell];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recImageCell];
         }
-        UIImageView *recImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 152)];
-        recImageView.animationDuration = 3.0;
-        recImageView.animationImages = self.imageArray;
-//        [recImageView startAnimating];
-//        recImageView.animationRepeatCount = 0;
-//        recImageView.image = self.imageArray[self.imageIndex];
-        recImageView.image = [UIImage imageNamed:@"后会无期.jpg"];
-        [cell.contentView addSubview:recImageView];
+        [cell.contentView addSubview:self.scrollView];
+        [cell.contentView addSubview:self.pageControl];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -179,6 +202,28 @@
     }
     
     return nil;
+}
+
+//pagecontrol的点跟着页数改变
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGPoint offset=scrollView.contentOffset;
+    CGRect bounds=scrollView.frame;
+    self.imageIndex = offset.x/bounds.size.width;
+    [self.pageControl setCurrentPage:self.imageIndex];
+}
+//点击pagecontrol的点 跳到那一页的实现
+- (IBAction)pageTurn:(UIPageControl *)sender {
+    CGSize viewsize=self.scrollView.frame.size;
+    CGRect rect=CGRectMake(sender.currentPage*viewsize.width, 0, viewsize.width, viewsize.height);
+    [self.scrollView scrollRectToVisible:rect animated:YES];
+    self.imageIndex = [(UIPageControl *)sender currentPage];
+}
+
+- (void)touchRecImage:(id)sender {
+    NSInteger bookID = [(UIControl *)sender tag];
+    NSLog(@"Touch Rec Image.");
+    self.valueDict = @{@"bookID": [NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:bookID]]};
+    [self performSegueWithIdentifier:@"BookDetail" sender:self];
 }
 
 // tell the delegate the table view is aobut to draw a cell for a pariticular row
