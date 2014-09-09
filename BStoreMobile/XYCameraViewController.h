@@ -12,6 +12,7 @@
 #import "XYCameraView.h"
 #import <QCAR/DataSet.h>
 #import "XYViewController.h"
+#import "CustomIOS7AlertView.h"
 
 @interface XYCameraViewController : XYViewController<AVCaptureMetadataOutputObjectsDelegate, XYCameraSessionControl> {
     CGRect viewFrame;
@@ -20,6 +21,7 @@
     NSString* lastISBN;
     NSString* lastURL;
     int segmentState;
+    CustomIOS7AlertView* alert;
 }
 
 @property (weak, nonatomic) IBOutlet XYCameraView *viewPreview;

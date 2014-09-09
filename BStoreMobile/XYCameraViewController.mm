@@ -91,7 +91,7 @@
     [_videoPreviewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     [_videoPreviewLayer setFrame:_viewPreview.layer.bounds];
     
-    [self showLoadingAnimation];
+//    [self showLoadingAnimation];
     // initialize the AR session
     [vapp initAR:QCAR::GL_20 ARViewBoundsSize:viewFrame.size orientation:UIInterfaceOrientationPortrait];
 }
@@ -192,20 +192,27 @@
 #pragma Loading Animation
 
 - (void) showLoadingAnimation {
-    CGRect mainBounds = [_viewPreview bounds];
-    CGRect indicatorBounds = CGRectMake(mainBounds.size.width / 2 - 12,
-                                        mainBounds.size.height / 2 - 12, 24, 24);
-    UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithFrame:indicatorBounds];
-    
-    loadingIndicator.tag  = 1;
-    loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    [_viewPreview addSubview:loadingIndicator];
-    [loadingIndicator startAnimating];
+//    CGRect mainBounds = [_viewPreview bounds];
+//    CGRect indicatorBounds = CGRectMake(mainBounds.size.width / 2 - 12,
+//                                        mainBounds.size.height / 2 - 12, 24, 24);
+//    UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithFrame:indicatorBounds];
+//    
+//    loadingIndicator.tag  = 1;
+//    loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+//    [_viewPreview addSubview:loadingIndicator];
+//    [loadingIndicator startAnimating];
+    alert = [[CustomIOS7AlertView alloc] init];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 40)];
+    [label setText:@"正在打开摄像头"];
+    [alert setContainerView:label];
+    [alert setButtonTitles:[NSMutableArray arrayWithObjects:nil]];
+    [alert show];
 }
 
 - (void) hideLoadingAnimation {
-    UIActivityIndicatorView *loadingIndicator = (UIActivityIndicatorView *)[_viewPreview viewWithTag:1];
-    [loadingIndicator removeFromSuperview];
+//    UIActivityIndicatorView *loadingIndicator = (UIActivityIndicatorView *)[_viewPreview viewWithTag:1];
+//    [loadingIndicator removeFromSuperview];
+    [alert close];
 }
 
 
@@ -314,7 +321,7 @@
                 return;
             }
             
-            [self showLoadingAnimation];
+//            [self showLoadingAnimation];
             
             lastISBN = [metadataObj stringValue];
             
