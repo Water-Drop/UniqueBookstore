@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *upCnt;
 @property (weak, nonatomic) IBOutlet UILabel *downCnt;
 @property (weak, nonatomic) IBOutlet UILabel *fromlbl;
+@property (weak, nonatomic) IBOutlet UILabel *publicMsg;
 
 
 

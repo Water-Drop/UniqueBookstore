@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>image</key>
+		<string>后会无期.jpg</string>
+		<key>bookID</key>
+		<integer>39</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>小时代海报.jpg</string>
+		<key>bookID</key>
+		<integer>36</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>看见.jpg</string>
+		<key>bookID</key>
+		<integer>22</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>茶花女.gif</string>
+		<key>bookID</key>
+		<integer>8</integer>
+	</dict>
+</array>
+</plist>

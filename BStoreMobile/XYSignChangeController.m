@@ -66,7 +66,9 @@
     NSString *txt = [self calculateSign:textView.text];
     NSInteger txtlen = (txt == nil) ? 0 : [txt length];
     self.remains.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithInt:(MAXSIGN - txtlen)]];
-    textView.text = txt;
+    if (textView.markedTextRange == nil) {
+        textView.text = txt;
+    }
 }
 
 - (NSString *)calculateSign:(NSString *)txt
@@ -123,5 +125,14 @@
             NSLog(@"modifySignInfo Error:%@", error);
         }];
     }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (textView.text.length >= 30 && text.length > range.length) {
+        return NO;
+    }
+    
+    return YES;
 }
 @end

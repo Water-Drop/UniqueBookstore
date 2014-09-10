@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XYViewController.h"
 
-@interface XYRecBookController : XYViewController< UITableViewDataSource, UITableViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate >
+@interface XYRecBookController : XYViewController< UITableViewDataSource, UITableViewDelegate,UICollectionViewDataSource, UICollectionViewDelegate,UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @end

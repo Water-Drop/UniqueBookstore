@@ -175,7 +175,7 @@
                     NSNumber *isFriends = tmp[@"isFriends"];
                     enum friendsInfoStatus status = ADD;
                     if ([isFriends intValue] == 1) {
-                        status = DELETE;
+                        status = INFO;
                     }
                     self.valueDict = @{@"userID":userID, @"uname":username, @"gen":@"男", @"addr":address, @"sg": sign, @"status": [NSNumber numberWithInteger:status], @"head":head, @"nickname": nickname};
                     [self performSegueWithIdentifier:@"friendsInfo" sender:self];

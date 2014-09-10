@@ -72,7 +72,7 @@
 - (void)writeLoginName:(NSString* )name AtPwd:(NSString* )pwd WithUserID:(NSString* )userID {
     // 获取注册的值
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userInfo = @{@"loginName": name, @"loginPwd": pwd, @"userID": userID};
+    NSDictionary *userInfo = @{@"loginName": name, @"loginPwd": pwd, @"userID": userID, @"isToPublic": @"公开"};
     [defaults setObject:userInfo forKey:@"userInfo"];
     [defaults synchronize];
 }

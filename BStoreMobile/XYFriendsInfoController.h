@@ -10,7 +10,7 @@
 #import "XYTableViewController.h"
 
 enum friendsInfoStatus {
-    DELETE, ADD
+    DELETE, ADD, INFO
 };
 
 @interface XYFriendsInfoController : XYTableViewController<UIAlertViewDelegate>

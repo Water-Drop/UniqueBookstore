@@ -9,6 +9,7 @@
 #import "XYUserInfoController.h"
 #import "XYUtil.h"
 #import "XYLabelChangeController.h"
+#import "XYGenderChangeController.h"
 
 @interface XYUserInfoController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImg;
@@ -160,7 +161,7 @@
     } else if ([segue.identifier isEqualToString:@"genderChange"]) {
         UINavigationController *nav = (UINavigationController *)segue.destinationViewController;
         UIViewController *dest = nav.viewControllers[0];
-        self.valueDict = @{@"gender": self.gender.text};
+        self.valueDict = @{@"gender": self.gender.text, @"status": [NSNumber numberWithInteger:GENDER]};
         if (self.valueDict) {
             for (NSString *key in self.valueDict) {
                 NSLog(@"%@, %@", key, self.valueDict[key]);

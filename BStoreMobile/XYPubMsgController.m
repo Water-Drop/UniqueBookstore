@@ -434,9 +434,14 @@ enum pubStatus {
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                    alert.tag = 1;
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//                    alert.tag = 1;
+//                    [alert show];
+                    [_tokenFieldView resignFirstResponder];
+                    [_messageView resignFirstResponder];
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:^(void){
+                        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"发布成功" description:@"你已成功发送消息" type:TWMessageBarMessageTypeSuccess];
+                    }];
                 }
             }
             NSLog(@"sendPrivateMsg Success");
@@ -471,9 +476,14 @@ enum pubStatus {
             if (retDict && retDict[@"message"]) {
                 NSLog(@"message: %@", retDict[@"message"]);
                 if ([retDict[@"message"] isEqualToString:@"successful"]) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-                    alert.tag = 1;
-                    [alert show];
+//                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"发布成功" message:@"你已成功发送消息" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//                    alert.tag = 1;
+//                    [alert show];
+                    [_tokenFieldView resignFirstResponder];
+                    [_messageView resignFirstResponder];
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:^(void){
+                        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"发布成功" description:@"你已成功发送消息" type:TWMessageBarMessageTypeSuccess];
+                    }];
                 }
             }
             NSLog(@"sendPublicMsg Success");
